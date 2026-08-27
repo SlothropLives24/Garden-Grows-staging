@@ -1,0 +1,870 @@
+/* Content pages (engine/build_pages.py). Generated corpus documents - not the app shell. */
+:root {
+  color-scheme: light dark;
+  /* Mirror the APP's own tokens (web/styles.css) so the content pages and the app read as ONE site.
+     Two-tier accent, exactly as the app: --accent is the bright terracotta for marks/borders; the
+     dark 700 step (--accent-text) is what body-size accent text uses to clear contrast on cream. */
+  --bg: #f5ead8; --surface: #ebddc5; --card: #f9f4ed; --text: #201e1d; --muted: #645c50;
+  --line: #dcd3c4; --divider: rgba(32,30,29,0.16);
+  --accent: #c67139; --accent-text: #8c491a; --sage: #56633f;
+  --mark-1: #c67139; --mark-2: #7a8a5e; --mark-3: #56633f; /* the brand mark, skinnable */
+  --sage-soft: #8fa073; /* the app's accent-2-500 - shelf swatches and card spines, never text */
+  /* O87 figure palette — the four categorical marks, VALIDATED for CVD + contrast on the cream
+     ground (six-check validator; receipts in docs/mockups/content-visuals.html). Extends Organic
+     because the two brand ramps alone fail as chart colours (low chroma, adjacent hues). */
+  --cf-1: #c96a30; --cf-2: #2f6212; --cf-3: #af8712; --cf-4: #2b6fb0;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #1d1a16; --surface: #2a2620; --card: #252220; --text: #f0e8da; --muted: #b0a794;
+          --line: #3d3931; --divider: rgba(240,232,218,0.18);
+          --accent: #d67f48; --accent-text: #d67f48; --sage: #aebf92; --sage-soft: #8fa073;
+          --mark-1: #d67f48; --mark-2: #8fa073; --mark-3: #aebf92;
+          /* the figure marks, re-validated on the dark card surface (same six checks) */
+          --cf-1: #d67a35; --cf-2: #437d15; --cf-3: #b3830c; --cf-4: #4587c2; }
+}
+/* ...and the SAME tokens keyed off an explicit choice, so the app's Display pref reaches these
+   pages too. Three states, exactly as the app resolves them: an explicit dark or light wins
+   either way, and "system" (no attribute) still follows the OS through the media query above.
+   Without this the planner could be dark while every guide stayed cream on the same screen. */
+:root[data-theme="dark"] { --bg: #1d1a16; --surface: #2a2620; --card: #252220; --text: #f0e8da; --muted: #b0a794;
+          --line: #3d3931; --divider: rgba(240,232,218,0.18);
+          --accent: #d67f48; --accent-text: #d67f48; --sage: #aebf92; --sage-soft: #8fa073;
+          --mark-1: #d67f48; --mark-2: #8fa073; --mark-3: #aebf92;
+          /* the figure marks, re-validated on the dark card surface (same six checks) */
+          --cf-1: #d67a35; --cf-2: #437d15; --cf-3: #b3830c; --cf-4: #4587c2; }
+
+/* THE APP'S OWN TYPE, shared here so the content pages and the app read in ONE voice. The pages
+   used to fall to system sans while the app rendered Hanken + Bricolage; a reader crossing the
+   app<->content boundary felt the type change under them, and the whole complaint was "a second
+   site" (maintainer, 2026-08-09). These are the app's own faces, already shipped to web/fonts/ for
+   the app itself - same filenames, same axes as web/styles.css loads (lines 9-19) - so the two
+   surfaces can never drift to different cuts. O36 costed the 76.9 KB Bricolage face against a 7 KB
+   page and parked it; the harmony pass OVERRIDES that, made out loud ("A"), because matching the
+   app's voice is worth the bytes and the asset is the app's own cache-shared file. font-display:
+   swap keeps first paint unblocked. Enforced by test_pages_type_is_the_apps_own_faces. */
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 200 800; font-display: swap;
+  src: url("web/fonts/BricolageGrotesque[opsz,wdth,wght].woff2") format("woff2"); }
+@font-face { font-family: "Hanken Grotesk"; font-weight: 100 900; font-display: swap;
+  src: url("web/fonts/HankenGrotesk[wght].woff2") format("woff2"); }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.55;
+  font-family: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px; }
+main { max-width: 44rem; margin: 0 auto; padding: 1.5rem 1.1rem 3rem; }
+/* THE HEADER IS PLACED AS THE APP PLACES IT (maintainer, 2026-08-09): full-bleed across the
+   viewport with the brand hard-left and the one way-in hard-right, NOT centred to the reading
+   column. The app header spans full width - brand ~1.75rem from the edge on desktop, ~1rem on a
+   phone - and it is the ARTICLE below that centres to 44rem. Matching that means a reader swapping
+   app<->content sees the brand hold the same corner and the header keep the same height, instead of
+   the wordmark jumping inward and the bar growing taller. The FOOTER stays centred to the reading
+   column: it is a document's sitemap, not app chrome, so it belongs under the text. */
+/* DESKTOP SCALING, matched to the app (maintainer 2026-08-16: "the size and position of the content
+   header and the planner header are not matching... desktop needs the exact same treatment"). Both
+   surfaces size their brand at 1.15rem, but the APP steps its root font-size up at these widths and
+   these pages never did - so the same rem produced 18.4px here against 20.1px there, and every
+   header metric drifted with it. The ladder below is web/styles.css's, verbatim; mobile stays 16px,
+   which is why mobile always matched. */
+@media (min-width: 900px)  { :root { font-size: 16.5px; } }
+@media (min-width: 1280px) { :root { font-size: 17.5px; } }
+@media (min-width: 1680px) { :root { font-size: 18.5px; } }
+@media (min-width: 2100px) { :root { font-size: 19.5px; } }
+header.site { margin: 0; padding: .55rem clamp(1rem, 2.5vw, 1.8rem);
+  box-sizing: border-box;
+  display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; justify-content: space-between; }
+footer.site { max-width: 44rem; margin: 0 auto; padding: 1rem 1.1rem;
+  display: flex; flex-wrap: wrap; gap: .8rem; align-items: baseline; }
+/* THE HEADER CARRIES THE BRAND AND ONE WAY IN, AND NOTHING ELSE (2026-08-03).
+   The section links used to live here: eight of them, styled with nothing but `margin-right`, at
+   20px tall against this project's own 44px tap floor, wrapping to three lines. Measured at 390px
+   that was a 151px header - a fifth of the phone screen spent on navigation before the article
+   began, on all 477 pages. Two alternatives were measured and both lose: giving those links 44px
+   targets in place grows the header to 204px, and a horizontally scrolling strip is 110px but
+   hides 366px of itself - roughly four of the seven destinations off-screen.
+   A stranger arrives here from a search or a backlink, on ONE document. They need to read it, to
+   know whose site it is, and a way into the product. Browsing to /guilds/ is something you do when
+   you have FINISHED reading, so the section nav moved to the footer - where all seven are visible
+   at once, in a vertical list, with nothing hidden and nothing to scroll. Header: ~53px, placed and
+   bordered as the app's. */
+header.site { border-bottom: 1px solid var(--line); }
+.hcta, .fcta { display: inline-flex; align-items: center; font-weight: 600; text-decoration: none; }
+.fcta { min-height: 44px; }
+/* The way-in pill IS the app's own right-hand chrome pill (.navguides / .authchip in web/styles.css):
+   muted text on a --line hairline, terracotta ONLY on hover - not an orange chip. The app's door
+   OUT to the guides and the guide's door BACK to the app are then the same control, reading as one
+   product either side of the boundary (maintainer, 2026-08-09: "use the same colours as the
+   planning side" - the header's standing orange was the CTA text, and this retires it). */
+.hcta { color: var(--muted); border: 1px solid var(--line); border-radius: 999px;
+  padding: .15rem .6rem; font-size: .85rem; white-space: nowrap; }
+.hcta:hover { color: var(--accent-text); border-color: var(--accent); }
+/* ...and it takes the app's desktop step too (web/styles.css @768px bumps .navguides/.authchip
+   to fs-3): same pill, same size, both surfaces. Without this the way-in pill sat a step
+   smaller here than the identical pill three pixels away in the planner. */
+@media (min-width: 768px) { .hcta { font-size: .95rem; padding: .3rem .75rem; } }
+/* O102 — the two navigation bands. The SECTION RAIL (between the site's sections, under the
+   header, non-sticky: it orients a landing, it does not track a scroll) and the CONTENTS BAND
+   (within this page, sticky: it tracks the scroll). Both are single scrollable rows of monochrome
+   typographic chips — the same language as the app's jump row, which is the parity the arc is for.
+   Sticky stays slim (one row, well under GDS's zoom-viewport worry) and every h2 target carries
+   scroll-margin so an anchor jump never lands hidden under the band. */
+.secnav { display: flex; gap: .15rem; overflow-x: auto; scrollbar-width: none;
+  padding: .3rem clamp(1rem, 2.5vw, 1.8rem); border-bottom: 1px solid var(--line); }
+.secnav::-webkit-scrollbar { display: none; }
+.secnav a { flex: none; min-height: 44px; display: inline-flex; align-items: center;
+  padding: 0 .6rem; font-size: .85rem; font-weight: 600; color: var(--muted);
+  text-decoration: none; border-radius: 999px; }
+.secnav a:hover { color: var(--accent-text); }
+.secnav a[aria-current="true"] { color: var(--accent-text); box-shadow: inset 0 -2px var(--accent); border-radius: 0; }
+nav.contents { position: sticky; top: 0; z-index: 5; display: flex; gap: .28rem;
+  overflow-x: auto; scrollbar-width: none; margin: .4rem 0 .8rem; padding: .35rem 0;
+  background: var(--bg); border-bottom: 1px solid var(--line); }
+nav.contents::-webkit-scrollbar { display: none; }
+.cchip { flex: none; min-height: 44px; display: inline-flex; align-items: center;
+  padding: 0 .7rem; font-size: .85rem; font-weight: 600; color: var(--muted);
+  text-decoration: none; border: 1px solid var(--line); border-radius: 999px; }
+.cchip b { font-variant-numeric: tabular-nums; font-weight: 600; }
+.cchip b::before { content: "\00B7 "; } /* the "· N" separator lives in CSS, as the app's does */
+.cchip:hover { color: var(--accent-text); border-color: var(--accent); }
+.cchip[aria-current="true"] { color: var(--accent-text); border-color: var(--accent);
+  background: var(--bg); }
+h2[id] { scroll-margin-top: 3.4rem; }
+/* F0 — the measurement swap. Both units ship in every `.u`; the head stamp sets `html[data-units]`
+   from the reader's gg-units preference (shared with the app) and CSS shows one. Imperial is the
+   default-visible arm (no attribute), matching units.ts's imperial default — zero flash. */
+.u .um { display: none; }
+.u .ui { display: inline; }
+:root[data-units="metric"] .u .um { display: inline; }
+:root[data-units="metric"] .u .ui { display: none; }
+/* F0 slice 2 — the TEMPERATURE swap, on the separate gg-temp pref (a gardener may want ft but °C).
+   °F is the default-visible arm; the head stamp sets html[data-temp="c"] to flip to Celsius. */
+.u .tc { display: none; }
+.u .tf { display: inline; }
+:root[data-temp="c"] .u .tc { display: inline; }
+:root[data-temp="c"] .u .tf { display: none; }
+/* The right-hand cluster: the unit toggle sits beside the way-in pill. */
+.hright { display: inline-flex; align-items: center; gap: .5rem; }
+/* A monochrome-typographic segmented toggle (D-105: no emoji): both units always shown, the active
+   one carried in accent-on-tint, the other muted. Same hairline-pill idiom as .hcta. */
+.unittoggle { display: inline-flex; min-height: 44px; align-items: center; gap: .1rem;
+  border: 1px solid var(--line); border-radius: 999px; background: none; cursor: pointer;
+  padding: .1rem; font: inherit; }
+.unittoggle:hover { border-color: var(--accent); }
+/* The 44px TAP floor is a phone rule and is kept there. On a pointer device it was the only
+   thing setting this bar's height - 64px against the planner's 60px, from the toggle alone.
+   Desktop drops to the app's own pill rhythm; mobile is untouched. Placed AFTER the base rule
+   because it lost to source order when it sat above it. */
+@media (min-width: 768px) { .unittoggle { min-height: 0; padding: .3rem .55rem; font-size: .95rem; } }
+@media (min-width: 768px) { header.site { min-height: 3.4rem; } }
+.unittoggle span { font-size: .8rem; font-weight: 600; line-height: 1; padding: .28rem .55rem;
+  border-radius: 999px; color: var(--muted); }
+/* Imperial active by default; metric active under the stamp. The ACTIVE side is the accent chip. */
+.unittoggle .ut-i { color: var(--accent-text); background: var(--accent-bg); }
+:root[data-units="metric"] .unittoggle .ut-i { color: var(--muted); background: none; }
+:root[data-units="metric"] .unittoggle .ut-m { color: var(--accent-text); background: var(--accent-bg); }
+/* THE FOOTER IS A DESIGNED SITEMAP, not a bare link row (2026-08-09). The section nav still lives
+   here by the 2026-08-03 ruling above, but as a proper footer: the brand and the way-in on one side,
+   the destinations grouped under labels on the other - so it reads as the end of ONE site rather than
+   a loose row of links. Stacks to a single column on a phone; the 44px tap floor is kept. */
+footer.site { border-top: 1px solid var(--line); display: grid; gap: 1.8rem; color: var(--muted);
+  font-size: .92rem; margin-top: 3.2rem; padding-top: 1.8rem; padding-bottom: 2.6rem;
+  align-items: start; }
+@media (min-width: 620px) { footer.site { grid-template-columns: 1.1fr 1fr; gap: 2.6rem; } }
+.foot-brand .brand { font-size: 1.1rem; }
+.foot-note { margin: .55rem 0 .9rem; max-width: 24rem; line-height: 1.5; }
+footer.site nav.sitenav { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem 1.2rem; margin: 0; }
+.foot-h { margin: 0 0 .15rem; font-weight: 700; color: var(--text); font-size: .72rem;
+  text-transform: uppercase; letter-spacing: .07em; }
+.foot-col a { display: flex; align-items: center; min-height: 40px; color: var(--accent-text);
+  text-decoration: none; }
+.foot-col a:hover { text-decoration: underline; }
+/* THE BRAND IS THE APP'S BRAND, at the app's own recipe: the triad mark, the two-tone wordmark
+   (Milpa in ink, Gardens in the dark terracotta text step), Bricolage Grotesque at the app's own
+   weights - 600 for the wordmark, 700 for the emphasised "Gardens" in --accent-text (web/styles.css
+   lines 235/239). It renders in the SAME full Bricolage face the app loads (declared above), not
+   the 1.7 KB thirteen-glyph subset the O36 costing shipped: the 2026-08-09 harmony pass overrides
+   that costing, made out loud, so the wordmark's cut matches the app exactly instead of
+   approximating it with a private face. */
+.brand { font-weight: 600; text-decoration: none; color: var(--text);
+  font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  display: inline-flex; align-items: center; gap: .4rem; font-size: 1.15rem;
+  letter-spacing: -.01em; white-space: nowrap; }
+.brand b { color: var(--accent-text); font-weight: 700; }
+.brand .brandmark { width: 1.25rem; height: 1.25rem; flex: none; }
+/* The triad's own colours, the app's literals. Multiply gives the overlap its depth on the light
+   ground; on a dark ground multiply goes to mud, so the circles simply stack. */
+/* The mark's circles are TOKENS, not literals (O88 follow-up): the logo is part of the skin, and a
+   hardcoded terracotta left it autumn on a summer page. The defaults below ARE the autumn values,
+   so the shipped look is byte-identical and only a [data-season] block moves them. */
+/* Isolated for the same reason the app's mark is: with its own stacking context the circles
+   blend against each other and never against the page, so a mark left on `multiply` over a
+   dark ground still renders its own colours instead of going black. */
+.brandmark { isolation: isolate; }
+.brandmark .t1 circle { fill: var(--mark-1); } .brandmark .t2 circle { fill: var(--mark-2); }
+.brandmark .t3 circle { fill: var(--mark-3); }
+/* The mark's circles overlap, and multiply is what shows that overlap on a light ground. It must be
+   OFF on a dark one, or each circle multiplies toward black and the logo disappears - which is
+   exactly what a reader saw whose OS is light but whose app pref is dark (maintainer, 2026-08-16:
+   "you can clearly see the logo darkness issue... all seasons have the same issue"). The old rule
+   turned it off via the media query ALONE, so it never fired for that reader. Three states, like
+   every other dark rule here. */
+.brandmark g { mix-blend-mode: multiply; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brandmark g { mix-blend-mode: normal; } }
+:root[data-theme="dark"] .brandmark g { mix-blend-mode: normal; }
+header.site nav a { margin-right: .9rem; }
+a { color: var(--accent-text); }
+/* HEADINGS ARE SIZED IN `em`, NOT `rem`, AND THAT IS THE WHOLE FIX FOR A REAL DEFECT.
+   `body` sets 17px; `rem` resolves against the ROOT, which is still 16px. So `h3 { 1.05rem }`
+   computed to 16.8px against a 17px paragraph - a heading SMALLER than the prose beneath it,
+   measured on every content page. The explainers show it worst because they embed rule cards whose
+   titles are h3, so a reader meets the inversion three or four times down one page.
+   The ratios below are unchanged - 1.9 / 1.25 / 1.05 are what this sheet always meant to say. In
+   `em` they resolve against the body size this sheet itself sets, so they finally say it. Whether
+   1.05 is enough separation for a subhead is a question of TASTE and belongs to the typography
+   pass, not here; this only stops a heading being smaller than its own paragraph. */
+/* The VOICE face on every heading - the app puts Bricolage on its h1s and section titles
+   (web/styles.css `--serif`), so a heading reads in the same voice on either side of the app
+   boundary rather than dropping to the prose face. Sizes and the `em`-not-`rem` fix below are
+   unchanged; this only sets which face carries them. */
+h1, h2, h3, h4 { font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif; }
+h1 { font-size: 2em; line-height: 1.15; margin: .6rem 0 .2rem; }
+/* A rule's or belief's H1 is its whole CLAIM SENTENCE, not a short title (O106d kept it so, since
+   the distinctive words lead). At the title 2em a long claim - the potato-greening rule is ~250
+   characters - filled a phone screen top to bottom and pushed the grade badge and mechanism below
+   the fold. A sentence-heading does not need title size: claims read at a smaller step so the page
+   opens on its ANSWER, not on one oversized sentence. (2026-08-24, maintainer: mobile screenshots.) */
+h1.claim { font-size: 1.4em; line-height: 1.2; }
+h2 { font-size: 1.45em; margin: 2rem 0 .5rem; padding-top: .9rem;
+  border-top: 1px solid var(--divider); }
+h3 { font-size: 1.15em; margin: 0 0 .35rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; }
+.also, .more, .sci { color: var(--muted); font-size: .92rem; }
+/* O109e: the cite-this block. A muted, collapsed disclosure so it never competes with the page's
+   own claim, opening to a selectable citation (monospace, so a copy-paste keeps its punctuation). */
+details.cite { margin: 1.4rem 0 .4rem; border-top: 1px solid var(--line); padding-top: .7rem; }
+details.cite > summary { cursor: pointer; color: var(--muted); font-size: .9rem; font-weight: 600; }
+.citetext { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: .85rem;
+  background: var(--surface); border: 1px solid var(--line); border-radius: .45rem;
+  padding: .6rem .7rem; margin: .6rem 0 .4rem; overflow-wrap: anywhere; user-select: all; }
+.citenote { font-size: .82rem; color: var(--muted); max-width: 44rem; margin: 0; }
+/* O23: the ladder's door. Sits under the lede where the search cohort is already looking, and is
+   the one thing on the page styled as an action rather than a document. */
+/* A folklore page's ANSWER is the thing the reader came for - it leads, at reading size, before the
+   longer "what is actually known". The claim is the headline; this is the reply to it. */
+.answer { font-size: 1.15rem; line-height: 1.5; margin: .2rem 0 1rem; }
+.ladder { margin: .9rem 0 1.4rem; }
+.ladder-cta { display: inline-block; background: var(--accent-text); color: var(--bg);
+  font-weight: 600; text-decoration: none; border-radius: .5rem; padding: .5rem .9rem; }
+/* THE FACTS LIST USED TO SCROLL THE PAGE SIDEWAYS ON A PHONE, and it was the most numerous page
+   type on a project worked from a phone. `max-content` on the label column cannot shrink, so the
+   longest label in the corpus - "Start indoors, weeks before transplant" - set the column width and
+   pushed the values off-screen: measured 42 px of overflow at 390, 72 at 360, 112 at 320, with the
+   numbers clipped mid-word ("6-6.8" read "6-6"). `minmax(0, max-content)` lets that column shrink
+   below its content, which is the whole fix on wider screens.
+   Below 480 px the two columns STACK instead, because a shrunken label column just moves the
+   problem: "Start indoors, weeks before transplant" wrapped into 90 px of width is four lines of
+   ragged text beside a one-line value. A definition list stacked label-over-value is what these
+   read as on a narrow screen anyway. */
+dl.facts { display: grid; grid-template-columns: minmax(0, max-content) 1fr; gap: .35rem .9rem;
+  margin: 0; }
+dl.facts dt { color: var(--muted); min-width: 0; overflow-wrap: break-word; }
+dl.facts dd { margin: 0; min-width: 0; overflow-wrap: break-word; }
+@media (max-width: 480px) {
+  dl.facts { grid-template-columns: 1fr; gap: 0; }
+  dl.facts dt { margin-top: .5rem; }
+  dl.facts dd { font-weight: 600; }
+}
+/* O57 slice B: at desktop width a plant page floats its facts table as a sticky reference aside,
+   so the reading column keeps a comfortable measure and the numbers stay in view while the reader
+   scrolls past them into the cultivar groups, soft-number caveats and rules below. Scoped to
+   `main:has(.factbox)` - ONLY plant pages carry the wrapper, so pure reading pages (guild, rule,
+   belief, explainer) stay single-column and centred at 44rem. Below 1120px the wrapper is an
+   unstyled div and every page is byte-identical to the phone, the invariant this arc kept: the
+   mobile layout is never touched. The reading content is pinned to column 1 in DOM order; the
+   factbox is lifted out of the auto-flow into column 2 spanning every row, so its mid-document
+   position in the source does not disturb the reading order on either layout. */
+@media (min-width: 1120px) {
+  main:has(.factbox) { max-width: 64rem; display: grid;
+    grid-template-columns: minmax(0, 1fr) 19rem; gap: 0 2.6rem; align-items: start; }
+  main:has(.factbox) > * { grid-column: 1; min-width: 0; }
+  main:has(.factbox) > .factbox { grid-column: 2; grid-row: 1 / span 999;
+    position: sticky; top: 1.2rem; align-self: start; margin: 0;
+    background: var(--surface); border: 1px solid var(--divider); border-radius: .7rem;
+    padding: .9rem 1.1rem 1.1rem;
+    /* O59a: a sticky box taller than the viewport pins its top and pushes its own bottom rows off
+       the bottom edge, permanently unreachable (corn's 17-row box is ~1,150px against an 800px
+       laptop viewport). Cap it to the visible height less the sticky offset and its own margin, and
+       let the overflow scroll INSIDE the box - so every row is reachable at any viewport height. */
+    max-height: calc(100vh - 2.4rem); overflow-y: auto; }
+  main:has(.factbox) > .factbox > h2 { margin-top: 0; font-size: 1.05em; }
+  /* the aside is 19rem, too narrow for a label+value grid without values wrapping character by
+     character - so inside the box the list stacks value-under-label, the same shape the phone
+     already uses below 480px. It reads as a spec panel: muted label, the number bold beneath it. */
+  main:has(.factbox) > .factbox dl.facts { grid-template-columns: 1fr; gap: 0; }
+  main:has(.factbox) > .factbox dl.facts dt { margin-top: .55rem; }
+  main:has(.factbox) > .factbox dl.facts dt:first-of-type { margin-top: 0; }
+  main:has(.factbox) > .factbox dl.facts dd { font-weight: 600; }
+}
+ul.index { list-style: none; padding: 0; }
+ul.index li { padding: .3rem 0; border-bottom: 1px solid var(--divider); }
+/* O112b: the corpus download call-to-action - a single prominent link, the licence in a quiet aside. */
+p.download { margin: 1.2rem 0; }
+p.download a { display: inline-block; padding: .55rem 1.1rem; border: 1px solid var(--accent, #2f6f4f);
+  border-radius: 6px; font-weight: 600; text-decoration: none; }
+p.download .dl-meta { display: block; margin-top: .4rem; color: var(--muted); font-size: .85rem; }
+/* O112a: the rule change history - a dated ledger, the date quiet and monospaced, the reason leading. */
+ul.rulehist { list-style: none; padding: 0; margin: .3rem 0 0; }
+ul.rulehist li { display: flex; gap: .7rem; padding: .35rem 0; border-bottom: 1px solid var(--divider);
+  align-items: baseline; }
+ul.rulehist time { flex: none; font-family: var(--mono, ui-monospace, monospace); font-size: .85rem;
+  color: var(--muted); }
+ul.index em { color: var(--muted); font-size: .9rem; }
+/* O111e: the site search box and its result list. Result meaning is carried by TEXT (a kind label,
+   the title, a snippet), never by colour alone, so it survives greyscale and D-105 alike. */
+.sform { display: flex; flex-direction: column; gap: .3rem; margin: 0 0 .6rem; max-width: 34rem; }
+.sform label { font-size: .9rem; color: var(--muted); }
+.sform input { font: inherit; padding: .55rem .7rem; border: 1px solid var(--line); border-radius: .45rem;
+  background: var(--surface); color: inherit; }
+.sresults li { padding: .5rem 0; }
+.sresults .sr-k { display: inline-block; font-size: .72rem; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--muted); margin-right: .5rem; }
+.sresults .sr-t { font-weight: 600; }
+.sresults .sr-x { margin: .2rem 0 0; color: var(--muted); font-size: .9rem; }
+/* O60: the guides index is a plain link list on a phone (the `ul.index` rules above, unchanged) and a
+   CARD GRID at desktop. The card thumbnail is hidden at phone width, so adding it to the DOM leaves the
+   mobile list byte-identical - only the desktop rules below reveal it and lay the cards out. The grid
+   is a lower breakpoint than the factbox's 1120 (a card grid needs far less width than a two-column
+   reading+aside layout), but the same discipline: every phone width keeps the list untouched. Scoped
+   to `.guides-cards` so the plants/guilds/beliefs indexes that share `ul.index` are not affected. */
+.guidecard-thumb { display: none; }
+/* A2: the journey-shelf heads. Base styles - the phone keeps the same single-column list, just
+   grouped under these heads; the colour swatch names the shelf, the count is honest. Shelf colour:
+   soft sage for the journey shelves, the deep sage step for What to grow (the biggest shelf),
+   terracotta for Myths - decoration keyed by section, never by an individual guide. */
+.shelf-h { display: flex; align-items: center; gap: .5rem; }
+.shelf-h .shelf-sw { width: 14px; height: 14px; border-radius: 4px; flex: none;
+  background: var(--sage-soft); }
+.shelf-s3 .shelf-sw { background: var(--sage); }
+.shelf-s5 .shelf-sw { background: var(--accent); }
+.shelf-h .shelf-n { color: var(--muted); font-weight: 400; font-size: .8em;
+  font-variant-numeric: tabular-nums; }
+/* O102 Arc C — the rules index. The editorial SHELF STRIP (a curated on-ramp above the full list),
+   the per-row "#" anchor and its :target landing, the per-section back-to-top, and the kind blurbs. */
+.shelves { display: grid; gap: 1rem; margin: .8rem 0 1.6rem; }
+.shelf-c { border-left: 3px solid var(--sage-soft); padding-left: .9rem; }
+.shelf-c:nth-child(2) { border-left-color: var(--accent); }   /* Myths, checked - terracotta */
+.shelf-blurb { color: var(--muted); margin: .1rem 0 .5rem; font-size: var(--fs-1); }
+.kind-blurb { color: var(--muted); margin: -.05rem 0 .5rem; font-size: var(--fs-1); }
+ul.index li { position: relative; }
+.rowlink { margin-left: .35rem; color: var(--muted); text-decoration: none; opacity: 0; font-weight: 600; }
+ul.index li:hover .rowlink, .rowlink:focus { opacity: 1; }
+ul.index li:target { background: var(--sage-soft); border-radius: 6px;
+  box-shadow: 0 0 0 .4rem var(--sage-soft); scroll-margin-top: 3.4rem; }
+.totop { margin: .3rem 0 1.4rem; font-size: var(--fs-1); }
+.totop a { color: var(--muted); text-decoration: none; }
+.totop a:hover { color: var(--accent-text); }
+@media (min-width: 620px) { .shelves { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 760px) {
+  main:has(.guides-cards) { max-width: 63rem; }
+  /* A2: each card wears its shelf's colour as a left spine; the blurb clamps to two lines ON THE
+     CARD ONLY - the full description stays in the DOM (and in the phone list), so the O60 pin on
+     the mobile markup holds byte-for-byte. */
+  .shelf .guidecard { border-left: 5px solid var(--sage-soft); }
+  .shelf-s3 .guidecard { border-left-color: var(--sage); }
+  .shelf-s5 .guidecard { border-left-color: var(--accent); }
+  /* O82(f): the 2-line clamp let a sliver of line 3 peek - the .sci carried 1rem bottom padding
+     INSIDE its overflow box (a later, MORE specific base rule set it), so line 3 showed in the
+     padding zone before the clip. Beat that base rule's specificity, zero the bottom padding, and
+     pin an explicit 2-line max-height (line-clamp alone rendered inconsistently) for a clean cut;
+     the card carries the breathing space instead. */
+  .shelf ul.guides-cards li.guidecard > .sci { display: -webkit-box; -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; overflow: hidden; line-height: 1.45; max-height: 2.9em; padding-bottom: 0; }
+  .shelf .guidecard { padding-bottom: .85rem; }
+  .guides-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+    gap: 1rem; margin-top: 1.2rem; }
+  .guides-cards li.guidecard { padding: 0; border-bottom: none; display: flex; flex-direction: column;
+    background: var(--surface); border: 1px solid var(--line); border-radius: .8rem; overflow: hidden;
+    transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
+  .guides-cards li.guidecard:hover { border-color: var(--accent); transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(32,30,29,.09); }
+  .guides-cards li.guidecard .guidecard-thumb { display: block; width: 100%; height: 8rem;
+    object-fit: cover; background: var(--bg); }
+  .guides-cards li.guidecard > a { padding: .8rem .95rem .1rem; font-weight: 700; font-size: 1.1em;
+    color: var(--accent-text); text-decoration: none; line-height: 1.25; }
+  .guides-cards li.guidecard > .sci { padding: .15rem .95rem 1rem; }
+}
+/* O97 P3: de-boxed. The card drops its surface fill and radius and becomes open content set apart
+   by the grade rail alone - the box no longer frames the claim, the rail and the bold voice-face
+   h3 do. Content sits inset past the rail; no fill means the reading column runs edge to edge. */
+.card { padding: .1rem 0 .35rem .95rem;
+  margin: 1.35rem 0 .5rem; border-left: 3px solid var(--sage); }
+/* A3/C2: more air BETWEEN card groups than inside them - cards in a run sit close (the rail keeps
+   each one distinct without a fill), the run itself stands apart from the prose around it. */
+.card + .card { margin-top: .9rem; }
+/* A3/C3: the spine carries the grade, same plain-words mapping the badge states (D-083 - the
+   words stay; the colour only echoes them). Sage = well established, terracotta = promising,
+   neutral = a good hunch / contested / refuted. The badge floats top-right of its card. */
+.card.gA { border-left-color: var(--sage); }
+.card.gB { border-left-color: var(--accent); }
+.card.gC, .card.gD, .card.gF { border-left-color: var(--line); }
+.card > .conf { float: right; margin: .1rem 0 .35rem .7rem; }
+/* A3: the app deep-link states its weight - quieter than the primary static-page read */
+.card .more a[data-copy="rule_see_fire"] { color: var(--muted); font-size: .88em; }
+/* A3: chapter rhythm on guides - h2s count themselves in a soft sage circle. CSS counters only,
+   scoped to [data-guide] so explainers and every other page are untouched. */
+[data-guide] { counter-reset: guide-sec; }
+[data-guide] h2 { counter-increment: guide-sec; }
+[data-guide] h2::before { content: counter(guide-sec, decimal-leading-zero);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2em; height: 2em; margin-right: .55em; border-radius: 50%;
+  background: color-mix(in srgb, var(--sage-soft) 30%, transparent); color: var(--sage);
+  font-size: .62em; font-weight: 650; font-variant-numeric: tabular-nums; }
+/* A3: the Keep-going trail - context lines above the related list, plants as tag chips */
+.trail { margin: 1.4rem 0 .4rem; }
+.trail .trail-line { margin: .3rem 0; }
+.trail .trail-rules { margin: .2rem 0 .6rem; padding-left: 1.2rem; }
+.trail .trail-plants { margin: .55rem 0 .2rem; color: var(--muted); }
+.trail .trail-chip { display: inline-block; border: 1px solid var(--line); border-radius: 99rem;
+  padding: .1rem .6rem; margin: .12rem .1rem; color: var(--text); text-decoration: none;
+  font-size: .92rem; background: var(--surface); }
+.trail .trail-chip:hover { border-color: var(--accent); }
+.card p { margin: .45rem 0; }
+/* A refuted card's heading is a claim we reject, so the line that says so must not read as body
+   text. Colour + weight only, no icon (D-105), and it reuses the same accent the weak-confidence
+   and soft-evidence lines already use, so "this is the corpus disagreeing" looks consistent. */
+.card .refuted { color: var(--accent-text); font-weight: 600; font-size: .95rem; }
+.meta { color: var(--muted); font-size: .92rem; }
+.conf { font-weight: 600; color: var(--sage); }
+.conf.gD, .conf.gF { color: var(--accent-text); }
+.ev { font-size: .95rem; }
+.ev.ok { color: var(--sage); }
+.ev.soft { color: var(--accent-text); }
+details { margin: .4rem 0; }
+summary { cursor: pointer; color: var(--muted); font-size: .93rem; }
+.prov { font-size: .9rem; color: var(--muted); margin: .5rem 0; }
+/* O97 P3: de-boxed to a neutral left rail (the notes carry no grade, so the rail stays --line). */
+.note { border-left: 3px solid var(--line); padding: .1rem 0 .1rem .95rem; margin: 1rem 0; }
+ul.soft li { margin-bottom: .5rem; }
+/* O58 guides: the "what you need" checklist and the "keep going" cross-links read as set-apart
+   blocks, not more body paragraphs. O97 P3: de-boxed like the rest of the reading column - a
+   neutral left rail (they carry no grade) in place of the old surface tint. The sources fold
+   reuses the shared details.sources styling. */
+.needs, .related { border-left: 3px solid var(--line); padding: .1rem 0 .1rem .95rem; margin: 1rem 0; }
+.needs-h, .related-h { margin: 0 0 .3rem; font: 600 var(--fs-0) var(--mono); letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted); }
+.needs ul, .related ul { margin: 0; padding-left: 1.1rem; }
+.needs li, .related li { margin: .2rem 0; }
+/* A3: the "In this guide" panel - the reader's own questions, each a jump-link to its answer.
+   O97 P3: de-boxed like .needs/.related, but its rail stays --accent (not neutral) because the
+   linked questions mark it as a way IN to the piece rather than a checklist. The list is unbulleted
+   (each row is a question, not a step), and the anchors carry the site's link colour so they read as
+   tappable. */
+.in-this-guide { border-left: 3px solid var(--accent);
+  padding: .1rem 0 .1rem .95rem; margin: 1.2rem 0; }
+.itg-h { margin: 0 0 .4rem; font: 600 var(--fs-0) var(--mono); letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted); }
+.in-this-guide ul { margin: 0; padding: 0; list-style: none; }
+.in-this-guide li { margin: .3rem 0; }
+.in-this-guide li a { text-decoration: none; }
+.in-this-guide li a:hover { text-decoration: underline; }
+/* O67: the "what this guide can't answer yet" block, and the open-questions index it feeds. A muted,
+   honest card - not an error, a stated edge. The question reads in the body voice; the reason sits
+   under it in the muted aside voice. */
+.open-q { border: 1px dashed var(--line); border-radius: .6rem; padding: .75rem 1rem; margin: 1.6rem 0 .6rem; }
+.open-q-h { margin: 0 0 .2rem; font: 600 var(--fs-0) var(--mono); letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted); }
+.open-q-lede { margin: 0 0 .5rem; font-size: .9rem; color: var(--muted); }
+.open-q ul, .oq-guide ul { margin: 0; padding: 0; list-style: none; }
+.open-q li, .oq-guide li { margin: .55rem 0; }
+.oq-q { display: block; font-weight: 600; }
+.oq-why { display: block; color: var(--muted); font-size: .92rem; }
+.oq-count { color: var(--muted); font: 600 var(--fs-0) var(--mono); letter-spacing: .04em; }
+.oq-guide { margin: 1.3rem 0; }
+.oq-guide h2 { margin: 0 0 .3rem; }
+.gd-sources { margin-top: 1.4rem; }
+/* O58 Phase 3: the static placement diagram - the deterministic sibling of the app landing's product
+   band. The frame carries the plan map's own ground/soil palette (web/styles.css .lg-plan-frame), so
+   the guide's diagram reads as the same drawing the app produces. Light and dark. */
+.gd-diagram { margin: 1.2rem 0; }
+.gd-frame { --gd-ground: #b7c491; --gd-soil: #d9c9a3; background: var(--gd-ground); border-radius: .6rem;
+  padding: clamp(.6rem, 3vw, 1.1rem); display: grid; place-items: center; }
+@media (prefers-color-scheme: dark) { .gd-frame { --gd-ground: #3d4633; --gd-soil: #5a4f3a; } }
+.gd-fit { display: block; width: 100%; max-width: 320px; height: auto; }
+.gd-fit circle { stroke-width: 1; }
+.gd-bed { fill: var(--gd-soil); stroke: color-mix(in srgb, var(--gd-soil) 60%, #6b5a3a); stroke-width: 2; }
+.gd-legend { list-style: none; margin: .6rem 0 0; padding: 0; display: flex; flex-wrap: wrap;
+  gap: .35rem .9rem; font: 600 var(--fs-0, .8rem) ui-monospace, monospace; }
+.gd-legend li { display: inline-flex; align-items: center; gap: .4rem; }
+.gd-ldot { width: .7rem; height: .7rem; border-radius: 50%; flex: none; }
+.gd-diagram figcaption { font-size: .82rem; color: var(--muted); margin: .4rem 0 0; }
+/* O62c — the last-frost odds figure. A neutral framed panel with three risk bands (frost most years ->
+   the gamble -> frost rare) and the median / 1-in-10 dates marked; the band fills are the ONLY colour
+   and are re-tuned for the dark ground so the risk gradient reads on both. All text takes the page's
+   own --text/--muted so it never fights the theme. */
+.frostfig { margin: 1.2rem 0; }
+.ff-frame { background: var(--surface); border: 1px solid var(--divider); border-radius: .6rem;
+  padding: clamp(.6rem, 3vw, 1rem); }
+.ff-svg { display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto; }
+.ff-risk { fill: #c0603066; } .ff-gamble { fill: #d9a84777; } .ff-safe { fill: #6f8a4f77; }
+.ff-mid { stroke: var(--muted); stroke-width: 1; opacity: .45; }
+.ff-month { stroke: var(--divider); stroke-width: 1; }
+.ff-mlab { fill: var(--muted); font: 10px ui-sans-serif, system-ui, sans-serif; text-anchor: middle; }
+.ff-key-tick { stroke: var(--text); stroke-width: 1.5; }
+.ff-key { fill: var(--text); font: 600 11px ui-sans-serif, system-ui, sans-serif; }
+.ff-keyd { fill: var(--muted); font: 10px ui-sans-serif, system-ui, sans-serif; }
+.ff-legend { list-style: none; margin: .6rem 0 0; padding: 0; display: flex; flex-wrap: wrap;
+  gap: .35rem .9rem; font-size: .82rem; color: var(--muted); }
+.ff-legend li { display: inline-flex; align-items: center; gap: .4rem; }
+.ff-dot { width: .8rem; height: .8rem; border-radius: .2rem; flex: none; }
+.ff-dot.ff-risk { background: #c06030; } .ff-dot.ff-gamble { background: #d9a847; }
+.ff-dot.ff-safe { background: #6f8a4f; }
+.frostfig figcaption { font-size: .82rem; color: var(--muted); margin: .4rem 0 0; }
+@media (prefers-color-scheme: dark) {
+  .ff-risk { fill: #d5764a66; } .ff-gamble { fill: #e6bd6a66; } .ff-safe { fill: #93b06e66; }
+  .ff-dot.ff-risk { background: #d5764a; } .ff-dot.ff-gamble { background: #e6bd6a; }
+  .ff-dot.ff-safe { background: #93b06e; }
+}
+/* AQ-7 — the frost-odds tool's own chrome: a ZIP field and a results region that then borrows the
+   .frostfig / .ff-* figure classes above and the .answer / .facts / .prov / .ladder classes the
+   station pages use, so a looked-up window reads identically to a static one. */
+.frosttool { margin: 1.1rem 0 .3rem; }
+.ft-field { display: flex; flex-direction: column; gap: .3rem; }
+.frosttool label { font-size: .8rem; font-weight: 600; letter-spacing: .02em; color: var(--muted);
+  text-transform: uppercase; }
+.frosttool input { font-size: 1.35rem; padding: .5rem .65rem; width: 6.5rem; letter-spacing: .12em;
+  color: var(--text); background: var(--surface); border: 1px solid var(--divider);
+  border-radius: .45rem; }
+.frosttool input:focus { outline: 2px solid var(--accent-text); outline-offset: 1px; }
+.ft-hint { font-size: .85rem; color: var(--muted); margin: .5rem 0 0; max-width: 42rem; }
+.ft-out { margin: 1.2rem 0 1.6rem; min-height: 1px; }
+.ft-out:empty { margin: 0; }
+.ft-empty { color: var(--muted); }
+/* O105c - the still-sow tool reuses the .frosttool form and .ft-out region above, and adds only its
+   result chrome: three tiers coloured by the SAME risk palette the frost figure uses, carried on a
+   left border rather than a pictograph (D-105). */
+.st-h { font-size: 1rem; margin: 1.3rem 0 .5rem; padding-left: .6rem; border-left: 4px solid var(--divider); }
+.st-safe { border-left-color: #6f8a4f; } .st-gamble { border-left-color: #d9a847; }
+.st-late { border-left-color: #c06030; }
+.st-list { list-style: none; padding: 0; margin: 0 0 .5rem; display: flex; flex-wrap: wrap; gap: .3rem 1rem; }
+.st-list li { display: flex; gap: .4rem; align-items: baseline; }
+.st-crop { font-weight: 600; } .st-dtm { font-size: .82rem; color: var(--muted); }
+.st-note { font-size: .9rem; color: var(--muted); max-width: 44rem; margin: .5rem 0; }
+@media (prefers-color-scheme: dark) {
+  .st-safe { border-left-color: #93b06e; } .st-gamble { border-left-color: #e6bd6a; }
+  .st-late { border-left-color: #d5764a; }
+}
+/* O106: the section nav overflows 544 px into 390 and scrolls, but nothing SAID so - six of the
+   eight corpus sections were invisible to a phone reader who did not guess to swipe. The affordance
+   is a mask on the SCROLLER itself rather than an overlay: an absolutely-positioned gradient has to
+   be anchored to something that does not scroll, and a sticky pseudo-element in a horizontally
+   scrolling flex row lays out at zero width (measured - the first attempt here rendered nothing).
+   A mask fades the content at the right edge whatever the layout does, and cannot intercept a tap.
+   It is static rather than scroll-linked: at the end of the row the last item is still legible
+   through the tail of the gradient, which is a smaller cost than the JS a scroll-linked fade needs
+   on a page that otherwise ships none. */
+.secnav {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.2rem), transparent);
+          mask-image: linear-gradient(to right, #000 calc(100% - 2.2rem), transparent);
+}
+@media (min-width: 46rem) { .secnav { -webkit-mask-image: none; mask-image: none; } }
+/* O105a: the result now carries BOTH seasons, each headed. The heading has to read as a divider
+   inside the answer rather than as a page section, so it sits smaller than the page's own h2 and
+   rules off above itself - except the first one, which already follows the input. */
+.ft-out .ft-h { font-size: 1.05rem; margin: 1.8rem 0 .4rem; padding-top: 1rem;
+  border-top: 1px solid var(--divider); }
+.ft-out .ft-h:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+/* AQ-6 comparison page: a dated "last checked" badge and the concessions list. The list borrows
+   .facts-style two-column shape on desktop but stacks the product name over its concession on a
+   phone, because a concession is a sentence, not a value. */
+.checked { display: inline-block; font-size: .85rem; color: var(--muted); border: 1px solid var(--divider);
+  border-radius: .4rem; padding: .3rem .6rem; margin: .2rem 0 1rem; }
+.compare { margin: 1rem 0 1.4rem; }
+.compare dt { font-weight: 600; color: var(--text); margin: 1rem 0 .2rem; }
+.compare dd { margin: 0 0 .2rem; color: var(--muted); }
+@media (min-width: 700px) {
+  .compare dt { margin-top: 1.1rem; }
+  .compare dd { max-width: 46rem; }
+}
+/* O87 F1 — the shared CHROME every corpus DATA FIGURE hangs on (the sibling of .gd-diagram and
+   .frostfig above). A generated figure is a card: framed surface, a fluid-but-capped SVG, a caption
+   that carries its own provenance line. The marks come from the validated --cf-* palette; text wears
+   ink/muted tokens, never a mark colour. New figure families (ph bands, depth cut-away) reuse these
+   classes, so the site's figures read as one system. */
+.cf { margin: 1.2rem 0; }
+.cf-frame { background: var(--card); border: 1px solid var(--line); border-radius: .6rem;
+  padding: .7rem .5rem; }
+.cf-svg { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; }
+.cf-grid { stroke: var(--line); stroke-width: 1; }
+.cf-axis { fill: var(--muted); font: 10px ui-sans-serif, system-ui, sans-serif; }
+.cf-lbl { fill: var(--text); font: 600 11px ui-sans-serif, system-ui, sans-serif; }
+.cf-val { fill: var(--muted); font: 10px ui-monospace, "SF Mono", Menlo, monospace; }
+.cf-bar { fill: var(--cf-2); }
+.cf-bar-acid { fill: var(--cf-1); }  /* an acid-lover reads in the terracotta mark, not the leaf */
+.cf-mark { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+/* F3 depth cut-away: the soil block, its surface line, the seeds and their stems. */
+.cf-soil { fill: color-mix(in srgb, var(--surface) 70%, #b08d5a); opacity: .55; }
+.cf-surface { stroke: var(--muted); stroke-width: 1.5; }
+.cf-stem { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 1 4; opacity: .8; }
+.cf-seed { fill: var(--cf-1); }
+.cf-median { stroke: var(--cf-2); stroke-width: 2; }  /* the median tick on a frost-compare window */
+/* F5 rule illustration (R-105): a flat schematic plant in drafting conventions, class-styled so it
+   inherits the figure tokens and themes. Leaf/stem in leaf-green, water in slate. */
+.rf-leaf { fill: var(--cf-2); }
+.rf-stem { fill: none; stroke: var(--cf-2); stroke-width: 5; stroke-linecap: round; }
+.rf-midrib { fill: none; stroke: var(--card); stroke-width: 1.6; }
+.rf-water { fill: var(--cf-4); }
+.rf-film { fill: none; stroke: var(--cf-4); stroke-width: 3.5; stroke-linecap: round; opacity: .85; }
+.rf-panel { fill: var(--surface); }
+.rf-ground { stroke: var(--muted); stroke-width: 2; }
+.rf-pool { fill: var(--cf-4); opacity: .4; }
+/* F3 dual-unit SVG labels — the SVG twin of F0's .u swap. Both texts ship; CSS shows one off the
+   same html[data-units] the app writes. Imperial is the default-visible arm (no attribute). */
+.cf-u-m { display: none; } .cf-u-i { display: inline; }
+:root[data-units="metric"] .cf-u-m { display: inline; }
+:root[data-units="metric"] .cf-u-i { display: none; }
+.cf figcaption { font-size: .82rem; color: var(--muted); margin: .5rem 0 0; }
+.cf-prov { display: block; margin-top: .35rem; font-size: .76rem; color: var(--muted); }
+.cf-prov code { font-size: .95em; }
+/* O62b — inline SCENE photos in guides. A credited process shot placed beside the section it
+   illustrates (the UMN/Almanac pattern the guides didn't have). On a phone it stacks full-width in
+   reading order; on desktop it floats RIGHT at a fixed, restrained width so the prose keeps a
+   comfortable measure and the photos never dominate. Three rules keep the wide view clean: the fixed
+   width (not a percentage that balloons), every guide heading CLEARS the float (a short section can
+   never let its photo bleed into the next one), and the full-width diagram / rule cards clear too. A
+   guide that carries scenes widens its reading column on a wide screen (the O57 desktop-fill lesson),
+   so the photos fill space the guide used to leave empty. A fixed 3:2 box reserves the space so the
+   image load never reflows the page. */
+figure.scene { margin: 1rem 0; }
+figure.scene img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover;
+  border-radius: .5rem; background: var(--surface); }
+figure.scene figcaption { font-size: .8rem; color: var(--muted); margin: .35rem 0 0; line-height: 1.4; }
+@media (min-width: 700px) {
+  figure.scene { float: right; width: 16rem; margin: .3rem 0 1rem 1.6rem; }
+  [data-guide] h2 { clear: both; }
+  [data-guide] figure.gd-diagram, [data-guide] .card { clear: both; }
+}
+@media (min-width: 1120px) {
+  main:has(figure.scene) { max-width: 52rem; }
+}
+/* O44 — the plant photo. A fixed 4:3 box with object-fit: cover reserves its space so the image
+   loading never reflows the page (no per-image dimensions stored in the corpus), and crops
+   consistently across a set of photos that arrive at every aspect ratio. The credit is mandatory
+   and small; the licence links the source. */
+figure.species-photo { margin: 0 0 1rem; max-width: 320px; }
+figure.species-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover;
+  border-radius: .5rem; background: var(--surface); }
+figure.species-photo figcaption { font-size: .82rem; color: var(--muted); margin: .35rem 0 0; }
+.member-thumb { width: 2.2rem; height: 2.2rem; object-fit: cover; border-radius: .35rem;
+  vertical-align: middle; margin-right: .55rem; }
+/* O51 — the guild's face row: its members' own photos, round, overlapping slightly, each a link
+   to that plant's page. Sized in rem so the 192px source stays 2x-sharp at every root size. */
+.guild-face { margin: 0 0 .6rem; display: flex; }
+.guild-face img { width: 3.6rem; height: 3.6rem; object-fit: cover; border-radius: 50%;
+  border: 2px solid var(--bg); background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.guild-face a + a img { margin-left: -.55rem; }
+.guild-face a:hover img, .guild-face a:focus-visible img { z-index: 1; position: relative; }
+/* O51 — the explainer's scene-setting header. Fixed 2:1 box (dimensions on the img) so it never
+   reflows; the credit is mandatory, exactly as on species pages. */
+figure.exp-hero { margin: 0 0 1.1rem; }
+figure.exp-hero .frame { border-radius: .6rem; overflow: hidden; }
+figure.exp-hero img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1;
+  object-fit: cover; background: var(--surface); }
+figure.exp-hero figcaption { font-size: .82rem; color: var(--muted); margin: .35rem 0 0; }
+
+/* O52 (motion-level ruling, 2026-08-06) — motion on the reading pages, as a PROGRESSIVE
+   enhancement and behind prefers-reduced-motion in full. Pure CSS scroll-driven animations: a
+   browser without animation-timeline simply shows the page (no JS, nothing to fail loudly), a
+   reader with "reduce motion" set gets a still page, and everything animates transform/opacity
+   only, so nothing ever re-lays-out.
+   - reveal: cards and figures rise 12px as they enter the viewport, once, subtly.
+   - parallax: the explainer hero's IMAGE drifts inside its clipped frame at a fraction of scroll
+     (the ruled "two hero surfaces" — the app landing carries the other). */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* A3: the reading-progress hairline on guides. Pure CSS, page-scroll driven; outside this
+       block the div carries no styles at all, so a browser without animation-timeline (or a
+       reduced-motion reader) gets nothing - not a frozen bar. */
+    .readline { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 5;
+      background: var(--accent); border-radius: 0 99rem 99rem 0;
+      transform-origin: 0 50%; transform: scaleX(0);
+      animation: pages-progress linear both; animation-timeline: scroll(root); }
+    article.card, figure.species-photo, .index li, .note {
+      animation: pages-rise both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+    figure.exp-hero img {
+      animation: pages-drift both linear;
+      animation-timeline: view();
+      animation-range: contain 0% cover 100%;
+      scale: 1.12;
+    }
+  }
+}
+@keyframes pages-rise { from { opacity: .25; translate: 0 12px; } to { opacity: 1; translate: 0 0; } }
+@keyframes pages-drift { from { translate: 0 -4%; } to { translate: 0 4%; } }
+@keyframes pages-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* O111d (content estate): a print stylesheet. Until now a plant, guide or rule page printed AS THE
+   SCREEN - the whole site header, the sections nav, the contents rail and the footer link columns
+   riding every printout, in tinted chrome that wastes toner. Printing is the one moment the app
+   cannot serve (standing in the garden with no signal), so a content page should print as a clean
+   document: the article, black on white, and the citation that carries its own source URL. The APP
+   surfaces (the map-based Plan, the Calendar) are a separate, harder job and are not in scope here.
+   meaning on a content page is TEXT (a grade is the WORD, never a colour), so backgrounds are left to
+   drop to the browser's toner-saving default rather than forced to print; break-inside guards keep a
+   fact box, a citation or a figure from splitting across a page. */
+@media print {
+  html, body { background: #fff !important; color: #111 !important; }
+  * { box-shadow: none !important; text-shadow: none !important; background: transparent !important; }
+  header.site, nav.secnav, nav.contents, footer.site,
+  .unittoggle, .hcta, .in-this-guide, .rowlink, .backtotop { display: none !important; }
+  main { max-width: none !important; margin: 0 !important; padding: 0 !important; }
+  a { color: #111 !important; }
+  /* a fact box or citation still needs to read as a bounded block once its fill is gone */
+  .factbox, .cite { border: 1px solid #bbb !important; }
+  figure img, img { max-width: 100% !important; height: auto !important; }
+  .factbox, .cite, figure, li, tr { break-inside: avoid; }
+  h1, h2, h3 { break-after: avoid; }
+  @page { margin: 1.6cm; }
+}
+
+
+/* GENERATED by engine/tools/season_ramps.py --pages-css - do not hand-edit.
+   The content pages' seasonal skins, derived from the same eight the app uses.
+   Autumn is absent on purpose: it is the bare :root above, and must stay byte-identical. */
+:root[data-season="spring"] {
+  --bg: #f8faec;
+  --surface: #eef3d9;
+  --text: #201e1d;
+  --card: #f5f5f2;
+  --line: #d4d6c8;
+  --muted: #596146;
+  --accent: #4a9a24;
+  --accent-text: #306e17;
+  --sage: #765800;
+  --sage-soft: #b29541;
+  --mark-1: #4a9a24;
+  --mark-2: #95761d;
+  --mark-3: #765800;
+}
+:root[data-season="summer"] {
+  --bg: #fdf6df;
+  --surface: #f8ecc0;
+  --text: #201e1d;
+  --card: #f7f5ec;
+  --line: #dad4bf;
+  --muted: #655d41;
+  --accent: #1f78c1;
+  --accent-text: #1f6198;
+  --sage: #795700;
+  --sage-soft: #b6933e;
+  --mark-1: #1f78c1;
+  --mark-2: #98741d;
+  --mark-3: #795700;
+}
+:root[data-season="winter"] {
+  --bg: #edf1f1;
+  --surface: #dfe6e6;
+  --text: #201e1d;
+  --card: #f3f5f5;
+  --line: #d1d5d5;
+  --muted: #516064;
+  --accent: #3e7a99;
+  --accent-text: #36637d;
+  --sage: #2e4a35;
+  --sage-soft: #84a18a;
+  --mark-1: #3e7a99;
+  --mark-2: #64836a;
+  --mark-3: #2e4a35;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-season="spring"] {
+    --bg: #1a1b19;
+    --surface: #262721;
+    --text: #f0e8da;
+    --card: #232321;
+    --line: #393a32;
+    --muted: #a5ab97;
+    --accent: #67ae28;
+    --accent-text: #bbe490;
+    --sage: #e7d492;
+    --sage-soft: #b29541;
+    --mark-1: #67ae28;
+    --mark-2: #ceb668;
+    --mark-3: #e7d492;
+  }
+  :root:not([data-theme="light"])[data-season="summer"] {
+    --bg: #1b1a17;
+    --surface: #282723;
+    --text: #f0e8da;
+    --card: #232321;
+    --line: #3b3932;
+    --muted: #aea894;
+    --accent: #569fd8;
+    --accent-text: #b3daf7;
+    --sage: #ebd28d;
+    --sage-soft: #b6933e;
+    --mark-1: #569fd8;
+    --mark-2: #d3b464;
+    --mark-3: #ebd28d;
+  }
+  :root:not([data-theme="light"])[data-season="winter"] {
+    --bg: #161c1c;
+    --surface: #202929;
+    --text: #f0e8da;
+    --card: #222323;
+    --line: #373a3a;
+    --muted: #9babaf;
+    --accent: #6ba0bd;
+    --accent-text: #bbd9ea;
+    --sage: #c8d9cb;
+    --sage-soft: #84a18a;
+    --mark-1: #6ba0bd;
+    --mark-2: #a7bfab;
+    --mark-3: #c8d9cb;
+  }
+}
+:root[data-theme="dark"][data-season="spring"] {
+  --bg: #1a1b19;
+  --surface: #262721;
+  --text: #f0e8da;
+  --card: #232321;
+  --line: #393a32;
+  --muted: #a5ab97;
+  --accent: #67ae28;
+  --accent-text: #bbe490;
+  --sage: #e7d492;
+  --sage-soft: #b29541;
+  --mark-1: #67ae28;
+  --mark-2: #ceb668;
+  --mark-3: #e7d492;
+}
+:root[data-theme="dark"][data-season="summer"] {
+  --bg: #1b1a17;
+  --surface: #282723;
+  --text: #f0e8da;
+  --card: #232321;
+  --line: #3b3932;
+  --muted: #aea894;
+  --accent: #569fd8;
+  --accent-text: #b3daf7;
+  --sage: #ebd28d;
+  --sage-soft: #b6933e;
+  --mark-1: #569fd8;
+  --mark-2: #d3b464;
+  --mark-3: #ebd28d;
+}
+:root[data-theme="dark"][data-season="winter"] {
+  --bg: #161c1c;
+  --surface: #202929;
+  --text: #f0e8da;
+  --card: #222323;
+  --line: #373a3a;
+  --muted: #9babaf;
+  --accent: #6ba0bd;
+  --accent-text: #bbd9ea;
+  --sage: #c8d9cb;
+  --sage-soft: #84a18a;
+  --mark-1: #6ba0bd;
+  --mark-2: #a7bfab;
+  --mark-3: #c8d9cb;
+}

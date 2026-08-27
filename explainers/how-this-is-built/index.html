@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>How this is built - a rules corpus in git, and an app that is only its front end - Milpa Gardens</title>
+    <meta name="description" content="The product is a versioned YAML corpus with evidence grades, a Python engine, and a TypeScript port checked against it." />
+    <link rel="icon" href="../../web/icons/icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../../web/icons/apple-touch-icon.png" />
+    <script>try{var u=localStorage.getItem("gg-units");if(u==="metric")document.documentElement.setAttribute("data-units","metric");var t=localStorage.getItem("gg-temp");if(t==="c")document.documentElement.setAttribute("data-temp","c");var th=localStorage.getItem("gg-theme");document.documentElement.setAttribute("data-theme",(th==="dark"||th==="light")?th:((window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"));var S=["spring","summer","autumn","winter"],p=localStorage.getItem("gg-season"),r;if(S.indexOf(p)>=0){r=p;}else{var n=S[Math.floor(((new Date().getMonth()+10)%12)/3)];r=localStorage.getItem("gg-hemi")==="s"?S[(S.indexOf(n)+2)%4]:n;}document.documentElement.setAttribute("data-season",r);}catch(e){}</script>
+    <link rel="stylesheet" href="../../pages.css?v=65afa1525b" />
+  </head>
+  <body>
+    <header class="site">
+      <a class="brand" href="../../"><svg class="brandmark" viewBox="0 0 16 15" aria-hidden="true"><g class="t1"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9"/></g><g class="t2"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9"/></g><g class="t3"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9"/></g></svg>Milpa <b>Gardens</b></a>
+      <div class="hright">
+        <button type="button" class="unittoggle" id="unittoggle" aria-label="Switch measurement units between imperial and metric"><span class="ut-i">in</span><span class="ut-m">cm</span></button>
+        <a class="hcta" href="../../web/"><span data-copy="header_cta">Open the planner</span></a>
+      </div>
+    </header>
+    <nav class="secnav" aria-label="Sections"><a href="../../plants/">Plants</a><a href="../../guilds/">Guilds</a><a href="../../rules/">Rules</a><a href="../../beliefs/">Folklore</a><a href="../../guides/">Guides</a><a href="../../explainers/" aria-current="true">Explainers</a><a href="../../frost/">Frost</a><a href="../../unsure/">Unsure</a></nav>
+    <main>
+      <figure class="exp-hero"><div class="frame"><img src="../../web/img/thumbs/hero_thymus_vulgaris.webp" alt="A bundle of fresh thyme sprigs" width="960" height="480" decoding="async"></div><figcaption>Photo: Evan-Amos &middot; <a href="https://commons.wikimedia.org/wiki/File:Thyme-Bundle.jpg" rel="noreferrer">CC0</a>, via Wikimedia Commons.</figcaption></figure>
+      <h1>How this is built - a rules corpus in git, and an app that is only its front end</h1>
+      <p class="lede">The product is a versioned YAML corpus with evidence grades, a Python engine, and a TypeScript port checked against it. The web app is a thin layer over the top and is the least interesting part.</p>
+      <div data-explainer="how-this-is-built">
+      <h2>The inversion</h2>
+      <p>Most garden planners are an application with some data in it. This is a corpus with an application in front of it. The distinction sounds academic and decides everything downstream.</p>
+      <p>The product is <code>corpus/</code>: a set of YAML files holding 83 species, 30 guilds, 91 rules and 22 folklore beliefs. It is optimised to be correct, auditable, and survivable across a total rewrite of everything else. If the web app were deleted tomorrow, the thing worth having would still exist.</p>
+      <h2>Every rule states its mechanism or it is not a rule</h2>
+      <p>The corpus has four constraints it does not bend on. The first is the one that shapes the content most:</p>
+      <blockquote><p>No enforced rule without a named mechanism. If a rule cannot state its mechanism in one sentence without the word &quot;helps&quot;, it is not a top-grade rule. Downgrade it or delete it.</p></blockquote>
+      <p>&quot;Helps&quot; is the tell. It is the word that lets an unexamined claim pass as a checked one, and banning it from the mechanism field turns out to eliminate most of the companion-planting canon in a single stroke.</p>
+      <p>The others: a guild that does not fit your bed is shown greyed with the reason, never silently substituted; the engine will tell you to get a soil test and will not invent an NPK number; and a citation that was never read cannot be marked as verified.</p>
+      <p>Two of those four are enforced mechanically by a validator that runs on every change. The fourth one cannot be, which is the point of the next section.</p>
+      <h2>Verified means a human read the source</h2>
+      <p>Every rule carries an evidence status. <code>unverified</code> means a language model asserted the claim from general knowledge and nobody has checked it. Promoting a rule to <code>verified</code> requires a real source in the rule&#x27;s pointers, read by a person.</p>
+      <p>No automated process is allowed to make that promotion, including the one that writes most of this code. Right now 0 rules sit at unverified. That number is published rather than hidden, because a corpus that cannot report its own unchecked claims is not auditable.</p>
+      <p>The pointers are stored as prose, verbatim, usually including the sentence that carries the claim and the date it was read. When you open a source disclosure anywhere on this site, you are seeing what the corpus recorded, not a tidied summary of it.</p>
+      <h2>Demotion is a feature</h2>
+      <p>Grades move in both directions. A rule dropping from a confident tier to a weaker one because the literature turned out to be more equivocal than assumed is the system working correctly, and it gets recorded rather than quietly deleted.</p>
+      <p>This is the reason the corpus is YAML in git rather than rows in a database. Every grade change is its own commit, with the source that caused it in the commit message. The version history <em>is</em> the epistemic history of the project: you can ask when a claim was believed, why it changed, and what was read that changed it.</p>
+      <h2>Two engines that have to agree</h2>
+      <p>The rules engine exists twice. The reference implementation is Python; the app runs a TypeScript port in the browser. That is a duplication, and duplication drifts, so it is not left to discipline: the Python side generates conformance goldens and the TypeScript engine is checked against them on every change. If the two disagree about what a rule does, the build goes red.</p>
+      <p>The same pattern is used for these pages. The site you are reading renders the corpus a second time, beside the app, so a test parses the app&#x27;s own source and fails if the two ever describe evidence differently.</p>
+      <h2>No backend, no weather API</h2>
+      <p>The app has no server. Climate data is precomputed to a static bundle at build time and versioned in the repo like any other artifact, which means the planner works offline, the climate layer is diffable, and the whole system&#x27;s external dependency is refreshed roughly once a decade instead of once a request.</p>
+      <h2>The bits that are deliberately missing</h2>
+      <ul>
+        <li>No companion-planting chart, ever.</li>
+        <li>No drag-and-drop canvas, except in one place with a specific reason.</li>
+        <li>No fertiliser numbers without a soil test.</li>
+        <li>No guilds sourced from permaculture blogs. The list of real ones is short, and the shortness is the feature.</li>
+      </ul>
+      <h2>Read it yourself</h2>
+      <p>The evidence page in the app lists every rule and every belief with its grade, mechanism and sources. This site puts the same material on pages a search engine can reach.</p>
+      <ul>
+        <li><a href="../../plants/">Every plant, with the confidence tier on every number</a></li>
+        <li><a href="../../guilds/">Every guild, including the ones that claim nothing</a></li>
+        <li><a href="../../web/">Open the planner</a></li>
+      </ul>
+      </div>
+      <p class="more"><a href="../" data-copy="all_explainers">All explainers</a> &middot; <a href="../../web/" data-copy="plan_a_bed">Plan a bed</a></p>
+    </main>
+    <footer class="site">
+      <div class="foot-brand">
+        <a class="brand" href="../../"><svg class="brandmark" viewBox="0 0 16 15" aria-hidden="true"><g class="t1"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9"/></g><g class="t2"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9"/></g><g class="t3"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9"/></g></svg>Milpa <b>Gardens</b></a>
+        <p class="foot-note" data-copy="footer_note">Every claim on this page comes from the project&#x27;s rule corpus, with its evidence grade and its sources shown as recorded. Nothing here is generated prose.</p>
+        <a class="fcta" href="../../web/"><span data-copy="footer_cta">Plan a bed with Milpa Gardens</span></a>
+      </div>
+      <nav class="sitenav" aria-label="Explore the site">
+        <div class="foot-col">
+          <p class="foot-h">Learn</p>
+          <a href="../../guides/">Guides</a>
+          <a href="../../explainers/">Explainers</a>
+          <a href="../../compare/">How Milpa compares</a>
+          <a href="../../frost-odds/">Frost odds tool</a>
+          <a href="../../frost/">Frost dates</a>
+        </div>
+        <div class="foot-col">
+          <p class="foot-h">The corpus</p>
+          <a href="../../plants/">Plants</a>
+          <a href="../../guilds/">Guilds</a>
+          <a href="../../rules/">Rules</a>
+          <a href="../../beliefs/">Folklore</a>
+          <a href="../../unsure/">What we don't know</a>
+          <a href="../../for-educators/">For educators</a>
+          <a href="../../search/">Search</a>
+          <a href="../../privacy/">Privacy</a>
+        </div>
+      </nav>
+    </footer>
+    <script>(function(){var b=document.getElementById("unittoggle");if(!b)return;b.addEventListener("click",function(){var r=document.documentElement,metric=r.getAttribute("data-units")==="metric";try{if(metric){r.removeAttribute("data-units");localStorage.setItem("gg-units","imperial");}else{r.setAttribute("data-units","metric");localStorage.setItem("gg-units","metric");}}catch(e){}});})();</script>
+    <script>(function(){var band=document.querySelector("nav.contents");if(!band||!("IntersectionObserver"in window))return;var links=[].slice.call(band.querySelectorAll("a[href^='#']"));var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1));});if(secs.some(function(s){return !s;}))return;var current=-1;function mark(i){if(i===current)return;current=i;links.forEach(function(a,j){if(j===i){a.setAttribute("aria-current","true");a.scrollIntoView({inline:"nearest",block:"nearest"});}else{a.removeAttribute("aria-current");}});}var io=new IntersectionObserver(function(){var y=band.getBoundingClientRect().bottom+8,best=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<=y)best=i;});mark(best);},{rootMargin:"0px 0px -55% 0px",threshold:0});secs.forEach(function(s){io.observe(s);});})();</script>
+    <script type="module">const gg=()=>import("../../edit.js");try{(localStorage.getItem("gg-editor")==="1"||location.hash==="#edit")&&gg()}catch(e){}addEventListener("hashchange",()=>{try{location.hash==="#edit"&&gg()}catch(e){}})</script>
+    <script>if("serviceWorker"in navigator){navigator.serviceWorker.register("../../sw.js").catch(function(){})}</script>
+    <script>(function(){try{var H={"milpa.garden":1,"www.milpa.garden":1};if(!H[location.hostname]||navigator.webdriver)return;if(navigator.doNotTrack==="1"||navigator.globalPrivacyControl===true)return;var q="p="+encodeURIComponent(location.pathname)+"&r="+encodeURIComponent(document.referrer||"")+"&rnd="+Date.now();fetch("https://milpa-garden.goatcounter.com/count?"+q,{method:"GET",keepalive:true,mode:"no-cors"}).catch(function(){});}catch(e){}})();</script>
+  </body>
+</html>

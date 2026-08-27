@@ -1,0 +1,1408 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Content-Security-Policy (D-122, security review M1). GitHub Pages can't set headers, so the
+         meta tag is the only mechanism. It caps what any single bug can do: only these hosts may run
+         script or receive data - an XSS can't exfiltrate the auth tokens to an attacker's server.
+         script-src carries the sha256 of the ONE inline block (the import map, which must stay inline
+         for Safari); if you EDIT the import map, recompute:
+           python3 -c "import re,hashlib,base64;print('sha256-'+base64.b64encode(hashlib.sha256(re.search(r'<script type=\"importmap\">(.*?)</script>',open('web/index.html').read(),16).group(1).encode()).digest()).decode())"
+         connect-src is PINNED to this project's Supabase host, not `*.supabase.co` (security review
+         M1, 2026-08-22): the paste-your-own-backend option was removed in O19, so a wildcard only
+         served to let an XSS exfiltrate tokens to an attacker's OWN Supabase project. `mock.supabase.co`
+         is the e2e harness's stub host (Supabase assigns random project refs, so it is not a real
+         endpoint anyone can register) and is allowlisted so the suite still boots under the true CSP.
+         If the backend project ref in web/backend.json ever changes, change it here too. Extension-office
+         and source links are plain <a href> navigation, which CSP does not gate. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0e+LyieViR3yOY06a9Z1WYNq/Nze+DWhZNy3AXoqO5s=' https://geocoding.geo.census.gov https://maps.googleapis.com https://maps.gstatic.com; connect-src 'self' https://milpa-garden.goatcounter.com https://uyyrtlgufvconidlsgsx.supabase.co https://mock.supabase.co https://nominatim.openstreetmap.org https://geocoding.geo.census.gov https://maps.googleapis.com https://tile.googleapis.com https://server.arcgisonline.com; img-src 'self' data: blob: https://server.arcgisonline.com https://tile.googleapis.com https://maps.googleapis.com https://*.gstatic.com; style-src 'self' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <!-- the map owns pinch (touch-action:none on the svg); page-level pinch-zoom would fight it
+         and "zoom the whole screen" mid-gesture, so it is off - the app scales its own type -->
+    <!-- O108b: the ACCESSIBLE default - zoomable, so page text meets WCAG 1.4.4 (Resize text) on
+         every route with no JavaScript. router.ts re-locks ONLY the Plan route (the map + the drag
+         canvas, the one surface a browser pinch would fight the app's own gesture on); the other
+         four routes stay zoomable. The map and canvas also carry their own touch-action:none. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Garden planning from evidence, not folklore. Every recommendation cites a rule; every rule states its mechanism and evidence grade." />
+    <meta name="theme-color" content="#272e1b" />
+    <!-- Share cards + canonical (acquisition P0): links must unfurl with a face, and the app page
+         canonicalizes to the bare domain so search never splits milpa.garden vs /web/ (staging serves
+         this same file, so the canonical also keeps staging out of the rankings by design). -->
+    <link rel="canonical" href="https://milpa.garden/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Milpa Gardens" />
+    <meta property="og:title" content="Milpa Gardens - the garden planner that shows its work" />
+    <meta property="og:description" content="Every recommendation cites a rule; every rule names its mechanism and evidence grade. Odds-not-a-date frost. No companion-planting chart." />
+    <meta property="og:url" content="https://milpa.garden/" />
+    <meta property="og:image" content="https://milpa.garden/web/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Milpa Gardens - the garden planner that shows its work" />
+    <meta name="twitter:description" content="Every recommendation cites a rule; every rule names its mechanism and evidence grade. Odds-not-a-date frost. No companion-planting chart." />
+    <meta name="twitter:image" content="https://milpa.garden/web/og.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <title>Milpa Gardens</title>
+    <link rel="stylesheet" href="./styles.css?v=9667c2acab" />
+  </head>
+  <body>
+    <!-- The three-sisters triad: the milpa mark, reused in the header brand and across the landing
+         via <use>. Organic redesign: terracotta + sage + deep sage, and the circles overlap with a
+         multiply blend - interplanted, not adjacent. Fills are inline var() so they survive the
+         <use> clone and stay theme-aware. -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="triad" viewBox="0 0 16 15"><g style="mix-blend-mode:var(--triad-blend,multiply)"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9" style="fill:var(--color-accent)"/></g><g style="mix-blend-mode:var(--triad-blend,multiply)"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9" style="fill:var(--color-accent-2)"/></g><g style="mix-blend-mode:var(--triad-blend,multiply)"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9" style="fill:var(--color-accent-2-700)"/></g></symbol></svg>
+    <!-- Boot splash (D-091): a static, CSS-only loading screen shown from the FIRST paint - the moment
+         the HTML arrives - and removed by app.ts once the app is interactive. The app is client-rendered
+         from a deferred module (dist/app.js) + the data bundle, so on a cold/slow connection there is a
+         window where the shell is blank; this makes that window read as "loading", not "broken". Nothing
+         here depends on the module having loaded. The inline timeout below is the ONLY safety net for the
+         module itself never arriving (app.ts can't react if app.ts never runs): after 15s it reveals a
+         reload affordance. On a successful boot app.ts hides this before the timeout fires. -->
+    <div id="bootsplash" role="status" aria-live="polite">
+      <svg class="bootmark" aria-hidden="true"><use href="#triad"/></svg>
+      <p class="bootword">Loading Milpa Gardens…</p>
+      <p class="bootslow">A slow first connection can take a moment.
+        <button id="bootreload" type="button">reload</button></p>
+    </div>
+    <script src="./boot.js?v=696300568b"></script>
+    <header class="site">
+      <a class="brand" href="#/start"><svg class="brandmark" aria-hidden="true"><use href="#triad"/></svg>Milpa <b>Gardens</b></a>
+      <!-- Plan is map-first: the header condenses to one row there; this reveals the rest
+           until the next map/sheet interaction condenses it again -->
+      <button id="hdrtoggle" type="button" aria-label="show the menu">menu</button>
+      <nav aria-label="Sections"><!-- rendered by nav.ts (D-025 dropdown tree) --></nav>
+      <!-- The persistent Guides door (O58 linking): guides are static pages at the domain root
+           beside /web/, one tap from every surface. It is the standing SECTION-SWITCH door, so it
+           opens in the SAME tab (harmony round 2, 2026-08-09: "limit new tabs" - now that content and
+           app read as one site, swapping to the guide section should not spawn a tab). Still NOT a
+           sixth section tab - D-025 locks the nav to five in-app routes. The MID-PLAN deep links
+           (the coach/team/answer guide cards) keep their new tab, where navigating away mid-arrange
+           would cost an unsaved plan; this door is chrome, not a mid-task action. -->
+      <a class="navguides" href="../guides/">Guides</a>
+      <a id="authchip" class="authchip" href="#/account">sign in</a>
+    </header>
+    <main>
+      <!-- D-029 example-garden banner (round 5: shell-level, so it rides Plan, Calendar and Log -
+           CSS hides it on the other routes; app.ts toggles [hidden] on example-active). -->
+      <div id="examplebanner" class="examplebanner" hidden>
+        <span data-copy="exampleBannerText"></span>
+        <button id="exampleremove" type="button" data-copy="exampleRemove"></button>
+      </div>
+      <!-- D-152 draft ask-once banner: signed in with a garden drafted while signed out still on
+           this device - add it to the account, or discard it. Rendered by log.ts; persistent until
+           answered (never a toast - the choice must not expire). -->
+      <div id="draftbanner" class="examplebanner" hidden></div>
+      <!-- ================================================= START (landing, D-027) -->
+      <section class="page" id="page-start" hidden aria-labelledby="landing-h">
+        <div class="landing">
+          <!-- The landing's SECOND STATE (approved 2026-08-01, docs/mockups/returning-home.html):
+               a gardener who already has ground meets an answer here instead of the stranger's
+               doors - what changed while they were away, the one ask, and which of their gardens
+               needs them. Rendered by home.ts; the `home-returning` body class hides everything
+               below and restores the tab bar. Empty (and the doors intact) for a stranger. -->
+          <div id="homereturn" hidden></div>
+          <div class="lg-top">
+          <header class="lg-hero">
+            <p class="lg-eyebrow"><svg class="triad" aria-hidden="true"><use href="#triad"/></svg> <span data-copy="landingEyebrow"></span></p>
+            <h1 id="landing-h" data-copy-html="landingHeadlineHtml"></h1>
+            <p class="lg-deck" data-copy-html="landingDeckHtml"></p>
+            <!-- O88 S4: one line of seasonal voice, chosen by the same <html data-season> stamp that
+                 swaps the palette - so the words and the colours can never disagree. -->
+            <p class="lg-voice" data-copy-season="landingVoice"></p>
+            <!-- C-3 / O109(g): the no-account promise stated ABOVE the doors, so a stranger warned off
+                 AI tools sees it before scrolling. Same landingNote key it always was (still the
+                 editor's held-by-a-check pin), lifted out of the below-doors note where it fell below
+                 the mobile fold. -->
+            <p class="lg-promise" data-copy="landingNote"></p>
+            <!-- The exchange ladder's front door (approved mockup 2026-07-30): the landing asks the
+                 visitor's PROBLEM instead of assuming it. Doors 1-2 open the answers surface; door 3
+                 is the existing Why page; door 4 is the existing planner, word for word (.startgo
+                 keeps its handler). Not a wizard (Q-B2): every door leads straight to an answer. -->
+            <p class="lg-ask" data-copy="landingAsk"></p>
+            <div class="lg-doors">
+              <button id="doorwhen" class="lg-door" type="button">
+                <span><span class="lg-door-q" data-copy="door1Q"></span>
+                <span class="lg-door-h" data-copy="door1H"></span></span>
+                <span class="lg-door-go">&rsaquo;</span>
+              </button>
+              <button id="doorteams" class="lg-door" type="button">
+                <span><span class="lg-door-q" data-copy="door2Q"></span>
+                <span class="lg-door-h" data-copy="door2H"></span></span>
+                <span class="lg-door-go">&rsaquo;</span>
+              </button>
+              <a class="lg-door" href="#/why">
+                <span><span class="lg-door-q" data-copy="door3Q"></span>
+                <span class="lg-door-h" data-copy="door3H"></span></span>
+                <span class="lg-door-go">&rsaquo;</span>
+              </a>
+              <button id="startbtn" class="lg-door lg-door-plan startgo" type="button">
+                <span><span class="lg-door-q" data-copy="door4Q"></span>
+                <span class="lg-door-h" data-copy="door4H"></span></span>
+                <span class="lg-door-go">&rsaquo;</span>
+              </button>
+            </div>
+            <p class="lg-cta">
+              <button id="examplebtn" class="lg-example" type="button" data-copy="landingExample"></button>
+            </p>
+          </header>
+
+          <!-- The "see the planner" band (audit R3, option C): REAL product output rendered from the
+               corpus in app.ts (renderLandingProduct) - the actual Three Sisters placement diagram
+               through the same place()/placementSvg the Plan page uses, and a real graded rule card.
+               Not a screenshot (rots, a binary) and not a hand-drawn mockup (drifts); it cannot lie
+               because it IS the product. Stays hidden if the layout can't be computed. -->
+          <section class="lg-product" id="lgproduct" hidden aria-label="A look at the planner" data-reveal></section>
+          </div>
+
+          <!-- O98 P3 (D-189 pilot): the home DEEP BLOCK — a full-width photo-behind-text band. The
+               photo is a credited scene from the bundle's pool (build_bundle.py → scenes), set as
+               --hero-img by app.ts:renderLandingHero, which also writes the E-IMG credit beneath. It
+               stays hidden until a scene resolves; the .heroverlay guarantee (an opaque .herotext box,
+               pinned by scenario 108) keeps the text legible over any photo in every skin. -->
+          <section class="heroverlay lg-deep" id="lgdeep" hidden data-reveal aria-label="What a planned bed grows into"></section>
+
+          <!-- O57 slice A: the proof section is a FULL-WIDTH band below the hero+product row, not the
+               420px right rail it used to live in. In the rail it stacked the product band, both proof
+               cards AND the frost card against a ~900px hero - a measured 1,534px of empty left column
+               on the domain's most-linked URL. Out of the rail the receipts run 3-up (the two guilds +
+               the frost odds) at their real photo size. -->
+          <section class="lg-proof">
+            <p class="lg-proof-lead" data-copy="landingProofLead"></p>
+            <div class="lg-receipts">
+              <article class="lg-rec sure" data-reveal>
+                <span class="lg-kicker"><svg class="triad" aria-hidden="true"><use href="#triad"/></svg> The guild you know</span>
+                <!-- O51 (imagery-surfaces ruling): the card shows its own members' faces — the 192px
+                     built thumbs (~5 KB each, web/img/thumbs/), never the full card photos. The names
+                     sit right below, so the images are decorative to a screen reader (alt="") but do
+                     the recognising for everyone else. -->
+                <span class="lg-thumbs" aria-hidden="true"><img data-spot-photo="zea_mays" src="img/thumbs/zea_mays.webp" alt="" width="192" height="192" loading="lazy" decoding="async"><img data-spot-photo="phaseolus_vulgaris" src="img/thumbs/phaseolus_vulgaris.webp" alt="" width="192" height="192" loading="lazy" decoding="async"><img data-spot-photo="cucurbita_pepo" src="img/thumbs/cucurbita_pepo.webp" alt="" width="192" height="192" loading="lazy" decoding="async"></span>
+                <span class="lg-plants">Corn · Beans · Squash</span>
+                <h2 data-copy="guildSistersH" class="lg-team">The Three Sisters</h2>
+                <p data-copy="guildSistersBody" class="lg-why">The cornstalk is a living pole for the beans to climb; the beans feed the soil; the squash sprawls below and shades out the weeds. Three crops that carry each other.</p>
+                <span class="lg-conf s"><span class="mk"></span> Well established</span>
+                <a class="lg-rec-ev" href="#/why?rule=R-001">See the evidence →</a>
+              </article>
+              <article class="lg-rec hunch" data-reveal>
+                <span class="lg-kicker">One you might not</span>
+                <span class="lg-thumbs" aria-hidden="true"><img data-spot-photo="thymus_vulgaris" src="img/thumbs/thymus_vulgaris.webp" alt="" width="192" height="192" loading="lazy" decoding="async"><img data-spot-photo="brassica_oleracea" src="img/thumbs/brassica_oleracea.webp" alt="" width="192" height="192" loading="lazy" decoding="async"></span>
+                <span class="lg-plants">Thyme · Cabbage</span>
+                <h2 data-copy="guildHerbsH" class="lg-team">Aromatic herbs among the brassicas</h2>
+                <p data-copy="guildHerbsBody" class="lg-why">Strong-smelling herbs planted among cabbages are reported to leave less caterpillar damage - one extension trial found that with thyme. Nobody has shown why, and plenty of trials find nothing, so we won’t oversell it.</p>
+                <span class="lg-conf h"><span class="mk"></span> A good hunch</span>
+                <a class="lg-rec-ev" href="#/why?rule=R-050">See the evidence →</a>
+              </article>
+              <!-- The climate half of the epistemics proof (D-029 sibling): the frost dates aren't
+                   guesses either. Rendered LIVE from the bundle's curated NCEI station in app.ts
+                   (renderLandingFrost) so the numbers can never drift from the corpus; stays hidden
+                   if no station carries a band. It is the THIRD card in the receipts row (O57 slice A). -->
+              <div id="lgfrost" class="lg-frost" hidden></div>
+            </div>
+            <p class="lg-cap" data-copy-html="landingProofCapHtml"></p>
+          </section>
+
+          <!-- A7b (award-benchmark amendments): the proof band closes with the action it argues
+               for. Its argument used to end ~1500px before the only large CTA (the foot button);
+               the convinced reader now gets the button where the receipts finish. Same .startgo
+               handler as every start button; the page is not shortened, the note not enlarged. -->
+          <div class="lg-proof-cta" data-reveal>
+            <button class="primary startgo" type="button" data-copy="landingProofCta"></button>
+          </div>
+
+          <div class="lg-div"><svg class="triad" aria-hidden="true"><use href="#triad"/></svg></div>
+
+          <section class="lg-more" data-reveal>
+            <h2 class="lg-h2" data-copy="landingMoreTitle"></h2>
+            <p class="lg-lead" data-copy="landingMoreLead"></p>
+            <div class="lg-guilds">
+              <article class="lg-guild">
+                <div class="lg-gh"><svg class="triad" aria-hidden="true"><use href="#triad"/></svg><span class="lg-gname">The Four Sisters</span></div>
+                <p data-copy="guildFourthBody">Add a fourth - a sunflower or amaranth - and it draws in the pollinators and pest-eaters the other three depend on.</p>
+                <span class="lg-tag">a small step further</span>
+              </article>
+              <article class="lg-guild">
+                <div class="lg-gh"><svg class="triad" aria-hidden="true"><use href="#triad"/></svg><span class="lg-gname">The fruit-tree guild</span></div>
+                <p data-copy="guildAppleBody">A young apple, ringed by a nitrogen-fixer, insect-drawing flowers, and bulbs that hold back the grass - a small perennial community that tends itself.</p>
+                <span class="lg-tag">a standing partnership</span>
+              </article>
+              <article class="lg-guild">
+                <div class="lg-gh"><svg class="triad" aria-hidden="true"><use href="#triad"/></svg><span class="lg-gname">The milpa itself</span></div>
+                <p data-copy="guildMilpaBody">The whole intercropped field the app takes its name from: the three sisters joined by amaranth and chiles - a garden grown as one community.</p>
+                <span class="lg-tag">the namesake</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="lg-how" data-reveal>
+            <h2 class="lg-h2" data-copy="landingHowTitle"></h2>
+            <p class="lg-lead" data-copy="landingHowLead"></p>
+            <div class="lg-principles">
+              <div class="lg-pr">
+                <span class="lg-n">01</span>
+                <h3 data-copy="landingP1Title"></h3>
+                <p data-copy="landingP1Body"></p>
+                <p data-copy="landingWhyExample" class="lg-ex">why: the beans pull nitrogen from the air and leave it in the soil.</p>
+              </div>
+              <div class="lg-pr">
+                <span class="lg-n">02</span>
+                <h3 data-copy="landingP2Title"></h3>
+                <p data-copy="landingP2Body"></p>
+                <p data-copy="landingConfidenceRow" class="lg-ex">confidence: well established · promising · a good hunch</p>
+              </div>
+              <div class="lg-pr">
+                <span class="lg-n">03</span>
+                <h3 data-copy="landingP3Title"></h3>
+                <p data-copy="landingP3Body"></p>
+                <p data-copy="landingFertilizerRow" class="lg-ex">fertilizer: get a soil test - we won’t guess the numbers.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="lg-wont" data-reveal>
+            <h2 data-copy="landingWontTitle"></h2>
+            <ul>
+              <li><span class="x"></span><span>Hand you a <b>companion-planting chart</b> copied off a blog. The list of pairings we trust is short - that’s the point. <a class="lg-wont-guide" href="../guides/companion-planting-honestly/" target="_blank" rel="noopener">What actually holds up →</a></span></li>
+              <li><span class="x"></span><span>Print a <b>fertilizer number</b> without a soil test behind it. <a class="lg-wont-guide" href="../guides/the-soil-test/" target="_blank" rel="noopener">Why a soil test →</a></span></li>
+              <li><span class="x"></span><span>Repeat <b>folklore</b> we haven’t actually checked against a real source.</span></li>
+              <li><span class="x"></span><span>Quietly <b>swap a plant</b> that doesn’t fit your space - we show it greyed, with the reason.</span></li>
+            </ul>
+          </section>
+
+          <div class="lg-foot">
+            <svg class="triad" aria-hidden="true"><use href="#triad"/></svg>
+            <h2 data-copy="landingFootTitle"></h2>
+            <button class="primary startgo lg-foot-btn" type="button" data-copy="landingStart"></button>
+            <p class="lg-note" data-copy="landingFootNote"></p>
+          </div>
+        </div>
+      </section>
+      <!-- ==================================================== ANSWERS (exchange ladder) -->
+      <!-- Rungs 1-2 (approved mockup 2026-07-30): a ZIP buys the climate card, a crop buys its
+           dates + a signed-out ICS. Ungated by design - account buys KEEPING things, not seeing
+           things. Rendered entirely by answers.ts from the live bundle; nothing static here but
+           the skeleton. -->
+      <section class="page" id="page-answers" hidden aria-labelledby="answers-h">
+        <div class="answers">
+          <h1 id="answers-h" data-copy="answersTitle"></h1>
+          <p class="tagline" data-copy="answersTagline"></p>
+
+          <section class="ans-block" aria-labelledby="ans-where-h">
+            <h2 id="ans-where-h" class="ans-h" data-copy="answersWhereH"></h2>
+            <!-- Answered questions COLLAPSE to a receipt (approved 2026-08-01). The form below is
+                 hidden once the fact is given, and this line states what it bought - the Plan
+                 page's own need -> earned trade grammar, on the ladder. "Change" reopens it. -->
+            <div id="anszip-receipt" class="ans-receipt" hidden></div>
+            <div id="anszip-form">
+            <div class="ans-ziprow">
+              <label class="ans-ziplabel" for="anszip" data-copy="answersZipLabel"></label>
+              <input id="anszip" inputmode="numeric" autocomplete="postal-code" placeholder="55401" />
+            </div>
+            <p class="hint" id="anszip-hint"></p>
+            </div>
+            <div id="ansclimate" class="ans-card" hidden></div>
+          </section>
+
+          <section class="ans-block" id="anscrop" aria-labelledby="ans-crop-h">
+            <h2 id="ans-crop-h" class="ans-h" data-copy="answersCropH"></h2>
+            <div id="anscrop-receipt" class="ans-receipt" hidden></div>
+            <div id="anscrop-form">
+            <div id="anschips" class="ans-chips"></div>
+            <p class="hint" id="anscrop-hint"></p>
+            <input id="anscropq" type="search" placeholder="Or type any crop - carrot, kale, rhubarb..." />
+            <div id="anscroplist" class="ans-chips"></div>
+            </div>
+            <div id="ansdates" class="ans-card" hidden></div>
+            <div id="ansicsrow" class="ans-icsrow" hidden>
+              <button id="ansics" class="primary" type="button" data-copy="answersIcsBtn"></button>
+              <span class="remindrow">remind me
+                <select id="ansremind" aria-label="reminder time">
+                  <option value="morning">morning of (8:00)</option>
+                  <option value="evening">evening before (18:00)</option>
+                  <option value="none">no reminder</option>
+                </select>
+              </span>
+              <p class="hint" data-copy="answersIcsHint"></p>
+            </div>
+          </section>
+
+          <section class="ans-block" aria-labelledby="ans-teams-h">
+            <h2 id="ans-teams-h" class="ans-h" data-copy="answersTeamsH"></h2>
+            <div id="ansteams" class="ans-card" hidden></div>
+          </section>
+
+          <!-- O34's situation row, ONE LAYER DEEPER (maintainer, 2026-08-01). It began under the
+               landing's doors and took a lot of the front page's real estate to ask intake
+               questions before the visitor had received anything. It lives here instead, and stays
+               hidden until an answer is actually on screen - so it reads as "now refine it" rather
+               than as a second set of questions to get through first. Its deep links
+               (#/answers?situation=...) work from anywhere regardless. -->
+          <div id="anssituations" class="ans-sits" hidden>
+            <p class="ans-sit-lead" data-copy="landingSituationLead"></p>
+            <div id="anssitrow" class="ans-sitrow"></div>
+          </div>
+          <!-- ...and the ANSWER sits right here, under the chip that asked for it. It used to
+               render three blocks further up, so tapping a chip at the bottom of the page put its
+               answer somewhere you could not see - which, with the router's scroll-to-top, is what
+               read as a reload. Inline means ADJACENT, not merely "on the same page".
+               A SIBLING of the row, never a child: the row hides until something has been given,
+               and a deep link (#/answers?situation=containers) must still answer on a cold arrival
+               where nothing has been given yet. -->
+          <div id="anssituation" hidden></div>
+
+          <div id="ansnext" class="ans-next" hidden>
+            <p class="ans-next-l" data-copy="answersNextL"></p>
+            <button id="ansplan" class="primary" type="button" data-copy="answersPlanBtn"></button>
+            <p class="hint" data-copy="answersPlanHint"></p>
+          </div>
+        </div>
+      </section>
+      <!-- ============================================================ PLAN -->
+      <!-- `hidden` like every other page: the router unhides the right one on first paint. Without it
+           #page-plan painted before the router ran, flashing Plan when the bare domain routes to #/start. -->
+      <section class="page" id="page-plan" hidden>
+        <!-- D-079 shell: the map is the prominent surface; the plan sections live in a bottom
+             sheet (mobile) that becomes a static LEFT panel on wide screens. Map on the RIGHT. -->
+        <div id="planshell">
+          <div id="maparea">
+            <!-- D-099: the flow reads make → name → save. The tool row is ONE line. O101 (maintainer
+                 toolset ruling, 2026-08-21): the popular shapes are the toolbar - Rectangle (absorbs
+                 the old Square; one tap drops a bed, one finger still pans) and Circle up front, the
+                 parametric presets under "⋯ shapes" beside the demoted free-trace ("not easy to use"
+                 - kept only for genuinely irregular outlines). Paint tiles left the menu entirely:
+                 everything it did for NEW beds is done better by the presets, and existing painted
+                 beds keep their editor via tap-to-edit (startEditBed re-enters it; #painttools below
+                 stays for exactly that path). Name & save live in #savecard below, which appears only
+                 once a shape exists. -->
+            <div class="mapbar">
+              <span class="mapbar-group">
+                <button id="moderect" type="button" class="modebtn on">Rectangle</button>
+                <button id="modecircle" type="button" class="modebtn">Circle</button>
+                <details id="advshapes">
+                  <summary>⋯ shapes</summary>
+                  <span class="advrow">
+                    <!-- O101 presets: the two popular kit shapes, parametric (tap to place, handles
+                         to shape) - never free drawing. L-bed = a rectangle with one notched corner
+                         (the corner-kit shape); trough = a rounded-end rectangle (the stock-tank
+                         planter), saved as a polygon exactly like the circle's 32-gon. -->
+                    <button id="modelbed" type="button" class="modebtn">L-bed</button>
+                    <button id="modeubed" type="button" class="modebtn">U-bed</button>
+                    <button id="modetrough" type="button" class="modebtn">trough</button>
+                    <button id="modecorner" type="button" class="modebtn">trace an odd outline</button>
+                  </span>
+                </details>
+                <span id="painttools" hidden>
+                  <button id="paintmove" type="button" class="modebtn" title="one finger moves the map - drag the painted bed itself to move the bed">move</button>
+                  <button id="paintbrush" type="button" class="modebtn on" title="drag one finger to paint tiles">paint</button>
+                  <button id="painterase" type="button" class="modebtn" title="drag one finger across tiles to erase them">erase</button>
+                  <button id="paintrotate" type="button" class="modebtn" title="rotate the painted bed a quarter turn">rotate</button>
+                </span>
+              </span>
+              <span class="mapbar-group">
+                <button data-copy="planMoveGardenBtn" id="reanchor" type="button" hidden>Move garden here</button>
+                <button data-copy="planUseMapCentreBtn" id="mapuse" type="button" title="pan the imagery to your house, then make this spot your location">use map centre</button>
+              </span>
+            </div>
+            <!-- browse mode (round 7, framed map): the pill that opens the full ground editor -->
+            <button id="editground" type="button">edit ground</button>
+            <div id="mapviewport">
+              <svg id="mapsvg" viewBox="0 0 440 440" role="img" aria-label="your ground - map with a metre grid; tap to trace growing areas, drag to pan, pinch to zoom"></svg>
+              <!-- The Where-step LOCATION PICKER (D-181): a real Google Map, shown only while Where is
+                   open AND a Google key is configured, so tiles stream smoothly and pan/zoom feels
+                   native. Keyless, or on any Google failure, this stays hidden and the SVG canvas
+                   above is the map exactly as before. It is NOT a design surface - beds are still laid
+                   out on the custom grid canvas (D-078). -->
+              <div id="gmap" hidden aria-label="location map - drag the pin onto your garden"></div>
+              <!-- D-079 slice 6: the map is the hub - what's planned and planted shows on it.
+                   D-094: the toggles and the legend collapse into two chips so the canvas stays
+                   the garden's; each expands on tap. -->
+              <div class="maplayers" role="group" aria-label="map layers">
+                <span class="lyrow">
+                  <button id="ly-toggle" type="button" aria-expanded="false">≡ layers</button>
+                  <span class="ly-set" hidden>
+                    <button id="ly-areas" type="button" class="on">areas</button>
+                    <button id="ly-plantings" type="button" class="on">plantings</button>
+                    <button id="ly-labels" type="button" class="on">labels</button>
+                    <!-- D-097: the illustrated/photo switch - photo also fades in on its own while editing beds -->
+                    <button id="ly-photo" type="button">photo</button>
+                    <!-- A4: the tint layer - ONE active at a time; each tints the drawn beds from
+                         data the app already holds, and #tintwords states the active encoding -->
+                    <span class="ly-tints" role="group" aria-label="bed tint layer">
+                      <button id="ly-t-season" type="button" class="on">this season</button>
+                      <button id="ly-t-sun" type="button">sun</button>
+                      <button id="ly-t-soil" type="button">soil</button>
+                      <button id="ly-t-rotation" type="button">rotation</button>
+                    </span>
+                    <span id="tintwords" class="tintwords"></span>
+                  </span>
+                </span>
+                <span class="lyrow">
+                  <!-- round 6: dot colours alone don't identify plants - the legend names them -->
+                  <button id="keytoggle" type="button" aria-expanded="false" hidden>● key</button>
+                  <div id="maplegend" aria-label="what the plant colours mean" hidden></div>
+                </span>
+              </div>
+              <!-- Pre-location empty state: with no anchor the map has nothing to draw, so instead of a
+                   clipped corner hint (and useless layer/zoom chrome) it shows one centred, complete
+                   invitation. #mapviewport.empty (set by groundmap while unanchored) reveals this and
+                   hides the chips + nav; it clears the moment a location resolves and the map fills in. -->
+              <div id="mapempty" aria-live="polite">
+                <svg class="triad" aria-hidden="true"><use href="#triad"/></svg>
+                <p data-copy="planMapEmptyTitle" class="me-h">Your map opens here</p>
+                <p data-copy="planMapEmptyBody" class="me-b">Set your location in the “Where” step and we’ll drop you on your own yard - then trace your beds right on the satellite image.</p>
+              </div>
+              <!-- D-094: the float is a transient toast now - confirmations and errors only -->
+              <p class="hint maphint faded" id="maphint" aria-live="polite"></p>
+              <!-- Contextual map alerts STACK in one column at the bottom (maintainer: don't split them
+                   across the map). Each chip toggles [hidden] on its own; hidden ones collapse, so one
+                   shows alone at the bottom and two stack. The R-006 reach nudge (a bed's shorter side is
+                   beyond arm's reach) and the R-098 container advisory (a "container" grown past a typical
+                   one) - both dismissible, never permanent. -->
+              <div id="mapalerts">
+                <!-- D-099 guidance ("Tap the map to drop a bed"), moved here from a top-centre pill
+                     (walk round 6, maintainer: too prominent up there, and it covered the map).
+                     It now lives in the same bottom stack as every other map message and closes
+                     like them; it still retires by itself the moment a shape exists. -->
+                <div id="mapnotices" hidden>
+                  <span id="mapnoticestext"></span>
+                  <button id="mapnoticesx" type="button" aria-label="dismiss">&times;</button>
+                </div>
+                <div id="mapcontainer" hidden>
+                  <span id="mapcontainertext"></span>
+                  <button id="mapcontainerx" type="button" aria-label="dismiss">&times;</button>
+                </div>
+                <div id="mapreach" hidden>
+                  <span id="mapreachtext"></span>
+                  <button id="mapreachx" type="button" aria-label="dismiss">&times;</button>
+                </div>
+                <!-- O7 / D-164: the plan travels IN the link - one button by the map, where the
+                     shareable thing is on screen. O113 X1 made it a floating chip; the walk found
+                     it colliding with the message pills, so it rides the SAME bottom column as the
+                     last item - messages stack above it, nothing overlaps. The box opens as a panel
+                     above the chip. An empty garden gets the REASON in the box, never a silent
+                     no-op; an unlocated map hides it with the rest of the chrome. -->
+                <div id="sharerow">
+                  <button data-copy="planShareBtn" id="sharebtn" type="button">Share this plan</button>
+                  <div id="sharebox" hidden>
+                    <!-- × is the monochrome typographic close (D-105-allowed), and the share button
+                         itself toggles - the box was uncloseable (walk round 5, maintainer) -->
+                    <button id="shareclose" class="shareclose" type="button" aria-label="close">×</button>
+                    <p id="shareboxmsg"></p>
+                    <p id="shareurl" class="shareurl" hidden></p>
+                  </div>
+                </div>
+              </div>
+              <!-- A4: the bed popover - tap a saved bed and it says what the bed IS (name, size,
+                   structure, sun, what's growing) with the three acts: Open in Plan, Log here,
+                   Edit. Read-only, never a drag surface (D-078); Escape or a map tap dismisses. -->
+              <div id="bedpop" class="bedpop" role="dialog" aria-label="bed" hidden></div>
+              <!-- zoom + re-centre only: dragging pans (round 7 removed the arrow pad) -->
+              <div class="mapnav">
+                <button id="mapzout" type="button" aria-label="zoom out">−</button>
+                <button id="mapzin" type="button" aria-label="zoom in">+</button>
+                <button id="mapc" type="button" aria-label="centre on plot">⌂</button>
+              </div>
+              <span class="hint" id="mapattrib"></span>
+              <!-- O113 X1: #sharerow floats INSIDE the viewport - it lives at the bottom of the
+                   #mapalerts column above, so the message pills stack over it instead of on it. -->
+            </div>
+            <!-- D-099: name & save is a CARD that appears only once a shape exists - make → name →
+                 save. It carries the live size (editable for square/circle), the name, the sun, the
+                 Save, and the demoted undo/redo/discard. One save surface for every tool. -->
+            <div id="savecard" hidden>
+              <div class="scrow scsize">
+                <span id="dimsrect">
+                  <input id="shapew" type="number" min="0.1" step="0.1" value="2" aria-label="bed width" /> ×
+                  <input id="shapel" type="number" min="0.1" step="0.1" value="2" aria-label="bed length" /> <span class="ulen">m</span>
+                </span>
+                <span id="dimscircle" hidden>⌀
+                  <input id="shaped" type="number" min="0.1" step="0.1" value="2" aria-label="bed diameter" /> <span class="ulen">m</span>
+                </span>
+                <span id="dimsl" hidden>
+                  <input id="lw" type="number" min="0.3" step="0.1" value="2" aria-label="L-bed outer width" /> ×
+                  <input id="ll" type="number" min="0.3" step="0.1" value="2" aria-label="L-bed outer length" /> <span class="ulen">m</span>
+                  · notch <input id="lnw" type="number" min="0.1" step="0.1" value="1" aria-label="notch width" /> ×
+                  <input id="lnl" type="number" min="0.1" step="0.1" value="1" aria-label="notch length" /> <span class="ulen">m</span>
+                </span>
+                <span id="dimsu" hidden>
+                  <input id="uw" type="number" min="0.3" step="0.1" value="2.4" aria-label="U-bed outer width" /> ×
+                  <input id="ul" type="number" min="0.3" step="0.1" value="2" aria-label="U-bed outer length" /> <span class="ulen">m</span>
+                  · notch <input id="unw" type="number" min="0.1" step="0.1" value="0.8" aria-label="notch width" /> ×
+                  <input id="unl" type="number" min="0.1" step="0.1" value="1.2" aria-label="notch length" /> <span class="ulen">m</span>
+                </span>
+                <span id="dimstrough" hidden>
+                  <input id="tw" type="number" min="0.1" step="0.1" value="0.6" aria-label="trough width" /> ×
+                  <input id="tl" type="number" min="0.1" step="0.1" value="1.8" aria-label="trough length" /> <span class="ulen">m</span>
+                </span>
+                <span id="sizereadout"></span>
+                <span class="scspacer"></span>
+                <button id="areaundo" type="button" class="iconbtn" title="undo">↺</button>
+                <button id="arearedo" type="button" class="iconbtn" title="redo">↻</button>
+                <button id="areaclear" type="button" class="iconbtn" title="discard this shape">⌫</button>
+              </div>
+              <div class="scrow">
+                <input id="areaname" type="text" placeholder="name this bed (e.g. south bed)" />
+              </div>
+              <div class="scrow">
+                <select id="bedstructure" aria-label="this bed's structure" title="how this ground is built: a field is walked from lanes, a bed is reached from its edges">
+                  <option value="raised">Raised Bed</option>
+                  <option value="in_ground" selected>In-Ground Bed</option>
+                  <option value="container">Container Or Pot</option>
+                  <option value="field">Field (Walked From Lanes)</option>
+                </select>
+              </div>
+              <div class="scrow">
+                <select id="bedlanes" aria-label="which way this bed's walkways run" title="a bed too deep to reach gets walking paths, a field gets lanes - this flips which way they run; a bed reachable whole never gets any">
+                  <option value="" selected>Walkways Run The Long Way</option>
+                  <option value="flip">Walkways Run The Short Way</option>
+                </select>
+              </div>
+              <!-- O16: R-098's refusal reason, ANCHORED. It used to live only in the greyed
+                   option's title attribute, which a phone never shows - so the reason existed
+                   and no touch user could reach it. -->
+              <p id="bedstructwhy" class="hint bedstructwhy" hidden></p>
+              <div class="scrow">
+                <select id="bedsun" aria-label="this bed's sun exposure" title="how much direct sun this bed gets">
+                  <option value="">Sun: Unstated</option>
+                  <option value="full">Full Sun (6+ h Direct)</option>
+                  <option value="part_shade">Part Shade</option>
+                </select>
+                <button id="areasave" type="button" class="scsave">Save bed</button>
+              </div>
+            </div>
+            <!-- O113 X1: #sharerow lives INSIDE #mapviewport now (a floating chip) - see there. -->
+          </div>
+          <div id="plansheet">
+            <div id="sheetgrab" role="button" tabindex="0" aria-label="open or close the plan panel"><span id="sheetpeek" aria-hidden="true"></span></div>
+            <!-- The garden path (Organic redesign): the step spine's summaries render here as a
+                 horizontal stepper - Where, Your ground, Plant teams, then "+ extras" for the
+                 aside steps. Rendered by sheet.ts from the SAME <details class="step"> state
+                 (ids unchanged for deep links + D-079 summaries); tapping a done node reopens it. -->
+            <div id="pathbar" aria-label="Plan steps"></div>
+            <div id="sheetbody">
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg><span data-copy="planTitle"></span></h1>
+        <p class="tagline" data-copy="planTagline"></p>
+        <!-- Active garden banner (walkthrough): on login it must be obvious WHICH garden + location is
+             active, for any garden count. Set by the log refresh; tap to jump to the Where step (switch
+             garden / change location). Hidden until there's a garden. -->
+        <button type="button" id="activegarden" hidden></button>
+        <!-- The ask card's Plan-sheet mirror (O27): the one due ask compressed to a single
+             tappable line - sign-in lands here, so the journey's next step greets it. Hidden
+             signed out or when nothing is due (the mirror never occupies the planner idly). -->
+        <div id="askmini" hidden></div>
+        <div class="controls">
+          <!-- D-079 slice 3: the workflow spine. Each section is a step that folds to a one-line
+               summary; one open at a time; "Continue" walks top to bottom. -->
+          <details class="step" id="step-where" open>
+            <summary><span class="badge">1</span><span class="steptitle">Where</span><span class="stepsum" id="sum-where"></span></summary>
+            <div class="stepbody">
+              <!-- Trade-first grammar (earned planner phase A): the callout names what the fact
+                   BUYS, not what the form demands. The receipt line below it appears once the
+                   step is done - what the fact bought, stated. -->
+              <p data-copy="planWhereLead" class="stepneed" id="need-where">Your address buys your frost odds and real
+                planting windows - type it and the pin drops. Everything here follows it.</p>
+<!-- earned-where (the receipt) moved BELOW the address block (walk round 4, maintainer:
+                   "the first thing you see should be address") - see after #ziphint. -->
+            <!-- The simple plan (declutter round, approved 2026-07-30): Where is location
+                 identification ONLY - one address field, the map's pin to confirm. ZIP and Plus
+                 Code are PARKED (the answers ladder hands its coordinates over directly); the
+                 garden picker moved to the Log; the climate card collapsed into the receipt line
+                 (the full card lives on the Calendar); the extension office rides the soil card. -->
+            <!-- A real FORM (walk round 3): the phone keyboard's Go/Search key submits reliably
+                 (keydown-Enter alone is not guaranteed on mobile keyboards), and submit auto-pins
+                 a confident match - type the address, hit go, the pin drops. The visually-hidden
+                 companions are the standard autofill trick: `street-address` alone fills only the
+                 street line (the reported "house number and street only"), but a browser filling
+                 from a saved address fills the SIBLING city/state/ZIP fields in the same pass -
+                 app.ts composes them into the visible field so the full address populates. -->
+            <form id="addrform" class="logrow" autocomplete="on">
+              <label for="addr">Address</label>
+              <input id="addr" name="street-address" type="text" autocomplete="street-address" enterkeyhint="search"
+                placeholder="street address, city" style="width:16rem" />
+              <input id="addrcity" name="city" type="text" autocomplete="address-level2" tabindex="-1" aria-hidden="true" class="autofillaux" />
+              <input id="addrstate" name="state" type="text" autocomplete="address-level1" tabindex="-1" aria-hidden="true" class="autofillaux" />
+              <input id="addrzip" name="postal-code" type="text" autocomplete="postal-code" tabindex="-1" aria-hidden="true" class="autofillaux" />
+            </form>
+            <!-- Address suggestions (walk round 2): type, pause, tap your address - no Find
+                 button. Filled by app.ts from the same geocoder chain as before. -->
+            <div id="addrlist" class="addrlist"></div>
+            <p class="hint" data-copy="whereHint"></p>
+            <!-- live status line: fills with "Found ZIP …" or an error; empty by default (D-079 pass) -->
+            <p class="hint" id="ziphint" aria-live="polite" data-copy="ziphintDefault"></p>
+            <!-- The receipt line (earned planner phase A), BELOW the entry it confirms (walk
+                 round 4): the address is the step's first thing; what it bought reads after. -->
+            <p data-copy="planWhereBought" class="stepearned" id="earned-where" hidden>Bought: your frost odds and planting
+              windows for every crop - live everywhere, never re-asked.</p>
+            <!-- O58 Phase 4 (slice C): the coaching band, shown only BEFORE a location exists (the
+                 Where step's cold state). Toggled by draw() on `located`. -->
+            <div id="coach-where" class="coachband" hidden></div>
+
+            <!-- lat/lon are the app's location STATE, written by the address pick, the ladder's
+                 carry, and the map - the visible Fine-tune disclosure left with the walk round 2
+                 declutter (the map pin is the manual path now). Hidden, never removed: everything
+                 downstream reads location from these two fields. -->
+            <input id="lat" type="number" hidden />
+            <input id="lon" type="number" hidden />
+            <!-- The multi-garden chip (declutter round): garden management lives on the Log now;
+                 this one line appears ONLY when more than one garden exists (groundmap's
+                 renderPlotBar toggles it) so a single-garden user never sees garden chrome. -->
+            <p class="hint" id="gardenchip" hidden></p>
+            <p><button type="button" class="stepnext" data-next="sec-ground">Next: your ground - where do things grow?</button></p>
+            </div>
+          </details>
+          <details class="step" id="sec-ground">
+            <summary><span class="badge">2</span><span class="steptitle">Your ground</span><span class="stepsum" id="sum-ground"></span></summary>
+            <div class="stepbody">
+              <!-- Short on purpose (walk round 7): this callout opens the step, and a four-line
+                   block pushed the map out of the picture. One sentence; the how-to lives with
+                   the controls it describes. -->
+              <p data-copy="planGroundLead" class="stepneed" id="need-ground">A bed buys the fit verdict and a placement for
+                every team - size one below, or draw it on the map.</p>
+            <!-- The receipt for THIS step sits below the bed-making row, right above the bed list
+                 and the Continue button (walk round 6, maintainer): a receipt that appears at the
+                 top of a long step tells you what you bought while the way ONWARD is off-screen.
+                 Together, "Bought: ..." and "Continue → plan this bed" read as one beat. -->
+            <!-- Dimension beds (earned planner phase B): two numbers make a real bed - the map is
+                 an upgrade, not the entrance. Values follow the units preference (dimw/diml ride
+                 LEN_INPUT_IDS); storage stays metres like every length. -->
+            <div class="dimbed">
+              <div class="logrow dimrow">
+                <label for="dimw" data-copy="dimbedAbout"></label>
+                <input id="dimw" inputmode="decimal" aria-label="width" />
+                <span aria-hidden="true">&times;</span>
+                <input id="diml" inputmode="decimal" aria-label="length" />
+                <span id="dimunit"></span>
+                <select id="dimstructure" aria-label="how this bed is built">
+                  <option value="in_ground">in-ground</option>
+                  <option value="raised">raised bed</option>
+                  <option value="container">container</option>
+                  <option value="field">open field</option>
+                </select>
+                <button id="dimmake" type="button" data-copy="dimbedMake"></button>
+              </div>
+              <p class="hint" id="dimbedmsg" data-copy="dimbedHint"></p>
+            </div>
+            <p data-copy="planGroundMapHint" class="hint">Trace or size your growing areas on the map - they appear here.</p>
+            <!-- Order after a save (walk rounds 8-9, maintainer): the BED you just made, then
+                 what it bought, then Continue. Saving scrolls the user to the bed row, so all
+                 three read as one beat - the thing, its payoff, the way onward. -->
+            <div id="arealist"></div>
+            <p data-copy="planGroundBought" class="stepearned" id="earned-ground" hidden>Bought: real fit verdicts and
+              placements below - every team checked against the beds you'll actually plant.</p>
+            <!-- CONTINUE sits right under the bed list (walk round 8): saving a bed lands the
+                 user on the receipt, and the way onward has to be in the same view. The optional
+                 next-trade card and the history declaration follow it - they are things you MAY
+                 do, not the step's action. -->
+            <p><button type="button" class="stepnext" data-next="step-plan">Continue → plan this bed</button></p>
+            <!-- The trace-it upgrade (phase B): shown while a non-container SIZED bed exists -
+                 the next trade, with its payoff named. Silent for containers (personas finding 2:
+                 a balcony has no ground identity to earn, and the card would read as "this app
+                 assumes a yard"). Visibility owned by draw() in app.ts. -->
+            <div class="upgradecard" id="traceupgrade" hidden>
+              <p class="upgrade-l" data-copy="traceUpL"></p>
+              <p class="hint" data-copy="traceUpBody"></p>
+            </div>
+            <!-- Soil + the extension office moved to the LOG (walk round 4, maintainer: "way too
+                 much initial input for a new user" - and the Log is where observations live; the
+                 earn-strip and the ask card invite them from there). See #soilzone in the Log. -->
+            <div class="groundsub" id="sec-eligibility">
+              <!-- A1: real h2s - the measured Plan outline skipped h1 -> h3 -->
+              <h2 class="planh2" data-copy="planHistoryH">What grew here recently</h2>
+              <div class="logrow" id="candrow" hidden>
+                <label for="candbed">This ground</label>
+                <select id="candbed"></select>
+                <span class="hint">tell us what grew here before you started tracking</span>
+              </div>
+              <p class="hint" id="famhint"></p>
+              <div id="families"></div>
+              <p class="hint" data-copy="familyHint"></p>
+              <div id="eligibility"></div>
+            </div>
+            </div>
+          </details>
+          <details class="step" id="step-plan">
+            <summary><span class="badge">3</span><span class="steptitle">Plant teams for this bed</span><span class="stepsum" id="sum-plan"></span></summary>
+            <div class="stepbody">
+            <h2 class="teamshead" data-copy="teamsHead"></h2>
+            <div id="guilds"></div>
+            <!-- The one nudge (declutter round): every step ends in exactly one clear next ask.
+                 The teams step's ask is the calendar - a picked team's dates are the payoff. -->
+            <p><button type="button" class="stepnext" id="teamsnudge">Pick a team - its dates go on your calendar ›</button>
+               <button type="button" class="stepnext" data-next="step-mybed">Or design your own bed →</button></p>
+            </div>
+          </details>
+          <!-- D-140: the first-60-seconds spine is Where -> Your ground -> Plant teams (steps 1-3). The
+               rest are optional extras - build your own bed, add a plant, track a season - grouped under
+               this divider and de-numbered (a "+" marker, muted title) so a first-timer reads three
+               steps to a plan, not six. -->
+          <p data-copy="planOptionalTag" class="stepmore">Optional, when you're ready</p>
+          <details class="step aside" id="step-mybed">
+            <summary><span class="badge">+</span><span class="steptitle">Design your own bed</span><span class="stepsum" id="sum-mybed"></span></summary>
+            <div class="stepbody">
+        <div id="mybed" class="mybed">
+          <p class="hint" data-copy="mybedHint"></p>
+          <!-- Select the bed FIRST (round 19): each bed keeps its own configuration, so pick which one
+               you're building before adding plants. Rendered by renderMyBed; drives #candbed. -->
+          <div id="mybedbedrow" class="logrow"></div>
+          <!-- O14 / D-155: the picker is a type-to-filter LIST, not a 73-item native select (which is
+               a scroll wheel on iOS - tedious at 73, unusable at 200). Grouped by the species'
+               reader-facing `category`, with what is already in this garden pinned first. Blocked
+               plants STAY IN THE LIST, greyed and carrying their reason - invariant 2; a filter that
+               dropped them would hide a refusal behind a search box. Rendered by renderMyBed. -->
+          <div class="pickrow">
+            <label for="mybedq">Add a plant</label>
+            <input id="mybedq" type="search" autocomplete="off" placeholder="type to narrow - e.g. to, bean, mint"
+                   aria-label="search plants to add" aria-controls="mybedlist" />
+            <p id="mybedcount" class="hint"></p>
+            <div id="mybedlist" class="picklist" role="listbox" aria-label="plants you can add"></div>
+          </div>
+          <div id="mybedmembers"></div>
+          <div id="mybedresult"></div>
+        </div>
+            <p><button type="button" class="stepnext" data-next="sec-addplant">Missing a plant? Add your own →</button></p>
+            </div>
+          </details>
+          <details class="step aside" id="sec-addplant">
+            <summary><span class="badge">+</span><span class="steptitle">Add your own plant</span><span class="stepsum" id="sum-addplant"></span></summary>
+            <div class="stepbody">
+          <p class="hint" data-copy="addPlantHint"></p>
+          <!-- The field set is generated by plantform.ts (shared with the Log's "My added plants"
+               editor, so the two never drift): Core fields always shown, the rest under a "More
+               traits" disclosure. The family input reads this datalist. -->
+          <datalist id="upfamilies"></datalist>
+          <div id="upform-host"></div>
+          <div class="uprow actions">
+            <button id="upadd" type="button" class="primary">Add plant</button>
+            <span class="hint" id="upmsg" aria-live="polite"></span>
+          </div>
+          <p class="hint" id="uplisthint"></p>
+          <div id="uplist"></div>
+            </div>
+          </details>
+          <!-- ISSUES #11 slice 2: the season TRACK surface, in-place on Plan. Revealed by renderSeason
+               once there's a season or saved ground; hidden for a fresh, empty stepper. -->
+          <details class="step aside" id="step-season">
+            <summary><span class="badge">+</span><span class="steptitle">This season</span><span class="stepsum" id="sum-season"></span></summary>
+            <div class="stepbody">
+              <div id="season"></div>
+            </div>
+          </details>
+        </div><!-- /controls -->
+        <div id="handoff" class="welcome" hidden>
+          <p data-copy="handoffBody"></p>
+          <button id="handoffgo" type="button" class="primary" data-copy="handoffButton"></button>
+        </div>
+            </div><!-- /sheetbody -->
+          </div><!-- /plansheet -->
+        </div><!-- /planshell -->
+      </section>
+      <!-- ============================================================ LOG -->
+      <section class="page" id="page-log" hidden>
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg>Season log</h1>
+        <p class="tagline" data-copy="logTagline"></p>
+        <!-- The ask card (O27, approved mockup): the single most valuable next action, computed
+             from the season, the calendar's tasks, and the ledger's own standings. ONE ask, ranked
+             timely observations > reality gap > dated actions > standing observations > season
+             close; one waiting line; quiet when nothing is due. Rendered by askcard.ts on every
+             log refresh; hidden signed out (the authenticated journey's surface). -->
+        <div id="askcard" hidden></div>
+        <!-- O58 Phase 4 (slice C): the coaching band, shown only on the COLD Log (signed out, or a
+             signed-in account with no beds and no seasons). Toggled by the log's refresh(); exempt
+             from the .page.locked blackout so it shows below the sign-in card. -->
+        <div id="coach-log" class="coachband" hidden></div>
+        <!-- ISSUES #11 Log redesign slice A: the ledger as a hierarchy - this location → a year
+             switcher (past seasons open read-only) → beds as cards, each expanding to its plantings.
+             The season loop (start/track/close/reactivate) lives at the location foot. Rendered by
+             renderLocations. The Record forms below are the interim detail layer until slice B. -->
+        <section id="loglocations"></section>
+        <!-- The season timeline (Organic redesign, 1c): the viewed season's events as one flowing
+             diary - category-coloured dots on a vertical line, newest first. Derived entirely from
+             the season record (plantings' dates, failures, notes, observations); rendered by
+             renderTimeline in log.ts. Empty until the season has events. -->
+        <section id="logtimeline" aria-label="season timeline"></section>
+        <!-- O111b: the seed box - what varieties the gardener OWNS, so a plan can subtract what you
+             have from what a plan needs (O111c). A persistent inventory, not season-specific; it
+             syncs with the account like a user species. Rendered by seedbox.ts on every log refresh. -->
+        <section id="seedbox" class="seedbox" aria-labelledby="seedbox-h">
+          <h2 id="seedbox-h">Seed box</h2>
+          <p class="hint">What you already have on hand. The planner can subtract these from what a plan needs.</p>
+          <form id="seedadd" class="seedadd">
+            <select id="seedspecies" aria-label="crop"><option value="">Pick a crop&hellip;</option></select>
+            <input id="seedvariety" type="text" maxlength="120" placeholder="variety (optional)" aria-label="variety" />
+            <input id="seedqty" type="text" maxlength="60" placeholder="how much (optional)" aria-label="how much" />
+            <input id="seedyear" type="number" min="1900" max="2100" step="1" placeholder="year" aria-label="packet year" />
+            <input id="seednotes" type="text" maxlength="300" placeholder="note (optional)" aria-label="note" />
+            <button id="seedaddbtn" type="submit" class="primary">Add to seed box</button>
+          </form>
+          <ul id="seedlist" class="seedlist"></ul>
+          <p id="seedempty" class="hint" hidden>Your seed box is empty. Add what you have above.</p>
+        </section>
+        <!-- O111c: the shopping list - the species in this plan minus what the seed box holds, matched
+             by species. Sits under the seed box so "what you own" and "what you still need" read
+             together. Rendered by seedbox.ts's renderShoppingList on every log refresh. -->
+        <section id="shoppinglist" class="shoppinglist" aria-labelledby="shoppinglist-h">
+          <h2 id="shoppinglist-h">Shopping list</h2>
+          <p class="hint">What this plan needs that your seed box does not already have.</p>
+          <ul id="shoplist" class="shoplist"></ul>
+          <p id="shopnote" class="hint" hidden></p>
+        </section>
+        <!-- Team feed (D-172): conversation on THIS garden, visible to its team. Deliberately NOT the
+             diary above - that is the gardener's own record (the season vocabulary, the engine, the
+             export); this is the team's talk, an ordinary members-only record that rides the shared-
+             garden sync. Posts render as PLAIN CONVERSATION - no grades, no rule cards, no mechanism
+             sentences (the voice boundary, pinned) - so folklore arriving socially can never be
+             mistaken for the evidence layer. Rendered by renderFeed; text-only in v1 (photos amend
+             D-171 and are their own slice). Shown only signed in. -->
+        <section id="gardenfeed" hidden>
+          <h2 data-copy="feedHeading">Garden feed</h2>
+          <p class="hint" data-copy="feedIntro">Notes for the people who tend this garden with you.</p>
+          <div class="logrow">
+            <input id="feedbody" type="text" maxlength="1000" placeholder="Say something to the team" />
+            <button id="feedpost" type="button" class="primary" data-copy="feedPostBtn">Post</button>
+          </div>
+          <div id="feedlist"></div>
+        </section>
+        <!-- Replaced copies (D-125 surfaced, maintainer 2026-08-08): every sync pull that replaces
+             this device's data snapshots the outgoing copy first; this quiet fold is the button the
+             ring lacked since O19 removed it as debug chrome. It matters NOW because a TEAMMATE can
+             be the one who replaced your data - "a team member may make a mistake, a team lead can
+             revert it". A restore writes back through the stamping path, so the merge treats it as
+             the newest edit (a re-add that BEATS the deletion tombstone) and the revert propagates
+             to the whole team. Scoped to the active garden; hidden when the ring holds nothing for
+             it. Rendered by renderRestore in log.ts. -->
+        <section id="gardenrestore" hidden>
+          <details id="restorefold">
+            <summary data-copy="restoreHeading">Replaced copies of this garden</summary>
+            <p class="hint" data-copy="restoreIntro">When a sync replaces this device's copy of the garden or a season, the outgoing copy is kept here for a while. Restore one to make it the newest version - it syncs back to everyone, undoing the change.</p>
+            <div id="restorelist"></div>
+          </details>
+        </section>
+        <!-- The quick-log composer (handoff 1c, round 7): the garden-wide diary entry - frost/heat
+             with severity, a date defaulting to today, and a note. On phones it pins above the tab
+             bar with the note pill + Log it always visible and the detail row revealed while
+             focused; on desktop it sits at the top of the diary column (4c). Same ids the obsadd
+             handler always wired; the weather card keeps the climate display and frost panel. -->
+        <div id="composer">
+          <div class="logrow obsrow">
+            <label for="obsdate">Log</label>
+            <select id="obsevent" aria-label="observed event"></select>
+            <select id="obssev" aria-label="observation severity"></select>
+            <!-- SOIL-UX 3: which ground a soil entry is about. Frost and heat land on the whole
+                 address (D-013) so they need no picker; soil lands on a BED, and "water stood here"
+                 is meaningless without knowing where "here" is. Revealed only for soil events. -->
+            <select id="obsground" aria-label="which ground" hidden></select>
+            <label for="obsdate">on</label>
+            <input id="obsdate" type="date" />
+            <input id="obsnote" type="text" placeholder="What happened in the garden?" />
+            <button id="obsadd" type="button" class="primary">Log it</button>
+          </div>
+          <!-- A7a (award-benchmark amendments): when an entry ADVANCES a ledger-earned standing,
+               one line here says what it bought ("Frost logged - 2 of 3 seasons toward your own
+               dates."). Hidden otherwise; real seasons only, same rule as the earn-strip. -->
+          <p class="hint" id="lognudge" aria-live="polite" hidden></p>
+        </div>
+        <!-- ISSUES #11 redesign slice C: observations + frost calibration are the ADDRESS's weather -
+             frost/heat land on the whole ground, not one bed (D-013) - so they live in one panel at the
+             location level, right under the beds. #logseason stays here (hidden) as the active-season
+             holder app.logSnapshot.seasonId reads; refresh keeps it on the latest season. Observations
+             log to that active season. Rendered/wired in log.ts + app.ts (renderFrost → #frost). -->
+        <!-- lograil wraps the side panels so the desktop grid (4c) can seat them as one right
+             rail beside the timeline; ids inside are unchanged. -->
+        <div id="lograil">
+        <!-- Gardens (declutter round): management moved here from the Plan's Where step - the Log
+             is where garden-level things already live (rename, delete, per-garden climate). The
+             Log is an account surface, so signed out = one garden, by design (approved call). -->
+        <fieldset id="sec-gardens">
+          <legend>Gardens</legend>
+          <div class="logrow gardenswitch">
+            <label for="plotsel">Garden</label>
+            <select id="plotsel"></select>
+          </div>
+          <div class="gardenadd">
+            <button data-copy="logAddGardenBtn" id="plotaddtoggle" type="button" class="addgardenbtn">＋ Add a garden</button>
+            <span id="plotaddfields" class="gardenaddfields" hidden>
+              <input id="newplotname" type="text" placeholder="new garden's name" />
+              <button id="plotadd" type="button">Create</button>
+              <p class="hint" data-copy="groundHint"></p>
+            </span>
+          </div>
+        </fieldset>
+        <!-- The earn-strip (earned planner phase A): the ledger's own mechanics - R-093 frost
+             supersession, the D-148 pH gate, R-100's drainage trigger - stated as standings:
+             what's LIVE on this garden's data, what's partway with the remaining cost named,
+             what's WAITING with the trade stated. Rendered by log.ts from the same resolvers
+             the mechanisms use; nothing here is a new mechanism. -->
+        <fieldset id="sec-earned">
+          <legend data-copy="logLedgerLegend">What your ledger has earned</legend>
+          <div id="earnedstrip"></div>
+        </fieldset>
+        <fieldset id="sec-weather">
+          <legend data-copy="logWeatherLegend">This ground's weather</legend>
+          <select id="logseason" aria-label="active season" hidden></select>
+          <!-- Multi-location (walkthrough): with more than one garden, each has its own climate at its
+               own latitude (MN vs FL). This surfaces every garden's zone + typical frost dates at a
+               glance; tap one to switch to it. Rendered by renderGardensClimate; empty for one garden. -->
+          <div id="gardensclimate"></div>
+          <p data-copy="logWeatherBody" class="hint">Frost and heat land on the whole address, not one bed - three seasons of
+            frost dates and this ground's own last-frost supersedes the national model.</p>
+          <div id="frost"></div>
+          <div class="logrow">
+            <button data-copy="logDemoLoadBtn" id="frostdemo" type="button">load demo seasons</button>
+            <button data-copy="logDemoClearBtn" id="frostdemoclear" type="button" hidden>clear demo seasons</button>
+            <span class="hint" data-copy="frostDemoHint"></span>
+          </div>
+        </fieldset>
+        <!-- This ground's SOIL (maintainer, 2026-07-25): the counterpart of the weather panel above.
+             Frost and heat land on the whole address; soil lands on the BEDS, and a season log
+             without it leaves the gardener's most durable ground fact visible only on the Plan tab.
+             READ-ONLY - there is one place to record soil (the card in Your ground, which knows each
+             bed's structure), and every row here routes to it. Rendered by renderSoilSummary. -->
+        <!-- The soil RECORD card + the extension office (walk round 4): moved here from the
+             planner's ground step. Soil is an OBSERVATION - Log territory, behind the account
+             wall like the rest of the ledger - so a brand-new signed-out planner never meets
+             this form; the earn-strip above and the ask card invite it when a planting makes it
+             matter. The extension office rides the card (it answers "who tests my soil?").
+             draw() in app.ts still owns the beds-exist toggle; the render targets keep their ids. -->
+        <div id="soilzone" hidden>
+          <div id="soil"></div>
+          <div id="extension"></div>
+        </div>
+        <fieldset id="sec-soil">
+          <legend data-copy="logSoilLegend">This ground's soil</legend>
+          <p data-copy="logSoilBody" class="hint">How much you know about each piece of ground, and what the next step would
+            buy. Soil changes slowly, so this is a season-long picture rather than a daily one.</p>
+          <div id="soilsummary"></div>
+        </fieldset>
+        <!-- My added plants (maintainer): the plants you added yourself, managed here - edit any to fill
+             in more detail (it updates everywhere the plant is used and KEEPS your logged plantings,
+             because the plant's id never changes), or remove one. The add form itself is on the Plan tab
+             ("Add your own plant"). Rendered by renderManagedPlants in log.ts. -->
+        <fieldset id="sec-myplants">
+          <legend data-copy="logMyPlantsLegend">My added plants</legend>
+          <p data-copy="logMyPlantsBody" class="hint">Plants you added yourself. Edit one to fill in more detail - the more you tell us,
+            the more it behaves like a built-in plant across Plan, Log, and the Calendar.</p>
+          <div id="myplants"></div>
+        </fieldset>
+        <fieldset>
+          <legend>Keep it</legend>
+          <div class="logrow">
+            <button data-copy="logExportBtn" id="logexport" type="button">export season</button>
+            <button data-copy="logImportBtn" id="logimport" type="button">import pasted file</button>
+            <span class="hint" data-copy="exportHint"></span>
+          </div>
+          <details id="logfilebox">
+            <summary data-copy="logSeasonFileSummary">season file (export shows it here; paste one here to import)</summary>
+            <textarea id="logfile" rows="10" spellcheck="false" aria-label="season file (export target, import source)"></textarea>
+            <!-- D-171: photos ride beside the file as a zip, so import takes files too - the
+                 paste box keeps working for the YAML alone. -->
+            <label class="hint" for="logimportfiles">import from files (the season .yaml, and its photos .zip if you have one)</label>
+            <input type="file" id="logimportfiles" accept=".yaml,.yml,.zip" multiple aria-label="import season file and photo zip" />
+          </details>
+        </fieldset>
+        <div id="solar"></div>
+        </div><!-- /lograil -->
+        <p class="hint" id="logmsg" aria-live="polite"></p>
+      </section>
+      <!-- ============================================================ REVIEW -->
+      <section class="page" id="page-review" hidden>
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg>Season review</h1>
+        <p class="tagline" data-copy="reviewTagline"></p>
+        <div id="reviewbody"></div>
+      </section>
+      <!-- ============================================================ SHARE (O7 / D-164) -->
+      <!-- Tab-less like the landing and the Review: a recipient with no account and no garden
+           sees the plan instantly. The whole payload rides the fragment after #/share/ - this
+           section existing is what stops router.ts rewriting that hash to #/plan. -->
+      <section class="page" id="page-share" hidden>
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg>A shared plan</h1>
+        <div id="sharebody"></div>
+      </section>
+      <!-- ============================================================ CALENDAR -->
+      <section class="page" id="page-calendar" hidden>
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg>Your season, by the date</h1>
+        <p class="tagline" data-copy="calendarTagline"></p>
+        <!-- D-103: a garden-wide calendar over the season log's saved plans. Month grid by default,
+             a year overview on demand; every task tagged with its bed. -->
+        <div class="calbar">
+          <div class="seg" role="group" aria-label="calendar view">
+            <button id="calv-month" type="button" aria-pressed="true">Month</button>
+            <button id="calv-year" type="button" aria-pressed="false">Year</button>
+          </div>
+          <button data-copy="calendarIcsBtn" id="calics" type="button" class="calics">Add to calendar</button>
+          <!-- O111a: reminders on THIS device (no account, no server). Shown only where the platform
+               can wake the app while it is closed; hidden otherwise, where the export above is the
+               honest path. Wired by calendar.ts, which also renders its on/off/unsupported state. -->
+          <button id="calnotify" type="button" class="calics" hidden>Remind me on this device</button>
+          <!-- O5 (approved mockup): the one reminder control. The phone's CALENDAR APP does the
+               reminding - each exported task carries the chosen alarm; a display pref, so it
+               follows the account like units and theme. -->
+          <span class="remindrow"><label for="calremind">remind me</label>
+            <select id="calremind" aria-label="what reminder each exported task carries">
+              <option value="morning">morning of (8:00)</option>
+              <option value="evening">evening before (18:00)</option>
+              <option value="none">no reminder</option>
+            </select></span>
+        </div>
+        <p data-copy="calendarIcsHint" class="hint" id="calicshint">Reminders come from your phone's calendar app. Plan changed?
+          Export again - the calendar updates.</p>
+        <!-- O111a: the on-device reminders' own status line (how many are set, or why they are off).
+             Kept separate from the export hint above so each control speaks for itself. -->
+        <p class="hint" id="calnotifyhint" hidden></p>
+        <!-- The climate card (declutter round): moved from the Plan's Where step - this is the
+             page that is ABOUT dates, so the full card (percentile band, daylength, provenance
+             disclosure) lives here. Where keeps a one-line receipt; renderClimate targets this
+             id unchanged. -->
+        <div id="climate"></div>
+        <!-- Walk round 2: the calendar ends in a door, not a wall - the journey's loop back into
+             planning. The account panel above pitches KEEPING; this pitches CONTINUING. -->
+        <p><button type="button" class="stepnext" id="calplannudge">Plan the bed these dates serve ›</button></p>
+        <!-- Per-garden filter (walkthrough): the calendar spans every garden on the account. "All gardens"
+             consolidates; a garden chip narrows to one. Only rendered with two or more gardens. Default:
+             the default garden. -->
+        <div id="calgardens" class="calbeds" role="group" aria-label="filter by garden" hidden></div>
+        <!-- Per-bed filter (D-107): focus the calendar on one bed. Only rendered when one garden is in
+             scope and it has more than one bed with dated tasks; garden-wide climate markers stay visible. -->
+        <div id="calbeds" class="calbeds" role="group" aria-label="filter by bed" hidden></div>
+        <!-- MONTH -->
+        <div id="calmonthview">
+          <!-- O49: .calleft groups the month panel (nav + grid + legend) into ONE grid cell so the
+               desktop split (styles.css @1024) can cap the agenda to THIS column's height and scroll
+               it - a row-spanning agenda cannot be capped, a single-cell one can. Transparent to the
+               phone stack; renderers still target the ids/classes inside. -->
+          <div class="calleft">
+          <div class="calnav">
+            <button id="calprev" type="button" aria-label="previous month">‹</button>
+            <span class="callabel" id="calmlabel"></span>
+            <button id="calnext" type="button" aria-label="next month">›</button>
+          </div>
+          <!-- P2.2 de-box: the month BAND - the year at a glance, a chip per month, tap to jump.
+               The ‹ Month Year › nav above still steps across year boundaries; band + nav together
+               are the "year band". Chips are filled by calendar.ts's renderMonthGrid. -->
+          <div class="calmonthband" id="calmonthband" role="tablist" aria-label="jump to month"></div>
+          <div class="calmonth">
+            <div class="caldow"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+            <div class="calgrid" id="calgrid"></div>
+          </div>
+          <div class="callegend" aria-hidden="true">
+            <span><i class="ct-plant"></i>Plant / sow</span>
+            <span><i class="ct-sow"></i>Sow reminders</span>
+            <span><i class="ct-harvest"></i>Harvest</span>
+            <span><i class="ct-frost"></i>Frost &amp; season end</span>
+            <span><i class="ct-ended"></i>Logged / ended</span>
+            <span><i class="ct-note"></i>Notes</span>
+            <span class="calleg-key"><i class="cdot is-logged"></i>happened<i class="cdot is-planned"></i>planned</span>
+          </div>
+          </div>
+          <!-- calagenda is the day column, seated as the right rail beside the month panel; ids
+               inside are unchanged (renderers target them). O49: .calright is the grid cell; on the
+               desktop split the agenda is absolutely positioned inside it, so a busy (variable)
+               event list cannot grow the row - the row is set by .calleft and the agenda scrolls to
+               fit. At phone width .calright is a plain block and the agenda flows normally. -->
+          <div class="calright">
+          <div id="calagenda">
+            <h2 class="calagtitle" id="calagtitle"></h2>
+            <!-- D-106 slice 3: log what actually happened, straight from the day - routed only to the
+                 ledger updates it already handles (observation / sow / transplant / harvest / end / problem). -->
+            <div id="callog"></div>
+            <div id="caltasks"></div>
+          </div>
+          </div>
+        </div>
+        <!-- YEAR -->
+        <div id="calyearview" hidden>
+          <div class="calnav">
+            <button id="calyprev" type="button" aria-label="previous year">‹</button>
+            <span class="callabel" id="calylabel"></span>
+            <button id="calynext" type="button" aria-label="next year">›</button>
+          </div>
+          <div class="calyeargrid" id="calyeargrid"></div>
+        </div>
+        <p data-copy="calendarDatesNote" class="hint">Dates are 30-year medians; the climber lead counts from your last frost
+; your own logged frosts supersede the model after three seasons. Set your
+          location on the Plan page, then plan a bed - its dates appear here.</p>
+      </section>
+      <!-- ============================================================ WHY -->
+      <!-- The plant card (Phase 1). A real ROUTE, not a modal: `#/plant?id=<species>&group=<g>`,
+           the sibling of `#/why?rule=`. Being a route means the back button works, the 73 static
+           species pages can link IN (closing today's one-way linkage), and a gardener can send
+           someone a plant. Rendered by panels/plantcard.ts; every surface that names a species
+           opens THIS one rather than forking its own. -->
+      <section class="page" id="page-plant" hidden aria-labelledby="plant-h">
+        <h1 id="plant-h">Plant</h1>
+        <div id="plantcard"></div>
+      </section>
+      <section class="page" id="page-why" hidden>
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg>Why trust this?</h1>
+        <p data-copy="whyTagline" class="tagline">Every recommendation in this app cites a rule. Every rule states its
+          mechanism, its evidence grade, and the sources it stands on.
+          Here is all of it - including the folklore we checked and won't repeat.</p>
+        <!-- O13 + O102: contents FIRST. The jump row (three blocks, with counts, sticky) and the
+             ONE filter (kind of rule, in a gardener's words) lead the page; the search box sits
+             below them as a compact peer, not a hero - browsing is the primary way in, search the
+             fallback (the research: most visitors never type; the band is what they use).
+             Rendered live by why.ts; deliberately not a facet grid. -->
+        <nav id="whyjump" class="whyjump" aria-label="sections"></nav>
+        <div id="whychips" class="whychips" role="group" aria-label="filter rules by kind"></div>
+        <div class="controls">
+          <input id="whyq" type="search" placeholder="search rules &amp; folklore - try “basil”, “rotation”, “frost”" />
+        </div>
+        <!-- O102 Arc B: the applied-filter summary. Empty until a chip or a search narrows the page;
+             then it says how much is showing and carries a removable token per active facet plus a
+             clear-all (Baymard: active filters must stay visible or users lose track). -->
+        <div id="whyapplied" class="whyapplied" role="status" aria-live="polite" hidden></div>
+        <div id="beliefs"></div>
+        <div id="rules"></div>
+        <fieldset id="whyclimate">
+          <legend data-copy="whyClimateLegend">Where the climate numbers come from</legend>
+          <p data-copy="whyClimateBody" class="hint">Your frost window is precomputed from NOAA NCEI 1991–2020 station
+            normals (tier A, measured), a PRISM terrain offset where you're between stations
+            (tier B, modelled), or ERA5 reanalysis where no station is in range (tier C). The
+            app always shows which one you got and how far the data travelled. After
+            three logged seasons, your own ground's observations supersede all of it.</p>
+        </fieldset>
+        <!-- The PLANT numbers' provenance. The rules above cite their sources card by card, but
+             every footprint the planner quotes comes from a SPECIES field - mature spread drives
+             how many plants fit and how much room a guild asks for - and none of that reached this
+             page. #speciesconf and #speciesflags are written live from the bundle's confidence
+             blocks by why.ts, so the count cannot go stale; the citation line below is curated,
+             because the corpus's species notes are written to the maintainer (they carry dates,
+             reversals and internal argument) and are not reader-facing prose. -->
+        <fieldset id="whyspecies">
+          <legend data-copy="whyPlantLegend">Where the plant numbers come from</legend>
+          <p data-copy="whyPlantBody" class="hint">Every number a plant contributes - how wide it grows, how tall, how long
+            to harvest - carries a confidence mark. A number marked estimated is one nobody has
+            confirmed against a published source yet: usable for laying out a bed, not something to
+            quote. The app tracks which, and here they are.</p>
+          <p class="hint" id="speciesconf">loading…</p>
+          <div id="speciesflags"></div>
+          <p data-copy="whyTreeSizesBody" class="hint">The tree sizes were checked against land-grant extension publications in
+            July 2026: UGA Extension Circular 740 (Home Garden Apples) and Circular 1063 (Home
+            Garden Peaches), University of Maine Bulletin #2034 (Plum Production in Maine),
+            University of California ANR's plum rootstock guidance, and University of Missouri
+            Extension G6030 (peach training and pruning). Where a size is derived from a published
+            band rather than quoted from it - dwarf apples, for instance, are "about 30 to 40
+            percent as large as standard trees" rather than a stated height - the number stays
+            marked estimated. There is no dwarf pear in this corpus because extension sources say
+            a home grower cannot buy one.</p>
+        </fieldset>
+        <!-- Data sources + privacy (redesign round 3): moved here from the old page footer -
+             provenance belongs on the trust page, in the same card language. #info is written
+             by app.ts with the live corpus-bundle counts. -->
+        <fieldset id="whysources">
+          <legend data-copy="whyDataLegend">Where the data comes from</legend>
+          <p class="hint" id="info">loading…</p>
+          <p data-copy="whyDataBody" class="hint">Climate: NOAA NCEI 1991–2020 Normals · PRISM Climate Group, Oregon State
+            University · ERA5 via Open-Meteo · ZIP centroids: US Census 2020 - all precomputed at
+            build time; the app never calls a weather service. Your garden data syncs only to your
+            account, only when you're signed in. Address lookup: OpenStreetMap Nominatim ·
+            Imagery: Esri.</p>
+          <p data-copy="whyPrivacyBody" class="hint">Privacy: visits are counted anonymously (GoatCounter) - no cookies, no
+            personal data, and Do Not Track is honoured. Your plants and plans are never part
+            of it.</p>
+        </fieldset>
+        <!-- The next invitation (earned planner phase A, personas finding 3): the Why page used
+             to be a terminus - a reader finished a refutation with their next question unasked.
+             The same trade grammar as every other surface: what checking a tip earned, and what
+             one more tap buys. -->
+        <div class="whynext">
+          <p class="whynext-l" data-copy="whyNextL"></p>
+          <p data-copy="whyNextBody"></p>
+          <p><a class="whynext-go" href="#/answers?teams" data-copy="whyNextGo"></a></p>
+        </div>
+      </section>
+      <!-- ============================================================ ACCOUNT -->
+      <section class="page" id="page-account" hidden>
+        <!-- A3 / P2.3 (the D-189 pilot): the PROMISE is the dominant element - a full-bleed deep band.
+             --surface-deep is the generated per-skin token (D-192, P0.1b), receipted >= floor in all
+             eight skins; it inverts per scheme, so this is dark sage on cream in light and a BRIGHT
+             band on ink in dark - the look this pilot exists to judge on a phone. Fallback if it reads
+             as glare (D-189): bind it to a card, then drop to a --color-surface fill at this scale. -->
+        <div class="acctpromise">
+          <h1 data-copy="accountPromiseTitle">Your garden lives on this device.</h1>
+          <!-- data-copy fills the signed-OUT body at boot; account.ts's status() swaps to the
+               signed-in variant on the auth hook, so a signed-in gardener is never told to sign in. -->
+          <p id="acctpromisebody" data-copy="accountPromiseBody">Everything you plan and log is kept here in your browser, yours by default. Sign in only to carry it to another device - nothing leaves until you do.</p>
+        </div>
+        <!-- The ledger ring (P2.3 slice 2): the frost record's standing as a conic dial, drawn by
+             app.ts's redraw from the SAME frostCalibration the earn-strip reads (ledgerring.ts).
+             The --frac custom property drives the arc; the numeral and the standing line are set in
+             script. No data-copy - the state-dependent text lives beside its logic in ledgerring.ts,
+             like the earn-strip's, so it stays truthful and trips no copy-pin. -->
+        <div class="ledgerring" id="ledgerring">
+          <div class="ledgerring-dial" id="ledgerringdial" style="--frac:0">
+            <span class="ledgerring-num" id="ledgerringnum"></span>
+          </div>
+          <p class="ledgerring-label" id="ledgerringlabel"></p>
+        </div>
+        <p class="tagline" id="acctstatus">loading…</p>
+        <!-- The two desktop columns (maintainer, 2026-08-20: "layout is poor and there is a ton of
+             blank space"). The old grid placed each section in a shared row, so a tall right-hand
+             cell (the privacy card) inflated its row and left the other column blank beside it, and
+             the unplaced garden-knows fieldset auto-flowed below everything. These two wrappers make
+             each column an INDEPENDENT flow: forms left, the read-only knows+privacy stack right.
+             Both wrap contiguous runs of children, so the phone's single-column order is unchanged. -->
+        <div class="acctcol" id="acctcol-forms">
+        <fieldset id="sec-prefs">
+          <legend data-copy="accountDisplayLegend">Display preferences</legend>
+          <div class="logrow">
+            <label for="prefunits">Measurement</label>
+            <select id="prefunits" aria-label="measurement units">
+              <option value="metric">metres · cm · m²</option>
+              <option value="imperial">feet · inches · ft²</option>
+            </select>
+          </div>
+          <div class="logrow">
+            <label for="preftemp">Temperature</label>
+            <select id="preftemp" aria-label="temperature units">
+              <option value="c">°C</option>
+              <option value="f">°F</option>
+            </select>
+          </div>
+          <div class="logrow">
+            <label for="preftheme">Theme</label>
+            <select id="preftheme" aria-label="colour theme">
+              <option value="system">match my device</option>
+              <option value="light">light</option>
+              <option value="dark">dark</option>
+            </select>
+          </div>
+          <div class="prefrow">
+            <label for="prefseason">Season</label>
+            <select id="prefseason" aria-label="seasonal colours">
+              <option value="follow">follow the seasons</option>
+              <option value="spring">spring</option>
+              <option value="summer">summer</option>
+              <option value="autumn">autumn</option>
+              <option value="winter">winter</option>
+            </select>
+          </div>
+          <p data-copy="accountDisplayBody" class="hint">Applies everywhere in the app. Kept on this device; once you're signed in it
+            follows your account to every device.</p>
+        </fieldset>
+        <!-- The Account "Guides & how-tos" door (O61) was retired here on 2026-08-09: it existed
+             because the cold-state coaching bands self-hide once a garden is set up, leaving a
+             set-up gardener "no way back to the guides" - but the persistent header Guides door
+             (O58, on EVERY surface, signed in or out) is now that always-present way back, a better
+             home than a section buried on the Account page. The header door is the standing index
+             door; the coach/answer/team cards remain the contextual deep links. -->
+        <!-- O19 (maintainer, 2026-07-30): the custom-backend fieldset is gone - it implied how
+             the site is hosted and operates. The standard backend config still ships as
+             backend.json; nothing user-facing points at internals anymore. -->
+        <div id="acctsignedout">
+          <fieldset>
+            <legend>Sign in</legend>
+            <form id="signinform">
+              <div class="logrow"><label for="acctemail">email</label>
+                <input id="acctemail" type="email" autocomplete="username" required /></div>
+              <div class="logrow"><label for="acctpass">password</label>
+                <input id="acctpass" type="password" autocomplete="current-password" required /></div>
+              <div class="logrow">
+                <button id="acctsignin" type="submit" class="primary">Sign in</button>
+              </div>
+            </form>
+            <div class="logrow">
+              <span class="hint">new here?</span>
+              <button data-copy="accountCreateBtn" id="acctsignup" type="button">create account</button>
+              <button data-copy="accountForgotBtn" id="pwforgot" type="button">forgot password</button>
+            </div>
+          </fieldset>
+        </div>
+        <div id="syncreport" aria-live="polite"></div>
+        <div id="acctsignedin" hidden>
+          <div class="welcome signedcard">
+            <p>Signed in as <b id="acctwho"></b> - your ledger syncs to this account.</p>
+            <!-- O19: the ONE line of sync that survives - a quiet trust signal ("did my stuff
+                 save?"), folded into the identity card. All other sync chrome is gone: sync is
+                 automatic after every change, on open, on foreground, and on sign-in/out. -->
+            <p class="hint" id="lastsync" hidden></p>
+            <button id="acctsignout" type="button">sign out</button>
+          </div>
+          <fieldset>
+            <legend>My account</legend>
+            <div class="logrow">
+              <input id="newpass" type="password" placeholder="new password" autocomplete="new-password" />
+              <button data-copy="accountChangePwBtn" id="passchange" type="button">change password</button>
+            </div>
+            <div class="logrow">
+              <input id="newemail" type="email" placeholder="new email" autocomplete="email" />
+              <button data-copy="accountChangeEmailBtn" id="emailchange" type="button">change email</button>
+            </div>
+            <p data-copy="accountEmailNote" class="hint">Email changes are confirmed by a message to the new address.
+              Your addresses and their ledgers are managed on the Plan tab ("Your ground").</p>
+          </fieldset>
+          <!-- O19 (maintainer, 2026-07-30): the Sync section is gone entirely - sync is automatic
+               (after every change, on open, on foreground, on sign-in/out) and the manual button
+               was debug chrome. The last-synced line above is all that remains; failures still
+               dock in the report box like every other error. -->
+          <!-- Teams (D-172). The people-gathering surface: create a team, invite by email, see and
+               accept invites addressed to you, see the roster, leave. teams.ts renders the lists;
+               nothing here is authored in markup beyond the frame, the consent line, and the
+               create/invite controls. The consent line is the PINNED one (an e2e check fails if it
+               is missing). Attaching a garden to a team is the next slice. -->
+          <fieldset id="sec-teams">
+            <legend data-copy="teamsLegend">Teams</legend>
+            <p data-copy="teamsIntro" class="hint">A team lets more than one person tend the same garden.</p>
+            <div id="teaminvites"></div>
+            <div id="teamlist"></div>
+            <div class="logrow">
+              <input id="teamname" type="text" maxlength="60" placeholder="name this team" style="width:12rem" />
+              <button data-copy="teamsCreateBtn" id="teamcreate" type="button">create team</button>
+            </div>
+            <p data-copy="teamsConsent" class="hint" id="teamsconsent">Everyone you add to a team can see that team's gardens - their location on the map and their full seasons - and everyone on a team can see each other's sign-in email. Your photos and your display settings never travel.</p>
+            <p data-copy="teamsGardensNote" class="hint">Sharing this team's gardens comes next.</p>
+            <div id="teamsreport" aria-live="polite"></div>
+          </fieldset>
+          <fieldset>
+            <legend data-copy="accountDeleteLegend">Delete account</legend>
+            <p data-copy="accountDeleteBody" class="hint">Removes your account and every synced record from the backend.
+              This device's local log is untouched.</p>
+            <div class="logrow">
+              <input id="delconfirm" type="text" placeholder='type "delete my account"' style="width:14rem" />
+              <button data-copy="accountDeleteBtn" id="acctdelete" type="button">delete account</button>
+            </div>
+          </fieldset>
+        </div>
+        </div>
+        <!-- O19 (maintainer, 2026-07-30): renamed and rewritten VENDOR-FREE - hosting and
+             services are how the site runs, not something this page announces. Every promise
+             below is unchanged and true; the approved wording ships verbatim. -->
+        <div class="acctcol" id="acctcol-about">
+        <!-- O28: the inventory that the policy below is a promise about. Every fact the app can
+             hold, whether it holds it, what that fact is buying right now, and what the next one
+             would buy - the earn grammar as a directory. Rows are built by panels/knows.ts from
+             gardenknows.ts; nothing here is authored in markup, because a hand-written list would
+             drift from what is actually stored. -->
+        <fieldset id="sec-gardenknows">
+          <legend data-copy="accountKnowsLegend">What your garden knows</legend>
+          <p class="hint" id="knowssummary"></p>
+          <div id="knowsrows"></div>
+          <p data-copy="accountKnowsBody" class="hint">Every one of these is optional, and the app says what it would do with a
+            fact before you give it. Nothing here is sold, shared, or used to advertise to you.</p>
+        </fieldset>
+        <fieldset id="sec-privacy">
+          <legend data-copy="accountPrivacyLegend">Privacy Policy</legend>
+          <p data-copy="accountPrivacySignedOut" class="hint">Signed out, your garden data lives only on this device - the export is
+            your backup, and nothing leaves your browser.</p>
+          <p data-copy="accountPrivacySignedIn" class="hint">Signed in, your addresses, growing areas and seasons are stored in your
+            account so they can follow you across devices. They are readable only by your own
+            account, and deleting your account above removes them in one tap.</p>
+          <p data-copy="accountPrivacyBundle" class="hint">The plant knowledge that powers the app is a public file built into the
+            app itself. Your data never mixes into it.</p>
+          <p data-copy="accountPrivacyNetwork" class="hint">Address lookup and map imagery are fetched only when you use them, and
+            those requests carry only what you typed or the area you are viewing - never your
+            plans. Visits are counted anonymously: no cookies, no personal data, and Do Not Track
+            is honoured. Your plants and your plans are never part of any analytics.</p>
+        </fieldset>
+        </div>
+      </section>
+    </main>
+    <!-- The old text footer is gone (redesign round 3, maintainer): its provenance + privacy
+         paragraphs live on the Why page (#whysources), the trust surface where they belong. -->
+    <script type="importmap">
+      { "imports": { "preact": "./vendor/preact.mjs",
+                     "preact/hooks": "./vendor/preact-hooks.mjs",
+                     "htm": "./vendor/htm.mjs" } }
+    </script>
+    <script type="module" src="./dist/app.js?v=2a4f7d6779"></script>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>When is my last frost, and my first freeze? - Milpa Gardens</title>
+    <meta name="description" content="Your last spring frost and first fall freeze as odds, not single dates: the median, the 1-year-in-10 date, and the NOAA station behind them." />
+    <link rel="icon" href="../web/icons/icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../web/icons/apple-touch-icon.png" />
+    <script>try{var u=localStorage.getItem("gg-units");if(u==="metric")document.documentElement.setAttribute("data-units","metric");var t=localStorage.getItem("gg-temp");if(t==="c")document.documentElement.setAttribute("data-temp","c");var th=localStorage.getItem("gg-theme");document.documentElement.setAttribute("data-theme",(th==="dark"||th==="light")?th:((window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"));var S=["spring","summer","autumn","winter"],p=localStorage.getItem("gg-season"),r;if(S.indexOf(p)>=0){r=p;}else{var n=S[Math.floor(((new Date().getMonth()+10)%12)/3)];r=localStorage.getItem("gg-hemi")==="s"?S[(S.indexOf(n)+2)%4]:n;}document.documentElement.setAttribute("data-season",r);}catch(e){}</script>
+    <link rel="stylesheet" href="../pages.css?v=65afa1525b" />
+  </head>
+  <body>
+    <header class="site">
+      <a class="brand" href="../"><svg class="brandmark" viewBox="0 0 16 15" aria-hidden="true"><g class="t1"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9"/></g><g class="t2"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9"/></g><g class="t3"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9"/></g></svg>Milpa <b>Gardens</b></a>
+      <div class="hright">
+        <button type="button" class="unittoggle" id="unittoggle" aria-label="Switch measurement units between imperial and metric"><span class="ut-i">in</span><span class="ut-m">cm</span></button>
+        <a class="hcta" href="../web/"><span data-copy="header_cta">Open the planner</span></a>
+      </div>
+    </header>
+    <nav class="secnav" aria-label="Sections"><a href="../plants/">Plants</a><a href="../guilds/">Guilds</a><a href="../rules/">Rules</a><a href="../beliefs/">Folklore</a><a href="../guides/">Guides</a><a href="../explainers/">Explainers</a><a href="../frost/">Frost</a><a href="../unsure/">Unsure</a></nav>
+    <main>
+      <figure class="exp-hero"><div class="frame"><img src="../web/img/scenes/frost-covered-plants-1.webp" alt="A low green leaf completely crusted in white frost crystals, frosted grass and gravel around it" width="1600" height="1200" loading="lazy" decoding="async"></div><figcaption>Photo: Syrio &middot; <a href="https://commons.wikimedia.org/wiki/File:Frost_on_plants_02.jpg" rel="noreferrer">CC BY-SA 4.0</a>, via Wikimedia Commons.</figcaption></figure>
+      <h1>When is my last frost, and my first freeze?</h1>
+      <p class="answer">Type your ZIP code for the honest answer to both &mdash; not one date each, but the odds. The date half of years have frosted by, the date it still frosts 1 year in 10, and the same pair for the freeze that ends the season, from the nearest NOAA weather station, named, so you can weigh it yourself.</p>
+      <form class="frosttool" autocomplete="off" onsubmit="return false">
+        <div class="ft-field"><label for="ft-zip">US ZIP code</label>
+          <input id="ft-zip" name="zip" type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="e.g. 04101" aria-describedby="ft-hint" /></div>
+        <p class="ft-hint" id="ft-hint">Nothing is sent anywhere. The lookup runs on your device against a table of NOAA records, offline once the page has loaded.</p>
+        <noscript><p class="ft-hint">This lookup needs JavaScript. You can still <a href="../frost/">browse frost dates by location</a> as static pages.</p></noscript>
+      </form>
+      <div class="ft-out" id="ft-out" aria-live="polite"></div>
+      <h2>Why a frost date is not a date</h2>
+      <p>Every other site gives you a single last-frost date. A frost date is not a date: it is a percentile drawn from 30 years of records at a nearby weather station. Plant to the median and you lose the crop to a late frost in half of years. The tool above shows the median beside the 1-year-in-10 date, so you choose the risk instead of being handed one number and a false certainty.</p>
+      <h2>Both ends of the season, the same way</h2>
+      <p>The season has two edges and gardeners ask about both: the last frost of spring, which decides when it is safe to set out a tomato, and the first freeze of autumn, which decides whether what you sow in August has time to finish. Each is a distribution, and in each the 1-in-10 date is the one that catches you &mdash; a frost arriving <em>late</em> in spring, a freeze arriving <em>early</em> in fall. Enter a ZIP and you get both, with the same percentiles and the same station behind them; whichever edge is closer to today is shown first.</p>
+      <h2>Where these numbers come from</h2>
+      <p class="prov">NOAA NCEI 1991&ndash;2020 U.S. Climate Normals, 2,910 weather stations resolved to the roughly 32,850 U.S. ZIP codes each is nearest to. Every date is that station&rsquo;s own recorded percentile, unshifted &mdash; nothing here is modelled, averaged, or invented. It is the same committed table behind every location page on this site, read a second way.</p>
+      <h2>What this tool will not do</h2>
+      <p>It will not call a weather service, guess a number for a ZIP with no station near it, or tell you your hardiness zone &mdash; the zone is a different quantity for a different question (which perennials survive your winter, not when to sow), and answering one by quoting the other is exactly the shortcut this project refuses. It gives frost odds, from records, or it says it cannot.</p>
+      <p class="more"><a href="../frost/">Frost dates by location</a> &middot; <a href="../plants/">All plants</a> &middot; <a href="../unsure/">What we don&rsquo;t know</a></p>
+      <script>
+      (function(){
+        var MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
+        var CUM=[0,31,59,90,120,151,181,212,243,273,304,334];
+        function md(doy){var m=11;while(m>0&&CUM[m]>=doy)m--;return MON[m]+" "+(doy-CUM[m]);}
+        function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+        var inp=document.getElementById("ft-zip"),out=document.getElementById("ft-out");
+        if(!inp||!out)return;
+        var DATA=null,loading=false,pending=null;
+        function load(){
+          if(DATA||loading)return;loading=true;
+          fetch("data.json").then(function(r){return r.json();}).then(function(d){
+            var F=d.Fd.slice();for(var i=1;i<F.length;i++)F[i]=F[i]+F[i-1];d.F=F;DATA=d;loading=false;
+            if(pending!=null){var z=pending;pending=null;render(z);}
+          }).catch(function(){loading=false;out.innerHTML='<p class="ft-empty">The frost data could not be loaded. Browse <a href="../frost/">frost dates by location</a> instead.</p>';});
+        }
+        function lookup(zi){
+          var F=DATA.F,lo=0,hi=F.length-1,k=-1;
+          while(lo<=hi){var mid=(lo+hi)>>1;if(F[mid]<=zi){k=mid;lo=mid+1;}else{hi=mid-1;}}
+          if(k<0||zi>F[k]+DATA.D[k])return null;
+          return DATA.S[DATA.I[k]];
+        }
+        // One chart for both seasons (O105a). `fall` flips two things and nothing else: which side of the
+        // median the risk sits on, and which way the key label anchors. Spring risk runs LATE (a frost
+        // after the median), fall risk runs EARLY (a freeze before it), so the safe band is on the right
+        // in spring and on the left in autumn - and in both, p10 is the year in ten that catches you.
+        function bandSVG(s,fall){
+          var p10=fall?s[12]:s[5],p20=fall?s[13]:s[6],p30=fall?s[14]:s[7],p40=fall?s[15]:s[8],
+              p50=fall?s[10]:s[9];
+          if(!p50||!p10)return "";
+          var vals=[p10,p20,p30,p40,p50].filter(function(v){return v;});
+          var lo=Math.min.apply(null,vals)-12,hi=Math.max.apply(null,vals)+12;
+          var W=340,H=132,ml=16,mr=16,innerW=W-ml-mr,barY=74,barH=22;
+          function n(v){return Math.round(v*100)/100;}
+          function x(d){return n(ml+(d-lo)/(hi-lo)*innerW);}
+          var o=['<svg class="ff-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+(fall?"First fall freeze":"Last spring frost")+' odds for '+esc(s[0])+'">'];
+          if(fall){
+            o.push('<rect class="ff-band ff-safe" x="'+x(lo)+'" y="'+barY+'" width="'+n(x(p10)-x(lo))+'" height="'+barH+'"/>');
+            o.push('<rect class="ff-band ff-gamble" x="'+x(p10)+'" y="'+barY+'" width="'+n(x(p50)-x(p10))+'" height="'+barH+'"/>');
+            o.push('<rect class="ff-band ff-risk" x="'+x(p50)+'" y="'+barY+'" width="'+n(x(hi)-x(p50))+'" height="'+barH+'"/>');
+          }else{
+            o.push('<rect class="ff-band ff-risk" x="'+x(lo)+'" y="'+barY+'" width="'+n(x(p50)-x(lo))+'" height="'+barH+'"/>');
+            o.push('<rect class="ff-band ff-gamble" x="'+x(p50)+'" y="'+barY+'" width="'+n(x(p10)-x(p50))+'" height="'+barH+'"/>');
+            o.push('<rect class="ff-band ff-safe" x="'+x(p10)+'" y="'+barY+'" width="'+n(x(hi)-x(p10))+'" height="'+barH+'"/>');
+          }
+          [p40,p30,p20].forEach(function(d){if(d)o.push('<line class="ff-mid" x1="'+x(d)+'" y1="'+barY+'" x2="'+x(d)+'" y2="'+n(barY+barH)+'"/>');});
+          for(var mm=1;mm<=12;mm++){var d=CUM[mm-1]+1;if(lo<=d&&d<=hi){o.push('<line class="ff-month" x1="'+x(d)+'" y1="'+barY+'" x2="'+x(d)+'" y2="'+n(barY+barH+5)+'"/>');o.push('<text class="ff-mlab" x="'+x(d)+'" y="'+n(barY+barH+16)+'">'+MON[mm-1].slice(0,3)+'</text>');}}
+          function key(d,top,dl,anc){return '<line class="ff-key-tick" x1="'+x(d)+'" y1="'+n(barY-8)+'" x2="'+x(d)+'" y2="'+n(barY+barH)+'"/><text class="ff-key" x="'+x(d)+'" y="'+n(barY-24)+'" text-anchor="'+anc+'">'+top+'</text><text class="ff-keyd" x="'+x(d)+'" y="'+n(barY-11)+'" text-anchor="'+anc+'">'+dl+'</text>';}
+          o.push(key(p50,"Median",esc(md(p50)),"middle"));
+          o.push(key(p10,"1 year in 10",esc(md(p10)),fall?"start":"end"));
+          o.push("</svg>");
+          return o.join("");
+        }
+        function render(zs){
+          if(!DATA){pending=zs;out.innerHTML='<p class="ft-empty">Looking that up&hellip;</p>';load();return;}
+          var s=lookup(parseInt(zs,10));
+          if(!s){out.innerHTML='<p class="ft-empty">No NOAA station sits near ZIP '+esc(zs)+'. Browse the <a href="../frost/">closest listed locations</a> instead.</p>';return;}
+          var place=esc(s[0])+", "+esc(s[1]),lat=(s[3]/100).toFixed(2),lon=(s[4]/100).toFixed(2),h=[];
+          // A handful of frost-free stations (year-round season) record last-frost odds that STRADDLE the
+          // New Year: the late 1-in-10 tail lands in January while the median sits in late December, so on
+          // the calendar the tail comes numerically BEFORE the median. The spring-window bar assumes a
+          // clean spring and would draw nonsense, so for these we say the honest thing instead of a chart.
+          var p50=s[9],p10=s[5],wrap=(!p10||!p50||p10<p50);
+          // The two answers, each a block. They are built in a fixed order and then ORDERED by the
+          // reader's own month, so whoever arrives in August meets the freeze question first and whoever
+          // arrives in February meets the frost question first (O105a). The clock is used for THAT and
+          // nothing else - no date here is computed from it, and both blocks are always present, so a
+          // reader with no JS, or one who arrives at the boundary, loses only the running order.
+          var spring=[],autumn=[];
+          if(wrap){
+            spring.push('<p class="answer">Frost is rare at <strong>'+place+'</strong>: the growing season runs about '+(s[11]||365)+' days &mdash; effectively year-round. The recorded odds below straddle the calendar rather than falling in a single spring window.</p>');
+          }else{
+            spring.push('<h2 class="ft-h">When is my last spring frost?</h2>');
+            spring.push('<p class="answer">Half of years at <strong>'+place+'</strong> have their last spring frost by <strong>'+esc(md(p50))+'</strong> &mdash; but 1 year in 10 it still frosts after <strong>'+esc(md(p10))+'</strong>.</p>');
+            spring.push('<figure class="frostfig"><div class="ff-frame">'+bandSVG(s,false)+'</div><ul class="ff-legend"><li><span class="ff-dot ff-risk"></span>frost most years</li><li><span class="ff-dot ff-gamble"></span>frost in some years - the gamble</li><li><span class="ff-dot ff-safe"></span>frost rare (about 1 year in 10)</li></ul></figure>');
+          }
+          spring.push('<dl class="facts"><dt>Frost this late in 1 year in 10</dt><dd>'+esc(md(s[5]))+'</dd><dt>1 year in 5</dt><dd>'+esc(md(s[6]))+'</dd><dt>3 years in 10</dt><dd>'+esc(md(s[7]))+'</dd><dt>2 years in 5</dt><dd>'+esc(md(s[8]))+'</dd><dt>Half of years (the median)</dt><dd>'+esc(md(s[9]))+'</dd></dl>');
+          // The fall side, on exactly the same footing. A station whose table predates the fall
+          // percentiles (or a frost-free site whose freeze straddles the New Year) still gets the median
+          // it always had, stated as the median and not dressed up as odds.
+          var f50=s[10],f10=s[12],fok=(f50&&f10&&f10<f50);
+          if(f50){
+            autumn.push('<h2 class="ft-h">When is my first fall freeze?</h2>');
+            if(fok){
+              autumn.push('<p class="answer">Half of years at <strong>'+place+'</strong> keep going until <strong>'+esc(md(f50))+'</strong> &mdash; but 1 year in 10 the first freeze arrives by <strong>'+esc(md(f10))+'</strong>.</p>');
+              autumn.push('<figure class="frostfig"><div class="ff-frame">'+bandSVG(s,true)+'</div><ul class="ff-legend"><li><span class="ff-dot ff-safe"></span>freeze rare this early (about 1 year in 10)</li><li><span class="ff-dot ff-gamble"></span>freeze in some years - the gamble</li><li><span class="ff-dot ff-risk"></span>freeze by now most years</li></ul></figure>');
+              autumn.push('<dl class="facts"><dt>Freeze this early in 1 year in 10</dt><dd>'+esc(md(f10))+'</dd><dt>1 year in 5</dt><dd>'+esc(md(s[13]))+'</dd><dt>3 years in 10</dt><dd>'+esc(md(s[14]))+'</dd><dt>2 years in 5</dt><dd>'+esc(md(s[15]))+'</dd><dt>Half of years (the median)</dt><dd>'+esc(md(f50))+'</dd>'+(s[11]?'<dt>Growing season</dt><dd>about '+s[11]+' days</dd>':'')+'</dl>');
+            }else{
+              autumn.push('<p class="answer">The first fall freeze at <strong>'+place+'</strong> comes around <strong>'+esc(md(f50))+'</strong> in half of years. Only the median is recorded for this station, so this one is a middle, not a spread &mdash; treat it as less of an answer than the spring odds above.</p>');
+              if(s[11])autumn.push('<dl class="facts"><dt>Growing season</dt><dd>about '+s[11]+' days</dd></dl>');
+            }
+          }
+          var fallFirst=false;
+          try{var mo=new Date().getMonth()+1;fallFirst=(mo>=7&&mo<=12);}catch(e){}
+          h.push((fallFirst?autumn.concat(spring):spring.concat(autumn)).join(""));
+          h.push('<p class="prov">These are the recorded 1991&ndash;2020 normals at NOAA station '+esc(s[0])+' ('+esc(s[2])+'), at '+lat+', '+lon+' &mdash; that station\'s own records, unshifted. The further your garden is from it, the less exactly they describe your ground. Cold air also pools in low spots on the clear, still nights when frost happens, so a hollow can freeze while a slope nearby does not; no table can know that about your yard, but your own logged frosts eventually can.</p>');
+          h.push('<p class="prov">This is your frost <em>timing</em> &mdash; not your hardiness zone. The zone tells you which perennials survive your winter; these odds tell you when it is safe to set out tomatoes. They are different questions answered from different data, and a tool that gives you one by quoting the other is guessing.</p>');
+          h.push('<p class="ladder"><a class="ladder-cta" href="../web/#/answers?zip='+esc(zs)+'">What can I plant here, and when? &rarr;</a></p>');
+          out.innerHTML=h.join("");
+        }
+        function onchange(){
+          var v=(inp.value||"").replace(/[^0-9]/g,"").slice(0,5);
+          if(v!==inp.value)inp.value=v;
+          if(v.length===5)render(v);else out.innerHTML="";
+        }
+        inp.addEventListener("focus",load);
+        inp.addEventListener("input",onchange);
+        try{var m=(location.search.match(/[?&]zip=(\d{5})/)||[])[1];if(m){inp.value=m;render(m);}}catch(e){}
+      })();
+      </script>
+    </main>
+    <footer class="site">
+      <div class="foot-brand">
+        <a class="brand" href="../"><svg class="brandmark" viewBox="0 0 16 15" aria-hidden="true"><g class="t1"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9"/></g><g class="t2"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9"/></g><g class="t3"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9"/></g></svg>Milpa <b>Gardens</b></a>
+        <p class="foot-note" data-copy="footer_note">Every claim on this page comes from the project&#x27;s rule corpus, with its evidence grade and its sources shown as recorded. Nothing here is generated prose.</p>
+        <a class="fcta" href="../web/"><span data-copy="footer_cta">Plan a bed with Milpa Gardens</span></a>
+      </div>
+      <nav class="sitenav" aria-label="Explore the site">
+        <div class="foot-col">
+          <p class="foot-h">Learn</p>
+          <a href="../guides/">Guides</a>
+          <a href="../explainers/">Explainers</a>
+          <a href="../compare/">How Milpa compares</a>
+          <a href="../frost-odds/">Frost odds tool</a>
+          <a href="../frost/">Frost dates</a>
+        </div>
+        <div class="foot-col">
+          <p class="foot-h">The corpus</p>
+          <a href="../plants/">Plants</a>
+          <a href="../guilds/">Guilds</a>
+          <a href="../rules/">Rules</a>
+          <a href="../beliefs/">Folklore</a>
+          <a href="../unsure/">What we don't know</a>
+          <a href="../for-educators/">For educators</a>
+          <a href="../search/">Search</a>
+          <a href="../privacy/">Privacy</a>
+        </div>
+      </nav>
+    </footer>
+    <script>(function(){var b=document.getElementById("unittoggle");if(!b)return;b.addEventListener("click",function(){var r=document.documentElement,metric=r.getAttribute("data-units")==="metric";try{if(metric){r.removeAttribute("data-units");localStorage.setItem("gg-units","imperial");}else{r.setAttribute("data-units","metric");localStorage.setItem("gg-units","metric");}}catch(e){}});})();</script>
+    <script>(function(){var band=document.querySelector("nav.contents");if(!band||!("IntersectionObserver"in window))return;var links=[].slice.call(band.querySelectorAll("a[href^='#']"));var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1));});if(secs.some(function(s){return !s;}))return;var current=-1;function mark(i){if(i===current)return;current=i;links.forEach(function(a,j){if(j===i){a.setAttribute("aria-current","true");a.scrollIntoView({inline:"nearest",block:"nearest"});}else{a.removeAttribute("aria-current");}});}var io=new IntersectionObserver(function(){var y=band.getBoundingClientRect().bottom+8,best=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<=y)best=i;});mark(best);},{rootMargin:"0px 0px -55% 0px",threshold:0});secs.forEach(function(s){io.observe(s);});})();</script>
+    <script type="module">const gg=()=>import("../edit.js");try{(localStorage.getItem("gg-editor")==="1"||location.hash==="#edit")&&gg()}catch(e){}addEventListener("hashchange",()=>{try{location.hash==="#edit"&&gg()}catch(e){}})</script>
+    <script>if("serviceWorker"in navigator){navigator.serviceWorker.register("../sw.js").catch(function(){})}</script>
+    <script>(function(){try{var H={"milpa.garden":1,"www.milpa.garden":1};if(!H[location.hostname]||navigator.webdriver)return;if(navigator.doNotTrack==="1"||navigator.globalPrivacyControl===true)return;var q="p="+encodeURIComponent(location.pathname)+"&r="+encodeURIComponent(document.referrer||"")+"&rnd="+Date.now();fetch("https://milpa-garden.goatcounter.com/count?"+q,{method:"GET",keepalive:true,mode:"no-cors"}).catch(function(){});}catch(e){}})();</script>
+  </body>
+</html>

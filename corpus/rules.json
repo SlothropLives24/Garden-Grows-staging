@@ -1,0 +1,1304 @@
+{
+  "corpus": "Milpa Gardens",
+  "description": "Garden rules, each graded by the strength of its evidence and stated with the mechanism it works by.",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "version": "477875fca00a",
+  "history_available": false,
+  "grade_meanings": {
+    "A": "Well established",
+    "B": "Promising",
+    "C": "A good hunch",
+    "D": "Contested",
+    "F": "Refuted"
+  },
+  "counts": {
+    "rules": 91,
+    "verified": 90,
+    "unverified": 0
+  },
+  "rules": [
+    {
+      "id": "R-001",
+      "claim": "Corn requires a block of at least 4 rows (roughly 12 plants) for adequate kernel set.",
+      "refuted": false,
+      "type": "pollination",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Maize is wind-pollinated and protandrous. Tassels shed pollen that must land on silks of neighbouring plants. Below roughly 12 plants in a block of at least 4 rows, insufficient pollen reaches enough silks; each unfertilized silk is one missing kernel.",
+      "evidence_status": "verified",
+      "sources": [
+        "UMN Extension, 'Growing sweet corn in home gardens', extension.umn.edu/vegetables/growing-sweet-corn (read 2026-07-11): 'Always plant corn in blocks of at least four rows. Corn planted in a single row will have much of its pollen blown out of the row, and will produce ears that have blank areas where kernels did not form.'",
+        "NC State Extension, 'Organic Sweet Corn Production' (Horticulture Information Leaflets), content.ces.ncsu.edu/organic-sweet-corn-production (read 2026-07-11): 'Corn is wind-pollinated and should be planted in blocks of at least 4 rows for good pollination to occur.'",
+        "UMD Extension, 'Growing Sweet Corn in a Home Garden', extension.umd.edu/resource/growing-sweet-corn-home-garden (read 2026-07-11): 'Plant in blocks of at least three to four short rows, rather than one or two long rows, to ensure good pollination; minimum of three rows side by side (preferably four rows).'",
+        "Clemson HGIC 1308, 'Sweet Corn' (updated 2023-01-23), hgic.clemson.edu/factsheet/sweet-corn (read 2026-07-11): 'This crop is wind-pollinated; therefore, plant in blocks of several rows rather than 1 or 2 long rows to ensure full ears.'"
+      ]
+    },
+    {
+      "id": "R-002",
+      "claim": "A plant's mature spread must fit its allocated area.",
+      "refuted": false,
+      "type": "geometry",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Geometry.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "arithmetic"
+      ]
+    },
+    {
+      "id": "R-003",
+      "claim": "Plants over 120cm mature height belong on the polar side of a bed.",
+      "refuted": false,
+      "type": "geometry",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Solar geometry. Shadow falls outside the bed rather than across shorter neighbours.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "solar geometry"
+      ]
+    },
+    {
+      "id": "R-004",
+      "claim": "Sun-requiring species must not sit in the computed shadow of a taller neighbour.",
+      "refuted": false,
+      "type": "geometry",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Photosynthesis. Compute shadow polygons from latitude, date, and mature height.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "solar geometry"
+      ]
+    },
+    {
+      "id": "R-005",
+      "claim": "A full-sun species must not be placed in ground the gardener has marked as shaded.",
+      "refuted": false,
+      "type": "geometry",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Photosynthesis. A crop whose light minimum is full sun is below that minimum in shade and underperforms. Declared exposure — a wall, fence, or building the engine cannot see — distinct from the computed neighbour-shadow (R-004).",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "photosynthesis"
+      ]
+    },
+    {
+      "id": "R-006",
+      "claim": "A bed whose shorter side runs well past ~1.2 m has interior ground that can't be reached from its edges.",
+      "refuted": false,
+      "type": "geometry",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "A comfortable arm's reach is ~0.6 m, so ground more than twice that across can only be tended by standing on the bed — which compacts the soil and breaks the structure the bed exists to protect.",
+      "evidence_status": "verified",
+      "sources": [
+        "Iowa State Univ. Extension, Yard & Garden FAQ, raised bed size (read 2026-07-21; read by the maintainer 2026-07-25): 'Beds accessible on both sides can be 3 to 4 feet wide'; one-sided, 'the maximum width should be 1 1/2 to 2 feet (i.e., approximately arm's reach)'.",
+        "Univ. of Minnesota Extension, Raised bed gardens (read 2026-07-21; read by the maintainer 2026-07-25): 'the reach of your arm is generally a good metric ... If you can access both sides, the bed can be up to five feet wide.'",
+        "The two sources DISAGREE on the ceiling - Iowa State's 3-4 ft against Minnesota's 5 ft - and this rule takes the tighter one. Which source to take is a judgement, which is why this is recorded as promising rather than well established. AMENDED 2026-08-21: the threshold was first recorded as 120 cm, a metric rounding that fell 2 cm short of Iowa State's own 4-ft ceiling - so the single most common raised-bed size (a 4x4, 121.9 cm) tripped the reach warning and the R-098 strip split. The maintainer's 4x4 report caught it. Now 122 cm, exactly the tighter source's stated ceiling: a number the source does state."
+      ]
+    },
+    {
+      "id": "R-040",
+      "claim": "A plant that must climb needs an assigned support strong enough to carry it.",
+      "refuted": false,
+      "type": "geometry",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Mechanical. Unsupported pole beans sprawl, rot, and yield poorly.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "mechanics"
+      ]
+    },
+    {
+      "id": "R-041",
+      "claim": "Living supports have finite load capacity.",
+      "refuted": false,
+      "type": "geometry",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Mechanical load on a living stem.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "mechanics"
+      ]
+    },
+    {
+      "id": "R-042",
+      "claim": "Vining cucurbits in beds under 2m escape the bed.",
+      "refuted": false,
+      "type": "geometry",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "C. pepo vining types run 2-4m. Bush cultivars run under 1m.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "growth habit"
+      ]
+    },
+    {
+      "id": "R-010",
+      "claim": "Do not plant Solanaceae in ground that held Solanaceae within 3 years.",
+      "refuted": false,
+      "type": "rotation",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Alternaria solani (early blight) and Septoria lycopersici overwinter on tomato debris and solanaceous weeds; a 2-3 year break plus debris removal starves this inoculum. Fusarium has a very narrow host range, so rotating away from the host is effective. Verticillium is the exception: microsclerotia persist ~10 years and it infects 300+ host families, so a garden-scale rotation does not control it.",
+      "evidence_status": "verified",
+      "sources": [
+        "Clemson HGIC, 'Tomato Diseases & Disorders', hgic.clemson.edu/factsheet/tomato-diseases-disorders (read 2026-07-11): 'tomatoes and related vegetables, such as potatoes, peppers, and eggplants, should not be planted on the same land more than once in three years.'",
+        "NC State Extension, 'Early Blight of Tomato', content.ces.ncsu.edu/early-blight-of-tomato (read 2026-07-11): 'Rotate every 2-3 years.'",
+        "NC State Extension, 'Septoria Leaf Spot of Tomato', content.ces.ncsu.edu/septoria-leaf-spot-of-tomato (read 2026-07-11): 'The fungus is known to overwinter on infected tomato debris and solanaceous weed hosts'; 'Rotate away from tomato for 2 or more years.'",
+        "NC State Extension, 'Verticillium Wilt of Tomato and Eggplant', content.ces.ncsu.edu/verticillium-wilt-of-tomato-and-eggplant (read 2026-07-11): 'The pathogen can survive in the soil without a host for up to 10 years in the form of structures called microsclerotia'; 'affects more than 300 host families.'",
+        "UMass Extension, 'Solanaceous, Verticillium Wilt', umass.edu/agriculture-food-environment/vegetable/fact-sheets/solanaceous-verticillium-wilt (read 2026-07-11): 'Verticillium wilt tends to affect a wide range of hosts and can infect many unrelated plants. Fusarium spp., on the other hand, have very narrow host ranges.'"
+      ]
+    },
+    {
+      "id": "R-011",
+      "claim": "Do not plant Cucurbitaceae in ground that held Cucurbitaceae within 2-3 years.",
+      "refuted": false,
+      "type": "rotation",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Melittia cucurbitae overwinters as a pupa in the soil where its host grew and emerges the next summer; Anasa tristis overwinters as an adult in sheltered sites (plant debris, under boards or rocks) and flies to cucurbits in spring. A host-free break cuts local carryover, but both are strong fliers that re-invade from a distance, so rotation is only partial and works best paired with fall sanitation (destroy spent vines).",
+      "evidence_status": "verified",
+      "sources": [
+        "UMN Extension, 'Squash vine borers', extension.umn.edu/yard-and-garden-insects/squash-vine-borers (read 2026-07-11): 'squash vine borers spend the winter in the soil near their host plants ... Practice rotation ... planting cucurbits in different areas of your garden if possible, or alternate seasons'; 'rotate away from the area and destroy crop residue.'",
+        "Ohioline (Ohio State Univ.), 'Squash Vine Borer', ohioline.osu.edu/factsheet/ent-0106 (read 2026-07-11): 'Crop rotation away from previously infested fields helps reduce local populations, as overwintering pupae remain in the soil. However ... fields often need to be rotated more than 5 miles away as SVB can fly into fields from long distances.'",
+        "UMN Extension, 'Squash bugs', extension.umn.edu/yard-and-garden-insects/squash-bugs (read 2026-07-11): 'Squash bugs can live through the winter as adults in sheltered places, such as under plant debris, around buildings, or under rocks. When adults come out in the spring, they fly to growing cucurbit plants.'"
+      ]
+    },
+    {
+      "id": "R-012",
+      "claim": "Do not plant Brassicaceae in ground that held Brassicaceae within 4 years (extension recommends 4-7, and even that is not a cure).",
+      "refuted": false,
+      "type": "rotation",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Plasmodiophora brassicae forms thick-walled resting spores that survive in soil more than 10 years. They germinate in wet, acidic soil (pH < 7); liming above ~7.2 suppresses infection. Spores outlast any garden rotation, so a host-free break reduces but does not clear inoculum.",
+      "evidence_status": "verified",
+      "sources": [
+        "NC State Extension, 'Clubroot of Brassicas', content.ces.ncsu.edu/clubroot-of-brassicas (read 2026-07-11): 'Plasmodiophora brassicae is capable of surviving in the soil for more than 10 years by producing thick-walled, resting spores'; 'Infested fields should be rotated away from brassica for a minimum of 4-7 years, but this is not guaranteed to prevent disease'; 'Liming to raise soil pH to 7.[2]'.",
+        "Cornell Vegetables, 'Clubroot of Crucifers', vegetables.cornell.edu/pest-management/disease-factsheets/clubroot-of-crucifers (read 2026-07-11): 'the pathogen survives for many years even in the absence of host crops'; 'rotation of at least 7 years out of susceptible crucifers may be effective.'",
+        "UMass Extension, 'Brassicas, Clubroot', ag.umass.edu/vegetable/fact-sheets/brassicas-clubroot (read 2026-07-11): 'Long (5-7 years) rotations between brassica crops'; 'Maintain a high pH by regular applications of lime.'"
+      ]
+    },
+    {
+      "id": "R-013",
+      "claim": "Alliums and Apiaceae are unrelated to Solanaceae/Cucurbitaceae/Brassicaceae and can break those families' rotation cycles — but they are not \"low-pressure\" and need their own rotation.",
+      "refuted": false,
+      "type": "rotation",
+      "grade": "C",
+      "grade_meaning": "A good hunch",
+      "mechanism": "They host none of the big-three families' soilborne pathogens, so following those crops with an allium or apiaceous crop breaks the host cycle. But they are not inherently low-pressure: allium white rot (Sclerotium cepivorum) is allium-specific, its sclerotia persist 15+ years, and it cannot be eradicated once established; apiaceous crops carry their own soilborne diseases.",
+      "evidence_status": "verified",
+      "sources": [
+        "UMass Extension, 'Alliums, White Rot', ag.umass.edu/vegetable/fact-sheets/alliums-white-rot (read 2026-07-11): 'Sclerotium cepivorum is specific to allium species'; sclerotia 'may remain viable in soil for 15 years or more without allium hosts'; 'Currently, there is no way to eradicate white rot from a field where it has become established.'"
+      ]
+    },
+    {
+      "id": "R-071",
+      "claim": "A guild deposits family history across its whole footprint.",
+      "refuted": false,
+      "type": "rotation",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Soilborne inoculum and overwintering pest stages disperse across the bed. A guild dominated by one family forecloses that ground for that family's rotation interval.",
+      "evidence_status": "verified",
+      "sources": [
+        "Same soilborne-persistence basis as R-010/R-011 (read 2026-07-11): NC State Extension (Verticillium microsclerotia 'can survive in the soil without a host for up to 10 years'; Septoria/early blight 'overwinter on infected tomato debris and solanaceous weed hosts') and UMN/Ohioline (squash bug overwinters 'as adults in sheltered places ... they fly to growing cucurbit plants'; squash vine borer 'overwinters in the soil as a pupa').",
+        "Those sources establish that inoculum and pest stages persist in the ground and are not confined to the exact spot a plant occupied; this rule applies that persistence across the whole guild footprint. The whole-footprint attribution is the corpus's rotation geometry (history attaches to ground, not to the individual plant — see the data model), not a claim from an external source."
+      ]
+    },
+    {
+      "id": "R-094",
+      "claim": "Do not establish Verticillium-susceptible perennials (raspberries, strawberries, stone fruit) in ground that recently hosted Verticillium dahliae — either Solanaceae, or a logged planting of a Verticillium host (strawberry, raspberry or other bramble, or stone fruit).\n",
+      "refuted": false,
+      "type": "rotation",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Verticillium dahliae persists in soil as microsclerotia and infects a wide host range spanning Solanaceae and Rosaceae. There is no in-ground cure once a susceptible perennial is planted, so it can wilt and die from inoculum an earlier host left behind — and because the reservoir family may differ from the victim's, the same-family rotation intervals (R-010/R-011/R-012) miss it.",
+      "evidence_status": "verified",
+      "sources": [
+        "Penn State Extension, 'Bramble Disease - Verticillium Wilt' (Kathy Demchak), extension.psu.edu/bramble-disease-verticillium-wilt (read 2026-07-12): 'Verticillium wilt is caused by two common soilborne fungi (Verticillium dahliae and Verticillium albo-atrum) that have a wide host range'; 'To minimize disease, choose a planting site with no known history of this problem. Avoid land recently planted with tomatoes, potatoes, eggplants, peppers, strawberries, raspberries, or stone fruits'; 'There are no effective fungicides for management once the plants are in the ground'; 'The number of years required to eliminate verticillium, especially the resting spores from the soil, is unknown.'",
+        "UMass Extension, New England Small Fruit Management Guide, 'Brambles - Diseases', ag.umass.edu/fruit/ne-small-fruit-management-guide/brambles/diseases (read 2026-07-12): 'Verticillium attacks a wide range of plants, including potatoes, tomatoes, peppers, eggplant and strawberries. It overwinters in the soil and on plant debris. Do not plant [raspberries following these crops].'; 'Non-host crops such as corn or wheat can help eliminate the fungus if grown for at least 2 years before planting raspberries.'",
+        "Host range / persistence corroborated by the source already cited on R-010: NC State Extension, 'Verticillium Wilt of Tomato and Eggplant' (read 2026-07-11): 'The pathogen can survive in the soil without a host for up to 10 years in the form of structures called microsclerotia'; 'affects more than 300 host families.'"
+      ]
+    },
+    {
+      "id": "R-095",
+      "claim": "Do not establish Verticillium-susceptible perennials where the season log records that a Verticillium host (strawberry, raspberry or other bramble, or stone fruit) previously grew — a reservoir the coarse prior-Solanaceae family signal (R-094) structurally misses.\n",
+      "refuted": false,
+      "type": "rotation",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "The same reservoir as the family-level rule (R-094) — Verticillium dahliae persisting in soil as microsclerotia — but recognised precisely instead of coarsely. The family-level rule (R-094) fires on a prior Solanaceae family, which is all a manual history checkbox can express; this rule (R-095) fires on the logged planting's own species carrying the verticillium_host marker, so a prior Rosaceae host (strawberry, raspberry, stone fruit) counts while a non-host Rosaceae like apple correctly does not — precision the family signal cannot give.",
+      "evidence_status": "verified",
+      "sources": [
+        "Penn State Extension, 'Bramble Disease - Verticillium Wilt' (Kathy Demchak), extension.psu.edu/bramble-disease-verticillium-wilt (read 2026-07-12): 'To minimize disease, choose a planting site with no known history of this problem. Avoid land recently planted with tomatoes, potatoes, eggplants, peppers, strawberries, raspberries, or stone fruits'; 'There are no effective fungicides for management once the plants are in the ground.'",
+        "UMass Extension, New England Small Fruit Management Guide, 'Brambles - Diseases', ag.umass.edu/fruit/ne-small-fruit-management-guide/brambles/diseases (read 2026-07-12): 'Verticillium attacks a wide range of plants, including potatoes, tomatoes, peppers, eggplant and strawberries.'; 'Non-host crops such as corn or wheat can help eliminate the fungus if grown for at least 2 years before planting raspberries.'",
+        "Host range / persistence corroborated by NC State Extension, 'Verticillium Wilt of Tomato and Eggplant' (read 2026-07-11): microsclerotia survive 'up to 10 years' and the pathogen 'affects more than 300 host families.'"
+      ]
+    },
+    {
+      "id": "R-015",
+      "claim": "Legume green manure raises available N for the subsequent crop.",
+      "refuted": false,
+      "type": "nutrient",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "A legume fixes atmospheric nitrogen into its tissue as it grows. When the crop is killed and its residue decomposes, soil microbes mineralize that organic nitrogen — converting a form plants can't use into one they can — and release it for the next crop. How much depends on how well the legume grew, and it is lower on sandy soils.",
+      "evidence_status": "verified",
+      "sources": [
+        "Penn State Extension, 'Growing Cover Crops for Nitrogen on Vegetable Farms', extension.psu.edu/growing-cover-crops-for-nitrogen-on-vegetable-farms (read 2026-07-11): 'When cover crops are killed and begin to decompose, nitrogen can be released from the residues back into the soil where it can feed the next crop'; 'Mineralization is the process where organic nitrogen, which is largely not available to plants, is converted by soil microorganisms' into a plant-available form.",
+        "Univ. of Wisconsin-Madison Extension (Crops & Soils), 'Late Summer Planting Legumes to Produce Nitrogen Credits for Next Year', cropsandsoils.extension.wisc.edu/articles/late-summer-planting-legumes-to-produce-nitrogen-credits-for-next-year (read 2026-07-11): 'The nitrogen credit depends on the amount of crop growth and when the legume was planted. Nitrogen credits are 50 lb N/a lower on sandy, coarse-textured soils.'"
+      ]
+    },
+    {
+      "id": "R-016",
+      "claim": "Do not apply fresh high-N fertilizer to root crops.",
+      "refuted": false,
+      "type": "nutrient",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Excess N drives foliage at the expense of root bulking. (Forking is a separate problem — caused by rocks, compaction, or coarse/fresh organic matter in the root path, not by nitrogen.)",
+      "evidence_status": "verified",
+      "sources": [
+        "UMN Extension, 'Growing carrots and parsnips in home gardens', extension.umn.edu/vegetables/growing-carrots-and-parsnips (read 2026-07-11): 'Excessive nitrogen fertilization can also contribute to lots of leaf growth at the expense of root growth'; 'Forked, or split, roots may result from rocky, heavy, or compacted soil.'",
+        "Univ. of Illinois Extension, 'Carrots', extension.illinois.edu/gardening/carrots (read 2026-07-11): 'excess organic debris such as woodchips worked into the soil just before planting also may affect root penetration, causing forked and twisted roots'; hairy roots 'are caused by a viral disease known as \"aster yellows.\"'"
+      ]
+    },
+    {
+      "id": "R-017",
+      "claim": "Fertilizer recommendations without a soil test are guesswork. Say so.",
+      "refuted": false,
+      "type": "nutrient",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "N-P-K sufficiency is site-specific and unknowable a priori.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "epistemics"
+      ]
+    },
+    {
+      "id": "R-099",
+      "claim": "A measured soil pH below a plant's sourced floor is worth saying out loud, with the shortfall and the direction of the fix. Above the ceiling too, but only for a plant that is documented to require acid soil — for everything else the ceiling is this corpus's own and fires nothing.\n",
+      "refuted": false,
+      "type": "nutrient",
+      "grade": "C",
+      "grade_meaning": "A good hunch",
+      "mechanism": "Nutrient bioavailability is pH-dependent, so below the crop's optimum band phosphorus and molybdenum become less available; below about 5.5 the effect turns acute as aluminium and manganese dissolve fast enough to damage roots directly. Above an acid-requiring plant's range the same curve runs the other way: iron becomes unavailable and the plant goes chlorotic.",
+      "evidence_status": "verified",
+      "sources": [
+        "UF/IFAS Extension HS1207, Liu & Hanlon, 'Soil pH Range for Optimum Commercial Vegetable Production', edis.ifas.ufl.edu/publication/HS1207 (fetched and read in-container 2026-07-25). The ACUTE half of the mechanism: 'At pH 5.5 or lower, the solubility of Al increases 1000-fold for every pH unit decrease. For example, at pH 5.0, Al solubility is only 0.05 ppm, but at pH 4.0, Al solubility increases to a toxic level of 51 ppm.' On phosphorus: 'Aluminum and phosphate precipitate in low-pH soil'; 'Because of the Al concentration increase, the bioavailability of P at pH 4.0 reduces to one thousandth of the concentration present at pH 5.0'. On roots: 'In the presence of toxic concentrations of elements such as Al at low pH, root growth and water uptake are inhibited'. WHAT THIS SOURCE DOES NOT SUPPORT, AND IT IS WHY THIS RULE IS ONLY A GOOD HUNCH: all of the above is stated for pH 5.5 and below, and 'metal toxicity occurs at soil pH lower than 5.0' — while the floors this rule fires on run 5.5 to 6.2. Over most of its firing range the same page says the opposite: 'in the pH range from 5.5 to 7.0, all the nutrients have favorable solubility for use by vegetable plants.' The two are reconcilable (UMD's threshold is about optimum yield, this one about nutrient failure) but not as a single promising claim. Its Figure 2 is the nutrient-bioavailability-versus-pH curve that WOULD support the mild half of the mechanism; it is an image and could not be read.",
+        "UMD Extension, Table B-1 'Target Soil pH Values for Vegetable Crops', extension.umd.edu/sites/extension.umd.edu/files/2021-03/B-1.pdf (fetched and read in-container 2026-07-25): the source of every per-crop floor this rule reads. Its second column is headed 'Target lime when pH falls below', which is why the ruling_text says the floor is an intervention point rather than a lethal limit — the table itself frames it that way.",
+        "FIGURE 2 IS A DEAD END, AND THIS CLOSES IT (2026-07-26). Earlier notes recorded that HS1207's Figure 2 - a nutrient-bioavailability-versus-pH curve - was the evidence that would restore this rule to promising, and that it could not be read because it is an image. The figure does not need to be seen. Its caption and alt text are recoverable from the page: 'Figure 2. The pH and bioavailability (%) of listed nutrients in soil solution. Credit: Finck (1976).' TWO THINGS FOLLOW. First, the publication states its OWN reading of the figure, and that reading is the objection rather than the rescue: the sentence that forced the B-to-C downgrade - 'in the pH range from 5.5 to 7.0, all the nutrients have favorable solubility for use by vegetable plants' - is explicitly cited to Figure 2. The figure is what the contradiction rests on. Second, it is not UF/IFAS data: it is credited to Finck (1976), a reproduced availability curve of the widely-copied schematic kind. SO NOBODY SHOULD CHASE THIS IMAGE AGAIN. The good-hunch tier is not waiting on it. [read]"
+      ]
+    },
+    {
+      "id": "R-100",
+      "claim": "Ground the gardener has observed to stand water after rain is a site problem to fix before planting, not a plant problem to select around.\n",
+      "refuted": false,
+      "type": "nutrient",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Saturated soil has no air in it, so roots suffocate; and standing water lets Phytophthora release swimming zoospores, which need free water to reach a root or crown at all.",
+      "evidence_status": "verified",
+      "sources": [
+        "UC Statewide IPM Program (UC IPM), 'Phytophthora Root and Crown Rot', Home and Landscape, ipm.ucanr.edu/home-and-landscape/phytophthora-root-and-crown-rot/ (fetched and read in-container 2026-07-25). The one written for gardens rather than orchards, and the source of this rule's scope: 'Almost all fruit and nut trees, as well as many ornamental trees and shrubs (including many California natives), can develop Phytophthora root or crown rot'; 'Tomatoes, peppers, eggplant and other vegetable plants can also be affected.' On the threshold: 'Phytophthora diseases can develop in as little to 4 to 8 hours of soil saturation.' On the remedy: 'Avoid prolonged saturation of the soil or standing water around the base of trees or other susceptible plants'; 'Raised beds can improve drainage in a vegetable garden'; 'Consider planting trees and shrubs on mounds. The mounds should be 8 to 10 inches high for annuals and up to 2 feet high with a gradual slope for trees and perennials.' And the warning the ruling_text repeats: 'Never cover the root crown or graft union with soil or mulch.'",
+        "UC IPM Pest Management Guidelines, 'Phytophthora Root and Crown Rot', PEACH, ipm.ucanr.edu/agriculture/peach/phytophthora-root-and-crown-rot/ (fetched and read in-container 2026-07-25): 'Periods of 24 hours or more of saturated soil favor Phytophthora infections. Conversely, good soil drainage and more frequent but shorter irrigations reduce the risk of root and crown rot.' 'The most effective ways to manage Phytophthora root and crown rot are to select a good planting site, select an appropriate rootstock, and properly manage irrigation water.' 'Planting on raised berms can also help with disease management.' NOTE THE THRESHOLD DISAGREES WITH THE HOME PAGE ABOVE - 24 hours here, 4 to 8 hours there. This rule quotes neither as a threshold and fires on the gardener's own observation of standing water instead, which is why the disagreement does not reach the ruling.",
+        "UC IPM Pest Management Guidelines, 'Phytophthora Root and Crown Rot', PLUM, ipm.ucanr.edu/agriculture/plum/phytophthora-root-and-crown-rot/ (fetched and read in-container 2026-07-25). Read specifically to test whether the corpus's four fruit trees differ, and they do: 'Plum rootstocks are less susceptible to Phytophthora infections than peach rootstocks, so plums grown on plum rootstock seldom have this disease'; 'In general, plum rootstocks are more resistant than are peach or apricot.' But also 'Rootstocks vary in susceptibility to the different Phytophthora species; none are resistant to all pathogenic species of the fungus.' THIS DIFFERENCE IS NOT MODELLED and the rule does not act on it: susceptibility here is a property of the ROOTSTOCK, which this corpus does not carry for plum, and 'less susceptible' is not 'safe in standing water' - the anoxia half of the mechanism does not care about rootstock at all. Recorded because it is the obvious next refinement and because a reader will otherwise wonder why plum is treated like peach.",
+        "WSU Hortsense, 'Raspberry: Phytophthora root rot', hortsense.cahnrs.wsu.edu/fact-sheet/raspberry-phytophthora-root-rot/ (fetched and read in-container 2026-07-25): 'Phytophthora root rot can be a problem in the Pacific Northwest when raspberries are planted in areas with poor drainage'; 'Do not plant in waterlogged, poorly drained, or frequently flooded areas'; 'Improve soil drainage by planting raspberries in raised beds (soil level at least 12 inches above the surrounding soil.)' The 12-inch figure in the ruling_text is this one. Also 'The fungus attacks the fine roots, which rot and die.'",
+        "Ohio State University Extension, 'Phytophthora Root and Crown Rot of Fruit Trees', Ohioline PLPATH-FRU-06, ohioline.osu.edu/factsheet/plpath-fru-06 (read 2026-07-26). PREVIOUSLY RECORDED HERE AS 403-ING FROM THIS CONTAINER AND CITED ONLY FROM A SEARCH SUMMARY; it was a 404, not a 403 - the URL carried in this pointer was wrong by one character (plpath-fru-6 for plpath-fru-06). The page fetches fine. THE MECHANISM SENTENCE THIS RULE NEEDED: 'Zoospores are released from sporangia only when soil is completely saturated with water (standing water).' That is the zoospore half of the mechanism stated outright, and it is also the justification for the TRIGGER: the rule fires on observed standing water because standing water is the condition the source names. AND IT RESOLVES THE THRESHOLD DISAGREEMENT rather than adjudicating it: 'The longer the period or periods of soil saturation, the greater the risk of infection.' Risk rises CONTINUOUSLY with duration, so UC IPM's 4-to-8 hours and 24 hours are not competing cut-offs but two points on a dose-response - there is no threshold to pick, and quoting neither was correct modelling rather than an evasion. On scope: 'In Ohio, apple, cherry, and peach trees are usually attacked'; 'Pear and plum trees appear to be relatively resistant'; 'Among stone fruits, plums are relatively resistant, whereas the remainder are susceptible to very susceptible'; 'Pears are the most resistant tree fruit crop'. This independently corroborates the UC IPM plum finding in the pointer above, from a second institution. STILL NOT MODELLED, for the same reason recorded there: the page ties resistance to ROOTSTOCK ('Among dwarfing-apple rootstocks, M-9, M-2, and M-4 are relatively resistant'; 'Mahaleb is the most susceptible cherry rootstock'), which this corpus does not carry, and the anoxia half of the mechanism does not care about rootstock at all. [read]"
+      ]
+    },
+    {
+      "id": "R-101",
+      "claim": "A lime or sulfur RATE requires a buffer-pH measurement. Direction is free; the amount is not, and it is the lab's to give, never ours.\n",
+      "refuted": false,
+      "type": "nutrient",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Buffering capacity, which is set by clay and organic matter, decides how much lime moves pH at all, so the same target takes very different amounts in sand and in clay.",
+      "evidence_status": "verified",
+      "sources": [
+        "UF/IFAS Extension HS1207, Liu & Hanlon, 'Soil pH Range for Optimum Commercial Vegetable Production', edis.ifas.ufl.edu/publication/HS1207 (read 2026-07-25). The mechanism, stated outright: 'The amount of lime required to increase soil pH is determined by the size of the limestone particles being used and, most importantly, the buffering capacity of the soil.' What buffering IS: 'The buffering capacity refers to the soil's capacity to minimize change in the acidity of a solution when an acid or base is added into the solution.' What sets it: 'Buffering capacity is controlled by the soil's clay content and the amount of organic matter present.' And the consequence this rule turns into a refusal: 'Soils with large buffering capacity need more agricultural lime to adjust soil pH than those with lower buffering capacity for the same incremental change in soil pH. However, sandy soils have lower buffering capacity and need less lime for the same incremental change in pH than clay soils.' The page also names the remedy the ruling_text points at: 'The UF/IFAS Extension soil testing lab offers a Lime Requirement test as a component of a routine soil test, which provides a liming recommendation based on the buffer capacity of the soil sample.'",
+        "WHAT THE SOURCE DOES NOT SAY, and it is why this rule is promising rather than well established: it states that buffering capacity determines the amount, and it does not quantify how wrong an unbuffered estimate would be. The claim that the error is large enough to WARN a home gardener about is a judgement this corpus is making on top of the mechanism, not a sentence anyone published. Promising + suboptimal derives `advise`, which is the mildest non-inert ruling, and the ruling_text is phrased as a refusal to guess rather than as a prediction of harm."
+      ]
+    },
+    {
+      "id": "R-020",
+      "claim": "Do not plant a juglone-sensitive species within the root zone of Juglans. The sensitive list is the hazard's own, and it is wider than the Solanaceae - it also carries apple and cabbage.\n",
+      "refuted": false,
+      "type": "allelopathy",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Juglans roots exude hydrojuglone, oxidized to juglone, a respiration inhibitor. Solanaceae are highly sensitive: wilt and death.",
+      "evidence_status": "verified",
+      "sources": [
+        "UW-Madison / Wisconsin Horticulture (Joy, Hudelson & Jull, rev. 2024-02-28), 'Black Walnut Toxicity', hort.extension.wisc.edu/articles/black-walnut-toxicity (read 2026-07-13): 'Vegetables such as tomato, potato, eggplant and pepper ... are particularly sensitive to juglone'; 'The toxic effects of a mature black walnut tree can extend 50 to 80 feet from the trunk of the tree, with the greatest toxicity occurring within the tree's dripline.'",
+        "Iowa State Univ. Extension & Outreach, Yard and Garden FAQ, 'What plants are sensitive to the juglone produced by black walnuts?', yardandgarden.extension.iastate.edu (read 2026-07-13): juglone-sensitive plants include 'members of the tomato family (tomato, potato, eggplant, pepper).'"
+      ]
+    },
+    {
+      "id": "R-021",
+      "claim": "Sunflower residue suppresses germination of some small-seeded species.",
+      "refuted": false,
+      "type": "allelopathy",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Sunflower tissue and roots release allelochemicals that persist in the soil and inhibit the germination and early growth of sensitive plants. Small-seeded, direct-sown neighbours are the ones at risk: a small seed has little reserve to push through the inhibition, whereas a transplant is already past the germination window and largely escapes.",
+      "evidence_status": "verified",
+      "sources": [
+        "'The Allelopathic Activity of Aqueous Extracts of Helianthus annuus L. ... on Germination, Development, and Physiological Indices of Pisum sativum L.', PMC10180669, pmc.ncbi.nlm.nih.gov/articles/PMC10180669 (read 2026-07-11): 'If a sensitive test plant is exposed to allelopathic compounds, its seed germination and seedling growth are reduced'; 'Aqueous extracts of various organs of sunflower significantly suppress the growth of weeds ... and agricultural plants.' Effect was concentration-dependent (stimulatory at low concentration, inhibitory at 75%), consistent with the 'modest' effect_size. NOTE: this study used pea (large-seeded); the small-seeded/direct-sown scoping is the corpus's operationalization (small seeds have less reserve to overcome inhibition; transplants bypass the germination window), not a claim from this source."
+      ]
+    },
+    {
+      "id": "R-022",
+      "claim": "Fennel is allelopathic; a suppressive effect on neighbouring vegetables is plausible but poorly characterized (evidence is weed-directed, in vitro).\n",
+      "refuted": false,
+      "type": "allelopathy",
+      "grade": "C",
+      "grade_meaning": "A good hunch",
+      "mechanism": "Reported allelopathic exudates. Effect size poorly characterized.",
+      "evidence_status": "verified",
+      "sources": [
+        "Nourimand, Mohsenzadeh, Teixeira da Silva & Saharkhiz (2011), 'Allelopathic Potential of Fennel (Foeniculum vulgare Mill.)', Medicinal and Aromatic Plant Science and Biotechnology 5(1):54-57 (read 2026-07-13): fennel-seed ethanolic extract inhibited germination and seedling growth of FOUR WEEDS (perennial ryegrass, wild barley, oat, dandelion) in vitro at 2.5-10%; no crop or vegetable was tested.",
+        "Tanase, Istrate & Stoleru (2026), 'Allelopathic Interactions in Vegetable Production Systems', Horticulturae 12(4):438, doi:10.3390/horticulturae12040438 (read 2026-07-13): lists fennel among aromatic vegetables (with dill, parsley, carrot, onion) whose extracts can have 'both inhibitory and stimulatory effects on plant germination and growth, depending on the species, concentration, and application conditions'; no fennel-specific suppression of a neighbouring vegetable is reported.",
+        "Gap: no study tests fennel suppressing a neighbouring VEGETABLE in situ; documented activity is weed-directed and in vitro. The claim was reworded 2026-07-13 to say exactly that, and the maintainer read both papers 2026-07-25 and promoted it. What is verified here is the HEDGE - that the effect is plausible and poorly characterized - not a suppression effect. A field trial of fennel against a neighbouring vegetable would change this rule whichever way it came out."
+      ]
+    },
+    {
+      "id": "R-030",
+      "claim": "Tomato fruit set fails when night temperatures persistently exceed ~21C (70F); high day temperatures (>29-32C) compound it.",
+      "refuted": false,
+      "type": "thermal",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Sustained high day (>29-32C / 85-90F) and night (>21C / 70F) temperatures make pollen non-viable (\"tacky\") and impair its release; flowers go unfertilized within their ~50-hour window and abscise.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Missouri IPM, 'Understanding Tomato Fruit Set' (Missouri Produce Growers Bulletin), ipm.missouri.edu/MPG/2013/4/Understanding-Tomato-Fruit-Set (read 2026-07-11): 'When daytime temperatures exceed 85 degrees F or nighttime temperatures exceed 70 degrees F, pollination suffers due to pollen becoming \"tacky\" and non-viable.'",
+        "UMD Extension (J. Brust), 'Expect Poor Fruit Set in Tomatoes This Week', extension.umd.edu/resource/expect-poor-fruit-set-tomatoes-week (read 2026-07-11): 'Daytime highs of 90° F and above and nighttime lows only getting down to 70° F ... will cause blossom drop and fruit abortion in tomatoes.'"
+      ]
+    },
+    {
+      "id": "R-031",
+      "claim": "Tender species must not be scheduled before the site's last frost date.",
+      "refuted": false,
+      "type": "timing",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Ice nucleation in leaf tissue.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "climatology"
+      ]
+    },
+    {
+      "id": "R-032",
+      "claim": "A species must reach maturity within the site's frost-free window.",
+      "refuted": false,
+      "type": "timing",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Accumulated GDD vs gdd_to_maturity, or DTM vs frost-free days.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "GDD models"
+      ]
+    },
+    {
+      "id": "R-033",
+      "claim": "A vine assigned to a living support must be sown after the support is established — corn ~6 in (~15 cm) tall, roughly 2-3 weeks — not at the same time.",
+      "refuted": false,
+      "type": "timing",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Load. A bean vine on an immature, poorly-anchored stalk pulls it over; extension guides key the delay to the support's height (corn ~6 in) as a proxy for it being rooted enough to bear the climbing load.",
+      "evidence_status": "verified",
+      "sources": [
+        "Cornell Garden-Based Learning, 'How to Plant the Three Sisters', gardening.cals.cornell.edu/lessons/curriculum-classics/the-three-sisters-exploring-an-iroquois-garden/how-to-plant-the-three-sisters (read 2026-07-11): 'When the corn plants are about 6 inches high, pole beans and pumpkins can be planted around the corn plants.'",
+        "USDA National Agricultural Library, 'The Three Sisters of Indigenous American Agriculture', nal.usda.gov/collections/stories/three-sisters (read 2026-07-11): 'Two or three weeks after the corn was planted, the women returned to plant bean seeds in the same hills.'"
+      ]
+    },
+    {
+      "id": "R-034",
+      "claim": "Succession sowing at 2-3 week intervals extends harvest for short-DTM crops.",
+      "refuted": false,
+      "type": "timing",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Sowing the same crop in batches two to three weeks apart staggers when each batch matures, so the harvest arrives as a continual succession instead of one glut. It pays off only for short-DTM crops, whose quick turnaround lets several sowings ripen within a single season.",
+      "evidence_status": "verified",
+      "sources": [
+        "Penn State Extension Master Gardener (Lancaster Co.), 'Succession Planting', extension.psu.edu/programs/master-gardener/counties/lancaster/idea-gardens/the-raised-bed-garden/succession-planting (read 2026-07-11): 'Succession planting extends the vegetable harvest'; 'Plant one crop, then approximately 2 weeks (or more) later, plant the same crop in another area to have a continual harvest.'"
+      ]
+    },
+    {
+      "id": "R-076",
+      "claim": "Hardiness zone is the correct variable for perennials, and only for perennials.",
+      "refuted": false,
+      "type": "thermal",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Zones encode average annual minimum winter temperature, which governs whether a woody perennial survives to spring. It is the wrong quantity for an annual, which never sees winter.\nTHE CEILING IS A SECOND AND DIFFERENT MECHANISM, and until 2026-07-26 this rule enforced it without naming it. A zone too WARM does not kill a perennial; it fails to chill it. Deciduous fruit crops need a winter dormancy period to break bud and set fruit, so in a zone milder than a plant is adapted to it may survive and never crop. Until ISSUES #13 was decided the band was enforced at both ends; now (option E) only the cold end gates — it alone follows from the definition of the zone system — and the warm end is carried as an ADVISORY, not a refusal.\nAND THE WARM END IS A CULTIVAR'S ANSWER, NOT A SPECIES', which is the honest limit of what this rule can do. Chill requirement is published per variety and varies enormously within a species, so a species-level ceiling says \"the modelled range does not reach your zone\", never \"no plant of this kind will crop for you\". So the engine offers the plant above its band and advises choosing a cultivar rated for the zone rather than refusing it — the same move invariant 3 makes for soil, applied to chill.",
+      "evidence_status": "verified",
+      "sources": [
+        "THE FLOOR IS TRUE BY DEFINITION and needs no citation: the USDA system defines a zone AS a band of average annual minimum winter temperature, so 'a plant colder-hardy than your zone survives your winter' is the definition restated. This rule was `verified_trivially` on that basis alone until 2026-07-26. THE CEILING WAS NEVER COVERED BY IT - a minimum-temperature definition says nothing about a plant failing for want of chill - and that gap is why ISSUES #13 exists. The pointer below closes it.",
+        "OSU Extension EC 1303, 'Growing blackberries in your home garden' (Bernadine Strik), catalog.extension.oregonstate.edu/sites/catalog/files/project/pdf/ec1303.pdf (read 2026-07-26). THE CEILING'S MECHANISM, STATED: 'Winter cold-hardy cultivars adapted to the colder regions of Oregon (such as zones 5 to 7), may not grow normally in regions of the Willamette Valley (zone 8) where winters are warmer and plants receive less winter chill.' A plant failing in a WARMER zone for want of chill - which is what this rule's upper bound enforces and what no source said until now. THE SAME PAGE MAKES IT A CULTIVAR PROPERTY: 'Even cultivars within the same type (trailing, erect or semierect) differ in fruit quality and flavor, appearance, tolerance to pests, cold hardiness, and plant longevity', and the remedy it gives is the one this rule's rejection text now repeats: 'Minimize risk by choosing types and cultivars that are adapted to your hardiness zone.' The page then publishes a table of sixteen cultivars EACH WITH ITS OWN ZONE RANGE, which is the strongest available evidence that a species-level band is an approximation. [read]",
+        "WHAT THIS DOES NOT SETTLE. The mechanism is now named, but the corpus still carries ONE band per species where the source carries one per cultivar, and 12 of 25 perennial zones have no citation at all. So the ceiling is explained without being precise. ISSUES #13 stays open on that, and the rejection text is deliberately phrased as 'the modelled range does not reach your zone' rather than as a prediction that nothing will crop."
+      ]
+    },
+    {
+      "id": "R-080",
+      "claim": "Self-incompatible species require 2+ genetically distinct plants.",
+      "refuted": false,
+      "type": "pollination",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Many fruit trees carry self-incompatibility alleles at a single locus: when a pollen grain shares an allele with the pistil it lands on, the pistil rejects it and no seed sets. A plant's own pollen always shares its alleles, so it cannot fertilize itself — and neither can a second tree of the identical variety, which is genetically the same. Fertilization needs pollen from a genetically distinct plant.",
+      "evidence_status": "verified",
+      "sources": [
+        "Penn State Extension, 'Pollination Requirements for Various Fruits and Nuts', extension.psu.edu/pollination-requirements-for-various-fruits-and-nuts (read 2026-07-11): 'Apple: Cross-pollination is always needed to produce adequate fruit crop'; 'Cherry: Sweet: Most varieties are self-unfruitful'; 'Those fruits listed as self-fertile will set fruit with their own pollen.'",
+        "'Pollen-Pistil Interaction in Response to Pollination Variants in Subtropical Japanese Plum (Prunus salicina Lindl.) Varieties', PMC9692414, pmc.ncbi.nlm.nih.gov/articles/PMC9692414 (read 2026-07-11): 'Japanese plum exhibits gametophytic self-incompatibility (GSI), a prezygotic reproductive barrier where genetically related pollen is rejected by the pistil ... governed by a polymorphic locus (S) ... Self-incompatibility occurs when the same S-allele is expressed in the haploid pollen grain and the diploid pistil.'"
+      ]
+    },
+    {
+      "id": "R-081",
+      "claim": "Onion cultivar group must match site latitude.",
+      "refuted": false,
+      "type": "timing",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Bulbing fires when daylength crosses a cultivar's critical threshold (short ~10-12h, intermediate ~12-14h, long ~14-16h). A short-day cultivar grown too far north crosses its low threshold early and bulbs prematurely on small plants, so bulbs stay small. A long-day cultivar grown too far south never reaches its high threshold and fails to bulb. Changeover is around the 35th-38th parallel.",
+      "evidence_status": "verified",
+      "sources": [
+        "NC State Extension, 'Bulb Onions', content.ces.ncsu.edu/bulb-onions (read 2026-07-11): 'onions will not form bulbs until daylength reaches the cultivar's critical threshold. Short-day onions bulb at approximately 10-12 hours of daylength ... Intermediate-day onions bulb at approximately 12-14 hours ... Long-day onions bulb at 14-16 hours of daylength.'",
+        "Univ. of Illinois Extension (The Humble Gardener), 'Growing Onions in Central Illinois', extension.illinois.edu/blogs/humble-gardener/2018-03-19-growing-onions-central-illinois (read 2026-07-11): 'Long day varieties are for northern growing areas (above the 35th latitude); short-day varieties are for southern. If short-day varieties are grown in our zone, they won't do well. They will not form bulbs of any decent size. And since the long day onions need more daylight, they will not do well' (in the south)."
+      ]
+    },
+    {
+      "id": "R-102",
+      "claim": "An insect-pollinated crop depends on an insect to move pollen between its flowers; no arrangement of plants substitutes for one.\n",
+      "refuted": false,
+      "type": "pollination",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "A monoecious cucurbit bears pollen and ovules in separate flowers, so fertilization requires a vector to carry pollen between them - neither wind nor self-fertility applies. Ovules that are not fertilized do not develop, and the fruit aborts or forms misshapen.",
+      "evidence_status": "verified",
+      "sources": [
+        "Clemson HGIC 1321, 'Summer Squash', hgic.clemson.edu/factsheet/summer-squash (fetched in-container 2026-08-01, READ AND CONFIRMED BY THE MAINTAINER 2026-08-01): 'Squash have separate male and female flowers on the same plant, and pollen must be transferred from the male flowers to the female flowers by bees.' And the consequence, stated categorically: 'Poor pollination will result in no fruit formation or either poorly formed fruit.' Note the page discusses blossom-end rot SEPARATELY as a calcium disorder, so the malformation claim here is not that confusion. [read]",
+        "UMN Extension, 'Growing summer squash and zucchini in home gardens', extension.umn.edu/vegetables/growing-summer-squash-and-zucchini (fetched in-container 2026-08-01, READ AND CONFIRMED BY THE MAINTAINER 2026-08-01): 'An insect must move the pollen from the male flowers to the female flowers. Bees are common squash pollinators.' And on the failure: 'Poor fruit set could be due to not enough pollination.' THE SAME PAGE IS WHY THIS RULE REFUSES TO DIAGNOSE: 'Cold, rainy or cloudy weather can reduce pollination', and 'It is also common that the first flush of fruit isn't adequately pollinated; time often solves this issue as bees find the planting.' [read]",
+        "UMN Extension IPM, N. Hoidal, 'Limited fruit set and fruit abortion in winter squash and pumpkins', 2019-08-30, blog-fruit-vegetable-ipm.extension.umn.edu (fetched in-container 2026-08-01, READ AND CONFIRMED BY THE MAINTAINER 2026-08-01): 'Pumpkins and squash are dependent upon insect pollination.' On which insects, which is why the remedy speaks of forage rather than of honeybees: 'Bumblebees and squash bees (Peponapis pruinosa) are the best pollinators of pumpkins since they forage in the morning.' [read]",
+        "UMD Extension, 'Vegetable Plant Pollination in a Changing Climate', extension.umd.edu/resource/vegetable-plant-pollination-changing-climate (fetched in-container 2026-08-01, READ AND CONFIRMED BY THE MAINTAINER 2026-08-01): 'Summer squash flowers require insect pollination and are only open in the morning', and on incomplete pollination, 'Fruits may also be small, malformed, and have few seeds.' WHAT THIS SOURCE DOES NOT BUY, recorded so the rule cannot grow into it: its recommendation is the unquantified 'Plant a variety of flowering plants in or around your vegetable garden to attract pollinators'. That is R-052's territory, held there at a weaker confidence than this rule. NOT ONE OF THESE FOUR SOURCES SAYS A GARDEN WITHOUT FORAGE SETS LESS FRUIT, which is precisely why the claim above is the REQUIREMENT and the forage gap is only the trigger. [read]"
+      ]
+    },
+    {
+      "id": "R-103",
+      "claim": "How often to water is a weather question. This planner has no weather feed and will not invent a schedule.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "How fast ground dries is set by rainfall, temperature, wind and humidity - none of which this app observes. An interval computed without them is a guess wearing a schedule's clothes.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "epistemics"
+      ]
+    },
+    {
+      "id": "R-104",
+      "claim": "Blossom-end rot is a calcium-transport failure driven by uneven soil moisture, not a shortage of calcium in the soil.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Calcium reaches the fruit in the water the roots draw up: it is carried by the xylem along with that stream. When the supply of water is interrupted the supply of calcium is interrupted with it, and the enlarging fruit runs short at its tip - even where soil calcium is adequate.",
+      "evidence_status": "verified",
+      "sources": [
+        "Iowa State Univ. Extension, Yard & Garden, 'Blossom End Rot', yardandgarden.extension.iastate.edu/encyclopedia/blossom-end-rot (fetched in-container 2026-08-02, READ AND CONFIRMED BY THE MAINTAINER 2026-08-02): 'This is a problem born of calcium deficiency, most often the result of erratic watering.' On the amendment question, which is why this rule refuses to name one: 'Adding calcium to the soil is generally ineffective.' And the remedy: 'Mulch the area around tomato plants to conserve and maintain uniform soil moisture levels.' [read]",
+        "Univ. of Maryland Extension, 'Blossom End Rot on Vegetables', extension.umd.edu/resource/blossom-end-rot-vegetables (fetched in-container 2026-08-02, READ AND CONFIRMED BY THE MAINTAINER 2026-08-02): THE SOURCE OF THE CROP LIST - 'tomato, pepper, eggplant, pumpkin, squash, and watermelon' - which is why `ber_susceptible` is a species field and not a family gate: that set spans two families and excludes potato. Cause: 'a shortage of calcium in enlarging fruits', linked to 'inconsistent watering, shallow watering or droughty conditions'. WHAT THIS SOURCE DOES NOT BUY, recorded so the rule cannot grow into it: it also says 'Mix in 1/4 cup of gypsum (calcium sulfate) with the soil from each planting hole' and that a calcium chloride spray 'may offer some temporary relief'. That is an amendment quantity with no soil test behind it, which invariant 3 forbids regardless of whether the agronomy is right - and the other two sources read contradict it outright. [read]",
+        "Clemson HGIC, 'Gardening Myths: Fix Blossom End Rot with Calcium Sprays', hgic.clemson.edu/gardening-myths-fix-blossom-end-rot-with-calcium-sprays (fetched in-container 2026-08-02, READ AND CONFIRMED BY THE MAINTAINER 2026-08-02): the mechanism this rule states, in the source's own words - 'Calcium is taken up from the soil through the plants' roots and is transported by the xylem, along with water.' On sprays: 'Foliar calcium sprays are not effective', because 'the skin of the fruit is not able to directly absorb foliar-applied calcium.' And it lands where R-017 already stood, independently: it recommends conducting a soil test before planting. [read]"
+      ]
+    },
+    {
+      "id": "R-105",
+      "claim": "Water the soil, not the leaves. A film of water on a leaf is what most fungal spores need in order to germinate.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "A spore landing on a leaf needs liquid water on that surface to germinate and enter it. Water delivered to the soil never puts a film there; water thrown over the plant does, and the longer it lasts the more of the spores already present can use it.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Wisconsin-Madison Div. of Extension, Wisconsin Horticulture, 'Water, Water, Everywhere, but Never on the Leaves', hort.extension.wisc.edu/2021/04/01/water-water-everywhere-but-never-on-the-leaves (fetched in-container 2026-08-02, READ AND CONFIRMED BY THE MAINTAINER 2026-08-02): the mechanism, in the source's own words - overhead watering creates 'a \"leaf wetness period,\" a time when a thin layer of water coats the leaf', and 'This layer of water is exactly what most plant diseases-causing fungi require for their spores to germinate and infect.' The remedy: 'a soaker or drip hose that directs water into the soil rather than onto leaves.' NOTE FOR ANYONE TEMPTED TO ADD AN HOUR TO THIS RULE: this page names no time of day at all. [read]",
+        "Iowa State Univ. Extension, Yard & Garden, 'Managing Diseases in the Vegetable Garden', yardandgarden.extension.iastate.edu/how-to/managing-diseases-vegetable-garden (fetched in-container 2026-08-02, READ AND CONFIRMED BY THE MAINTAINER 2026-08-02): 'Soaker hoses, drip irrigation, or watering at the base of the plant all help keep the foliage dry.' And why it matters: 'Most disease-causing microorganisms, like fungi, require water to proliferate. Dry foliage helps slow or prevent their growth.' This page likewise names no watering hour. [read]",
+        "Penn State Extension, 'Garden Myths: Watering', extension.psu.edu/garden-myths-watering (fetched in-container 2026-08-02, READ AND CONFIRMED BY THE MAINTAINER 2026-08-02): 'If possible, avoid watering at the foliage of the plant which can lead to disease.' THIS IS THE ONLY SOURCE READ THAT NAMES AN HOUR - 'The best time for watering plants is in the early morning to avoid evaporation and reduce the potential for disease' - and one source's hour, contradicted elsewhere in the same literature by a mid-afternoon recommendation for gardeners with only a sprinkler, is why the clock is in this rule's scope_note rather than in its claim. [read]"
+      ]
+    },
+    {
+      "id": "R-106",
+      "claim": "A light sprinkle does not reach the roots. Water long enough to wet the soil to root depth, or the plant gets nothing.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Water moves down only as far as the volume applied can wet it. A brief watering darkens the surface and stops there, while the roots that take up water sit well below it, so the water never arrives where it is needed.",
+      "evidence_status": "verified",
+      "sources": [
+        "Iowa State Univ. Extension, Yard & Garden, 'Watering Tips for the Garden, Lawn, and Landscape', yardandgarden.extension.iastate.edu/how-to/watering-tips-garden-lawn-and-landscape (fetched in-container 2026-08-02, READ AND CONFIRMED BY THE MAINTAINER 2026-08-02): 'Apply water until the soil is moist to at least 5 or 6 inches' - the source of this rule's hand's-depth target, ~15 cm. This is the one source read with a dedicated 'Tips for Watering Vegetable Gardens' section, which is what puts the claim in scope for a vegetable planner where the tree-and-shrub pages below are not. WHAT WE ARE NOT CITING IT FOR: the same page says 'Avoid a quick splash that can promote shallow rooting', an outcome it does not explain. This rule takes the depth figure and leaves that claim alone. [read]",
+        "Univ. of Minnesota Extension, 'Watering established trees and shrubs', extension.umn.edu/planting-and-growing-guides/watering-established-trees-and-shrubs (fetched in-container 2026-08-02, READ AND CONFIRMED BY THE MAINTAINER 2026-08-02): 'Most of the small feeder roots responsible for water uptake are located in the top 12 to 18 inches of soil', and 'Apply a deep watering over the entire root zone area until the top 6 to 9 inches of soil are moist.' Cited for WHERE THE ROOTS ARE - the second half of this rule's mechanism. TWO SCOPE CAVEATS, both recorded so a later reader does not over-read the citation: the page is about trees and shrubs, not vegetables, so the depth figures are not transferred; and it too carries the unexplained shallow-rooting claim ('Avoid light watering as this promotes shallow root systems'), which this rule declines. [read]"
+      ]
+    },
+    {
+      "id": "R-107",
+      "claim": "A container dries out faster than the same plant in the ground, and it is the one place where a day's inattention can cost you the plant.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "A container holds a small fixed volume of soil, its whole root zone sits above ground rather than connected to the soil below, and a porous pot loses water from its sides as well as its surface. The reservoir is smaller and it empties faster.",
+      "evidence_status": "verified",
+      "sources": [
+        "Clemson HGIC, 'Container Vegetable Gardening', hgic.clemson.edu/factsheet/container-vegetable-gardening (fetched in-container 2026-08-02, READ AND CONFIRMED BY THE MAINTAINER 2026-08-02): the mechanism and the outcome in one sentence - 'Because the volume of soil is relatively small, containers can dry out very quickly, especially on a concrete patio in full sun.' The second mechanism, which is why the remedy names pot material: 'Clay pots and other porous containers allow additional evaporation from the sides of the pots and watering must be done more often.' The cadence: 'Check containers at least once a day and twice on hot, dry or windy days', and 'Daily or even twice-daily watering may be necessary.' [read]",
+        "Univ. of Minnesota Extension, 'Fertilizing and watering container plants', extension.umn.edu/managing-soil-and-nutrients/fertilizing-and-watering-container-plants (fetched in-container 2026-08-02, READ AND CONFIRMED BY THE MAINTAINER 2026-08-02): corroborates the size-and-material dependency - 'Depending upon the size and material of the container, you may need to water more than once per day during hot, dry weather.' [read]",
+        "NOT CITED, AND RECORDED SO IT IS NOT RE-SOUGHT: a web search attributed the drying-rate claim to UMD Extension's 'Maintaining Container Grown Vegetables'. The page was opened and it makes NO comparison between containers and ground and offers NO mechanism - it says only that frequency 'will vary based on the plant type, the size of the plant, and size of the container'. This is the second misattributed quote in this arc (the first was a UC IPM page that did not contain the root-growth sentence credited to it). A quote is not a source until the page has been opened."
+      ]
+    },
+    {
+      "id": "R-108",
+      "claim": "A tomato transplant goes into the ground DEEPER than it grew in its pot - buried up to its first leaves - rather than at the soil line it came out of.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "A tomato's stem forms roots along whatever length of it is buried in moist soil. Setting the plant deep therefore converts stem into root, and the plant ends up with a larger root system than the one that came out of the pot.",
+      "evidence_status": "verified",
+      "sources": [
+        "Utah State Univ. Extension, 'Tomato, Pepper & Eggplant: Planting & Spacing', extension.usu.edu/vegetableguide/tomato-pepper-eggplant/planting-spacing (fetched in-container 2026-08-03, READ AND CONFIRMED BY THE MAINTAINER 2026-08-03): the instruction and its scope - 'The stem of a tomato transplant may be buried in soil up to the first leaves (or more if the plant is spindly)'. The same page's PEPPER sentence, quoted here so the exclusion above is auditable rather than asserted: 'Transplants should be set so the soil level reaches the cotyledon leaves or the first true leaf.' The page gives EGGPLANT no setting-depth sentence of any kind. [read]",
+        "NOT A SOURCE FOR THE MECHANISM, and recorded so it is not re-sought: no page read for this rule states WHY a buried tomato stem roots. The mechanism above is the standard horticultural account of adventitious rooting, and it is asserted on the strength of the instruction it explains rather than on a page that states it outright; a source stating it directly would strengthen the pointer list rather than change the rule."
+      ]
+    },
+    {
+      "id": "R-109",
+      "claim": "Rhubarb leaf blades are poisonous and must never be eaten - only the leafstalks (the petioles) are edible. Harvest the stalks and cut the leaves off.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "The leaf blades hold a toxic concentration of oxalic acid - and, per NDSU, anthraquinone glycosides - which the edible petioles carry only in trace amounts. Oxalic acid binds calcium and can damage kidney function; eating the blades causes cramping, nausea and, in quantity, can be fatal. The stalks are safe because the toxins concentrate in the leaf, not the petiole.",
+      "evidence_status": "verified",
+      "sources": [
+        "UW-Madison / Wisconsin Master Gardener (Susan Mahr), 'Rhubarb, Rheum rhabarbarum', mastergardener.extension.wisc.edu/files/2018/04/rhubarb.pdf (read 2026-08-05): 'The leaves, however, contain a toxic amount of oxalic acid and are poisonous. The ensuing cramps, nausea and sometimes death from ingestion suppressed interest in the plant for about two hundred years.'",
+        "NDSU Extension, 'Dakota Gardener: Is Frost-Damaged Rhubarb Toxic?', ag.ndsu.edu/news/columns/dakota-gardener/dakota-gardener-is-frost-damaged-rhubarb-toxic (read 2026-08-05), names BOTH compounds and the edible/toxic split outright: 'The leaves contain oxalic acid which can damage kidney function'; 'recent scientific studies show the presence of other compounds such as anthraquinone glycosides that may contribute to the toxicity of the leaves'; 'Rhubarb stems (petioles) which resemble celery stalks are the edible portion of the plant because they contain only trace amounts of toxic compounds.' The SAME page is why the frost->toxin belief is excluded: 'A hard freeze is widely believed to cause the movement of toxic compounds from the leaves into the stems' ... 'I could not find any scientific studies to confirm or disprove this belief.'",
+        "U. of Illinois Extension (Good Growing), 'To rhubarb or not to rhubarb?', extension.illinois.edu/blogs/good-growing/2023-06-08-rhubarb-or-not-rhubarb (read 2026-08-05): 'Do not consume leaf blades, they contain large amounts of oxalic acid which can limit the body's ability to take up calcium.'",
+        "UMN Extension, 'Growing rhubarb in home gardens', extension.umn.edu/vegetables/growing-rhubarb (read 2026-08-05): 'Rhubarb leaves are toxic. Do not eat them.'",
+        "NC State Extension Gardener Plant Toolbox, 'Rheum rhabarbarum', plants.ces.ncsu.edu/plants/rheum-rhabarbarum/ (read 2026-08-05): Poison Severity 'Medium'; Poison Parts 'Leaves'; Toxic Principle 'Anthraquinone glycosides and soluble oxalates'; Poison Symptoms 'TOXIC ONLY IF LARGE QUANTITIES EATEN. Abdominal cramps, burning of mouth and throat, headache, weakness, nausea and vomiting, coma; may be fatal'."
+      ]
+    },
+    {
+      "id": "R-110",
+      "claim": "Currants and gooseberries (Ribes) are an alternate host of white pine blister rust, and some states regulate or ban planting them - especially black currant. Check your state's rules before planting, and where white pines are nearby choose a rust-resistant cultivar.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "White pine blister rust (Cronartium ribicola) needs BOTH a Ribes and a five-needle (white) pine to complete its life cycle. The rust is a minor nuisance on Ribes but can be lethal to white pines, which is why some states restrict Ribes planting - strictest for black currant (Ribes nigrum), the most susceptible type. A rust-immune cultivar breaks the cycle: it cannot host the rust, so it cannot pass it to a pine.",
+      "evidence_status": "verified",
+      "sources": [
+        "UMass Extension, 'Currants and Gooseberries' (New England Small Fruit Management Guide), www.umass.edu/agriculture-food-environment/fruit/ne-small-fruit-management-guide/currants-gooseberries (read 2026-08-05, re-read live 2026-08-14): 'Some New England states regulate aspects of Ribes spp. production within their boundaries due to their role as alternate hosts of White Pine Blister Rust (Cronartium ribicola)'; 'This disease is the primary reason for limited commercial production of Ribes in North America'; 'Most black currants (Ribes nigrum) and white pines (Pinus strobus) are extremely susceptible'; resistant cultivars named include 'Consort', 'Crusader', 'Ben Sarek', and 'Titania'.",
+        "USU Extension, 'How to Grow Red Currants in Your Garden', extension.usu.edu/yardandgarden/research/red-currants-in-the-garden (read 2026-08-05, re-read live 2026-08-14): 'In the early 1900s, currants were banned in the northern United States to prevent the spread of white pine blister rust. However for most states, including Utah, the ban was lifted in 1966'; 'Most red currant varieties are actually immune to the disease, with black currant being much more susceptible.' USU gooseberry page: 'White pine blister rust requires both a Ribes species and white pine to complete its life cycle.'",
+        "Iowa State Univ. Extension, 'Growing Currants and Gooseberries in the Home Garden', yardandgarden.extension.iastate.edu/how-to/growing-currants-and-gooseberries-home-garden (read 2026-08-05; REMOVED AT SOURCE by 2026-08-14 - the recorded URL 404s and the page could not be relocated; its claims are carried verbatim by the four confirmed sources above, so it is kept for provenance, not re-confirmed): 'Several states, however, still ban the planting and cultivation of black currants'; 'Consort ... along with Crusader and Coronet, are resistant to white pine blister rust.'",
+        "UMN Extension, 'Growing currants and gooseberries in the home garden', extension.umn.edu/fruit/growing-currants-and-gooseberries-home-garden (read 2026-08-05, re-read live 2026-08-14): 'Currants, gooseberries and other plants in the Ribes genus play a part in white pine blister rust'; 'Blister rust is little more than a nuisance to the grower of currants, but can be devastating to white pine trees'; 'Planting remains restricted in some areas of the U.S.'; 'Crusader ... Immune to blister rust'; 'Titania ... immune to blister rust.'",
+        "Penn State Extension, 'Home Fruit Plantings: Gooseberry and Currant Variety Selection', extension.psu.edu/home-fruit-plantings-gooseberry-and-currant-variety-selection (read 2026-08-05, re-read live 2026-08-14): 'Black currant (Ribes nigrum) is the most susceptible, though resistant varieties are available'; 'Titania ... Has very high resistance to white pine blister rust.'"
+      ]
+    },
+    {
+      "id": "R-111",
+      "claim": "A specialist pest or pathogen finds and builds on a continuous single-family host patch more readily than one broken by non-host families.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "C",
+      "grade_meaning": "A good hunch",
+      "mechanism": "Resource concentration - a specialist locates and holds its host more efficiently at higher host density and continuity, so an unbroken run of one family across adjacent beds is an easier target than the same family separated by a non-host (associational resistance).",
+      "evidence_status": "verified",
+      "sources": [
+        "Root 1973, 'Organization of a plant-arthropod association in simple and diverse habitats: the fauna of collards (Brassica oleracea)', Ecological Monographs 43:95-124 (abstract read by the maintainer 2026-08-21): proposes 'the resource concentration hypothesis, which states that herbivores are more likely to find and remain on hosts that are growing in dense or nearly pure stands; that the most specialized species frequently attain higher relative densities in simple environments.' This is R-111's claim and mechanism verbatim.",
+        "Elmstrom, Andow & Barclay 1988, 'Flea beetle movement in a broccoli monoculture and diculture', Environmental Entomology 17(2):299-305 (read by the maintainer 2026-08-21): the empirical test on a brassica specialist (the flea beetle Phyllotreta cruciferae) - immigration ~1.3x faster into monocultures than into dicultures, emigration ~2x faster from dicultures - reported as 'strong, direct support for the hypothesis that host plants are harder to find and easier to lose in vegetationally diverse habitats than in monocultures.'"
+      ]
+    },
+    {
+      "id": "R-070",
+      "claim": "Any co-planted set of vegetables is a guild.",
+      "refuted": true,
+      "type": "refutation",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "definition"
+      ]
+    },
+    {
+      "id": "R-072",
+      "claim": "Perennial members must not be sited in ground that is annually turned or rotated.",
+      "refuted": false,
+      "type": "geometry",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Tillage destroys the crown. Rotation moves the annuals; the perennial cannot move.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "mechanics"
+      ]
+    },
+    {
+      "id": "R-073",
+      "claim": "Perennial woody guilds are not bed-scoped. Their ground entity is the drip-line ring.",
+      "refuted": false,
+      "type": "geometry",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "A tree's root zone expands for a decade and extends well past the canopy edge.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "root architecture"
+      ]
+    },
+    {
+      "id": "R-075",
+      "claim": "A bulb ring suppresses turfgrass competition at a fruit tree trunk.",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Resource competition and physical occupancy of the root collar zone.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "competition"
+      ]
+    },
+    {
+      "id": "R-075b",
+      "claim": "Narcissus deters voles and rodents.",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "C",
+      "grade_meaning": "A good hunch",
+      "mechanism": "Narcissus bulbs and tissue contain lycorine and related alkaloids, which are toxic to eat. Rodents avoid them accordingly — field mice rarely touch daffodils even where they readily eat tulips and crocus — so a ring of narcissus tends to be left alone rather than gnawed. It is an avoidance effect, not a barrier: it discourages feeding on the bulbs, not a guarantee against every rodent.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Illinois Extension, 'Bulbs', extension.illinois.edu/flowers/bulbs (read 2026-07-11): field mice 'most often attack tulips, crocus and gladioli and rarely eat daffodils, alliums or colchicums.'",
+        "Univ. of Illinois Extension, 'Knowing poisonous plants can save a life', extension.illinois.edu/blogs/know-how-know-more/2022-07-05-knowing-poisonous-plants-can-save-life (read 2026-07-11): 'Daffodil, hyacinth, and narcissus contain the toxin lycorine, which, if eaten, typically causes nausea.'",
+        "Clemson HGIC, 'Planting Deer Resistant Bulbs', hgic.clemson.edu/planting-deer-resistant-fall-bulbs (read 2026-07-11): daffodils 'are also poisonous, so deer are not tempted to eat them.'"
+      ]
+    },
+    {
+      "id": "R-075c",
+      "claim": "Allium deters borers.",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "D",
+      "grade_meaning": "Contested",
+      "mechanism": "",
+      "evidence_status": "no_evidence_exists",
+      "sources": []
+    },
+    {
+      "id": "R-075d",
+      "claim": "A bulb ring suppresses turfgrass competition at the base of a woody perennial shrub or vine.",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Resource competition and physical occupancy of the root collar zone.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "competition"
+      ]
+    },
+    {
+      "id": "R-014",
+      "claim": "Beans fix nitrogen that feeds the corn growing beside them, that season.",
+      "refuted": true,
+      "type": "refutation",
+      "grade": "C",
+      "grade_meaning": "A good hunch",
+      "mechanism": "",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Arkansas Extension, 'Creating a Three Sisters Garden', uaex.uada.edu (read 2026-07-11): 'Most of the nitrogen converted by the beans will not be available to the corn and pumpkins the first year; the bean roots have to break down to release nitrogen. Corn is a heavy nitrogen [feeder].'",
+        "Hupe et al. 2021, Sci Rep 11:11424, 'Evidence of considerable C and N transfer from peas to cereals via direct root contact but not via mycorrhiza', pmc.ncbi.nlm.nih.gov/articles/PMC8169652 (read 2026-07-11): reports 'a mean N transfer rate of 8.4%, with a range of 2.7 to 22.5%, ... from N2-fixing legumes to non-N2-fixing mycorrhizal cereals' and 'N transfer rates of between 3.1 and 6.0% ... from soybean to maize'.",
+        "'Nitrogen uptake and transfer in a soybean/maize intercropping system in the karst region of southwest China', pmc.ncbi.nlm.nih.gov/articles/PMC5648690 (read 2026-07-11): 'N transferred from soybean to maize account for 2.4%–3.3% of the N uptake of maize.'"
+      ]
+    },
+    {
+      "id": "R-061",
+      "claim": "Marigolds interplanted among vegetables control root-knot nematodes.",
+      "refuted": true,
+      "type": "refutation",
+      "grade": "F",
+      "grade_meaning": "Refuted",
+      "mechanism": "",
+      "evidence_status": "verified",
+      "sources": [
+        "UF/IFAS EDIS ENY-056/NG045, 'Marigolds (Tagetes spp.) for Nematode Management', edis.ifas.ufl.edu/publication/NG045 (read 2026-07-11): intercropping — 'Can marigolds have an effect on plant-parasitic nematodes when grown in an intercropping setting? Probably not.'; 'marigold should be planted at least two months before the desired vegetable crop' at 'the same site in which the vegetable crop will be planted'; 'Planting should be dense to ensure the best nematode control'; 'Marigold produces a substance called alpha-terthienyl, which can aid in the reduction of root-knot nematodes'; 'Marigolds cannot eradicate nematodes ... it must be grown every season before the actual crop is planted.'"
+      ]
+    },
+    {
+      "id": "R-074",
+      "claim": "Comfrey is a dynamic accumulator that mines subsoil minerals and makes them available.",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "D",
+      "grade_meaning": "Contested",
+      "mechanism": "",
+      "evidence_status": "verified",
+      "sources": [
+        "Cornell Small Farms Program (Cornell Coop. Extension), 'New Findings Further the Study of Dynamic Accumulators' (Tyler & Zarro, 2022), smallfarms.cornell.edu/2022/04/new-findings-further-the-study-of-dynamic-accumulators (read 2026-07-11): an on-farm study 'has shown Russian comfrey to be a dynamic accumulator of both potassium and silicon' (tissue concentrations above the set thresholds). NOTE: this establishes high nutrient CONCENTRATION in comfrey biomass (supporting the 'potassium-rich biomass / good mulch' point), not the deep-root subsoil-MINING mechanism the rule refutes — accumulation reflects uptake from available soil, not sourcing of otherwise-inaccessible subsoil."
+      ]
+    },
+    {
+      "id": "R-082",
+      "claim": "Autumn olive is a good nitrogen fixer for a fruit tree guild.",
+      "refuted": true,
+      "type": "refutation",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "",
+      "evidence_status": "verified",
+      "sources": [
+        "NC State Extension Gardener Plant Toolbox, 'Elaeagnus umbellata', plants.ces.ncsu.edu/plants/elaeagnus-umbellata (read 2026-07-11): 'This plant is an invasive species in North Carolina'; 'It becomes quite competitive even in poor soils by fixing nitrogen in its roots'; 'The fruits are taken by birds and small mammals, which disperse the seeds ... a large plant may produce hundreds or thousands of fruits. Autumn olive threatens native species by out-competing them'; 'Many states have banned its sale.'",
+        "USDA Forest Service, Fire Effects Information System (Munger 2003), 'Elaeagnus umbellata', fs.usda.gov/database/feis/plants/shrub/elaumb/all.html (read 2026-07-11): symbiosis with soil actinomycetes 'permits the fixation and subsequent utilization of atmospheric nitrogen'; 'Seeds are dispersed by frugivorous birds'; listed 'as a noxious weed in several West Virginia counties'; USFS Region 8 lists it a 'category 1 weed' whose introduction 'is prohibited on National Forest System Lands.'"
+      ]
+    },
+    {
+      "id": "R-050",
+      "claim": "Aromatic species interplanted with brassicas are reported to reduce cabbage-worm damage. The mechanism is unresolved and trial results are mixed.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "C",
+      "grade_meaning": "A good hunch",
+      "mechanism": "Unresolved, and the rule says so rather than picking one. Volatile masking of host-finding cues and disrupted landing are both proposed. The trials that report an effect measured DAMAGE, which cannot separate fewer eggs laid from fewer larvae surviving or more predators arriving - so no mechanism here is established, only candidates.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Minnesota Extension, 'Companion planting in home gardens', extension.umn.edu/planting-and-growing-guides/companion-planting-home-gardens (read 2026-07-25): 'In an Iowa study, thyme, onion and nasturtium helped to reduce cabbage looper and imported cabbageworm damage in broccoli' - citing Riesselman, Leah B. (2006), 'Companion Planting: A Method for Sustainable Pest Control', Iowa State Research Farm Progress Reports. Thyme is this guild's canonical masking species, so the one trial found is on the plant the corpus actually prescribes.",
+        "Same page, on the wider claim base: 'While gardening charts online will provide you with long lists of plants that repel insects, these are not always accurate or backed by research', and of marigolds specifically, 'Sometimes yes and sometimes no.' That is the mixed picture this rule's effect_size asserts, now cited rather than claimed.",
+        "PRIMARY READ: the maintainer read Riesselman (2006) itself on 2026-07-25, at dr.lib.iastate.edu/farms_reports/295, and promoted this rule on it - not on Minnesota's summary alone. The trial's own measurements are not transcribed into this pointer; what the corpus asserts is still the DAMAGE claim the summary reports, and the read did not overturn it.",
+        "GAP that survives the read: the effect is measured as damage, and damage cannot separate fewer eggs laid from fewer larvae surviving or more predators arriving. That is why this claim does not mention egg-laying and why the mechanism is stated as unresolved. Verified means the source was read, not that the mechanism is known.",
+        "NEGATIVE RESULT, recorded so it is not cited by its title: Morkeliune et al. (2024), 'Effect of White Cabbage Intercropping with Aromatic Plant on Yield, Mineral and Biochemical Composition', Plants 13(13):1870, intercrops cabbage with calendula, French marigold, thyme and sage across 2017-2019 and measures NO pests, eggs or oviposition at all - yield and biochemistry only. It cannot support this rule. Nor can the '42% fewer egg clusters under sage' figure circulating in search results, which traces to commercial content sites and to no study."
+      ]
+    },
+    {
+      "id": "R-051",
+      "claim": "Alliums interplanted with carrots reduce carrot rust fly damage.",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "C",
+      "grade_meaning": "A good hunch",
+      "mechanism": "The carrot rust fly finds its host by the smell of carrot foliage. Onion and other allium volatiles growing among the carrots mask that scent, so fewer flies locate the row to lay eggs. Because the protection is the smell, it lasts only while the alliums are in the ground — once they are pulled, the masking goes with them.",
+      "evidence_status": "verified",
+      "sources": [
+        "New England Vegetable Management Guide (regional land-grant extension), 'Carrot and Parsnip - Insect Control' (Carrot Rust Fly, Psila rosae), nevegetable.org/crops/carrot-and-parsnip/insect-control (read 2026-07-11): 'Intercropping with onion has been shown to reduce damage by carrot rust flies.' Listed among partial/suppression measures (with row covers and staggered planting), consistent with the 'modest' effect_size. The Guide does not state the post-harvest collapse; that is the masking mechanism, not a claim from this source."
+      ]
+    },
+    {
+      "id": "R-052",
+      "claim": "Insectary plants near fruiting crops increase pollinator and predator visitation.",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "C",
+      "grade_meaning": "A good hunch",
+      "mechanism": "The flowers supply nectar and pollen that adult predators and parasitoids feed on, so a patch of them near a fruiting crop keeps those beneficial insects fed and close by to work the crop. The effect is real but not guaranteed — an insectary patch does not always suppress pests.",
+      "evidence_status": "verified",
+      "sources": [
+        "UC Statewide IPM Program (UC IPM), 'Insectary Plants', ipm.ucanr.edu/environmental-protection-and-pesticide-stewardship/insectary-plants (read 2026-07-11): 'Insectary plants are those grown to attract, feed, and shelter insect parasites (parasitoids) and predators to enhance biological pest control. Insectary plants provide nectar and pollen, which the adults of many natural enemy species need to consume.' (UC IPM also notes 'insectary plants may not always help' suppress pests — consistent with the 'reasonably supported' framing.)"
+      ]
+    },
+    {
+      "id": "R-053",
+      "claim": "Living mulch suppresses weeds and conserves soil moisture.",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "C",
+      "grade_meaning": "A good hunch",
+      "mechanism": "A living cover keeps a leaf canopy over the ground: it intercepts light at the soil surface, so weed seedlings are shaded out before they establish, and it slows surface evaporation, so the soil holds more water. In a Three Sisters planting this is the squash's role — its broad leaves shade the bed.",
+      "evidence_status": "verified",
+      "sources": [
+        "UMN Extension, 'Mulching for soil and garden health', extension.umn.edu/managing-soil-and-nutrients/mulching-soil-and-garden-health (read 2026-07-11): mulch 'Suppresses weeds'; 'Studies show that mulch reduces evaporation from the soil surface and helps soil hold water.'",
+        "Cornell Cooperative Extension (Warren Co. Master Gardener), 'Creating a Three Sisters Garden', warren.cce.cornell.edu/gardening-landscape/warren-county-master-gardener-articles/creating-a-three-sisters-garden (read 2026-07-11): 'The large, prickly squash leaves shade the soil, preventing weed growth' — the living-mulch role in Three Sisters."
+      ]
+    },
+    {
+      "id": "R-090",
+      "claim": "Every derived climate value carries the tier, grade, station, and distance that produced it.",
+      "refuted": false,
+      "type": "provenance",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Frost percentiles exist only at NCEI stations. Values elsewhere are offsets or model output. A bare date conceals the difference between a measurement and an inference.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "definition"
+      ]
+    },
+    {
+      "id": "R-091",
+      "claim": "PRISM offset from a nearby station assumes the spatial pattern of mean minimum temperature predicts the spatial pattern of last-frost date.\n",
+      "refuted": false,
+      "type": "provenance",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "PRISM models orography, temperature inversions, slope aspect, and coastal proximity at 800m. It provides monthly mean/min/max temperature. It does not provide frost exceedance probabilities; those exist only at stations. Combining them is an inference.",
+      "evidence_status": "verified",
+      "sources": [
+        "Daly et al. (2008), 'Physiographically Sensitive Mapping of Climatological Temperature and Precipitation across the Conterminous United States', Int. J. Climatol. 28: 2031-2064, prism.oregonstate.edu/pubs/link/2008_daly-etal_ijoc.pdf (read 2026-07-11): PRISM produces '1971-2000 mean monthly precipitation and minimum and maximum temperature ... 30-arcsec (~800-m) grids'; station weighting considers 'location, elevation, coastal proximity, topographic facet orientation, vertical atmospheric layer, topographic position, and orographic effectiveness of the terrain'; the western US, 'characterized by ... large elevation gradients, rain shadows, inversions, cold air drainage, and coastal effects, showed the greatest improvement.' Confirms PRISM provides mean monthly temperature fields, NOT frost-date exceedance probabilities -- so applying the offset to last-frost date remains an inference (below).",
+        "engine/climate_calibrate.py (held-out-station leave-one-out fit, 2026-07-11, ISSUES#6): over 190 station pairs spanning flat plains and mountain terrain, predicting a station's last-frost date from its nearest neighbour via the PRISM offset reduces mean-absolute error vs a bare nearest-station lookup beyond ~10 km (skill +1.4 days at 10-20 km, +2.5 at 20-40 km, +4.0 at 40-80 km; offset MAE stays <= 7 days out to 80 km). Offset MAE ~doubles (7.6 -> 12.6 days) once local PRISM tmin std >= 1.0 C. Quantifies the assumption; the provenance distance threshold (80 km), terrain downgrade (1.0 C), and on-site cap (0.5 C) in docs/CLIMATE.md §4 fall out of it."
+      ]
+    },
+    {
+      "id": "R-092",
+      "claim": "Frost dates can be downscaled by applying a standard lapse rate to elevation.",
+      "refuted": true,
+      "type": "provenance",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "",
+      "evidence_status": "verified",
+      "sources": [
+        "Penn State Extension, 'Frost, Critical Temperatures, and Frost Protection', extension.psu.edu/frost-critical-temperatures-and-frost-protection (read 2026-07-11): 'Radiation frosts occur when the heat that has been stored in the upper soil surfaces is radiated back into the atmosphere at night. Wind speeds are generally low, and an inversion usually develops with temperatures near the ground surface falling to, or below' freezing; 'Cold air is heavier than warm air; therefore, it will naturally flow down to lower elevations. Orchards or orchard pockets located at lower elevations will see more damage due to the collection of this cold air. This is the reason that site selection is critical to avoid low-lying land.'"
+      ]
+    },
+    {
+      "id": "R-093",
+      "claim": "An observed per-plot frost offset, fitted from 3+ seasons of logged outcomes on that ground, supersedes all modelled climatology for that plot.\n",
+      "refuted": false,
+      "type": "provenance",
+      "grade": "A",
+      "grade_meaning": "Well established",
+      "mechanism": "Garden-scale microclimate (south wall, frost pocket, raised-bed drainage, urban heat island) lives below 800m resolution and below 80m. No gridded product resolves it. The season log is a direct measurement on the exact ground in question.",
+      "evidence_status": "verified_trivially",
+      "sources": [
+        "measurement beats model on the measured point"
+      ]
+    },
+    {
+      "id": "R-096",
+      "claim": "Cold-hardy annuals can be sown or transplanted before the last spring frost — hardy crops about three weeks before, half-hardy about two weeks before. Tender crops wait for the frost itself (R-031).\n",
+      "refuted": false,
+      "type": "timing",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Cold hardiness. Hardy crops tolerate hard frost and half-hardy crops tolerate light frost, so they can occupy the ground weeks before frost-tender crops are allowed in (R-031). The offset is measured from the last spring frost.",
+      "evidence_status": "verified",
+      "sources": [
+        "University of Illinois Extension, 'Time Your Vegetable Plantings by Cold Hardiness' (2018-03-26), extension.illinois.edu/blogs/ilriverhort/2018-03-26-time-your-vegetable-plantings-cold-hardiness: very hardy vegetables 'withstand freezing temperatures and hard frosts without injury' (planted earliest in spring); frost-tolerant vegetables 'can withstand light frosts, but not freezing temperatures' (planted a couple of weeks later). LLM-summarised from a read of the page; it establishes the CATEGORIES but states no week offsets.",
+        "Colorado State Univ. Extension, GardenNotes #720, 'Vegetable Planting Guide', extension.colostate.edu/resource/vegetable-planting-guide (read 2026-07-25): hardy vegetables go in 'As early as 2-4 weeks before the date of the average last spring frost'; semi-hardy 'As early as 0-2 weeks before the date of the average last spring frost'; tender from seed 'around the date of the average last spring frost'; very tender 'Typically 2+ weeks after'. This is the source that states the offsets in weeks.",
+        "Where this rule sits in that range: hardy at 3 weeks is mid-range of CSU's 2-4. Half-hardy at 2 weeks is the EARLIEST EDGE of CSU's 0-2 - the most aggressive planting CSU sanctions, not the middle of it. The rule is inside published guidance at both ends, but it leans early on the half-hardy side and a gardener following it in a cold spring is taking that boundary.",
+        "Do not import an offset from another publication's hardiness scheme without checking the category names: CSU has no 'very hardy' tier, so a '4-6 weeks before frost' figure written against a four-tier scheme does not describe CSU's 'hardy'. Categories are not comparable across sources."
+      ]
+    },
+    {
+      "id": "R-097",
+      "claim": "Long-season warm crops are started indoors several weeks before the last frost and set out after it — tomato and tomatillo about six weeks ahead, pepper and eggplant about eight. Basil, six.\n",
+      "refuted": false,
+      "type": "timing",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "A frost-tender crop with a long days-to-maturity cannot mature if it is only direct-sown after the last frost — the frost-free window is too short. A head start under cover buys the weeks the season lacks; the seedling is set out only once frost has passed — the transplant date is still frost-gated (R-031).",
+      "evidence_status": "verified",
+      "sources": [
+        "University of Minnesota Extension, 'Starting seeds indoors', extension.umn.edu/planting-and-growing-guides/starting-seeds-indoors: seed-starting chart gives tomato '5-6 weeks' and pepper and eggplant '9 weeks' before the outdoor planting date (warm crops set out after the last frost). Read 2026-07-19 (LLM-summarised); read by the maintainer 2026-07-25, which is the read that promoted this rule. Note what the corpus's per-crop values do with the sources: tomato 6 sits at the top of Minnesota's '5-6 weeks' and inside Illinois's '6-8'; pepper and eggplant 8 sit BELOW Minnesota's '9 weeks' and at the top of Illinois's '6-8'. They are a reconciliation of two published ranges, not a figure either source prints.",
+        "University of Illinois Extension, 'When should I start my seeds?' (2023-02-10), extension.illinois.edu/blogs/good-growing/2023-02-10-when-should-i-start-my-seeds: peppers, tomatoes, and eggplant started '6-8 weeks before the last frost'. Read 2026-07-19."
+      ]
+    },
+    {
+      "id": "R-098",
+      "claim": "A planted bed keeps every plant within arm's reach of a path, edge, or walkable row.",
+      "refuted": false,
+      "type": "geometry",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "A comfortable arm's reach is ~0.6 m (the same basis the draw-time reach nudge uses). Ground past that from any access line can only be tended by standing on the soil, compacting it. So a reach-from-edge bed wider than reach-from-both-sides (~1.2 m) is laid out as <=1.2 m planting strips separated by ~0.5 m paths; a field is worked from walkable rows ~0.75 m apart, not one solid block. Which model applies is read from the bed's declared structure: raised / in_ground / container are edge-reached (strips), field is walked (rows).",
+      "evidence_status": "verified",
+      "sources": [
+        "Iowa State Univ. Extension, Yard & Garden FAQ, raised bed size (read 2026-07-21): 'Beds accessible on both sides can be 3 to 4 feet wide'; one-sided 'the maximum width should be 1 1/2 to 2 feet (i.e., approximately arm's reach)'; equipment pathways '~3' wide'.",
+        "Univ. of Minnesota Extension, Raised bed gardens (read 2026-07-21): 'the reach of your arm is generally a good metric ... If you can access both sides, the bed can be up to five feet wide.'",
+        "Field/row model: sweet-corn row spacing '30 to 36 inches ... so you can hoe, mulch, and harvest without breaking brace roots' (Univ. of Maryland / UMN / Illinois Extension, read 2026-07-21). Path 18-24 in foot-traffic minimum (garden extension consensus).",
+        "Container upper bound: the largest common vegetable container is a half-whiskey-barrel / 15-20 gal grow bag ~0.66 m across (Harvest to Table, harvesttotable.com, and the Old Farmer's Almanac container-size chart; read 2026-07-21). 75 cm is that with a small margin; past it the ground is a raised or in-ground bed."
+      ]
+    },
+    {
+      "id": "R-112",
+      "claim": "A legume fixes atmospheric nitrogen only in symbiosis with rhizobia specific to its cross-inoculation group; ground with no recent history of that group may carry too few of them to nodulate well.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Nitrogen fixation happens in root nodules formed by Rhizobium or Bradyrhizobium bacteria specific to each legume group. On ground that has not grown that legume group before - a new bed, a soil-less mix, a long gap in the rotation, a fumigated or strongly acid soil - the matching strain can be absent or sparse, so nodulation and fixation are reduced until a population builds.",
+      "evidence_status": "verified",
+      "sources": [
+        "Penn State Extension, 'Inoculation of Forage and Grain Legumes', extension.psu.edu/inoculation-of-forage-and-grain-legumes (read 2026-08-14): 'Rhizobia bacteria are fairly specific as to which legumes they will infect, form nodules on the roots of, and for which they will fix nitrogen'; 'Legumes effectively nodulated by the same Rhizobia species are termed cross-inoculation groups'; 'Inoculation is recommended when the legume being planted has not been grown in that field in the past three years or with every planting of a high-value crop'; 'Inside the nodule, an enzyme called nitrogenase drives the N fixation reaction.'"
+      ]
+    },
+    {
+      "id": "R-113",
+      "claim": "A warm-season bean germinates from warm soil, not from a calendar date; sown into cold ground it rots or emerges weak, even after the frost has passed.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Warm-season legumes take up water fast at sowing (imbibition), and in cold soil that first rush of cold water injures the seed tissue before the seedling can establish - imbibitional chilling - so the seed rots or comes up damaged. Soil below about 15 C (60 F) at sowing depth is where this bites, and the frost-free date can arrive weeks before the soil is that warm.",
+      "evidence_status": "verified",
+      "sources": [
+        "USU Extension, 'How to Grow Beans in Your Garden', extension.usu.edu/yardandgarden/research/beans-in-the-garden (read 2026-08-14): 'Beans are warm weather vegetables that require soil and air temperatures above 60°F for best germination and plant growth'; 'If you plant when soils are below 60°F, germination is greatly reduced'; 'Seedlings will emerge in 7-10 days when planted in soil that has warmed to 65-85°F.'",
+        "UMN Extension, 'Growing beans in home gardens', extension.umn.edu/vegetables/growing-beans (read 2026-08-14): 'Bean seed planted in cold soil may rot rather than germinate, and plant growth will be very slow in cooler weather'; 'Plant beans once the soil has warmed.'"
+      ]
+    },
+    {
+      "id": "R-114",
+      "claim": "Seedlings raised in cool, wet, or reused growing medium can collapse from damping-off - soil-borne fungi that rot the seed or girdle the young stem at the soil line before the plant establishes.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Damping-off is caused by soil-borne fungi - chiefly Rhizoctonia and Fusarium species and the water mould Pythium - that infect the germinating seed or the young stem at the soil surface, rotting it so the seedling fails to emerge or topples at the base. The pathogens thrive in cool, wet medium with poor drainage, and anything that slows the seedling's own growth (low light, overwatering, cool soil, high fertiliser salts) widens the window in which they attack.",
+      "evidence_status": "verified",
+      "sources": [
+        "UMN Extension, 'How to prevent seedling damping off', extension.umn.edu/solve-problem/how-prevent-seedling-damping (read 2026-08-21): 'The fungi, Rhizoctonia spp. and Fusarium spp., along with the water mold Pythium spp. are the most common pathogens responsible for damping off'; 'The damping off pathogens thrive in cool wet conditions'; 'Any condition that slows plant growth will increase damping off. Low light, overwatering, high salts from over fertilizing and cool soil temperatures are all associated with increased damping off'; 'Use new potting mix to fill trays. Don't reuse potting mix and don't use garden soil or compost'; 'Water to keep it moist but not soggy.'",
+        "NC State Extension, 'Damping-off in Flower and Vegetable Seedlings', content.ces.ncsu.edu/damping-off-in-flower-and-vegetable-seedlings (read 2026-08-21): 'The fungi include species of Rhizoctonia, Pythium, Fusarium, Phytophthora, Sclerotinia, Sclerotium, Botrytis, and others'; 'Species of Pythium, Sclerotinia, and Phytophthora are more likely to cause damping-off in cool, wet soils; whereas species of Rhizoctonia, Fusarium and Sclerotium rolfsii may cause damping-off under warmer and drier conditions'; 'its spread may be reduced by providing drier conditions for better seedling growth ... increasing air circulation and ventilation, reducing the frequency of watering, providing better water drainage.'"
+      ]
+    },
+    {
+      "id": "R-115",
+      "claim": "A seedling raised indoors is set out gradually, not all at once: moved straight from a windowsill or grow-light into full sun and wind it suffers sunscald, windburn, or transplant shock, because its soft indoor growth has not hardened to outdoor conditions.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Indoor-raised seedlings grow soft - a thin cuticle and waxy layer, unlignified stems, and high tissue water - because the light, wind, and temperature swings that toughen a plant are absent indoors. Exposed abruptly to direct sun the thin leaves scald, in wind the soft stems break or desiccate, and the whole plant stalls from the shock. Hardening off - a week or two of increasing daily outdoor exposure - thickens the cuticle and waxy layers, develops lignin in the cell walls, builds carbohydrate reserves, and lowers freeze-prone cell water, so the plant can take the move.",
+      "evidence_status": "verified",
+      "sources": [
+        "UMD Extension, 'Hardening Off Vegetable Seedlings for the Home Garden', extension.umd.edu/resource/hardening-vegetable-seedlings-home-garden (read 2026-08-21): 'Hardening is the process of exposing transplants (seedlings) gradually to outdoor conditions. It enables your transplants to withstand the changes in environmental conditions they will face when planted outside in the garden'; 'Begin hardening transplants 1-2 weeks prior to setting out plants in your garden'; 'place them outside in a shaded, protected spot on warm days, bringing them in at night. Each day, increase the amount of sunlight the transplants receive'; 'Don''t put tender seedlings outdoors on windy days or when temperatures are below 45 F'; 'Reduce the frequency of watering to slow plant growth, but don''t allow plants to wilt.'",
+        "Illinois Extension, 'Starting a Garden: Hardening Off Indoor Seedlings' (Good Growing), extension.illinois.edu/blogs/good-growing/2020-04-06-starting-garden-hardening-indoor-seedlings (read 2026-08-21): 'Plant stems can snap due to strong winds, or leaves can become sunburned from being exposed to direct sunlight'; 'Hardening off reduces the growth rate and thickens the cuticle and waxy layers'; 'It also stimulates root development, increases the amount of carbohydrates in tissues for food reserves, reduces the amount of freeze prone water in cells, and develops lignin in the cell walls'; 'gradually reduce how often you water; however, don''t allow the plants to wilt.'"
+      ]
+    },
+    {
+      "id": "R-116",
+      "claim": "A cole crop set out too early can bolt or \"button\": a long spell of cold on a young plant vernalizes it, and instead of a full head it runs to a premature flower stalk or forms a small, misshapen head.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Cabbage, broccoli, cauliflower and their kin are biennials, so cold is their signal that a winter has passed and it is time to flower. A young plant that accumulates enough cold - a stretch of weather in the 40s F - is vernalized and switches from building leaves and a head to running up a flower stalk and setting seed. Set out before the weather has settled, a small transplant crosses that cold threshold before it has grown the leafy bulk a head needs, so it buttons (a tiny premature head) or bolts (runs to seed) rather than heading properly.",
+      "evidence_status": "verified",
+      "sources": [
+        "UMN Extension, 'Growing cool-season crops - non-pest issues', extension.umn.edu/planting-and-growing-guides/non-pest-issues-cool-season-crops (read 2026-08-21): 'Bolting refers to premature flowering. It occurs at any point after a plant has shifted into its reproductive stage'; 'Since bolting is partially triggered by the accumulation of cold, these strategies can reduce exposure to cold temperatures for young plants'; 'the ideal situation for cool-season vegetables is cool but moderate temperatures (50s and 60s) for the first month of growth'; 'when spring weather is quite cool, plants can experience vernalization early, and the result is buttoning up, or the formation of small, often misshapen heads.'",
+        "UMD Extension, 'Flower Stalks Form or Bolting of Vegetables', extension.umd.edu/resource/flower-stalks-form-or-bolting-vegetables (read 2026-08-21): 'Biennial vegetable crops complete their life cycle in 2 years. But many will produce flower stalks in response to cool or hot temperatures and long days'; 'Onion-biennial seed stalks form if weather is cool early in its growth cycle.'"
+      ]
+    },
+    {
+      "id": "R-117",
+      "claim": "A direct-sown root crop left unthinned grows crowded roots that stay small - the seedlings stand far denser than they can mature, compete for the same soil, and the roots twist and intertwine instead of sizing up.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Root crops are sown as seed in place and germinate much denser than they can mature. Where the seedlings stand too close, their swelling roots run out of room and compete for space, water, and nutrients, so they stay undersized and are deformed - twisting and intertwining against their neighbours. Thinning the stand while the seedlings are young leaves each remaining root the room to develop. (Distinct from FORKING, which the sources attribute to rocky or compacted soil and root-knot nematodes, not crowding - so this rule claims small-and-intertwined, not forked.)",
+      "evidence_status": "verified",
+      "sources": [
+        "UMN Extension, 'Growing carrots and parsnips in home gardens', extension.umn.edu/vegetables/growing-carrots-and-parsnips (read 2026-08-21): 'You must thin out both carrots and parsnips to allow room for the roots to develop properly'; 'When the largest seedlings are three to four inches tall, thin by pulling up extra seedlings so that the remaining plants are about two to four inches apart'; 'If the plants develop healthy green tops, but limited root growth, it is usually because the plants are crowded.'",
+        "Univ. of Illinois Extension, Home Vegetable Gardening - 'Carrots', extension.illinois.edu/gardening/carrots (read 2026-08-21): 'Twisting and intertwining result from seeding too thickly and inadequate thinning of seedlings'; 'Thin the seedlings when they are about one inch tall to no more than three seedlings per inch for finger carrots ... and one seedling per 1 to 2 inches for larger varieties.'"
+      ]
+    },
+    {
+      "id": "R-118",
+      "claim": "A young transplant can be cut off at the soil line overnight by a cutworm - a caterpillar that curls around the tender stem and severs it just above the ground. A collar around the stem blocks it.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Cutworms are the soil-dwelling caterpillars of several night-flying moths. They feed after dark, curling the body around a seedling's stem and chewing through it at or just above the soil surface, which topples the whole plant. A young transplant is vulnerable because its stem is small and tender; as the plant grows the stem thickens past what a cutworm can encircle and cut, so the risk is an early-season one. A collar - cardboard, stiff paper, or foil - set around the stem and pushed into the soil is a physical barrier the cutworm can neither climb over nor tunnel under to reach the stem.",
+      "evidence_status": "verified",
+      "sources": [
+        "UMN Extension, 'Cutworms', extension.umn.edu/yard-and-garden-insects/cutworms (read 2026-08-21): 'Cutworms curl their bodies around the stem and feed on it. This feeding causes the plant to be cut off just above the soil surface'; 'New transplants or young plants have more chances of injury because their stems are smaller and more tender'; 'Place aluminum foil or cardboard collars around transplants. This creates a barrier that stops cutworm larvae from feeding on plants'; 'Place the collars around plants such that one end is pushed a few inches into the soil, and the other end extends several inches above ground.'",
+        "Univ. of Illinois Extension, 'Cutworm', extension.illinois.edu/insects/cutworm (read 2026-08-21): 'older caterpillars eat through the stem of young plants about 1/2 inch above ground and then eat the plant'; 'Collars of cardboard, aluminum foil, or metal can be placed around transplants at planting to prevent feeding'; 'older plants with thicker stems are less susceptible to attack.'"
+      ]
+    },
+    {
+      "id": "R-119",
+      "claim": "Potato tubers that catch light while growing - wherever soil settles or washes away and shallow tubers are left uncovered - turn green and become bitter and toxic, so the crop must be kept covered with soil rather than left exposed at the surface.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Tuber tissue exposed to light produces chlorophyll and, in that same tissue, synthesises the toxic glycoalkaloids solanine and chaconine, so soil mounded over the developing tubers keeps light off them and prevents both the greening and the toxin from forming.",
+      "evidence_status": "verified",
+      "sources": [
+        "Penn State Extension, 'Potatoes in the Garden and the Kitchen', extension.psu.edu/potatoes-in-the-garden-and-the-kitchen (read 2026-08-21): 'Tubers exposed to sunlight (both before and after harvest) will turn green and should not be eaten'; 'Sun exposure causes the potato''s skin to produce chlorophyll and, along with it, two toxic compounds, solanine and chaconine. These cause the potato to have a bitter taste ...'; 'When the plant stems are 8 to 12 inches tall, gently hill or mound the soil around the base of the plant, covering most of the stem. You may repeat this mounding practice two or three times as the plants grow.'",
+        "UMN Extension, 'Growing potatoes in home gardens', extension.umn.edu/vegetables/growing-potatoes (read 2026-08-21): 'Green skin occurs when potato tubers experience exposure to light'; 'Hilling also keeps any shallow tubers from exposure to light and turning green.'"
+      ]
+    },
+    {
+      "id": "R-120",
+      "claim": "Onions and garlic lifted for storage are cured first - dried down in a warm, airy, shaded place for about two to four weeks until the neck is tight and dry and the outer scales are papery. Bulbs stored uncured, or poorly cured, rot in storage instead of keeping.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "At harvest the bulb's neck and outer scales are still moist living tissue and the neck is an open channel into the bulb, so curing in warm moving air dries the neck shut and the outer scales to a papery protective skin, removing the wet tissue that storage rots colonise and sealing the neck they enter by; an uncured bulb goes into storage with a moist open neck and soft scales, and decays.",
+      "evidence_status": "verified",
+      "sources": [
+        "UMN Extension, 'Growing onions in home gardens', extension.umn.edu/vegetables/growing-onions (read 2026-08-21): 'Curing is essential if you plan to store your onions'; 'Keep the onions in a warm (75F - 90F), well-ventilated area for two to four weeks, until outer bulb scales are dry and the neck is tight'; 'Poor curing will result in decay during storage.'",
+        "Clemson HGIC, 'Onion, Leek, Shallot, & Garlic', hgic.clemson.edu/factsheet/onion-leek-shallot-garlic (read 2026-08-21): onion - 'Thoroughly air-dry bulbs in a shaded area before storage', 'To avoid storage diseases, be sure onions are well-cured before storing'; garlic - 'Cure in a warm, shady place with good air movement', 'Allow bulbs to dry until the neck is dry and the outer skin is papery, approximately two to three weeks', 'Bulb rot can also occur in storage from bruising and insufficient drying.'"
+      ]
+    },
+    {
+      "id": "R-121",
+      "claim": "A lightweight fabric floating row cover laid over a bed at planting keeps flying and egg-laying pests off the crop through its vulnerable early stage - flea beetles, cabbage moths and loopers, cucumber beetles and squash bugs, and the root-maggot flies of cabbage, onion, and carrot - but it must come off at flowering for any crop that needs an insect to set fruit, or it excludes the pollinator too.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Floating row cover is a gauze-like spun sheet laid loosely over the crop and sealed at its edges to the soil, and it stops damage by physical exclusion - the adult insect cannot reach the plant to feed or lay eggs - so the barrier must be continuous from planting, before the pests arrive, with its edges buried against a walking insect; because the same closed barrier also shuts out the bee, a crop whose fruit depends on insect pollination has to be uncovered once its flowers open.",
+      "evidence_status": "verified",
+      "sources": [
+        "UNH Extension, 'Using Row Covers in the Garden', extension.unh.edu/blog/2020/10/using-row-covers-garden (read 2026-08-21): 'row cover can create a barrier around your plants to exclude insects, as well as some animals like rabbits, birds and deer'; brassicas - 'cabbage maggots, cutworms, flea beetles, cabbage loopers, cabbage worms'; cucurbits - 'cucumber beetles, squash bugs, squash vine borer'; 'For insect pollinated vegetables, like the nightshades ... and cucurbits ..., row cover should be removed when female flowers bloom so as to allow pollination to occur.'",
+        "UMD Extension, 'Row Covers', extension.umd.edu/resource/row-covers (read 2026-08-21): floating row cover is used to 'exclude large and small animals, especially insect pests, making it an exceptional organic pest management tool'; 'Some pests overwinter in the soil near host plants, emerging the following spring under a cover. (Examples include the adult flies of root maggots, flea beetles, and Colorado potato beetles.)'; 'Crops that don''t need their flowers pollinated by insects, like spring leafy greens and green beans, can be kept covered until harvest.'"
+      ]
+    },
+    {
+      "id": "R-122",
+      "claim": "Garlic is planted in autumn, not spring - the cloves go in the ground several weeks before it freezes, root, and overwinter. The weeks of winter cold below about 40 F vernalize the clove, and that cold is what triggers it to form a bulb the following spring as the days lengthen. Planted in spring, garlic misses the cold and bulbs poorly.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "A garlic clove will not form a bulb until it has been vernalized - held for roughly six to eight weeks below about 40 F. The bulb itself does not develop during that cold; it is only induced by it, and forms in spring as days lengthen and temperatures rise. Fall planting delivers the cold naturally over winter with the clove already rooted, so growth resumes early and a full bulb sizes up by early summer. It is the same biennial vernalization that prematurely bolts a spring-sown cool-season crop, but with the sign reversed: there the accumulated cold buttons the plant into an early flower and ruins it; here, in a crop sown in autumn to be harvested as a bulb, that same cold is the intended trigger.",
+      "evidence_status": "verified",
+      "sources": [
+        "UGA Extension, 'Garlic Production for the Gardener' (C854), fieldreport.caes.uga.edu/publications/C854 (read 2026-08-22): 'Late September through November is the time to plant garlic in Georgia'; 'Garlic cloves require a period of 6-8 weeks of cool weather after planting (below 40 F) to undergo vernalization ... by low winter temperatures'; 'Although vernalized, no inflorescence or lateral buds (that later form the bulb) are developed until early spring with the onset of lengthening days and suitable temperatures'; 'Hard-necked garlics may grow in Georgia but generally prefer the cold winters and long, cool springs of more northern climates. Soft-necked garlics are well-adapted to the more temperate climate of the South.'",
+        "Iowa State Univ. Extension, 'Growing Garlic in the Home Garden', yardandgarden.extension.iastate.edu/how-to/growing-garlic-home-garden (read 2026-08-22): 'Plant cloves ... in the fall (October to early November)'; 'The highest yields are obtained from the largest cloves planted in the fall'; 'Plant large cloves 1 to 1.5 inches deep with the pointed side up, 3 to 5 inches apart within rows spaced 18 to 24 inches apart'; 'Fall-planted garlic should be mulched in November with a 4- to 6-inch layer of weed-seed-free straw to help prevent winter injury.'"
+      ]
+    },
+    {
+      "id": "R-123",
+      "claim": "Potatoes are grown from certified seed potatoes - disease-free seed tubers from a certified source - not from saved tubers or grocery-store potatoes. Large seed tubers are cut into blocky pieces, each with at least one eye, and the cut surfaces left to dry to a tough protective skin before planting. Grocery-store potatoes may be treated to stay dormant and can carry disease that persists in the soil.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Potato is propagated vegetatively - the crop grows from a piece of tuber, not from true seed - so any virus or disease in the seed tuber is passed straight to the new plants and can remain in the soil for years; certified seed is inspected, disease-free stock, which is why saving one's own tubers or planting grocery potatoes risks introducing disease. Each planted piece must carry an eye, the bud the new shoot grows from. A freshly cut piece exposes moist flesh that storage and soil rots colonise; holding the cut pieces a few days until the surface dries and forms a corky protective layer (suberises) seals that wound before planting. Grocery tubers may additionally be treated with a sprout inhibitor, so they are slow to grow.",
+      "evidence_status": "verified",
+      "sources": [
+        "UMN Extension, 'Growing potatoes in home gardens', extension.umn.edu/vegetables/growing-potatoes (read 2026-08-22): 'Buy disease-free seed tubers from a certified grower or seed distributor'; 'Every piece must have at least one \"eye,\" an indentation that will produce the new shoot'; 'Place the cut pieces on a tray at room temperature (between 60 F and 70 F) for a few days until the cut surface has dried out and formed a tough protective layer'; 'Do not plant potatoes purchased at the grocery store, as the store may treat them with chemicals to keep tubers dormant, in which case they will be slow to grow. Diseases may also infect the potatoes, which can remain in the soil for a long time.'",
+        "Utah State Univ. Extension, 'How to Grow Potatoes in Your Garden', extension.usu.edu/yardandgarden/research/potatoes-in-the-garden (read 2026-08-22): 'When buying seed tubers, ask for certified seed as this will help reduce the potential for introducing disease into the garden'; 'When cutting, make sure the seed piece weighs at least 2 ounces and has one or more \"eyes\"'; 'saving your own seed potatoes leads to a buildup of viruses and diseases that eventually will cause serious problems in the garden. Whenever possible, purchase and plant certified seed to help control many of the problem diseases potatoes experience.'"
+      ]
+    },
+    {
+      "id": "R-124",
+      "claim": "Over-feeding a tomato with nitrogen grows a tall, dark-green, leafy plant that flowers late and sets little fruit. The plant pours its resources into vines and foliage instead of blossoms, so flowering is delayed or sparse and yield drops. This is a vegetative-versus-reproductive imbalance the gardener causes by fertilizing, not the heat that makes already-open flowers fail to hold - keep the two apart.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "High available nitrogen biases the plant toward vegetative growth: abundant nitrogen keeps it building leaves and stems, and that leaf-and-stem growth takes priority over the switch into flowering, so flower initiation is delayed and fewer flowers form. The visible result is lush dark foliage with reduced and later fruit set - growth spent on the plant rather than the crop.",
+      "evidence_status": "verified",
+      "sources": [
+        "UGA Extension, 'Troubleshooting Cultural Problems in Tomatoes' (C1089), fieldreport.caes.uga.edu/publications/C1089 (read 2026-08-22): 'applying too much nitrogen can cause excessive growth and hinder flowering'; 'Too much nitrogen is also a common problem, and can be identified when the plant is tall and dark green, with excessive growth and no blooming.'",
+        "Univ. of Missouri Extension, 'Watering and Fertilizing Tomatoes in a High Tunnel' (G6462), extension.missouri.edu/publications/g6462 (read 2026-08-22): 'Too much nitrogen creates excessive vine growth, twisted foliage, delayed flowering and lower yield.'"
+      ]
+    },
+    {
+      "id": "R-125",
+      "claim": "Mint spreads aggressively by underground rhizomes and will colonize a bed, out-competing and crowding its neighbours if grown loose in open ground. Do not plant it directly in a shared bed. Contain it in a pot, or in a bottomless container sunk into the ground, and harvest and pull strays to keep it in bounds.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Rhizomatous, and stoloniferous, spread. Mint's horizontal underground stems - rhizomes - and its surface runners root at their nodes and send up new shoots, so an unconfined plant expands outward from the crown each season and reappears wherever a node reaches soil. This vegetative creep is why a loose planting takes over a bed, and why a physical soil barrier, not a spacing rule, is the control.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Illinois Extension, 'Mint' (Herbs), extension.illinois.edu/herbs/mint (read 2026-08-22): 'They grow from 1-3 feet tall and aggressively spread by underground rhizomes'; 'Because mints have a prolific growth habit, they will become invasive in the garden'; 'It is highly suggested that mints be grown in containers above ground'; 'Other suggestions for containing mints include planting mints in large bottomless containers that are sunk into the garden.'",
+        "Utah State Univ. Extension, 'How to Grow Mint in Your Garden', extension.usu.edu/yardandgarden/research/mint-in-the-garden (read 2026-08-22): 'Mint spreads quickly in open garden areas and will out-compete most garden plants'; 'Mint is a rapid growing perennial herb with many varieties that grow up to 3 feet tall and are quite invasive'; 'Consider separate beds or grow mint in buried containers to contain the spreading rhizomes'; 'Containers should extend 3-4 inches above and 10-15 inches below the soil surface to ensure containment.'"
+      ]
+    },
+    {
+      "id": "R-126",
+      "claim": "Basil is grown for its leaves: pinch out the growing tips and remove flower buds as they form to keep the plant making tender leaves and growing bushy. Once basil flowers, it turns toward seed and the leaves fall off in quantity and quality. Harvest and pinch from the top regularly, and take the flower buds off as soon as they appear.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Apical dominance and the leaf-to-seed switch. Pinching the terminal shoot releases the lateral buds below the cut, so the plant branches and grows bushier with more leaf-bearing stems; and because flowering redirects the plant from building leaves to setting seed, removing the buds before they open keeps it in leaf and the foliage tender.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Illinois Extension, 'Basil' (Herbs), extension.illinois.edu/herbs/basil (read 2026-08-22): 'Pinching the tips of stems encourages a bushy plant and more leaf growth resulting in a round plant full of aromatic basil'; 'Basil flower buds should be removed by pinching as soon as you see them form. Leaving them on the plant will affect the flavor of the leaves.'",
+        "Penn State Extension, 'Basil, A Summer Favorite', extension.psu.edu/basil-a-summer-favorite (read 2026-08-22): 'Continue to pick the leaves regularly to encourage growth throughout the summer'; 'This keeps the plant growing strong and bushy, providing for a continual harvest through the warm days of fall'; 'After six weeks, watch out for early flowering. If flower buds do emerge, just cut or pinch them off'; 'The flavor will be adversely affected if the plant is allowed to flower.'"
+      ]
+    },
+    {
+      "id": "R-127",
+      "claim": "Rosemary, sage, thyme and oregano are Mediterranean plants that want full sun and sharp, well-drained soil and tolerate drought once established. They are intolerant of wet, heavy or poorly drained soil and are easily over-watered, which invites root and stem rot. They also do better in lean soil than rich - over-feeding grows lush, low-flavour foliage and encourages disease - so water sparingly and keep feeding light.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "These species are adapted to dry-climate Mediterranean conditions - gritty, fast-draining soils and low summer water. In wet or heavy, poorly drained soil the root zone stays waterlogged, starving the roots of oxygen and rotting them; excess water and rich fertility compound the rot risk and, in these aromatic herbs, thin the essential oils that carry the flavour.",
+      "evidence_status": "verified",
+      "sources": [
+        "Clemson HGIC, 'Herbs', hgic.clemson.edu/factsheet/herbs (read 2026-08-22): 'Many common herbs are from the Mediterranean region. They grow well in full sun, well-drained soil, and dry summers'; rosemary - 'All grow best in dry, sunny areas in well-drained soil'; sage - 'The plants require excellent drainage and dry soil in full sun'; thyme - 'Plant thyme in full sun in very well drained soil that stays dry'; oregano - 'Plant oregano in full sun and well-drained soil'; 'Most herbs do not need a highly fertile soil. Very fertile soils tend to produce lush leaves that lack flavor.'",
+        "Univ. of Maryland Extension, 'Care of Herbs and Starting Herbs from Seed', extension.umd.edu/resource/care-herbs-and-starting-herbs-seed (read 2026-08-22): 'Drainage is probably the most important single factor in successful herb growing'; 'Herbs will not grow in wet soils'; 'The \"Mediterranean\" herbs, such as basil, thyme, rosemary, oregano, and lavender, grow best on sunny, dry sites in light (sandy) soil'; 'Over-fertilizing herb plants can lower the plant's essential oil content and encourage root and stem rot diseases.'",
+        "NC State Extension Gardener Plant Toolbox, 'Salvia officinalis', plants.ces.ncsu.edu/plants/salvia-officinalis (read 2026-08-22): 'Common sage prefers full sun and well-drained, medium to dry soils that mimic those of its Mediterranean homeland'; 'It is intolerant of wet or poorly drained soils'; 'It will tolerate drought and poor soils.'"
+      ]
+    },
+    {
+      "id": "R-128",
+      "claim": "Nasturtiums bloom best in lean, poor-to-average, well-drained soil in full sun. Rich soil or heavy nitrogen feeding pushes the plant into lush leaf growth at the expense of flowers - the familiar 'all leaves, few blooms'. Go easy on feeding, and do not fertilise except on very poor ground.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Rich soil and abundant nitrogen bias the plant toward vegetative leaf growth over flowering; lean, low-fertility soil shifts the same balance back toward bloom. It is the foliage-over-flower tradeoff that heavy feeding produces in many plants, here spending the plant on leaves instead of the flowers it was grown for.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Wisconsin-Madison Extension (Wisconsin Horticulture), 'Nasturtium, Tropaeolum majus', hort.extension.wisc.edu/articles/nasturtium-tropaeolum-majus (read 2026-08-22): 'Do not fertilize, except on extremely poor soil, as high rates of fertilization promotes leaf growth and reduces flowering.'",
+        "NC State Extension Gardener Plant Toolbox, 'Tropaeolum majus', plants.ces.ncsu.edu/plants/tropaeolum-majus (read 2026-08-22): 'It grows best in poor to average, well-drained soil in full sun, but with some afternoon shade in hot summers'; 'Fertilizing will increase foliage, however, will also decrease flowering.'"
+      ]
+    },
+    {
+      "id": "R-129",
+      "claim": "Borage is an annual that self-seeds freely and returns on its own from dropped seed, so a single planting typically reappears as volunteer seedlings year after year. Expect volunteers in and around where it grew. If you would rather it did not come up, remove the spent flower and seed heads before the seed drops and pull unwanted seedlings while young; otherwise leave a few heads and let it reseed.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "An annual that sets abundant seed which drops and germinates in place, so one planting reappears and spreads by self-sown volunteers each season without being replanted. The control follows from the same mechanism: seed that is removed before it drops cannot volunteer.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Illinois Extension, 'Plant of the Week: Borage', extension.illinois.edu/blogs/hort-home-landscape/2016-06-24-plant-week-borage (read 2026-08-22): 'This annual self-seeds wherever it is planted, so in most years, an abundance of borage returns.'",
+        "NC State Extension Gardener Plant Toolbox, 'Borago officinalis', plants.ces.ncsu.edu/plants/borago-officinalis (read 2026-08-22): 'the plant is also self-seeding and will remain in your garden year after year.'"
+      ]
+    },
+    {
+      "id": "R-130",
+      "claim": "Culinary French tarragon has sterile flowers and sets no viable seed, so it is grown only from division, cuttings, or a bought started plant - never from a seed packet. Seed sold as \"tarragon\" is Russian tarragon, a taller, coarser plant whose flavour is far inferior. Sow that seed and you get the near-flavourless plant, not the culinary herb.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "French tarragon's flowers are sterile and it seldom sets viable seed, so the only way to keep the true culinary plant is to propagate it vegetatively - by division or cuttings from an existing plant. The \"tarragon\" seed on the market is a different, seed-fertile type, Russian tarragon, which lacks the odour and flavour that make French tarragon worth growing.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Illinois Extension, 'Tarragon: French', extension.illinois.edu/herbs/tarragon-french (read 2026-08-22): 'True French tarragon is only available as plants grown from cuttings or root divisions'; 'Because French tarragon produces flowers that are sterile, it cannot be grown from seeds'; 'Seeds that are sold as tarragon at seed racks or in catalogs are seeds of Russian tarragon'; 'This is a much taller, coarser plant and its culinary use is considered to be inferior because it lacks the odor and flavor characteristics of French tarragon.'",
+        "Utah State Univ. Extension, 'How to Grow French Tarragon in Your Garden', extension.usu.edu/yardandgarden/research/french-tarragon-in-the-garden (read 2026-08-22): 'French tarragon should be propagated through cuttings or root divisions from an existing plant. It does not produce viable seed, and growing from seed typically results in the less flavorful Russian tarragon'; 'Russian tarragon, while not classified as being a different species, has flavor vastly inferior to French tarragon.'"
+      ]
+    },
+    {
+      "id": "R-131",
+      "claim": "Lemon balm self-sows freely and, left to flower and set seed unchecked, spreads and can take over a bed. Cut back or deadhead the flowering stalks before they set seed to keep it in bounds, or grow it in a container. It is a strong self-seeder that can become weedy - though not a listed invasive.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "The spread is chiefly by self-sown seed: a plant left to flower sets abundant seed that drops and germinates in place, so it recurs and expands from year to year. Removing the flowering stalks before seed sets breaks that cycle. Its spread is by seed rather than by the running underground stems that carry its relative mint, though a soil-grown plant can also creep somewhat at its edges.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Illinois Extension, 'Lemon Balm', extension.illinois.edu/herbs/lemon-balm (read 2026-08-22): 'While mint can spread rapidly by underground stems, lemon balm spreads by setting lots of seed and can, if allowed to go unchecked start to overtake the garden'; 'To prevent spreading, prune flowering stalks before they have a chance to set seed'; \"'Compacta' - A more compact form of lemon balm that is also sterile which means the flowers do not set viable seed.\"",
+        "Utah State Univ. Extension, 'How to Grow Lemon Balm in Your Garden', extension.usu.edu/yardandgarden/research/lemon-balm-in-the-garden (read 2026-08-22): 'Lemon balm, like mint spreads rapidly (becomes weedy) and can take over an herb bed'; 'Growing plants in containers helps control this problem'; 'If planted in the soil, harvest the leaves regularly, remove the flowers before they set seed, and dig around the plant edges to reduce root spreading.'"
+      ]
+    },
+    {
+      "id": "R-132",
+      "claim": "Blueberries need strongly acidic soil, about pH 4.0 to 5.5. Above about 5.5 the soil is not acidic enough and the plant cannot take up iron, so the new leaves yellow between the veins (iron chlorosis). Test the soil before planting; if it is too high, lower it with elemental sulfur applied several months ahead, then re-test. A foliar iron spray only greens the leaves for a while and does not fix the soil.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Blueberries are acid-loving plants adapted to low-pH soils. At soil pH above about 5.5, iron is not available to the roots even when it is present in the soil, and the plant develops interveinal chlorosis - yellowing between the veins - on new growth. Lowering the pH with elemental sulfur makes iron available again; spraying the leaves with iron greens them only temporarily and leaves the soil, and so the plant's long-term health, uncorrected.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Minnesota Extension, 'Growing blueberries in the home garden', extension.umn.edu/fruit/growing-blueberries-home-garden (read 2026-08-22): 'Blueberries require a pH between 4.0-5.5'; 'If the pH of the soil is over 5.5, then the soil is not acidic enough for blueberries'; 'Blueberry plants in soil with a pH above 5.5 will struggle to absorb the nutrients they need from the soil'; 'Chlorosis, or yellow discoloring of the leaves, is usually the first sign of a soil pH problem'; figure caption 'iron chlorosis caused by high soil pH'; 'Spraying plants with a foliar chelated iron fertilizer ... will temporarily green up the leaves, but it will not improve plant health in the long term'; 'It is best to amend the pH with sulfur the fall before planting, because it takes several months for sulfur to change the soil pH.'",
+        "Clemson HGIC, 'Blueberry', hgic.clemson.edu/factsheet/blueberry (read 2026-08-22): 'If the pH is above 6.0, select another planting site. If the soil pH is below 6.0 but above the 5.5 limit, apply wettable sulfur (90 percent sulfur)'; '... apply iron sulfate if needed to correct the yellowing of foliage'; 'Have a soil test taken in the fall before planting ... Any sulfur applications should be made at least three months prior to planting because it takes several months for sulfur to reduce the pH.'"
+      ]
+    },
+    {
+      "id": "R-133",
+      "claim": "Raspberry and blackberry canes are biennial: a cane grows its first year (a primocane), fruits its second year (a floricane), then dies. On summer-bearing types, after harvest cut out only the spent floricanes, at ground level, and keep the current year's primocanes - they are next year's crop. Cutting every cane down on a summer-bearing plant removes next year's fruit. Ever-bearing (primocane-fruiting) types fruit on first-year canes and, grown for a single fall crop, can instead be cut wholesale close to the ground in winter.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Each cane lives two years while the crown persists: a vegetative primocane in year one becomes the fruiting floricane in year two, and a floricane dies after fruiting - it will not fruit again or survive another winter. Next year's fruiting wood is therefore this year's primocanes, so removing them removes the crop. The spent floricanes are cut at ground level because dead stubs left standing can harbor canker-causing fungi.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Maryland Extension, 'Growing Raspberries and Blackberries in a Home Garden', extension.umd.edu/resource/growing-raspberries-and-blackberries-home-garden (read 2026-08-22): 'In the second growing year, those one-year-old canes, now called floricanes, produce flowers and fruit on main stems and laterals (side branches)'; 'Floricanes die after fruiting and must eventually be removed because they will not produce another harvest or survive a second winter'; 'When plants are dormant, remove the dead floricanes that fruited the previous season'; 'When removing dead, fruited canes or excess primocanes, make the cuts at ground level so that the dead stubs do not protrude where they can harbor canker-causing fungi'; 'Primocane-bearing raspberry and blackberry cultivars produce fruit on first-year canes.'",
+        "Univ. of Illinois Extension, 'Pruning and Training Raspberries', extension.illinois.edu/small-fruits/pruning-and-training-raspberries (read 2026-08-22): 'primocanes are first year growth and in second year they grow into floricanes which bear fruits'; 'Floricanes are cut after harvest'; 'Primocanes that will bear fruits the following year are thinned to avoid competition'; 'For a single late season crop harvest, canes are cut very close to the ground in December to February.'"
+      ]
+    },
+    {
+      "id": "R-134",
+      "claim": "Do not harvest asparagus at all the first year after planting crowns. When harvest begins - the second or third spring, depending on the source you follow - keep it short: about two weeks in the first harvest year, no more than a month, then let every later spear grow out. From the fourth year on, harvest can run eight to ten weeks. After harvest ends, let the spears grow into ferns and leave them standing: the ferns are what feed the crown for next year.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Every spear is drawn from energy stored in the crown, and the ferns are what refill that store - the fern's photosynthesis is banked underground to produce the following year's spears. A young planting is still expanding its root storage system, so cutting its spears removes the shoots that would have become ferns, and excessive removal of spears weakens the plants. Restraint in the establishment years is what builds a crown strong enough to bear a full harvest for decades.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Minnesota Extension, 'Growing asparagus in home gardens', extension.umn.edu/vegetables/growing-asparagus (read 2026-08-22): 'In the first spring, a year after planting the crowns, do not harvest any spears'; 'The second spring after planting crowns, if the plants were strong and healthy during the previous growing season, begin to harvest when the spears are six to eight inches long'; 'In the first year of harvest, only pick asparagus for two weeks'; 'The fern creates energy that will be stored in the underground portion of the plant to produce the following year's spears'; 'It is important to take care of the ferns even after harvesting to ensure good future harvests.'",
+        "Univ. of Illinois Extension, 'Asparagus' (Home Vegetable Gardening), extension.illinois.edu/gardening/asparagus (read 2026-08-22): 'Asparagus can be harvested the third year after planting crowns, but for no more than one month the first season'; 'The plant is still expanding its root storage system and excessive removal of spears weakens the plants'; 'During the fourth year and thereafter, the spears may be harvested from their first appearance in the spring through May or June (as long as 8 to 10 weeks).'"
+      ]
+    },
+    {
+      "id": "R-135",
+      "claim": "On a new June-bearing strawberry planting, remove every blossom for the whole first season - check weekly and pinch or cut them off; flowering stops by early July. Letting first-year flowers set fruit reduces plant growth, runner production, and the size of next year's crop. Everbearing and day-neutral types are handled differently: remove blossoms only for the first stretch after planting - about four to six weeks, or until early July - then let them fruit, with first berries from August until frost.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "A first-year plant that ripens fruit spends its resources on berries instead of on the root system, leaf canopy and runners (daughter plants) that make up next year's bed; letting the flowers develop into berries reduces plant growth, runner production and the size of next year's crop, while removing them directs the plant's resources into a large root system and a healthy plant. June-bearers crop once a year, so the whole first season is given to establishment; everbearing and day-neutral types keep flowering, so only the establishment window is sacrificed and later flowers are allowed to fruit.",
+      "evidence_status": "verified",
+      "sources": [
+        "Iowa State Univ. Extension, 'I planted strawberries this spring. Do I need to remove this year's blossoms?', yardandgarden.extension.iastate.edu/faq/i-planted-strawberries-spring-do-i-need-remove-years-blossoms (read 2026-08-22): 'During the first growing season, all the blossoms should be removed from June-bearing strawberries'; 'If the flowers are allowed to develop into berries, their development will reduce plant growth, runner production, and the size of next year's crop'; 'Check the strawberry plants once a week and remove the blossoms by pinching or cutting. Flower production on June-bearing strawberries should stop by early July'; 'With everbearing and day-neutral strawberries, remove all blossoms until early July. Any flowers which bloom after this period may be allowed to develop into fruit. The first berries should ripen in August and continue until frost.'",
+        "Univ. of Maryland Extension, 'Growing Strawberries in a Home Garden', extension.umd.edu/resource/growing-strawberries-home-garden (read 2026-08-22): 'For June-bearers, remove the flowers for the entire first season to direct the plant's resources into developing a large root system and healthy plant'; day-neutral - 'Remove flowers for the first 4-6 weeks after planting, and then allow plants to fruit.'"
+      ]
+    },
+    {
+      "id": "R-136",
+      "claim": "Grapes fruit on new shoots that grow from last season's canes, and only a few well-placed canes are kept. Prune hard every dormant season - late winter, after the coldest weather but before the buds swell: removing about 80 to 90 percent of the previous year's growth is normal and necessary. Under-pruning is the common mistake and leaves a tangled vine with fewer flower buds and small, poor-quality fruit.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "Fruit forms only on shoots arising from last season's canes, so a vine left unpruned piles up old wood that no longer fruits while the crop crowds onto too many buds. Cutting back 80 to 90 percent of last year's growth concentrates the vine into a small number of well-placed, productive canes; prune too little and too many buds remain, so the vine over-produces small, poor fruit and becomes a tangled mass.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Illinois Extension, 'Pruning and Training of Grape Vines', extension.illinois.edu/small-fruits/pruning-and-training-grape-vines (read 2026-08-22): 'Grapes flower and produce fruit only on one-year-old canes'; 'Proper pruning often results in the removal of 80 to 90% of the wood'; 'Prune after the coldest part of the winter is past, but before the buds begin to swell. February and early March are usually the best times in Illinois'; 'Most gardeners do not prune severely enough'; 'most home arbors soon become a tangled mass of vines because of failure to prune heavily enough.'",
+        "Univ. of Maryland Extension, 'Training and Pruning Grapes', extension.umd.edu/resource/training-and-pruning-grapes (read 2026-08-22): 'Typically, 90 percent of the previous year's growth is removed during dormant pruning'; 'Failure to prune hard leads to fewer flower buds and small, poor-quality fruit. Insufficient pruning can also trigger a biennial bearing pattern, where plants skip a year between harvests'; 'Prune in March so you can determine the amount of winter damage'; 'Fruits form on second-year wood ...'; 'Grapes produce fruit clusters on canes that are two years old.'"
+      ]
+    },
+    {
+      "id": "R-137",
+      "claim": "Tree fruits differ in whether a lone tree can set a crop. Apples and most European pears are self-unfruitful: one cultivar alone will not set a normal crop, so plant at least two different cultivars whose bloom periods overlap - for apple, a flowering crabapple in bloom at the same time also works. European plums are partially to entirely self-fruitful, and a second European plum cultivar makes fruit set reliable - Japanese and hybrid plums will not cross-pollinate them. Peaches and sour cherries are self-fruitful and may be planted alone. Partner trees must stand near each other: the published distances are within 50 to 100 feet, and 300 feet at most.\n",
+      "refuted": false,
+      "type": "advisory",
+      "grade": "B",
+      "grade_meaning": "Promising",
+      "mechanism": "A self-unfruitful tree will not set a normal crop from its own pollen or the pollen of another tree of the same cultivar; it needs pollen from a genetically different, compatible cultivar, carried by bees while both trees are in bloom. That is why the partner must be a different cultivar, must bloom at the same time, and must stand within a bee's working range - and why a self-fruitful species like peach or sour cherry, whose own pollen sets fruit, bears alone.",
+      "evidence_status": "verified",
+      "sources": [
+        "Univ. of Illinois Extension, 'Fruitfulness and Pollination' (Fruit Trees for Home Gardens), extension.illinois.edu/fruit-trees/fruitfulness-and-pollination (read 2026-08-22): 'Self-fruitful trees may be planted alone or in solid blocks of one variety. Most peach, nectarine, and sour cherry varieties are self-fruitful'; 'A self-unfruitful tree will not set a normal crop of fruits when pollinated by its own pollen or by pollen of another tree of the same variety'; 'Self-unfruitful trees require pollination by pollen from a tree of a different variety'; 'A tree of a self un- fruitful variety should have a pollinator tree planted within 300 feet'; 'European-type plums will not cross pollinate most Japanese type plums'; 'Honey bees are the most important means of transferring pollen between blossoms.'",
+        "Iowa State Univ. Extension, 'Pollination Requirements for Tree and Small Fruits', yardandgarden.extension.iastate.edu/how-to/pollination-requirements-tree-and-small-fruits (read 2026-08-22): 'Fruit trees that require two different varieties for pollination should be planted within 50 to 100 feet of one another to ensure a good fruit set'; 'Apples are considered self-unfruitful. Most apple varieties will set a small crop with their own pollen. For maximum production, however, plant at least two different varieties with overlapping bloom periods to ensure cross-pollination and fruit set'; 'Most flowering crabapples will pollinate nearby apple trees if they bloom at the same time'; 'Most European pears are self-unfruitful. Plant at least two different cultivars for maximum fruit production'; 'European plums are partially to entirely self-fruitful'; 'European plums will not pollinate hybrid plums and vice versa'; 'Tart (also called sour or pie) cherries are self-fruitful'; 'Most peach cultivars are self-fruitful.'",
+        "Penn State Extension, 'Pollination Requirements for Various Fruits and Nuts', extension.psu.edu/pollination-requirements-for-various-fruits-and-nuts (read 2026-08-22): 'Apple: Cross-pollination is always needed to produce adequate fruit crop'; 'Pear: A few varieties are self-fruitful, but a pollinizer will improve the crop'; 'Plum: A wide diversity occurs in the plums. About half of the varieties are self-fruitful and half are not. To be on the safe side, pollinizers should be provided'; 'Red tart: The commercial varieties are self-fruitful'; 'Peach: All commercial varieties, except J. H. Hale, are self-fruitful.'"
+      ]
+    }
+  ]
+}

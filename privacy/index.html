@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Your data and your privacy - Milpa Gardens</title>
+    <meta name="description" content="Exactly what Milpa Gardens collects, where each piece goes, and how to delete or export it - in plain language, matching what the code actually does." />
+    <link rel="icon" href="../web/icons/icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../web/icons/apple-touch-icon.png" />
+    <script>try{var u=localStorage.getItem("gg-units");if(u==="metric")document.documentElement.setAttribute("data-units","metric");var t=localStorage.getItem("gg-temp");if(t==="c")document.documentElement.setAttribute("data-temp","c");var th=localStorage.getItem("gg-theme");document.documentElement.setAttribute("data-theme",(th==="dark"||th==="light")?th:((window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"));var S=["spring","summer","autumn","winter"],p=localStorage.getItem("gg-season"),r;if(S.indexOf(p)>=0){r=p;}else{var n=S[Math.floor(((new Date().getMonth()+10)%12)/3)];r=localStorage.getItem("gg-hemi")==="s"?S[(S.indexOf(n)+2)%4]:n;}document.documentElement.setAttribute("data-season",r);}catch(e){}</script>
+    <link rel="stylesheet" href="../pages.css?v=65afa1525b" />
+  </head>
+  <body>
+    <header class="site">
+      <a class="brand" href="../"><svg class="brandmark" viewBox="0 0 16 15" aria-hidden="true"><g class="t1"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9"/></g><g class="t2"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9"/></g><g class="t3"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9"/></g></svg>Milpa <b>Gardens</b></a>
+      <div class="hright">
+        <button type="button" class="unittoggle" id="unittoggle" aria-label="Switch measurement units between imperial and metric"><span class="ut-i">in</span><span class="ut-m">cm</span></button>
+        <a class="hcta" href="../web/"><span data-copy="header_cta">Open the planner</span></a>
+      </div>
+    </header>
+    <nav class="secnav" aria-label="Sections"><a href="../plants/">Plants</a><a href="../guilds/">Guilds</a><a href="../rules/">Rules</a><a href="../beliefs/">Folklore</a><a href="../guides/">Guides</a><a href="../explainers/">Explainers</a><a href="../frost/">Frost</a><a href="../unsure/">Unsure</a></nav>
+    <main>
+      <h1>Your data and your privacy</h1>
+      <p class="answer">Milpa keeps as little about you as a garden planner can. Signed out, everything stays on your device. Signed in, your gardens sync to your own account and nobody else&#x27;s. Your plans and your photos are never sold, never used to advertise to you, and never mixed into the public plant data.
+      </p>
+      <p class="checked">Last updated <strong>August 22, 2026</strong>. Data controller: Milpa Gardens.</p>
+      <p class="lede">This page says what is collected, who it is sent to, and what you can do about it. Every line is true of what the app actually does; when a data flow changes, this page changes with it.
+      </p>
+      <h2>What Milpa collects, and only when</h2>
+      <dl class="compare">
+        <dt>Your email address</dt><dd>Your account identity, used to sign you in and to show teammates who made a change on a garden you share with them. Collected only if you create an account.
+      </dd>
+        <dt>Your garden&#x27;s location</dt><dd>The address you type and its approximate coordinates, so the planner can find your frost dates, hardiness zone and daylength. Collected only when you enter it.
+      </dd>
+        <dt>Your garden itself</dt><dd>Beds, plantings, seasons, notes, soil observations, and any plants you add. This is the work you do in the app.
+      </dd>
+        <dt>Team messages</dt><dd>If you share a garden with other people, the posts you write to that garden&#x27;s team. Only members of that garden can see them.
+      </dd>
+      </dl>
+      <h2>What never leaves your device</h2>
+      <dl class="compare">
+        <dt>Photos</dt><dd>Every photo you attach stays in this browser and is never uploaded. The export is how you move or back them up.
+      </dd>
+        <dt>Everything, when signed out</dt><dd>With no account, all of the above lives only on this device. The export is your backup, and nothing leaves your browser.
+      </dd>
+      </dl>
+      <h2>Who your data is sent to</h2>
+      <p>Only these services, only for what each line says.</p>
+      <dl class="compare">
+        <dt>Supabase (our backend host)</dt><dd>When you sign in and sync, your account data is stored on Supabase. It is readable only by your own account (and by teammates for a garden you explicitly share). We do not run ads on it and it is never sold.
+      </dd>
+        <dt>Google, the US Census Bureau, and OpenStreetMap</dt><dd>When you look up an address, the text you type is sent to these services to turn it into a location. Only what you typed is sent - never your plans.
+      </dd>
+        <dt>Google and Esri</dt><dd>When you view the satellite map, the app requests map imagery for the area you are looking at. That reveals roughly where you are looking to the imagery provider.
+      </dd>
+        <dt>GoatCounter (visitor counts)</dt><dd>Page visits are counted anonymously - no cookies, no accounts, no personal data. Do Not Track and Global Privacy Control are honored, and your plants and plans are never part of any count.
+      </dd>
+      </dl>
+      <p class="prov">Like any request your browser makes, each of these carries your device&#x27;s IP address to the service it reaches. That is how the web works; we mention it because a privacy page that pretended otherwise would be the dishonest kind.
+      </p>
+      <h2>How it is stored</h2>
+      <p>Your account data is protected at the database by a rule that lets each account read and write only its own rows - there is no way for one account to reach another&#x27;s garden. The plant knowledge that powers the app is a public file built into the app itself; your data never mixes into it.
+      </p>
+      <h2>Your control</h2>
+      <h3>Delete it</h3>
+      <p>Delete your account from the Account page and it removes your account and every record it holds - your gardens, plans, seasons and team messages - in one step, including messages you wrote on gardens others shared with you and any pending invitations addressed to you. You can also delete a single garden on its own.
+      </p>
+      <h3>Take it with you</h3>
+      <p>Export any season as a plain-text file, with its photos in a matching zip. Your data is yours to keep and to move.
+      </p>
+      <h2>What we never do</h2>
+      <ul class="index">
+        <li>Sell your data, or share it to advertise to you.</li>
+        <li>Build a profile of you, or track you across other sites.</li>
+        <li>Put your plants, plans or photos into any analytics.</li>
+        <li>Mix your data into the public plant corpus.</li>
+      </ul>
+      <h2>Contact</h2>
+      <p>Questions, or want your data removed and cannot reach the Account page? Write to us. This page is versioned in the open with the rest of the project, so what it promised and when is a matter of record.
+       <a href="mailto:privacy@milpa.garden">privacy@milpa.garden</a></p>
+    </main>
+    <footer class="site">
+      <div class="foot-brand">
+        <a class="brand" href="../"><svg class="brandmark" viewBox="0 0 16 15" aria-hidden="true"><g class="t1"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9"/></g><g class="t2"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9"/></g><g class="t3"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9"/></g></svg>Milpa <b>Gardens</b></a>
+        <p class="foot-note" data-copy="footer_note">Every claim on this page comes from the project&#x27;s rule corpus, with its evidence grade and its sources shown as recorded. Nothing here is generated prose.</p>
+        <a class="fcta" href="../web/"><span data-copy="footer_cta">Plan a bed with Milpa Gardens</span></a>
+      </div>
+      <nav class="sitenav" aria-label="Explore the site">
+        <div class="foot-col">
+          <p class="foot-h">Learn</p>
+          <a href="../guides/">Guides</a>
+          <a href="../explainers/">Explainers</a>
+          <a href="../compare/">How Milpa compares</a>
+          <a href="../frost-odds/">Frost odds tool</a>
+          <a href="../frost/">Frost dates</a>
+        </div>
+        <div class="foot-col">
+          <p class="foot-h">The corpus</p>
+          <a href="../plants/">Plants</a>
+          <a href="../guilds/">Guilds</a>
+          <a href="../rules/">Rules</a>
+          <a href="../beliefs/">Folklore</a>
+          <a href="../unsure/">What we don't know</a>
+          <a href="../for-educators/">For educators</a>
+          <a href="../search/">Search</a>
+          <a href="../privacy/">Privacy</a>
+        </div>
+      </nav>
+    </footer>
+    <script>(function(){var b=document.getElementById("unittoggle");if(!b)return;b.addEventListener("click",function(){var r=document.documentElement,metric=r.getAttribute("data-units")==="metric";try{if(metric){r.removeAttribute("data-units");localStorage.setItem("gg-units","imperial");}else{r.setAttribute("data-units","metric");localStorage.setItem("gg-units","metric");}}catch(e){}});})();</script>
+    <script>(function(){var band=document.querySelector("nav.contents");if(!band||!("IntersectionObserver"in window))return;var links=[].slice.call(band.querySelectorAll("a[href^='#']"));var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1));});if(secs.some(function(s){return !s;}))return;var current=-1;function mark(i){if(i===current)return;current=i;links.forEach(function(a,j){if(j===i){a.setAttribute("aria-current","true");a.scrollIntoView({inline:"nearest",block:"nearest"});}else{a.removeAttribute("aria-current");}});}var io=new IntersectionObserver(function(){var y=band.getBoundingClientRect().bottom+8,best=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<=y)best=i;});mark(best);},{rootMargin:"0px 0px -55% 0px",threshold:0});secs.forEach(function(s){io.observe(s);});})();</script>
+    <script type="module">const gg=()=>import("../edit.js");try{(localStorage.getItem("gg-editor")==="1"||location.hash==="#edit")&&gg()}catch(e){}addEventListener("hashchange",()=>{try{location.hash==="#edit"&&gg()}catch(e){}})</script>
+    <script>if("serviceWorker"in navigator){navigator.serviceWorker.register("../sw.js").catch(function(){})}</script>
+    <script>(function(){try{var H={"milpa.garden":1,"www.milpa.garden":1};if(!H[location.hostname]||navigator.webdriver)return;if(navigator.doNotTrack==="1"||navigator.globalPrivacyControl===true)return;var q="p="+encodeURIComponent(location.pathname)+"&r="+encodeURIComponent(document.referrer||"")+"&rnd="+Date.now();fetch("https://milpa-garden.goatcounter.com/count?"+q,{method:"GET",keepalive:true,mode:"no-cors"}).catch(function(){});}catch(e){}})();</script>
+  </body>
+</html>

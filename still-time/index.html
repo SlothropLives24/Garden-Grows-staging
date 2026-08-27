@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Can I still sow this? - Milpa Gardens</title>
+    <meta name="description" content="Sown now, will it beat your first freeze? Enter a ZIP: the days left in the season, and the crops that can still finish, from corpus maturity ranges and NOAA…" />
+    <link rel="icon" href="../web/icons/icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../web/icons/apple-touch-icon.png" />
+    <script>try{var u=localStorage.getItem("gg-units");if(u==="metric")document.documentElement.setAttribute("data-units","metric");var t=localStorage.getItem("gg-temp");if(t==="c")document.documentElement.setAttribute("data-temp","c");var th=localStorage.getItem("gg-theme");document.documentElement.setAttribute("data-theme",(th==="dark"||th==="light")?th:((window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"));var S=["spring","summer","autumn","winter"],p=localStorage.getItem("gg-season"),r;if(S.indexOf(p)>=0){r=p;}else{var n=S[Math.floor(((new Date().getMonth()+10)%12)/3)];r=localStorage.getItem("gg-hemi")==="s"?S[(S.indexOf(n)+2)%4]:n;}document.documentElement.setAttribute("data-season",r);}catch(e){}</script>
+    <link rel="stylesheet" href="../pages.css?v=65afa1525b" />
+  </head>
+  <body>
+    <header class="site">
+      <a class="brand" href="../"><svg class="brandmark" viewBox="0 0 16 15" aria-hidden="true"><g class="t1"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9"/></g><g class="t2"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9"/></g><g class="t3"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9"/></g></svg>Milpa <b>Gardens</b></a>
+      <div class="hright">
+        <button type="button" class="unittoggle" id="unittoggle" aria-label="Switch measurement units between imperial and metric"><span class="ut-i">in</span><span class="ut-m">cm</span></button>
+        <a class="hcta" href="../web/"><span data-copy="header_cta">Open the planner</span></a>
+      </div>
+    </header>
+    <nav class="secnav" aria-label="Sections"><a href="../plants/">Plants</a><a href="../guilds/">Guilds</a><a href="../rules/">Rules</a><a href="../beliefs/">Folklore</a><a href="../guides/">Guides</a><a href="../explainers/">Explainers</a><a href="../frost/">Frost</a><a href="../unsure/">Unsure</a></nav>
+    <main>
+      <figure class="exp-hero"><div class="frame"><img src="../web/img/scenes/frost-covered-plants-1.webp" alt="A low green leaf completely crusted in white frost crystals, frosted grass and gravel around it" width="1600" height="1200" loading="lazy" decoding="async"></div><figcaption>Photo: Syrio &middot; <a href="https://commons.wikimedia.org/wiki/File:Frost_on_plants_02.jpg" rel="noreferrer">CC BY-SA 4.0</a>, via Wikimedia Commons.</figcaption></figure>
+      <h1>Can I still sow this? Days left before your first freeze</h1>
+      <p class="answer">Type your ZIP code. It counts the days from today to your first fall freeze &mdash; the odds, from the nearest NOAA station &mdash; and sorts the crops by whether they can still finish if you sow now: which beat even an early freeze, which are a gamble, and which have run out of season.</p>
+      <form class="frosttool" autocomplete="off" onsubmit="return false">
+        <div class="ft-field"><label for="st-zip">US ZIP code</label>
+          <input id="st-zip" name="zip" type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="e.g. 04101" aria-describedby="st-hint" /></div>
+        <p class="ft-hint" id="st-hint">Nothing is sent anywhere. The lookup runs on your device against a table of NOAA records, offline once the page has loaded.</p>
+        <noscript><p class="ft-hint">This lookup needs JavaScript. You can still <a href="../frost/">browse frost dates by location</a> as static pages.</p></noscript>
+      </form>
+      <div class="ft-out" id="st-out" aria-live="polite"></div>
+      <h2>Why the fast end of the range, and why the 1-in-10 date</h2>
+      <p>Every crop matures across a span, not on a day: a radish in 22 to 30 days, a butternut in 90 to 110. This tool counts the FAST end plus a week of slack, because that is the honest best case for a late sowing &mdash; good soil, a warm autumn, no setback. It measures that against your first freeze, which is itself a distribution: half of years freeze by the median date, but 1 year in 10 the freeze comes earlier. A crop that only clears the median loses to an early freeze in some years, so the safe deadline is the 1-in-10 date, and the first group clears even that.</p>
+      <h2>What this tool will not do</h2>
+      <p>It will not call a weather service, invent a maturity for a crop the corpus does not record one for, or promise a harvest. Days-to-maturity shift with soil, weather and variety; a first-freeze date is odds, not a calendar entry. It is a timing guide built from records, and it says which crops are worth the gamble rather than telling you one will succeed.</p>
+      <p class="more"><a href="../frost-odds/">Frost dates for your ZIP</a> &middot; <a href="../frost/">Frost dates by location</a> &middot; <a href="../plants/">All plants</a></p>
+      <script>
+      (function(){
+        var MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
+        var CUM=[0,31,59,90,120,151,181,212,243,273,304,334];
+        var CROPS=[["Radish",22,30],["Mustard Greens",25,50],["Spinach",37,55],["Turnip",40,60],["Arugula",45,60],["Lacy Phacelia",45,60],["Lettuce",45,60],["Cilantro",45,70],["Okra",50,65],["Borage",50,70],["French Marigold",50,70],["Endive",55,70],["Nasturtium",55,70],["Zinnia",56,84],["Basil",60,75],["Scallion",60,80],["Cowpea",60,90],["Dill",60,90],["Carrot",65,80],["Cosmos",70,90],["Crimson Clover",70,90],["Melon",70,90],["Parsley",70,90],["Runner Bean",70,90],["Sunflower",70,100],["Amaranth",70,110],["Leek",70,120],["Potato",70,120],["Tomatillo",75,100],["Edamame",80,100],["Eggplant",80,100],["Fava Bean",80,100],["Rocky Mountain Bee Plant",80,100],["Watermelon",80,100],["Winter Squash",85,110],["Butternut",90,110],["Rutabaga",90,110],["Onion",90,120],["Sorghum",90,120],["Sweet Potato",90,120],["Celery",100,130],["Parsnip",120,180]];                       // [label, dtm_fast, dtm_slow], shortest-first
+        var MARGIN=7;                              // a week of slack on the optimistic end - honest, not heroic
+        function md(doy){var m=11;while(m>0&&CUM[m]>=doy)m--;return MON[m]+" "+(doy-CUM[m]);}
+        function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+        var inp=document.getElementById("st-zip"),out=document.getElementById("st-out");
+        if(!inp||!out)return;
+        var DATA=null,loading=false,pending=null;
+        function load(){
+          if(DATA||loading)return;loading=true;
+          fetch("../frost-odds/data.json").then(function(r){return r.json();}).then(function(d){
+            var F=d.Fd.slice();for(var i=1;i<F.length;i++)F[i]=F[i]+F[i-1];d.F=F;DATA=d;loading=false;
+            if(pending!=null){var z=pending;pending=null;render(z);}
+          }).catch(function(){loading=false;out.innerHTML='<p class="ft-empty">The frost data could not be loaded. Browse <a href="../frost/">frost dates by location</a> instead.</p>';});
+        }
+        function lookup(zi){
+          var F=DATA.F,lo=0,hi=F.length-1,k=-1;
+          while(lo<=hi){var mid=(lo+hi)>>1;if(F[mid]<=zi){k=mid;lo=mid+1;}else{hi=mid-1;}}
+          if(k<0||zi>F[k]+DATA.D[k])return null;
+          return DATA.S[DATA.I[k]];
+        }
+        function todayDoy(){var n=new Date();var s=new Date(n.getFullYear(),0,0);return Math.floor((n-s)/86400000);}
+        function list(rows){
+          var o=['<ul class="st-list">'];
+          for(var i=0;i<rows.length;i++){var c=rows[i];
+            o.push('<li><span class="st-crop">'+esc(c[0])+'</span> <span class="st-dtm">'+c[1]+'&ndash;'+c[2]+' days</span></li>');}
+          o.push("</ul>");return o.join("");
+        }
+        function render(zs){
+          if(!DATA){pending=zs;out.innerHTML='<p class="ft-empty">Looking that up&hellip;</p>';load();return;}
+          var s=lookup(parseInt(zs,10));
+          if(!s){out.innerHTML='<p class="ft-empty">No NOAA station sits near ZIP '+esc(zs)+'. Browse the <a href="../frost/">closest listed locations</a> instead.</p>';return;}
+          var place=esc(s[0])+", "+esc(s[1]),f50=s[10],f10=s[12];
+          // A frost-free (year-round) station, or one whose table predates the fall percentiles: the race
+          // against a first freeze is not the right question, so say that rather than draw a false deadline.
+          if(!f50||!f10||f10>=f50){
+            out.innerHTML='<p class="answer">Frost is rare at <strong>'+place+'</strong>'+(s[11]?' &mdash; the growing season runs about '+s[11]+' days, effectively year-round':'')+'. Days-to-maturity is not the constraint here the way it is where winter closes the season; almost anything you sow has time to finish. Your <a href="../frost/">frost page</a> has the recorded dates.</p>';
+            return;
+          }
+          var td=todayDoy(),toMed=f50-td,toEarly=f10-td;
+          var head='<p class="answer">At <strong>'+place+'</strong>, half of years keep going until <strong>'+esc(md(f50))+'</strong>, but 1 year in 10 the first freeze arrives by <strong>'+esc(md(f10))+'</strong>. Counting from today, that is about <strong>'+toMed+' frost-free days</strong> in a typical year &mdash; '+toEarly+' if the freeze comes early.</p>';
+          if(toMed<=0){
+            out.innerHTML=head+'<p class="st-note">Your typical first freeze has already passed for this year. New sowings of frost-tender crops will not finish now &mdash; the season is done until spring. The dates above are next year\'s.</p>';
+            return;
+          }
+          var safe=[],gamble=[],late=[];
+          for(var i=0;i<CROPS.length;i++){var c=CROPS[i],need=c[1]+MARGIN;
+            if(need<=toEarly)safe.push(c);else if(need<=toMed)gamble.push(c);else late.push(c);}
+          var h=[head];
+          h.push('<p class="st-note">Each crop is counted at the FAST end of its maturity range, plus a week of slack. Planting to beat the median loses the crop to an early freeze in some years, so the honest deadline is the 1-in-10 date &mdash; the first group clears even that.</p>');
+          if(safe.length){h.push('<h2 class="st-h st-safe">Still time, even in an early-freeze year</h2>');h.push(list(safe));}
+          if(gamble.length){h.push('<h2 class="st-h st-gamble">A gamble &mdash; finishes in a typical year, not an early one</h2>');h.push(list(gamble));}
+          if(late.length){h.push('<h2 class="st-h st-late">Too late to start from seed now</h2>');h.push(list(late));}
+          if(!safe.length&&!gamble.length){h.push('<p class="st-note">Nothing on the list can finish from seed in the days left. Fast greens (radish, salad leaves) are your only real options if the season ran unusually long; otherwise this is a season for planning next year.</p>');}
+          h.push('<p class="prov">Freeze dates are the recorded 1991&ndash;2020 normals at NOAA station '+esc(s[0])+' ('+esc(s[2])+'), that station\'s own records, unshifted. Days-to-maturity are the corpus\'s own ranges &mdash; a fast season, good soil and a warm autumn shorten them; a cold snap or poor ground lengthen them. This is a timing guide, not a guarantee.</p>');
+          h.push('<p class="ladder"><a class="ladder-cta" href="../web/#/answers?zip='+esc(zs)+'">Plan the whole bed, not just the deadline &rarr;</a></p>');
+          out.innerHTML=h.join("");
+        }
+        function onchange(){
+          var v=(inp.value||"").replace(/[^0-9]/g,"").slice(0,5);
+          if(v!==inp.value)inp.value=v;
+          if(v.length===5)render(v);else out.innerHTML="";
+        }
+        inp.addEventListener("focus",load);
+        inp.addEventListener("input",onchange);
+        try{var m=(location.search.match(/[?&]zip=(\d{5})/)||[])[1];if(m){inp.value=m;render(m);}}catch(e){}
+      })();
+      </script>
+    </main>
+    <footer class="site">
+      <div class="foot-brand">
+        <a class="brand" href="../"><svg class="brandmark" viewBox="0 0 16 15" aria-hidden="true"><g class="t1"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9"/></g><g class="t2"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9"/></g><g class="t3"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9"/></g></svg>Milpa <b>Gardens</b></a>
+        <p class="foot-note" data-copy="footer_note">Every claim on this page comes from the project&#x27;s rule corpus, with its evidence grade and its sources shown as recorded. Nothing here is generated prose.</p>
+        <a class="fcta" href="../web/"><span data-copy="footer_cta">Plan a bed with Milpa Gardens</span></a>
+      </div>
+      <nav class="sitenav" aria-label="Explore the site">
+        <div class="foot-col">
+          <p class="foot-h">Learn</p>
+          <a href="../guides/">Guides</a>
+          <a href="../explainers/">Explainers</a>
+          <a href="../compare/">How Milpa compares</a>
+          <a href="../frost-odds/">Frost odds tool</a>
+          <a href="../frost/">Frost dates</a>
+        </div>
+        <div class="foot-col">
+          <p class="foot-h">The corpus</p>
+          <a href="../plants/">Plants</a>
+          <a href="../guilds/">Guilds</a>
+          <a href="../rules/">Rules</a>
+          <a href="../beliefs/">Folklore</a>
+          <a href="../unsure/">What we don't know</a>
+          <a href="../for-educators/">For educators</a>
+          <a href="../search/">Search</a>
+          <a href="../privacy/">Privacy</a>
+        </div>
+      </nav>
+    </footer>
+    <script>(function(){var b=document.getElementById("unittoggle");if(!b)return;b.addEventListener("click",function(){var r=document.documentElement,metric=r.getAttribute("data-units")==="metric";try{if(metric){r.removeAttribute("data-units");localStorage.setItem("gg-units","imperial");}else{r.setAttribute("data-units","metric");localStorage.setItem("gg-units","metric");}}catch(e){}});})();</script>
+    <script>(function(){var band=document.querySelector("nav.contents");if(!band||!("IntersectionObserver"in window))return;var links=[].slice.call(band.querySelectorAll("a[href^='#']"));var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1));});if(secs.some(function(s){return !s;}))return;var current=-1;function mark(i){if(i===current)return;current=i;links.forEach(function(a,j){if(j===i){a.setAttribute("aria-current","true");a.scrollIntoView({inline:"nearest",block:"nearest"});}else{a.removeAttribute("aria-current");}});}var io=new IntersectionObserver(function(){var y=band.getBoundingClientRect().bottom+8,best=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<=y)best=i;});mark(best);},{rootMargin:"0px 0px -55% 0px",threshold:0});secs.forEach(function(s){io.observe(s);});})();</script>
+    <script type="module">const gg=()=>import("../edit.js");try{(localStorage.getItem("gg-editor")==="1"||location.hash==="#edit")&&gg()}catch(e){}addEventListener("hashchange",()=>{try{location.hash==="#edit"&&gg()}catch(e){}})</script>
+    <script>if("serviceWorker"in navigator){navigator.serviceWorker.register("../sw.js").catch(function(){})}</script>
+    <script>(function(){try{var H={"milpa.garden":1,"www.milpa.garden":1};if(!H[location.hostname]||navigator.webdriver)return;if(navigator.doNotTrack==="1"||navigator.globalPrivacyControl===true)return;var q="p="+encodeURIComponent(location.pathname)+"&r="+encodeURIComponent(document.referrer||"")+"&rnd="+Date.now();fetch("https://milpa-garden.goatcounter.com/count?"+q,{method:"GET",keepalive:true,mode:"no-cors"}).catch(function(){});}catch(e){}})();</script>
+  </body>
+</html>

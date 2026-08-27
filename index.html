@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="web/icons/icon-192.png" type="image/png" />
+    <!-- The custom domain (milpa.garden, D-037) lands here before /web/. This page must never
+         flash: it declares the app's colour scheme so it is dark-safe, paints nothing but the
+         brand centred on the app background, and redirects before the body renders. It sends the
+         bare domain to the homepage (#/start, the front door D-027) - the app's own fast-path
+         still sends returning visitors straight to Plan on a direct /web/ load. -->
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#166534" />
+    <title>Milpa Gardens</title>
+    <!-- Link unfurlers (Slack, iMessage, X, Facebook) read THIS page for a bare milpa.garden share -
+         they don't run the redirect - so the share card lives here too (acquisition P0). -->
+    <meta name="description" content="Garden planning from evidence, not folklore. Every recommendation cites a rule; every rule states its mechanism and evidence grade." />
+    <link rel="canonical" href="https://milpa.garden/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Milpa Gardens" />
+    <meta property="og:title" content="Milpa Gardens - the garden planner that shows its work" />
+    <meta property="og:description" content="Every recommendation cites a rule; every rule names its mechanism and evidence grade. Odds-not-a-date frost. No companion-planting chart." />
+    <meta property="og:url" content="https://milpa.garden/" />
+    <meta property="og:image" content="https://milpa.garden/web/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Milpa Gardens - the garden planner that shows its work" />
+    <meta name="twitter:description" content="Every recommendation cites a rule; every rule names its mechanism and evidence grade. Odds-not-a-date frost. No companion-planting chart." />
+    <meta name="twitter:image" content="https://milpa.garden/web/og.png" />
+    <!-- The site's identity for answer/generative engines (O100 lever 1b), stated ONCE, here on the
+         root - the generated pages reference the same Organization by the same name/url/logo. Keys
+         sorted and separators fixed to match build_pages.py jsonld_script, one serialization style
+         everywhere. There is deliberately NO SearchAction: the site has no search endpoint, and
+         structured data that names a URL that does not exist is exactly the overstatement the
+         honesty invariant forbids. -->
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","logo":{"@type":"ImageObject","url":"https://milpa.garden/web/icon-512.png"},"name":"Milpa Gardens","url":"https://milpa.garden/"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","description":"Garden planning from evidence, not folklore. Every recommendation cites a rule; every rule states its mechanism and evidence grade.","name":"Milpa Gardens","publisher":{"@type":"Organization","name":"Milpa Gardens","url":"https://milpa.garden/"},"url":"https://milpa.garden/"}</script>
+    <!-- redirect before paint: replace() runs in <head>, adds no history entry, no visible flash -->
+    <script>location.replace("./web/#/start");</script>
+    <noscript><meta http-equiv="refresh" content="0; url=./web/#/start" /></noscript>
+    <style>
+      html, body { height: 100%; margin: 0; }
+      body {
+        display: grid; place-items: center;
+        background: Canvas; color: light-dark(#15803d, #4ade80);
+        font: 600 1.25rem/1.4 system-ui, sans-serif;
+      }
+      a { color: inherit; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <a href="./web/#/start">🌱 Milpa Gardens</a>
+  </body>
+</html>

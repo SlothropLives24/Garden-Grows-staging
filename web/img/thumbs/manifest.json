@@ -1,0 +1,1164 @@
+{
+"cards": [
+"allium_cepa",
+"brassica_oleracea",
+"capsicum_annuum",
+"cucumis_sativus",
+"cucurbita_pepo",
+"daucus_carota",
+"lactuca_sativa",
+"ocimum_basilicum",
+"phaseolus_vulgaris",
+"pisum_sativum",
+"rheum_rhabarbarum",
+"ribes_spp",
+"rubus_idaeus",
+"solanum_lycopersicum",
+"solanum_melongena",
+"solanum_tuberosum",
+"tagetes_patula",
+"vitis_spp",
+"zea_mays"
+],
+"dims": {
+"abelmoschus_esculentus": [
+800,
+533
+],
+"achillea_millefolium": [
+642,
+800
+],
+"allium_ampeloprasum": [
+545,
+800
+],
+"allium_cepa": [
+800,
+800
+],
+"allium_fistulosum": [
+800,
+600
+],
+"allium_sativum": [
+800,
+533
+],
+"allium_schoenoprasum": [
+800,
+450
+],
+"amaranthus_cruentus": [
+533,
+800
+],
+"amorpha_fruticosa": [
+600,
+800
+],
+"anethum_graveolens": [
+800,
+536
+],
+"apium_graveolens": [
+628,
+475
+],
+"artemisia_dracunculus": [
+720,
+635
+],
+"asparagus_officinalis": [
+315,
+800
+],
+"beta_vulgaris": [
+800,
+533
+],
+"borago_officinalis": [
+800,
+600
+],
+"brassica_juncea": [
+449,
+800
+],
+"brassica_napus": [
+800,
+600
+],
+"brassica_oleracea": [
+800,
+687
+],
+"brassica_rapa": [
+800,
+600
+],
+"capsicum_annuum": [
+600,
+800
+],
+"cichorium_endivia": [
+800,
+497
+],
+"citrullus_lanatus": [
+600,
+800
+],
+"cleome_serrulata": [
+800,
+600
+],
+"coriandrum_sativum": [
+800,
+600
+],
+"cosmos_bipinnatus": [
+800,
+600
+],
+"cucumis_melo": [
+800,
+536
+],
+"cucumis_sativus": [
+450,
+800
+],
+"cucurbita_maxima": [
+800,
+483
+],
+"cucurbita_moschata": [
+800,
+533
+],
+"cucurbita_pepo": [
+800,
+600
+],
+"daucus_carota": [
+496,
+800
+],
+"elaeagnus_umbellata": [
+800,
+800
+],
+"eruca_sativa": [
+511,
+800
+],
+"ficus_carica": [
+572,
+800
+],
+"foeniculum_vulgare": [
+800,
+600
+],
+"fragaria_x_ananassa": [
+800,
+533
+],
+"glycine_max": [
+600,
+800
+],
+"helianthus_annuus": [
+800,
+530
+],
+"ipomoea_batatas": [
+800,
+599
+],
+"lactuca_sativa": [
+800,
+800
+],
+"lupinus_perennis": [
+800,
+533
+],
+"malus_domestica": [
+800,
+725
+],
+"melissa_officinalis": [
+530,
+800
+],
+"mentha_spicata": [
+800,
+612
+],
+"narcissus_spp": [
+800,
+600
+],
+"ocimum_basilicum": [
+800,
+533
+],
+"origanum_vulgare": [
+800,
+533
+],
+"pastinaca_sativa": [
+800,
+600
+],
+"petroselinum_crispum": [
+800,
+599
+],
+"phacelia_tanacetifolia": [
+800,
+643
+],
+"phaseolus_coccineus": [
+800,
+533
+],
+"phaseolus_lunatus": [
+600,
+800
+],
+"phaseolus_vulgaris": [
+627,
+800
+],
+"physalis_philadelphica": [
+800,
+533
+],
+"pisum_sativum": [
+600,
+800
+],
+"prunus_cerasus": [
+300,
+276
+],
+"prunus_domestica": [
+800,
+534
+],
+"prunus_persica": [
+800,
+545
+],
+"pyrus_communis": [
+800,
+533
+],
+"raphanus_sativus": [
+800,
+600
+],
+"rheum_rhabarbarum": [
+800,
+560
+],
+"ribes_spp": [
+533,
+800
+],
+"rosmarinus_officinalis": [
+600,
+800
+],
+"rubus_fruticosus": [
+800,
+533
+],
+"rubus_idaeus": [
+800,
+533
+],
+"salvia_officinalis": [
+800,
+533
+],
+"solanum_lycopersicum": [
+800,
+665
+],
+"solanum_melongena": [
+733,
+800
+],
+"solanum_tuberosum": [
+800,
+569
+],
+"sorghum_bicolor": [
+602,
+800
+],
+"spinacia_oleracea": [
+539,
+703
+],
+"symphytum_x_uplandicum": [
+720,
+513
+],
+"tagetes_patula": [
+800,
+686
+],
+"thymus_vulgaris": [
+800,
+438
+],
+"trifolium_incarnatum": [
+800,
+600
+],
+"trifolium_repens": [
+800,
+600
+],
+"tropaeolum_majus": [
+800,
+600
+],
+"vaccinium_corymbosum": [
+800,
+523
+],
+"vicia_faba": [
+600,
+800
+],
+"vigna_unguiculata": [
+600,
+800
+],
+"vitis_spp": [
+515,
+639
+],
+"zea_mays": [
+426,
+568
+],
+"zinnia_elegans": [
+600,
+800
+]
+},
+"heroes": [
+"cucurbita_maxima",
+"ocimum_basilicum",
+"solanum_tuberosum",
+"tagetes_patula",
+"thymus_vulgaris",
+"zea_mays"
+],
+"og": {
+"abelmoschus_esculentus": [
+800,
+420
+],
+"achillea_millefolium": [
+642,
+337
+],
+"allium_cepa": [
+800,
+420
+],
+"allium_fistulosum": [
+800,
+420
+],
+"allium_sativum": [
+800,
+420
+],
+"allium_schoenoprasum": [
+800,
+420
+],
+"amorpha_fruticosa": [
+600,
+315
+],
+"anethum_graveolens": [
+800,
+420
+],
+"apium_graveolens": [
+628,
+330
+],
+"artemisia_dracunculus": [
+720,
+378
+],
+"beta_vulgaris": [
+800,
+420
+],
+"borago_officinalis": [
+800,
+420
+],
+"brassica_napus": [
+800,
+420
+],
+"brassica_oleracea": [
+800,
+420
+],
+"brassica_rapa": [
+800,
+420
+],
+"capsicum_annuum": [
+600,
+315
+],
+"cichorium_endivia": [
+800,
+420
+],
+"citrullus_lanatus": [
+600,
+315
+],
+"cleome_serrulata": [
+800,
+420
+],
+"coriandrum_sativum": [
+800,
+420
+],
+"cosmos_bipinnatus": [
+800,
+420
+],
+"cucumis_melo": [
+800,
+420
+],
+"cucurbita_maxima": [
+800,
+420
+],
+"cucurbita_moschata": [
+800,
+420
+],
+"cucurbita_pepo": [
+800,
+420
+],
+"elaeagnus_umbellata": [
+800,
+420
+],
+"foeniculum_vulgare": [
+800,
+420
+],
+"fragaria_x_ananassa": [
+800,
+420
+],
+"glycine_max": [
+600,
+315
+],
+"helianthus_annuus": [
+800,
+420
+],
+"ipomoea_batatas": [
+800,
+420
+],
+"lactuca_sativa": [
+800,
+420
+],
+"lupinus_perennis": [
+800,
+420
+],
+"malus_domestica": [
+800,
+420
+],
+"mentha_spicata": [
+800,
+420
+],
+"narcissus_spp": [
+800,
+420
+],
+"ocimum_basilicum": [
+800,
+420
+],
+"origanum_vulgare": [
+800,
+420
+],
+"pastinaca_sativa": [
+800,
+420
+],
+"petroselinum_crispum": [
+800,
+420
+],
+"phacelia_tanacetifolia": [
+800,
+420
+],
+"phaseolus_coccineus": [
+800,
+420
+],
+"phaseolus_lunatus": [
+600,
+315
+],
+"phaseolus_vulgaris": [
+626,
+329
+],
+"physalis_philadelphica": [
+800,
+420
+],
+"pisum_sativum": [
+600,
+315
+],
+"prunus_domestica": [
+800,
+420
+],
+"prunus_persica": [
+800,
+420
+],
+"pyrus_communis": [
+800,
+420
+],
+"raphanus_sativus": [
+800,
+420
+],
+"rheum_rhabarbarum": [
+800,
+420
+],
+"rosmarinus_officinalis": [
+600,
+315
+],
+"rubus_fruticosus": [
+800,
+420
+],
+"rubus_idaeus": [
+800,
+420
+],
+"salvia_officinalis": [
+800,
+420
+],
+"solanum_lycopersicum": [
+800,
+420
+],
+"solanum_melongena": [
+732,
+384
+],
+"solanum_tuberosum": [
+800,
+420
+],
+"sorghum_bicolor": [
+602,
+316
+],
+"symphytum_x_uplandicum": [
+720,
+378
+],
+"tagetes_patula": [
+800,
+420
+],
+"thymus_vulgaris": [
+800,
+420
+],
+"trifolium_incarnatum": [
+800,
+420
+],
+"trifolium_repens": [
+800,
+420
+],
+"tropaeolum_majus": [
+800,
+420
+],
+"vaccinium_corymbosum": [
+800,
+420
+],
+"vicia_faba": [
+600,
+315
+],
+"vigna_unguiculata": [
+600,
+315
+],
+"zinnia_elegans": [
+600,
+315
+]
+},
+"og_scene": {
+"bean-teepee-trellis": [
+1200,
+630
+],
+"cold-frame-cloche": [
+1024,
+538
+],
+"cover-crop-field": [
+1200,
+630
+],
+"frost-covered-plants": [
+1200,
+630
+],
+"garden-beds-summer": [
+1200,
+630
+],
+"hand-sowing": [
+1200,
+630
+],
+"marigold-field": [
+1200,
+630
+],
+"seedling-emerging": [
+1200,
+630
+]
+},
+"scene_cards": {
+"allotment-plots": {
+"dims": [
+1600,
+900
+],
+"sha": "e324ba7dfcbbb6cac284058ad2edccba08106dc3b590977152b0feb99d202b49"
+},
+"autumn-harvest-basket": {
+"dims": [
+1600,
+1273
+],
+"sha": "9c57e117379a2509fd8d7082e8c31890f0c7efe941e1b86e9bcdbd7f37f8a65b"
+},
+"bean-teepee-trellis": {
+"dims": [
+1600,
+1067
+],
+"sha": "d01edd9ab472f95b5d1823f364bac9d97bd65bebe3cf5e99e41f63c36aee6104"
+},
+"berry-bushes-fruit": {
+"dims": [
+1600,
+1200
+],
+"sha": "eb2b28774cc3c54a0ab9d94f68889229278d4185bcf669a4255e37881a6db242"
+},
+"cabbage-brassica-bed": {
+"dims": [
+1600,
+1065
+],
+"sha": "9b502d9ce0e4285dca53c4ab22fd361bc4f6c465752ef7c3dd0ddae409d5ac70"
+},
+"celery-cabbage-bed": {
+"dims": [
+1600,
+900
+],
+"sha": "e8e62a8ddb92125a3c7324a8306537b9858689c5ee25c0ba3521a6a2e10edbe4"
+},
+"cold-frame-cloche": {
+"dims": [
+1024,
+768
+],
+"sha": "9d8bb24a7578744c338c0d953fbda3405828cf26c323c334722d731f66610375"
+},
+"compost-pile-garden": {
+"dims": [
+1600,
+1200
+],
+"sha": "5da15878072866e77438880e648c25c40e98ab1bb4533c958c29b13be6e15313"
+},
+"container-pots-vegetables": {
+"dims": [
+1000,
+750
+],
+"sha": "96aa77333a79fe8262ef56cc32a50b8951d160ca0009f79b21ab0bcd49ff97f9"
+},
+"corn-field-rows": {
+"dims": [
+1600,
+1200
+],
+"sha": "e3ad2b5e6e6178bf19f969442323b329d0515e46fd7a5ed391935399c8bd2be2"
+},
+"cover-crop-field": {
+"dims": [
+1600,
+901
+],
+"sha": "f7f864d936df09b84dcf15046bd1e6045fcda0211ca95495c0f4137772205205"
+},
+"currants-gooseberries": {
+"dims": [
+1600,
+1200
+],
+"sha": "b22f3f2ac3c6a2db24c95de429d603035dc4cfe0b9bf1051d95cb5e713f2e3c4"
+},
+"drip-irrigation-bed": {
+"dims": [
+1600,
+1200
+],
+"sha": "893aa26044ee030508633b525cb41109e27127e7d0a9d9b26a2381e1f09a9f53"
+},
+"floating-vegetable-garden": {
+"dims": [
+1600,
+1066
+],
+"sha": "e82ec40555299b9cc37588883981d62b2e4027c1020aa65e50a03c47ff7e7745"
+},
+"frost-covered-plants": {
+"dims": [
+1600,
+1200
+],
+"sha": "a667e3ae84beeaf6517c44cf067376bec4f871738ed0f454da4fa9a6d72b33eb"
+},
+"garden-beds-summer": {
+"dims": [
+1600,
+1200
+],
+"sha": "ad6e1b50b68555e36a5e51c5bb6a385a1df72eaa0fb13486d4f8e27dafa51a9f"
+},
+"garden-fork-digging": {
+"dims": [
+1600,
+1068
+],
+"sha": "31f87b2aea8324524cf9032accc5e3415b326183461aec01fe0fb6bed3a213ad"
+},
+"garden-path-beds": {
+"dims": [
+1600,
+900
+],
+"sha": "d15aaacd2a3a9c564a975ed9b5166960bf4bcacb9ebb6209030600b161eb3bf6"
+},
+"garden-rows-field": {
+"dims": [
+1600,
+1067
+],
+"sha": "2205586dc2f952bfda7af7ef16e7a28114608a70b6dade41605b5a3550690c49"
+},
+"garden-tools": {
+"dims": [
+1600,
+1200
+],
+"sha": "85eb2f0f656059f36be89bbf1c06ae43016cbda051a46708e68f2d212d59d699"
+},
+"gooseberry-bushes-field": {
+"dims": [
+640,
+480
+],
+"sha": "b63707f9f3346d67322caf5873ee91835279e8802d2c0ec07e910231f3235713"
+},
+"gooseberry-harvest": {
+"dims": [
+1600,
+1200
+],
+"sha": "ecb0b5d2dd5e244f4ef21b577169d4df4f6b1aa7f1728f4f9637537ce7f88c07"
+},
+"greenhouse-garden": {
+"dims": [
+1600,
+1007
+],
+"sha": "e40acc713e400cfbf8ce929ea9cfb1e69bccd732b29626da6069f4312519b923"
+},
+"grow-box": {
+"dims": [
+700,
+559
+],
+"sha": "517e2b20b765024c086475b73e48583583caffc8c30fb80c6d8199d3a680e079"
+},
+"hand-sowing": {
+"dims": [
+1600,
+1067
+],
+"sha": "af3ff7ddab5f48ba3af990aa6497b825595a393ca011fe43f91d5a33d4f15867"
+},
+"harvest-basket-vegetables": {
+"dims": [
+1600,
+1067
+],
+"sha": "7f50eb65d8f5993c6640bbe599a89bf0652e67de10890b70f5b93fe814738b9f"
+},
+"herb-garden": {
+"dims": [
+1600,
+1067
+],
+"sha": "b6bb968645f5dd696097b02e98a2b2072c89f6dfee32d9a9c47d523d9d612130"
+},
+"herb-parterre": {
+"dims": [
+1600,
+1048
+],
+"sha": "e54b4573e5f073a6d49bc5ce1b89ab06d73f9337d8b0cfc55e0dce68e6ebe833"
+},
+"kitchen-garden-potager": {
+"dims": [
+1600,
+1067
+],
+"sha": "6c8c3801a0fcf7e080d62557469b30fe6aec3f10c3718cc0059ece3b260102ac"
+},
+"leafy-greens-bed": {
+"dims": [
+1600,
+1200
+],
+"sha": "84beb42d4f8c10443e9b19de21e8118efd012ac21f001765789a228749dda2e3"
+},
+"marigold-field": {
+"dims": [
+1600,
+1065
+],
+"sha": "b29c00f7481cdbd71bfdea8f75f194c581fd95203bf19e1d7d83abe66bce5b62"
+},
+"mulch-straw-bed": {
+"dims": [
+1600,
+1083
+],
+"sha": "597775d31ffd67d25af88d1138ce703cd47c3c2dab327157f4dbefb9aa941aba"
+},
+"pepper-plants-fruiting": {
+"dims": [
+1600,
+1059
+],
+"sha": "c00ade33dfb5affa9df9284ddebece501a25d30c83fd87ee9f6187208ec5412d"
+},
+"pollinator-bee-flower": {
+"dims": [
+1600,
+968
+],
+"sha": "9f16feb22c00c850fa77a1278e5a567280fa9d06ee75ff1a733081d1e276b0e2"
+},
+"potager-arch-path": {
+"dims": [
+1600,
+1067
+],
+"sha": "f6153d77dd42a54fa511d4f86f609411e304ba26c4d458d899d33d7ed2fd0958"
+},
+"potager-obelisks": {
+"dims": [
+1600,
+1067
+],
+"sha": "7a85e05e83d2188c9815adae25f3c4d6d675fd6b53f25af3d2c943b39dc7700d"
+},
+"pumpkin-patch": {
+"dims": [
+1600,
+1067
+],
+"sha": "b4d9152df9dd15461358e78fee3e22bcd4ad0071d0f907e1b0828cca7c7761ee"
+},
+"rain-barrel-garden": {
+"dims": [
+1600,
+1068
+],
+"sha": "a9d33291be30a253c0f59b821a9fb69197b959aac0f1f5bc0c180a68dd5505da"
+},
+"root-vegetables-harvest": {
+"dims": [
+1600,
+1067
+],
+"sha": "b0df051c5ec6681219ccb952ba930399e99191d8a5847bf86347ea8d396bd4a0"
+},
+"seed-tray-cells": {
+"dims": [
+1600,
+721
+],
+"sha": "c5a21a685278032dcc476169a1bf90725ab809ec04627bdbf13565337b13119b"
+},
+"seedling-emerging": {
+"dims": [
+1600,
+1028
+],
+"sha": "ac196beb049b1433fb8afc1c6318a6fc1ddce3b47e5292e8ce369f92a2fee996"
+},
+"seedling-trays-topdown": {
+"dims": [
+1600,
+721
+],
+"sha": "ae895b7b28e1f96539f9321b61b6161067e81161740ab4c301d4c6e392092703"
+},
+"seedlings-tray": {
+"dims": [
+1600,
+721
+],
+"sha": "1092ecc040e9e09a4d325f33b11cc801efaf14232469b27a620e3ff50a7bf8fb"
+},
+"spring-planting-bed": {
+"dims": [
+1600,
+1035
+],
+"sha": "7b8a7cedb338d4a01c0263907dd25b55d111ddfd85517b27acef25f8e02e969b"
+},
+"squash-flower-mulch": {
+"dims": [
+1600,
+1067
+],
+"sha": "34be95a31dfcc5fa598e06087250547b9f8062098a8da7c8eb6b8e49a7a53e5f"
+},
+"squash-vines-sprawling": {
+"dims": [
+1280,
+960
+],
+"sha": "8d325dbe4d2c21a0288234d5b0b84b9f13cd6857ece3c45dfbbf5b13f5bf6aed"
+},
+"straw-bale-garden": {
+"dims": [
+1600,
+1067
+],
+"sha": "883faa3f6efd77a30ead69e97fc31805860f88d922a7b0f5dea59afa96201a73"
+},
+"sunflower-veg-border": {
+"dims": [
+1600,
+900
+],
+"sha": "0315e2742522b10979597f36439d713612dd4d079052afdcc7bb47859f3e3924"
+},
+"tomatoes-on-vine": {
+"dims": [
+1600,
+1067
+],
+"sha": "109aa20dc829421a8fd720187b06d5a56ddcdb1468e60a095dea396bd9b6b9de"
+},
+"walled-herb-garden": {
+"dims": [
+1600,
+1067
+],
+"sha": "6514831137dbba0a2066634c24a28490364e3b1c3b0429edc51fb12edc848f2c"
+},
+"water-butt-greenhouse": {
+"dims": [
+1600,
+1200
+],
+"sha": "1e50f9e811aac0955bfd8eb083bcc729e86853208a89cd5aff4c4d64cb29c825"
+},
+"watering-can-bed": {
+"dims": [
+1600,
+1067
+],
+"sha": "2bdaa739072fa94afb2128423d9580563e3f974c82402b627073f8cc81bb7e72"
+},
+"wheelbarrow-garden": {
+"dims": [
+1600,
+1068
+],
+"sha": "adaa8f95b0bb995180f492394429d43545a4c66cae1b8ec603391437f37254ab"
+},
+"winter-allotment-plots": {
+"dims": [
+640,
+459
+],
+"sha": "f1505c307bacda170c877767ba791683877d07e9a9c9730adb7ed6c21b3ac2d5"
+},
+"winter-allotment-scarecrow": {
+"dims": [
+640,
+467
+],
+"sha": "14b3d15684b620d9bf8691e23c089baa03bd67a1c5356a54edbfd79a75e1d4ea"
+},
+"winter-garden-frost": {
+"dims": [
+1280,
+914
+],
+"sha": "54c0d295d83fee1f11818beaf50c7f2567bede5a90fa1eb75f6fb68b3c33a4cc"
+},
+"zucchini-plant": {
+"dims": [
+1600,
+1065
+],
+"sha": "e6e94cae553978e29548ad76c628e862a8f4e3da987d69efa69f94c937266460"
+}
+},
+"sources": {
+"abelmoschus_esculentus": "f65cb6a31b0fadc5193a97e956ae18eb5032c429e664d885d11900cd68686c6d",
+"achillea_millefolium": "e686b38255d67db9be20ed95c190789cf53699a56db7dc78a500d28416bab8da",
+"allium_ampeloprasum": "b0809197c53472ea2d03fde20da39128124b6a1fa03f57fbbc9e278cf020a9ff",
+"allium_cepa": "f66ebd0aa0dab604cd8c3c4790a9204d5a82c0874efa103c93f890ee452c28eb",
+"allium_fistulosum": "2ab27358c9dd92b13addedfaee60e985633b5da4a84cad2f141c036548177622",
+"allium_sativum": "2b0139f2ee51e4d3cfe6c7585e658adcbccc7d8441b79ab65110bdc0dc110da4",
+"allium_schoenoprasum": "c6ed1f4c9f639031d8ef22da16daed4a9697e67ac6b757221dc8ff393eb02c77",
+"amaranthus_cruentus": "421c93bcef9933be0fe7d92a4efd06da15cd423909d36efad8f01da42078c108",
+"amorpha_fruticosa": "ceef04e2a43c19a8807f7cb49246428d079c6ba082f53b4e3697fed37fa4b714",
+"anethum_graveolens": "f9fcc1bb00091403b9bc6e2cc7d80c26d8aa1565030361b115a73d4d37005473",
+"apium_graveolens": "f6c3c3613a8982fc63fb0b455da6e410a6c83911b6b3564d77dad10cb5df506f",
+"artemisia_dracunculus": "813d71c087f707829a8de820792738eabfbc1999c1e89bfe9f7c7c3941f00981",
+"asparagus_officinalis": "b6d5c2d21c7a67f230f2ddbd36d752ecb4fc15205c1b588e08f134df3204c3cd",
+"beta_vulgaris": "eb7bb64defd109cec5a9f323666659fc55450f7db8e5ceba8b4fb33aec5ce8ce",
+"borago_officinalis": "d4db0f28f64c734e6076910a739643858170a20a2957086605df46aaaf3988bd",
+"brassica_juncea": "fe902938a2a6133d608a3f95d51a4ca2581206ae61748a697936c0c504633a85",
+"brassica_napus": "cc86a972f48502cc98927a16a2cb85024e55fd2f3a78b2d49664f84e56aaf5e2",
+"brassica_oleracea": "83a5595324fbac4f0486c4d4d75898a9ff06f7dad02961c078de418d107c9342",
+"brassica_rapa": "b92a02a76230396cbcba85a8f13736f6c57ebf6d653cb79ea4eb02929e5ed110",
+"capsicum_annuum": "f0c64039e4c0ff0c7789a645d9be46a45aac85fac9747aba3e9796f765e4b26c",
+"cichorium_endivia": "e38b820a2e2432eda55525d31248a7df4da129238ba9bd2a2221c2d33c7eed17",
+"citrullus_lanatus": "47c0fedd6529233910db52483173903b277046031abed9373ac23236f141bc1f",
+"cleome_serrulata": "f087ecab52cb30a340026328772b4ec3498f4272716e777e0fb479f9e50e7e00",
+"coriandrum_sativum": "7199f02c1f5ac3bcf24df568f874cc72c173b565c4e964eef587d8050841d622",
+"cosmos_bipinnatus": "bd25451d44f2bcc076b4f1ce46af876fbcb64136c88010ef5bd495fe7cf57063",
+"cucumis_melo": "087756849fa437ca522d8f5fe6e7348a79bc1efaf0b857e548abdf3b31cce56b",
+"cucumis_sativus": "4b7e9f824e57c599f1808883389b95840ace370ca3e345dff8ada0864c939639",
+"cucurbita_maxima": "b3963c6c6fec683957de9a9c0e62cc4bf5c3d9fb54841e7783490ba24e9b18ce",
+"cucurbita_moschata": "2f1057f489e0dee7dd76b22769d2772d495a6e603b0fec558014a9dc5f479367",
+"cucurbita_pepo": "3de4e05a6b1955f8782587fe38244743508ba81dde6257be29f674895fd58008",
+"daucus_carota": "8a43a260d771e0e52093477ad3fc6c9c2f38903100af5d683fdb2ab0ecae876f",
+"elaeagnus_umbellata": "aa9670d607f2ad0f1a96c9118d9a968e42452afd5c0597d9631336eb56848dc7",
+"eruca_sativa": "d473a63890fef903d3c387d52f035cedbe17f783a9e1145d737803fbc45aeb41",
+"ficus_carica": "2c2851e1c5ab7928d281540075a7d3c1d33c88959282a33f762d0ee0f9a9f3a3",
+"foeniculum_vulgare": "77643951540c25ab5d3bda0cd83c375e5643fdd0d72aeaa7ce2e6a3aa3e33aae",
+"fragaria_x_ananassa": "a2f4ae1e71d40776342a240a5973130d4c48d8fe6042dbff3f601c9a0b5ec3e3",
+"glycine_max": "1ab71b7fb3f8f7777ba17be90ba4a3a839f96e1fd76394d419393f750947557f",
+"helianthus_annuus": "d5a3245ee8d37ba12c549d8fa334d056403bed620ffe30347b1109d26d3f3981",
+"ipomoea_batatas": "bc01bd3207eb00b95e533cb80199282dbf8b178e79fffdef186d6c961a7a2641",
+"lactuca_sativa": "e1b5e53c96dde060f70068bbf38007e86f956186976a52aaafb14a0772f3bf45",
+"lupinus_perennis": "6d117ee2b7edca27654a0c16655a149935b49bc64156aeb77e8c02d5fdd7b0fc",
+"malus_domestica": "3f71e5258e9d67930be3fce472dc9b0661028b4a55d391dec85902f344fa455c",
+"melissa_officinalis": "9118055b82e7dfd9c407a14575b8286ad36319fefeb2acfa979fbe852e0db42d",
+"mentha_spicata": "cae6ad830280ffef6e2c6a78040df5c8c0d6daa8579418edd904e4f05e93bac4",
+"narcissus_spp": "48a98825508b0f24ce3db36250f2c901e09cbb2cbd132419ecbc321106b25459",
+"ocimum_basilicum": "c7e4a050522f26cf38580c92fd4183f0576fe70bcbc00f31bc248d07bcb9264c",
+"origanum_vulgare": "d0c4272dc37e756f0ab3f1c8393931bfebc9eb9efe3e48426b73ca2277dd0eef",
+"pastinaca_sativa": "94b27df2071938141f620e155efd9a193f1cb8d72b7ad0aad1939f24c0607983",
+"petroselinum_crispum": "565d514a0d5b41c521c14ea88ce1301a2d0a3d0faf9896059aa2b447fd695244",
+"phacelia_tanacetifolia": "41aea319ab77f0785617f6a4906baba81794e406b23a80c8d81f2a3bf8c61fb0",
+"phaseolus_coccineus": "a6cdaaedd8bd8d92b05642fcdd3cb76429955722896bcafe4025e241cad3b66b",
+"phaseolus_lunatus": "f63732443038573248c354b7cf884e3f69d5cdf7eb557e840760c0ae2e081d12",
+"phaseolus_vulgaris": "afd2bd8db7073d7814d672f4588d7089faaec3031589a229b617aad2e3362a9d",
+"physalis_philadelphica": "f85d8a72c77800117aa8b38cf23216df5fbf81133c1784ef888d143b8d705c8e",
+"pisum_sativum": "ff9ae3bec320140bf798ae2cd4cc266fb2fb78e7b639b386acf15a5bfa5684f5",
+"prunus_cerasus": "2687291463db8c98b88647a4736b94cc7409a5db6fb8ffe04d7ec95c2a1f407e",
+"prunus_domestica": "d2fc72d05b0f88a5a859cd1bbac38fd155cb963563c904caaa170791c6ba00fe",
+"prunus_persica": "a6dc639582a0c16187763da502be4047aad262359e7bb6bb3faab4169ff6eac8",
+"pyrus_communis": "f2e78940587ead154697cdab2a966a89b6d3b918b6c5da9c9a983b863f6e1992",
+"raphanus_sativus": "c1723b0a861e7195fed5807008d3c0480b195b977c614944d1795e03183f35fa",
+"rheum_rhabarbarum": "fe150c776d7e2847b1fb866ad60dcd746ef3882e12c7e2700b37e9d7cde37c0e",
+"ribes_spp": "92afcbf1985c3f7f59acdc70d2983b6218af2a5951db6506b490c4d68eea146a",
+"rosmarinus_officinalis": "84116a9ede4bb56163c07b7f2193590d86b965c441d5d0488b3a8b6aa66b7b1f",
+"rubus_fruticosus": "691e1f19ef7405af91261b46ddea40889398c15790a8260ff6bf53cae1d9e8ef",
+"rubus_idaeus": "c7aba003731cb52b0f5a4cf83680fc73c014510b9c66b1b6c6bfff3a49e76450",
+"salvia_officinalis": "016d62c7a2f6fb1f04dbb656c2fc1c11c34110d1e0d54302593506f326a665ee",
+"solanum_lycopersicum": "329329f19655abe940fc9c31fb9f7cee7103597aeac9821a545b4af5ef2be1a4",
+"solanum_melongena": "9825e9d4157460c39bcf620a1342ca553c0854cf54acf0c1dd51885a424bde51",
+"solanum_tuberosum": "4b8b0bb3de0dc1498bb6d970dce9ecf29807d153c552f154a5a99eb3062dab38",
+"sorghum_bicolor": "064ebdef84e1b88115acaf94f13e2c58f9f84186f9f3d389533b9c99e6a0f7a9",
+"spinacia_oleracea": "12117c3de22b84dea3b4c44d0136fa73ea636a67c4d0117063d0c04a74aa75d1",
+"symphytum_x_uplandicum": "0840aa70c8784010f497744f413f4a06f02d7bbcdd13b26cc4c69ed55a757c14",
+"tagetes_patula": "dc7dcf714e96eb05df05c2b7772659d8edd19089c875b9df4f715daf657621e9",
+"thymus_vulgaris": "b0e2754375509b41cbacc7a8951b1cc23911c6bcfe26e10bbd290adef5f10af4",
+"trifolium_incarnatum": "6e3b72da3ababcfe4156de009d05e86148e91935db052c064797b999d69d37f7",
+"trifolium_repens": "9abd0f7106b9ac2c949ed99d664dfae425c7891bd65109840aa3b110e71769cd",
+"tropaeolum_majus": "a29fbe4f5644fcc00f9a9c6c02c731adfb2ac93da2ac8141caf7019ba71b258d",
+"vaccinium_corymbosum": "31a9381e367dac3e143a219479622ea80695dc28f08e125aabd150f2a15b4d60",
+"vicia_faba": "6a5377164b70cfc95a95c06cc07fa1c1f623804c7b2c8b4cefb37dcb5d677ff5",
+"vigna_unguiculata": "b891ec34939bd5827d9a1ef8b2e890eac1b77a36fac0afe032917c23919f8f20",
+"vitis_spp": "e2053c657a5890e04f5b92c8dae44aa5687fc09a146754a5c82653b649722201",
+"zea_mays": "229dd13d42b316de5d28fb6857cca98960c25f31b92318828099011993c5ebbf",
+"zinnia_elegans": "271593b19115d48f512fd0ab97224700cb90b0880841e3f87040761a07931618"
+},
+"wide": []
+}

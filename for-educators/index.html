@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>For teachers and extension educators - Milpa Gardens</title>
+    <meta name="description" content="Why a class can use Milpa Gardens: what its evidence grades mean, what verified and unverified mean, what it refuses to do, and how to cite a claim with its grade." />
+    <link rel="icon" href="../web/icons/icon-192.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../web/icons/apple-touch-icon.png" />
+    <script>try{var u=localStorage.getItem("gg-units");if(u==="metric")document.documentElement.setAttribute("data-units","metric");var t=localStorage.getItem("gg-temp");if(t==="c")document.documentElement.setAttribute("data-temp","c");var th=localStorage.getItem("gg-theme");document.documentElement.setAttribute("data-theme",(th==="dark"||th==="light")?th:((window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"));var S=["spring","summer","autumn","winter"],p=localStorage.getItem("gg-season"),r;if(S.indexOf(p)>=0){r=p;}else{var n=S[Math.floor(((new Date().getMonth()+10)%12)/3)];r=localStorage.getItem("gg-hemi")==="s"?S[(S.indexOf(n)+2)%4]:n;}document.documentElement.setAttribute("data-season",r);}catch(e){}</script>
+    <link rel="stylesheet" href="../pages.css?v=65afa1525b" />
+  </head>
+  <body>
+    <header class="site">
+      <a class="brand" href="../"><svg class="brandmark" viewBox="0 0 16 15" aria-hidden="true"><g class="t1"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9"/></g><g class="t2"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9"/></g><g class="t3"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9"/></g></svg>Milpa <b>Gardens</b></a>
+      <div class="hright">
+        <button type="button" class="unittoggle" id="unittoggle" aria-label="Switch measurement units between imperial and metric"><span class="ut-i">in</span><span class="ut-m">cm</span></button>
+        <a class="hcta" href="../web/"><span data-copy="header_cta">Open the planner</span></a>
+      </div>
+    </header>
+    <nav class="secnav" aria-label="Sections"><a href="../plants/">Plants</a><a href="../guilds/">Guilds</a><a href="../rules/">Rules</a><a href="../beliefs/">Folklore</a><a href="../guides/">Guides</a><a href="../explainers/">Explainers</a><a href="../frost/">Frost</a><a href="../unsure/">Unsure</a></nav>
+    <main>
+      <h1>For teachers and extension educators</h1>
+      <p class="answer">You can point a class at this site because every claim on it carries an evidence grade, names the mechanism it works by, links the sources it rests on, and says plainly which of its own numbers it does not stand behind. Where it does not know, it says so instead of inventing a number.</p>
+      <p class="lede">Milpa Gardens is a garden-planning corpus - rules, folklore checked against the literature, and species records - written with an LLM and then held to a set of rules most gardening content, AI-written or not, is not held to. This page is those rules, in plain language, so you can judge whether it belongs in front of students.</p>
+      <h2>What a grade means</h2>
+      <p>Every enforced rule carries one of five grades. The word is the grade; the sentence is how far to trust it. These counts are read from the live corpus - 91 rules today - so this is the real distribution, not a claim about it.</p>
+      <dl class="compare">
+        <dt>Well established &mdash; 32 rules</dt><dd>Multiple independent, good-quality sources agree and the mechanism is understood. Safe to teach as established.</dd>
+        <dt>Promising &mdash; 46 rules</dt><dd>Good evidence and a clear mechanism, with fewer or less decisive sources. Reliable, not the last word.</dd>
+        <dt>A good hunch &mdash; 10 rules</dt><dd>A plausible mechanism with some support, short of proof. Useful if you flag it as tentative.</dd>
+        <dt>Contested &mdash; 2 rules</dt><dd>The literature disagrees, or the effect holds only under conditions the claim does not state. Present both sides.</dd>
+        <dt>Refuted &mdash; 1 rule</dt><dd>Widely repeated, checked against its sources, and it does not hold. Kept on the site so the correction is findable.</dd>
+      </dl>
+      <p>A grade is never given to a rule that cannot state its mechanism in one sentence without the word &ldquo;helps&rdquo;. A claim that only correlates, or works by a mechanism nobody can name, is downgraded or dropped &mdash; it does not get to sit at the top grade because it sounds right.</p>
+      <h2>What &ldquo;verified&rdquo; and &ldquo;unverified&rdquo; mean</h2>
+      <p><strong>Verified</strong> means a human read a real source, named in the rule&rsquo;s sources, and confirmed the claim &mdash; 90 of the 91 rules are verified today. <strong>Unverified</strong> means an LLM asserted it from general knowledge and no human has yet checked a source: it is labelled as such and never presented as fact. Right now none of the rules are unverified &mdash; the one rule that is not verified is marked as having <em>no evidence</em> at all, a human&rsquo;s judgement that the literature is silent, not an LLM guess dressed up as fact. Promoting a claim from unverified to verified requires a person reading the source &mdash; the model is never allowed to promote its own work. That single rule is the difference between this and an AI that cites papers it never opened.</p>
+      <p>Numbers carry the same honesty at the field level: a species&rsquo; size, spacing or timing figure is marked <em>estimated</em> or <em>contested</em> when it is not from a firm source. Every one of those &mdash; 348 today &mdash; is listed on <a href="../unsure/">What we don&rsquo;t know</a>, the one page a gardening site is never supposed to publish.</p>
+      <h2>What this corpus refuses to do</h2>
+      <p>These are enforced, not aspirations &mdash; each is a line the project will not cross, for a reason a student can check.</p>
+      <ul class="index">
+        <li>It gives no fertilizer NPK numbers without a soil test. Asked what to feed a bed, it says &ldquo;get a soil test&rdquo; and stops &mdash; it will not invent a number your ground did not give it.</li>
+        <li>It publishes no companion-planting chart. Folk pairings that fail a check against the literature are marked refuted and kept as corrections (1 so far), not laid out in a grid as if true.</li>
+        <li>It never shows a planting that does not fit the space you gave it. A guild too big for your bed is greyed out with the reason and the nearest thing that does fit, never silently swapped.</li>
+        <li>It invents no growing-degree-day maturity by analogy. A crop with no real GDD model in the literature simply does not get one; guessing it from a similar plant is fabrication.</li>
+        <li>It recommends no woody nitrogen-fixer without checking the state noxious-weed list first &mdash; several are invasive, and &ldquo;fixes nitrogen&rdquo; is not a reason to plant one.</li>
+        <li>It applies no elevation temperature correction to frost. On the clear, still nights when frost forms, cold air pools in low ground, so the textbook lapse-rate adjustment predicts the opposite of what happens; the corpus refuses it rather than ship a confident wrong answer.</li>
+      </ul>
+      <h2>How to cite it</h2>
+      <p>Every rule, folklore and plant page carries a &ldquo;Cite this page&rdquo; block with a ready citation &mdash; and for a rule or belief its evidence grade is part of the citation. Please keep the grade when you quote it: cite a claim as what it is (&ldquo;Milpa Gardens rates this <em>Contested</em>&rdquo;), not as a bare fact, so your students see the confidence the same way you do.</p>
+      <h2>What it is not</h2>
+      <p>It is not a substitute for your local extension office or a soil test, and it is not safety or medical advice &mdash; a toxicity note is a general caution, not a poison-control reference. Its climate data (frost dates, hardiness) is from NOAA and covers the United States. It plans gardens from evidence; it does not replace an agronomist, and it says so.</p>
+      <p>You can also take the whole graded set with you: the <a href="../corpus/">downloadable corpus</a> is every rule, its mechanism, its grade and its sources in one file, under a share-alike licence &mdash; something concrete to hand a class or check against yourself.</p>
+      <p class="more"><a href="../rules/">Read the rules</a> &middot; <a href="../corpus/">Download the corpus</a> &middot; <a href="../beliefs/">Folklore, checked</a> &middot; <a href="../unsure/">What we don&rsquo;t know</a></p>
+    </main>
+    <footer class="site">
+      <div class="foot-brand">
+        <a class="brand" href="../"><svg class="brandmark" viewBox="0 0 16 15" aria-hidden="true"><g class="t1"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9"/></g><g class="t2"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9"/></g><g class="t3"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9"/></g></svg>Milpa <b>Gardens</b></a>
+        <p class="foot-note" data-copy="footer_note">Every claim on this page comes from the project&#x27;s rule corpus, with its evidence grade and its sources shown as recorded. Nothing here is generated prose.</p>
+        <a class="fcta" href="../web/"><span data-copy="footer_cta">Plan a bed with Milpa Gardens</span></a>
+      </div>
+      <nav class="sitenav" aria-label="Explore the site">
+        <div class="foot-col">
+          <p class="foot-h">Learn</p>
+          <a href="../guides/">Guides</a>
+          <a href="../explainers/">Explainers</a>
+          <a href="../compare/">How Milpa compares</a>
+          <a href="../frost-odds/">Frost odds tool</a>
+          <a href="../frost/">Frost dates</a>
+        </div>
+        <div class="foot-col">
+          <p class="foot-h">The corpus</p>
+          <a href="../plants/">Plants</a>
+          <a href="../guilds/">Guilds</a>
+          <a href="../rules/">Rules</a>
+          <a href="../beliefs/">Folklore</a>
+          <a href="../unsure/">What we don't know</a>
+          <a href="../for-educators/">For educators</a>
+          <a href="../search/">Search</a>
+          <a href="../privacy/">Privacy</a>
+        </div>
+      </nav>
+    </footer>
+    <script>(function(){var b=document.getElementById("unittoggle");if(!b)return;b.addEventListener("click",function(){var r=document.documentElement,metric=r.getAttribute("data-units")==="metric";try{if(metric){r.removeAttribute("data-units");localStorage.setItem("gg-units","imperial");}else{r.setAttribute("data-units","metric");localStorage.setItem("gg-units","metric");}}catch(e){}});})();</script>
+    <script>(function(){var band=document.querySelector("nav.contents");if(!band||!("IntersectionObserver"in window))return;var links=[].slice.call(band.querySelectorAll("a[href^='#']"));var secs=links.map(function(a){return document.getElementById(a.getAttribute("href").slice(1));});if(secs.some(function(s){return !s;}))return;var current=-1;function mark(i){if(i===current)return;current=i;links.forEach(function(a,j){if(j===i){a.setAttribute("aria-current","true");a.scrollIntoView({inline:"nearest",block:"nearest"});}else{a.removeAttribute("aria-current");}});}var io=new IntersectionObserver(function(){var y=band.getBoundingClientRect().bottom+8,best=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<=y)best=i;});mark(best);},{rootMargin:"0px 0px -55% 0px",threshold:0});secs.forEach(function(s){io.observe(s);});})();</script>
+    <script type="module">const gg=()=>import("../edit.js");try{(localStorage.getItem("gg-editor")==="1"||location.hash==="#edit")&&gg()}catch(e){}addEventListener("hashchange",()=>{try{location.hash==="#edit"&&gg()}catch(e){}})</script>
+    <script>if("serviceWorker"in navigator){navigator.serviceWorker.register("../sw.js").catch(function(){})}</script>
+    <script>(function(){try{var H={"milpa.garden":1,"www.milpa.garden":1};if(!H[location.hostname]||navigator.webdriver)return;if(navigator.doNotTrack==="1"||navigator.globalPrivacyControl===true)return;var q="p="+encodeURIComponent(location.pathname)+"&r="+encodeURIComponent(document.referrer||"")+"&rnd="+Date.now();fetch("https://milpa-garden.goatcounter.com/count?"+q,{method:"GET",keepalive:true,mode:"no-cors"}).catch(function(){});}catch(e){}})();</script>
+  </body>
+</html>
