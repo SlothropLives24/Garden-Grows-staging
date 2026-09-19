@@ -1,0 +1,53 @@
+{
+ "name": "Milpa Gardens",
+ "short_name": "Milpa",
+ "description": "Garden planning from evidence, not folklore. Every recommendation cites a rule; every rule states its mechanism and evidence grade.",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#f5ead8",
+ "theme_color": "#272e1b",
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ],
+ "screenshots": [
+  {
+   "src": "img/shot-phone-plan.png",
+   "sizes": "780x1688",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "The Plan map: a bed placed on your ground, with the planning steps below"
+  },
+  {
+   "src": "img/shot-phone-home.png",
+   "sizes": "780x1688",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "The home view: your garden at a glance, with your own frost odds"
+  },
+  {
+   "src": "og.png",
+   "sizes": "1200x630",
+   "type": "image/png",
+   "form_factor": "wide",
+   "label": "Milpa Gardens - the garden planner that shows its work"
+  }
+ ]
+}

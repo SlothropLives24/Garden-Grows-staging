@@ -1,0 +1,1 @@
+{"stations":[{"first_freeze_32f_p50":"09-03","growing_season_days_p50":88,"key":"USW00026617","last_frost_32f":{"p10":"06-26","p20":"06-18","p30":"06-13","p40":"06-09","p50":"06-05"},"lat":64.5111,"lon":-165.44,"provenance":{"grade":"A","method":"nearest_ncei_station","station":{"id":"USW00026617","name":"Nome Muni Ap"},"tier":1},"summer_night_tmin_c":6.7}],"zips":{},"zones":{}}
