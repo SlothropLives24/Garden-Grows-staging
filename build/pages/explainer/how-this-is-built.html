@@ -1,0 +1,41 @@
+<h1>How Milpa is built, from its evidence files to the app</h1>
+<p class="lede">Every answer Milpa gives traces back to a graded, sourced rule in a set of plain-text files. The app is a thin layer on top of that record.</p>
+<div data-explainer="how-this-is-built">
+<h2>Why this matters to you</h2>
+<p>Every answer the planner gives you can be traced to a rule, and every rule says how sure we are of it, how it works, and what it rests on. That’s only possible because of how the project is put together: the knowledge comes first, and the app is built on top of it.</p>
+<p>Most garden planners are an app with some data inside them. This one is a body of data with an app in front of it. That sounds like an academic distinction, and it decides everything downstream.</p>
+<p>The data lives in what we call the <em>corpus</em>: a folder of plain-text files (written in YAML, a simple format that people and programs can both read) holding 129 species, 30 plant teams, 143 rules, and 35 folklore beliefs. It’s built to be correct, easy to check, and able to survive a complete rewrite of everything around it. If the web app were deleted tomorrow, the thing worth having would still be here.</p>
+<h2>Every rule states its reason, or it isn’t a rule</h2>
+<p>The project holds itself to four promises it won’t bend. The first is the one that shapes the content the most:</p>
+<blockquote><p>No enforced rule without a named mechanism. If a rule cannot state its mechanism in one sentence without the word “helps”, it is not a top-grade rule. Downgrade it or delete it.</p></blockquote>
+<p>In plainer words: a rule can only be graded well established or promising if it can say, in one sentence, how it works. “Helps” is the tell. It’s the word that lets an unexamined claim slip through dressed up as a checked one, and banning it from that one field knocks out most of the companion-planting canon in a single move.</p>
+<p>The other three: a plant team that doesn’t fit your bed is shown grayed with the reason and is never silently swapped; the engine won’t invent a fertilizer number and tells you to get a soil test; and a source nobody has read can’t be marked as verified.</p>
+<p>Two of those four are enforced automatically, by a checker that runs on every change. The fourth can’t be, and the next section is about that one.</p>
+<h2>Verified means a human read the source</h2>
+<p>Every rule carries an evidence status. <code>unverified</code> means a language model asserted the claim from general knowledge and nobody has checked it. Moving a rule up to <code>verified</code> takes a real source in the rule’s own notes, read by a person.</p>
+<p>No automated process is allowed to make that call, including the one that wrote most of this code. On the day this page was built, 2 of the 143 rules sat at unverified. That number is published because a corpus that can’t own up to its own unchecked claims isn’t really auditable.</p>
+<p>The sources are stored as plain text, word for word, usually including the sentence that carries the claim and the date someone read it. When you open a source anywhere on this site, you see what the corpus wrote down. It isn’t tidied up into a summary.</p>
+<h2>Demotion is a feature</h2>
+<p>Grades move both ways. A rule dropping from a confident tier to a weaker one, because the research was shakier than we assumed, is the system working exactly right. The drop gets recorded, and the rule isn’t deleted.</p>
+<p>This is why the corpus is kept as plain files in git, a version-control system that records every change. Rows in a database wouldn’t carry this history. Every grade change is its own commit, with the source that caused it written into the commit message. The version history <em>is</em> the history of what the project believed and why: you can ask when a claim was trusted, why it changed, and what somebody read that changed it.</p>
+<h2>Two engines that have to agree</h2>
+<p>The rules engine exists twice. The reference version is in Python; the app runs a TypeScript version in your browser. Duplicated code drifts, so the Python side generates the answers and the TypeScript engine is checked against them on every change. If the two ever disagree about what a rule does, the build goes red.</p>
+<p>The same trick keeps these pages accurate. The site you’re reading renders the corpus a second time, right alongside the app, and a test reads the app’s own code and fails if the two ever describe the evidence differently.</p>
+<h2>No weather API</h2>
+<p>Every date the planner gives you is worked out from climate data prepared ahead of time, or from frost dates you enter yourself. That data is a static file, stored in the repo like any other file, and the planner reads it on your device. The app never calls a weather service, so planning works offline and the climate layer can be diffed like code.</p>
+<p>Accounts run on a backend. When you sign in, your gardens sync through Supabase, our backend host, so they follow you to every device you use. The <a href="../../privacy/">privacy page</a> names every outside service the app talks to and exactly what reaches each one.</p>
+<h2>The bits that are deliberately missing</h2>
+<ul>
+  <li>No companion-planting chart, ever.</li>
+  <li>No drag-and-drop canvas, except in one place with a specific reason.</li>
+  <li>No fertilizer numbers without a soil test.</li>
+  <li>No plant teams pulled from permaculture blogs. The list of real ones is short, and it’s meant to be.</li>
+</ul>
+<h2>Read it yourself</h2>
+<p>The evidence page in the app lists every rule and every belief with its grade, its reason, and its sources. This site puts the same material on pages a search engine can reach.</p>
+<ul>
+  <li><a href="../../plants/">Every plant, with the confidence tier on every number</a></li>
+  <li><a href="../../guilds/">Every plant team, including the ones that claim nothing</a></li>
+  <li><a href="../../web/">Open the planner</a></li>
+</ul>
+</div>

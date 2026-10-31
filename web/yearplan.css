@@ -1,0 +1,146 @@
+/* The Milpa Plus year plan (Plus arc M1, D-306) - yearplanview.ts links this sheet the first time the plan is drawn
+   (after styles.css, whose tokens it reads), so the app's first visit carries none of it (perf budget: app-landing
+   css). Shipped by make site with the rest of web/; it is not render-blocking, so it ships as written. */
+/* Milpa Plus: the year plan (Plus arc M1, D-306; yearplanview.ts), under the next-season plan. Picture first (the
+   maintainer, 2026-10-14: "a paid feature, it needs to be premium"): the rotation board (beds down, years across,
+   each team banded in its families' colours), a year at a time behind tabs, each bed's year as a strip in Home's
+   chart idiom. Family colours are a band or a bar, never behind text, so every word keeps its ink's contrast. */
+.yearplan {
+  --fam-solanaceae: #b4483b; --fam-cucurbitaceae: #c97a26; --fam-apiaceae: #b39020; --fam-asteraceae: #6e9a33;
+  --fam-brassicaceae: #2f7f7a; --fam-fabaceae: #3f6fb0; --fam-amaryllidaceae: #7d5ba6; --fam-amaranthaceae: #a33a6b;
+  --fam-poaceae: #8a6d3b; --fam-lamiaceae: #5f8a74; --fam-other: #8c857a;
+  --yp-frost: color-mix(in srgb, var(--accent) 14%, transparent);
+  margin-top: var(--space-3); padding: var(--space-3); background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--r-md); box-shadow: var(--shadow-1);
+}
+:root[data-theme="dark"] .yearplan {
+  --fam-solanaceae: #e07a6c; --fam-cucurbitaceae: #eba35a; --fam-apiaceae: #dcc255; --fam-asteraceae: #a6cd6a;
+  --fam-brassicaceae: #6fc0b8; --fam-fabaceae: #86a9e3; --fam-amaryllidaceae: #b79be0; --fam-amaranthaceae: #dc84aa;
+  --fam-poaceae: #c7a774; --fam-lamiaceae: #93c2a8; --fam-other: #b0a794;
+}
+.fam-solanaceae { --fam: var(--fam-solanaceae); } .fam-cucurbitaceae { --fam: var(--fam-cucurbitaceae); }
+.fam-apiaceae { --fam: var(--fam-apiaceae); } .fam-asteraceae { --fam: var(--fam-asteraceae); }
+.fam-brassicaceae { --fam: var(--fam-brassicaceae); } .fam-fabaceae { --fam: var(--fam-fabaceae); }
+.fam-amaryllidaceae { --fam: var(--fam-amaryllidaceae); } .fam-amaranthaceae { --fam: var(--fam-amaranthaceae); }
+.fam-poaceae { --fam: var(--fam-poaceae); } .fam-lamiaceae { --fam: var(--fam-lamiaceae); } .fam-other { --fam: var(--fam-other); }
+.yp-top { margin: 0 0 var(--space-3); }
+.yp-eyebrow { margin: 0; font: 700 var(--fs-xs)/var(--lh-ui) var(--font-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--accent-text); }
+.yp-h { margin: var(--space-0) 0 0; font: 600 var(--fs-xl)/var(--lh-head) var(--serif); color: var(--color-text); }
+.yp-sub { margin: var(--space-0) 0 0; font-size: var(--fs-sm); color: var(--muted); }
+/* the board */
+.yp-board { display: grid; gap: var(--space-1); container: ypboard / inline-size; }
+.yp-brow { display: grid; grid-template-columns: minmax(3.5rem, 5.5rem) repeat(var(--yp-cols, 3), minmax(0, 1fr)); gap: var(--space-1); align-items: stretch; }
+.yp-bhead { align-items: end; }
+.yp-byear { font: 700 var(--fs-sm)/var(--lh-ui) var(--font-ui); text-align: center; color: var(--muted); }
+.yp-bname { align-self: center; font: 700 var(--fs-xs)/var(--lh-ui) var(--font-ui); letter-spacing: .04em; color: var(--color-text); overflow-wrap: anywhere; }
+.yp-tile { display: flex; flex-direction: column; gap: var(--space-1); min-height: 4.25rem; padding: 0 0 var(--space-1); text-align: left; cursor: pointer;
+  background: var(--color-surface); color: var(--color-text); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; font: inherit; }
+.yp-tile:hover, .yp-tile:focus-visible { border-color: var(--accent-text); }
+.yp-tile.yp-on { box-shadow: inset 0 0 0 2px var(--accent-text); }
+.yp-tile-rest { background: transparent; border-style: dashed; }
+.yp-band { display: flex; height: 6px; flex: none; }
+.yp-bandseg { flex: 1; background: var(--fam); }
+.yp-tname { padding: 0 var(--space-1); font: 600 var(--fs-xs)/1.25 var(--font-ui); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; hyphens: auto; overflow-wrap: break-word; }
+/* in the Plan sheet the card is narrower than the page: the bed names give the tiles their room, so a team's
+   long word ("Brassicas") wraps instead of being cut */
+@container ypboard (max-width: 20rem) { .yp-brow { grid-template-columns: minmax(2.5rem, 3.5rem) repeat(var(--yp-cols, 3), minmax(0, 1fr)); } }
+.yp-legend { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); margin: var(--space-2) 0 0; padding: 0; list-style: none; font-size: var(--fs-xs); color: var(--muted); }
+.yp-legend li { display: inline-flex; align-items: center; gap: var(--space-1); }
+.yp-sw { width: .75rem; height: .75rem; border-radius: var(--r-xs); background: var(--fam); }
+.yp-act { margin: var(--space-3) 0 0; }
+.yp-acceptnote { margin: var(--space-1) 0 0; }
+/* the year tabs */
+.yp-tabs { display: flex; gap: var(--space-1); margin: var(--space-4) 0 var(--space-2); padding: var(--space-0); background: var(--color-surface); border-radius: var(--r-pill); }
+.yp-tab { flex: 1; min-height: var(--tap); border: 0; border-radius: var(--r-pill); background: transparent; color: var(--muted); font: 700 var(--fs-sm) var(--font-ui); cursor: pointer; }
+.yp-tab[aria-selected="true"] { background: var(--card); color: var(--color-text); box-shadow: var(--shadow-1); }
+/* a bed's year */
+.yp-key { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); margin: 0 0 var(--space-2); padding: 0; list-style: none; font-size: var(--fs-xs); color: var(--muted); }
+.yp-key li { display: inline-flex; align-items: center; gap: var(--space-1); }
+.yp-ksw { display: inline-block; width: 1.25rem; height: .5rem; }
+.yp-k-grow .yp-ksw { height: 3px; background: var(--muted); }
+.yp-k-pick .yp-ksw { background: var(--muted); border-radius: var(--r-xs); }
+.yp-k-cover .yp-ksw { background: repeating-linear-gradient(135deg, var(--muted) 0 2px, transparent 2px 5px); }
+.yp-k-frost .yp-ksw { height: .75rem; background: var(--yp-frost); }
+.yp-bed { margin: 0 0 var(--space-3); padding: var(--space-2) 0 0; border-top: 1px solid var(--line); scroll-margin-top: 4rem; }
+.yp-bed.yp-flash { animation: yp-flash 1.2s ease-out; }
+@keyframes yp-flash { from { background: color-mix(in srgb, var(--accent) 12%, transparent); } to { background: transparent; } }
+@media (prefers-reduced-motion: reduce) { .yp-bed.yp-flash { animation: none; } }
+.yp-bhd .yp-band { width: 3rem; border-radius: var(--r-xs); overflow: hidden; margin-bottom: var(--space-1); }
+.yp-bedname { margin: 0; font: 700 var(--fs-xs)/var(--lh-ui) var(--font-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.yp-team { margin: var(--space-0) 0 0; font: 600 var(--fs-lg)/var(--lh-head) var(--serif); color: var(--color-text); }
+.yp-chips { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1); margin: var(--space-2) 0 0; }
+.yp-chips-k { font-size: var(--fs-xs); color: var(--muted); }
+.yearplan .yp-chip { margin: 0; display: inline-flex; align-items: center; min-height: 2rem; padding: 0 var(--space-2); border-radius: var(--r-pill);
+  border: 1px solid var(--line); background: var(--color-surface); color: var(--color-text); font: 600 var(--fs-xs) var(--font-ui); white-space: nowrap; }
+.yearplan .yp-chip, .yearplan .yp-chip:hover { text-decoration: none; }
+.yp-chip-plain { color: var(--muted); }
+.yearplan .yp-coverdoor { border: 0; background: none; padding: 0 var(--space-1); color: var(--accent-text); }
+/* the strip: Home's chart idiom, a row per crop over the season year */
+.yp-strip { margin: var(--space-2) 0 0; }
+.yp-srow { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); align-items: center; gap: var(--space-1); min-height: 1.5rem; }
+.yp-slab { font-size: var(--fs-xs); color: var(--color-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.yp-strack { position: relative; height: 1.25rem;
+  background: repeating-linear-gradient(to right, transparent 0 calc(100% / 12 - 1px), var(--line) calc(100% / 12 - 1px) calc(100% / 12)); }
+.yp-frosty .yp-srow:not(.yp-smonths) .yp-strack { background-image:
+  linear-gradient(to right, var(--yp-frost) 0 var(--yp-sp, 0%), transparent var(--yp-sp, 0%) var(--yp-fa, 100%), var(--yp-frost) var(--yp-fa, 100%) 100%),
+  repeating-linear-gradient(to right, transparent 0 calc(100% / 12 - 1px), var(--line) calc(100% / 12 - 1px) calc(100% / 12)); }
+.yp-smonths .yp-strack { display: grid; grid-template-columns: repeat(12, 1fr); height: auto; background: none; }
+.yp-smonth { font: 600 var(--fs-xs)/1 var(--font-ui); color: var(--muted); text-align: center; }
+.yp-seg { position: absolute; top: 50%; transform: translateY(-50%); }
+.yp-seg-grow { height: 3px; background: color-mix(in srgb, var(--fam) 55%, transparent); }
+.yp-seg-pick { height: .75rem; border-radius: var(--r-xs); background: var(--fam); }
+.yp-seg-cover { height: .75rem; border-radius: var(--r-xs); background: repeating-linear-gradient(135deg, var(--fam) 0 2px, transparent 2px 5px);
+  border: 1px solid var(--fam); box-sizing: border-box; }
+.yp-scover .yp-slab { color: var(--muted); font-style: italic; }
+.yp-coverline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-1); margin: var(--space-2) 0 0; font-size: var(--fs-sm); color: var(--color-text); }
+.yearplan .yp-coverline .yp-coverdoor { min-height: 0; padding: 0; font-size: var(--fs-sm); }
+/* one tap away: the dated jobs */
+.yp-more { margin: var(--space-2) 0 0; }
+.yp-more > summary { cursor: pointer; min-height: var(--tap); display: flex; align-items: center; font: 600 var(--fs-sm) var(--font-ui); color: var(--accent-text); }
+.yp-seasons { margin-top: var(--space-1); }
+.yp-season { margin: var(--space-1) 0 0; padding-left: var(--space-2); border-left: 3px solid var(--line); }
+.yp-sh { margin: 0; font-size: var(--fs-sm); font-weight: 700; }
+.yp-steps { margin: var(--space-0) 0 0; padding: 0; list-style: none; font-size: var(--fs-sm); }
+.yp-step { margin: 0 0 var(--space-0); }
+.yp-date { font-weight: 600; white-space: nowrap; }
+.yp-run { color: var(--muted); }
+.yp-none { margin: var(--space-0) 0 0; }
+.yp-cover .ns-why { margin-top: var(--space-0); }
+.yearplan .dossier-mark { margin-top: 0; margin-inline-start: var(--door-gap); }
+/* the household */
+.yp-house { margin: var(--space-3) 0 0; padding: var(--space-2) var(--space-3); background: var(--color-surface); border-radius: var(--r-md); }
+.yp-house-k { margin: 0 0 var(--space-1); font-weight: 700; }
+.yp-house-list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-0); }
+.yp-close { margin-top: var(--space-2); min-height: var(--tap); }
+/* under cover (D-307: R-180): the chooser above the strips, and the weeks a cover buys drawn onto the bars */
+.yp-under { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); margin: 0 0 var(--space-3); }
+.yp-under-k { font: 700 var(--fs-xs)/var(--lh-ui) var(--font-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.yp-pills { flex: 1 1 18rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: var(--space-1); }
+.yp-pill { min-height: var(--tap); padding: 0 var(--space-2); border: 1px solid var(--line); border-radius: var(--r-pill);
+  background: var(--card); color: var(--color-text); font: 600 var(--fs-sm) var(--font-ui); cursor: pointer; }
+.yp-pill[aria-checked="true"] { background: var(--accent-text); border-color: var(--accent-text); color: var(--card); }
+.yp-seg-ext { height: .75rem; box-sizing: border-box; border: 1px dashed var(--fam); background: color-mix(in srgb, var(--fam) 22%, transparent); }
+.yp-ext-early { border-radius: var(--r-xs) 0 0 var(--r-xs); }
+.yp-ext-late { border-radius: 0 var(--r-xs) var(--r-xs) 0; }
+.yp-k-ext .yp-ksw { box-sizing: border-box; border: 1px dashed var(--muted); background: color-mix(in srgb, var(--muted) 22%, transparent); border-radius: var(--r-xs); }
+.yp-extline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-1); margin: var(--space-2) 0 0; font-size: var(--fs-sm); color: var(--color-text); }
+.yearplan .yp-extline .yp-extdoor { min-height: 0; padding: 0; border: 0; background: none; color: var(--accent-text); font-size: var(--fs-sm); }
+/* putting up: a jar count per crop, and what it takes */
+.yp-putup { margin: var(--space-3) 0 0; padding: var(--space-2) var(--space-3); background: var(--color-surface); border-radius: var(--r-md); }
+.yp-putup-k { margin: 0; font-weight: 700; }
+.yp-putup-lead { margin: var(--space-0) 0 var(--space-2); }
+.yp-put-list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-2); }
+.yp-put { padding: var(--space-2) 0 0; border-top: 1px solid var(--line); }
+.yp-put:first-child { border-top: 0; padding-top: 0; }
+.yp-put-hd { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1) var(--space-2); }
+.yp-put-name { font: 600 var(--fs-md)/var(--lh-ui) var(--font-ui); }
+.yp-step-n { display: inline-flex; align-items: center; gap: var(--space-1); }
+.yp-stepbtn { width: var(--tap); height: var(--tap); border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--card);
+  color: var(--color-text); font: 700 var(--fs-lg)/1 var(--font-ui); cursor: pointer; }
+.yp-stepbtn:disabled { opacity: .45; cursor: default; }
+.yp-jars { min-width: 7.5rem; text-align: center; font: 600 var(--fs-sm) var(--font-ui); font-variant-numeric: tabular-nums; }
+.yp-pack { margin: var(--space-1) 0 0; min-height: var(--tap); max-width: 100%; }
+.yp-put-need { margin: var(--space-1) 0 0; font: 600 var(--fs-sm)/var(--lh-ui) var(--font-ui); color: var(--color-text); }
+.yp-put-none, .yp-put-contested { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-1); margin: var(--space-1) 0 0; font-size: var(--fs-sm); color: var(--muted); }
+.yearplan .yp-putdoor { min-height: 0; padding: 0; border: 0; background: none; color: var(--accent-text); font-size: var(--fs-sm); }
+.yp-putup-src { margin: var(--space-2) 0 0; }

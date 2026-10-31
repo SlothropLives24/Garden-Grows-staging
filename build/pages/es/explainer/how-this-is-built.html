@@ -1,0 +1,41 @@
+<h1>Cómo está hecho Milpa, de sus archivos de evidencia a la app</h1>
+<p class="lede">Cada respuesta que da Milpa se remonta a una regla calificada y con fuentes, guardada en un conjunto de archivos de texto sin formato. La app es una capa delgada encima de ese registro.</p>
+<div data-explainer="how-this-is-built">
+<h2>Por qué esto te importa</h2>
+<p>Cada respuesta que te da el planificador se puede rastrear hasta una regla, y cada regla dice qué tan seguros estamos de ella, cómo funciona y en qué se apoya. Eso solo es posible por cómo está armado el proyecto: el conocimiento va primero, y la app se construye encima.</p>
+<p>La mayoría de los planificadores de huerto son una app con algunos datos dentro. Este es un conjunto de datos con una app delante. Suena a distinción académica, y decide todo lo que viene después.</p>
+<p>Los datos viven en lo que llamamos el <em>corpus</em>: una carpeta de archivos de texto sin formato (escritos en YAML, un formato sencillo que pueden leer tanto las personas como los programas) con 129 especies, 30 equipos de plantas, 143 reglas y 35 creencias populares. Está hecho para ser correcto, fácil de comprobar y capaz de sobrevivir a que se reescriba por completo todo lo que lo rodea. Si mañana se borrara la app web, lo que vale la pena tener seguiría aquí.</p>
+<h2>Cada regla dice su razón, o no es una regla</h2>
+<p>El proyecto se obliga a cuatro promesas que no negocia. La primera es la que más le da forma al contenido:</p>
+<blockquote><p>Ninguna regla se aplica sin un mecanismo con nombre. Si una regla no puede enunciar su mecanismo en una oración sin la palabra “ayuda”, no es una regla de la calificación más alta. Bájale la calificación o elimínala.</p></blockquote>
+<p>Dicho más sencillo: una regla solo puede calificarse como bien establecida o prometedora si puede decir, en una oración, cómo funciona. “Ayuda” es la señal. Es la palabra que deja pasar una afirmación sin examinar disfrazada de afirmación comprobada, y prohibirla en ese único campo tumba de un solo golpe la mayor parte del canon de la asociación de cultivos.</p>
+<p>Las otras tres: un equipo de plantas que no cabe en tu cama se muestra en gris con la razón y nunca se cambia por otro en silencio; el motor no inventa una cifra de fertilizante y te dice que hagas un análisis de suelo; y una fuente que nadie ha leído no se puede marcar como verificada.</p>
+<p>Dos de esas cuatro se hacen cumplir de forma automática, con un programa de verificación que corre en cada cambio. La cuarta no se puede, y de esa trata la sección siguiente.</p>
+<h2>Verificada quiere decir que una persona leyó la fuente</h2>
+<p>Cada regla lleva un estado de evidencia. <code>unverified</code> (sin verificar) quiere decir que un modelo de lenguaje hizo la afirmación a partir de conocimiento general y nadie la ha comprobado. Subir una regla a <code>verified</code> (verificada) requiere una fuente real en las notas de la propia regla, leída por una persona.</p>
+<p>Ningún proceso automático puede tomar esa decisión, incluido el que escribió la mayor parte de este código. El día en que se generó esta página, 2 de las 143 reglas estaban sin verificar. Ese número se publica porque un corpus que no reconoce sus propias afirmaciones sin comprobar no es realmente auditable.</p>
+<p>Las fuentes se guardan como texto sin formato, palabra por palabra, por lo general con la oración que sostiene la afirmación y la fecha en que alguien la leyó. Cuando abres una fuente en cualquier parte de este sitio, ves lo que anotó el corpus. No se retoca para convertirlo en un resumen.</p>
+<h2>Bajar de calificación es una virtud</h2>
+<p>Las calificaciones se mueven en los dos sentidos. Que una regla baje de un nivel de confianza alto a uno más débil, porque la investigación era más floja de lo que suponíamos, es el sistema funcionando exactamente como debe. La bajada se registra, y la regla no se borra.</p>
+<p>Por eso el corpus se guarda como archivos sin formato en git, un sistema de control de versiones que registra cada cambio. Las filas de una base de datos no conservarían esta historia. Cada cambio de calificación es su propio commit, con la fuente que lo causó escrita en el mensaje del commit. El historial de versiones <em>es</em> la historia de lo que el proyecto creía y por qué: puedes preguntar cuándo se confió en una afirmación, por qué cambió y qué leyó alguien para cambiarla.</p>
+<h2>Dos motores que tienen que coincidir</h2>
+<p>El motor de reglas existe dos veces. La versión de referencia está en Python; la app usa una versión en TypeScript dentro de tu navegador. El código duplicado se desvía con el tiempo, así que el lado de Python genera las respuestas y el motor de TypeScript se compara con ellas en cada cambio. Si los dos llegan a no estar de acuerdo sobre lo que hace una regla, la compilación se pone en rojo.</p>
+<p>El mismo truco mantiene exactas estas páginas. El sitio que estás leyendo presenta el corpus una segunda vez, justo al lado de la app, y una prueba lee el propio código de la app y falla si los dos llegan a describir la evidencia de manera distinta.</p>
+<h2>Sin API del clima</h2>
+<p>Cada fecha que te da el planificador se calcula con datos del clima preparados de antemano, o con las fechas de helada que escribas tú. Esos datos son un archivo estático, guardado en el repositorio como cualquier otro archivo, y el planificador los lee en tu dispositivo. La app nunca llama a un servicio del tiempo, así que planificar funciona sin conexión y los cambios en la capa del clima se pueden comparar línea por línea como el código.</p>
+<p>Las cuentas funcionan con un servidor. Cuando inicias sesión, tus huertos se sincronizan a través de Supabase, el servicio donde funciona nuestra base de datos, para que te acompañen a cada dispositivo que uses. La <a href="../../es/privacy/">página de privacidad</a> nombra cada servicio externo con el que habla la app y exactamente qué le llega a cada uno.</p>
+<h2>Lo que falta a propósito</h2>
+<ul>
+  <li>Ninguna tabla de asociación de cultivos, nunca.</li>
+  <li>Ningún lienzo de arrastrar y soltar, salvo en un lugar con una razón concreta.</li>
+  <li>Ninguna cifra de fertilizante sin un análisis de suelo.</li>
+  <li>Ningún equipo de plantas sacado de blogs de permacultura. La lista de los reales es corta, y está pensada para serlo.</li>
+</ul>
+<h2>Léelo por tu cuenta</h2>
+<p>La página de evidencia de la app enumera cada regla y cada creencia con su calificación, su razón y sus fuentes. Este sitio pone ese mismo material en páginas a las que puede llegar un buscador.</p>
+<ul>
+  <li><a href="../../es/plants/">Cada planta, con el nivel de confianza en cada número</a></li>
+  <li><a href="../../es/guilds/">Cada equipo de plantas, incluidos los que no afirman nada</a></li>
+  <li><a href="../../web/?lang=es">Abre el planificador</a></li>
+</ul>
+</div>

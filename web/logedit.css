@@ -1,0 +1,65 @@
+/* O318 M1 (D-333, "A log you can trust"): the Log's diary editor (log.ts entryEditor) and the notice for an entry dated
+   after today (renderFuture). log.ts links this sheet at the Log's first diary draw, AFTER styles.css (whose tokens it
+   reads), so the app's first visit carries none of it (perf budget: app-landing css). Shipped by make site with the
+   rest of web/; it is not render-blocking, so it ships as written. */
+#logtimeline .tl-editor { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; margin: var(--space-1) 0 var(--space-3);
+  padding: var(--space-3); background: var(--color-surface); border: 1px solid var(--line); border-radius: var(--r-md); }
+#logtimeline .tl-editor input, #logtimeline .tl-editor select { font: inherit; padding: var(--space-1) var(--space-2); min-height: 44px; }
+#logtimeline .tl-editor .tl-ed-note, #logtimeline .tl-editor .tl-ed-what { flex: 1 1 12rem; min-width: 0; }
+#logtimeline .tl-ed-acts { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; flex-basis: 100%; }
+#logtimeline .tl-ed-cancel { background: none; border: 0; color: var(--accent-text); font: 600 var(--fs-sm) var(--font-ui); cursor: pointer; min-height: 44px; text-decoration: underline; }
+#logtimeline .tl-ed-err { flex-basis: 100%; margin: 0; color: var(--danger); font-size: var(--fs-xs); }
+#logtimeline .tl-ed-err:empty { display: none; }
+#logfuture, #logmoved { max-width: none; }
+#logfuture .lf-what { font-weight: 600; margin-top: var(--space-2); }
+/* O318 M2 (D-333): the diary by year - a heading per season with its count, the viewed year's rows open, another year's
+   opening on a tap (the heading is the button, at least 44px tall). */
+#logtimeline .tl-year + .tl-year { border-top: 1px solid var(--line); margin-top: var(--space-2); }
+#logtimeline .tl-yh { margin: 0; padding: var(--space-2) 0; font: 600 var(--fs-read) var(--font-heading); }
+#logtimeline .tl-yh .tl-yn { margin-left: var(--space-1); font: 400 var(--fs-sm) var(--font-ui); color: var(--color-neutral-700); }
+#logtimeline .tl-yh:has(.tl-yb) { padding: 0; }
+#logtimeline .tl-yb { display: flex; align-items: baseline; gap: var(--space-1); width: 100%; min-height: 44px; padding: var(--space-2) 0;
+  background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+#logtimeline .tl-yb::after { content: "\25BE"; margin-left: auto; color: var(--color-neutral-700); }
+#logtimeline .tl-yb[aria-expanded="true"]::after { transform: rotate(180deg); }
+/* O318 M2: the way into the diary - one row of plain-text chips (it scrolls sideways on its own when the beds are many, the
+   page never does), and each row's kind word beside its bed tag. */
+#logfind { margin: 0 0 var(--space-3); }
+#logfind[hidden] { display: none; }
+#logfind .lf-chips { display: flex; flex-wrap: nowrap; gap: var(--space-2); overflow-x: auto; overscroll-behavior-x: contain;
+  scrollbar-width: none; padding-bottom: var(--space-1); }
+#logfind .lf-chips::-webkit-scrollbar { display: none; }
+/* O375 (c): while chips wait past the row's far edge, that edge fades - the cue a hidden scrollbar no longer gives */
+#logfind .lf-chips.lf-edge { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent); }
+#logfind .lf-chip { flex: none; white-space: nowrap; }
+#logfind .lf-n { font-weight: 400; }
+#logtimeline .tl-kind { font: 400 var(--fs-xs) var(--font-ui); color: var(--color-neutral-700); }
+#logtimeline .tl-none { margin: var(--space-2) 0 0; }
+/* O318 M2: the "where am I" line - each year a door (at least 44px tall) to its group */
+#logfind .lf-where { margin: 0 0 var(--space-1); font: 400 var(--fs-read)/1.4 var(--font-text); }
+#logfind .lf-y { white-space: nowrap; }
+#logfind .lf-year { display: inline-block; vertical-align: middle; background: none; border: 0; padding: 0 6px; min-height: 44px; min-width: 44px; color: var(--accent-text);
+  font: 600 var(--fs-read) var(--font-ui); text-decoration: underline; cursor: pointer; }
+#logfind .lf-start { margin-left: var(--space-2); }
+/* O318 M2: with several gardens open, the diary's heading and the editor name the garden */
+#logfind .lf-h { margin: 0 0 var(--space-1); font: 600 var(--fs-read) var(--font-heading); }
+#logtimeline .tl-editor .tl-ed-in { flex-basis: 100%; margin: 0; font-size: var(--fs-sm); color: var(--color-neutral-700); }
+/* O318 M2: a planting's date after today, fixed in place under its row in the notice */
+#logfuture .lf-fixform { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; margin: var(--space-2) 0 var(--space-3); }
+#logfuture .lf-fixform input { font: inherit; padding: var(--space-1) var(--space-2); min-height: 44px; }
+#logfuture .lf-fixform .tl-ed-cancel { background: none; border: 0; color: var(--accent-text); font: 600 var(--fs-sm) var(--font-ui); cursor: pointer; min-height: 44px; text-decoration: underline; }
+#logfuture .lf-fixform .tl-ed-err { flex-basis: 100%; margin: 0; color: var(--danger); font-size: var(--fs-xs); }
+#logfuture .lf-fixform .tl-ed-err:empty { display: none; }
+
+/* O327 (D-337 point 7): the card under the composer that shows what the Log read from a plain sentence, to check and
+   save (logline.ts drawLineCard). Linked with this sheet at the first read, never on the first visit. */
+#logline { margin: var(--space-2) 0 0; padding: var(--space-3); background: var(--color-surface); border: 1px solid var(--line);
+  border-radius: var(--r-md); display: flex; flex-direction: column; gap: var(--space-2); }
+#logline .ll-h { margin: 0; font-weight: 600; }
+#logline .ll-sub, #logline .ll-why, #logline .ll-count, #logline .ll-device { margin: 0; font-size: var(--fs-sm); color: var(--muted); }
+#logline .ll-fields { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+#logline .ll-fields select, #logline .ll-fields input { font: inherit; padding: var(--space-1) var(--space-2); min-height: 44px; max-width: 100%; }
+#logline .ll-fields .ll-count { flex-basis: 100%; }
+#logline .ll-err { margin: 0; color: var(--danger); font-size: var(--fs-sm); }
+#logline .linky { background: none; border: 0; color: var(--accent-text); font: 600 var(--fs-sm) var(--font-ui); cursor: pointer; min-height: 44px; text-decoration: underline; }
+#logline .ll-acts { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }

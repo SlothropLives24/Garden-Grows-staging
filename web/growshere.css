@@ -1,0 +1,18 @@
+/* What grows here (D-308, the southern crops arc's first milestone; growsview.ts) - growsview.ts links this sheet the
+   first time the card is drawn (after styles.css, whose tokens it reads), so the app's first visit carries none of it
+   (perf budget: app-landing css). The plants that fit sit on shelves as chips; the ones that fit with care, and the
+   ones that do not grow here, sit under one line per reason, its rule's door beside it. */
+.gh-lead { margin: var(--space-1) 0 0; font-size: var(--fs-sm); color: var(--color-text); }
+.gh-sec { margin: var(--space-3) 0 0; }
+.gh-sec-k { margin: 0; font: 700 var(--fs-sm)/var(--lh-ui) var(--font-ui); color: var(--color-text); }
+.gh-shelf { margin: var(--space-2) 0 0; }
+.gh-shelf-k { margin: 0; font: 600 var(--fs-xs)/var(--lh-ui) var(--font-ui); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.gh-reason { margin: var(--space-2) 0 0; padding-left: var(--space-2); border-left: 3px solid var(--line); }
+.gh-why { margin: 0; font-size: var(--fs-sm); color: var(--color-text); }
+.gh-why .dossier-mark { margin-inline-start: var(--door-gap); }
+.gh-not { margin: var(--space-3) 0 0; }
+.gh-not > summary { cursor: pointer; min-height: var(--tap); display: flex; align-items: center; font: 600 var(--fs-sm) var(--font-ui); color: var(--accent-text); }
+.gh-more { font-weight: 700; color: var(--accent-text); }
+.gh-chips > [hidden] { display: none; }
+/* R-181: the summer greens under the bolting line, a step in so they read as its answer */
+.gh-greens { margin-top: var(--space-2); padding-left: var(--space-2); }

@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0e+LyieViR3yOY06a9Z1WYNq/Nze+DWhZNy3AXoqO5s=' https://geocoding.geo.census.gov https://maps.googleapis.com https://maps.gstatic.com; connect-src 'self' https://milpa-garden.goatcounter.com https://cakpmpesvpvxgfeaujxx.supabase.co https://mock.supabase.co https://nominatim.openstreetmap.org https://geocoding.geo.census.gov https://maps.googleapis.com https://tile.googleapis.com https://server.arcgisonline.com; img-src 'self' data: blob: https://server.arcgisonline.com https://tile.googleapis.com https://maps.googleapis.com https://*.gstatic.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="description" content="Garden planning where every suggestion shows its evidence. Every recommendation cites a rule; every rule states its mechanism and evidence grade." />
+    <meta name="theme-color" content="#272e1b" />
+    <link rel="canonical" href="https://milpa.garden/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Milpa Gardens" />
+    <meta property="og:title" content="Milpa Gardens - the garden planner that shows its work" />
+    <meta property="og:description" content="Every recommendation cites a rule; every rule names its mechanism and evidence grade. Odds-not-a-date frost. No companion-planting chart." />
+    <meta property="og:url" content="https://milpa.garden/" />
+    <meta property="og:image" content="https://milpa.garden/web/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Milpa Gardens - the garden planner that shows its work" />
+    <meta name="twitter:description" content="Every recommendation cites a rule; every rule names its mechanism and evidence grade. Odds-not-a-date frost. No companion-planting chart." />
+    <meta name="twitter:image" content="https://milpa.garden/web/og.png" />
+    <meta property="og:locale" content="en_US" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@id":"https://milpa.garden/#organization","@type":"Organization","description":"Garden planning where every suggestion shows its evidence. Every recommendation cites a rule; every rule states its mechanism and evidence grade.","logo":{"@type":"ImageObject","url":"https://milpa.garden/web/icon-512.png"},"name":"Milpa Gardens","url":"https://milpa.garden/"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@id":"https://milpa.garden/#website","@type":"WebSite","description":"Garden planning where every suggestion shows its evidence. Every recommendation cites a rule; every rule states its mechanism and evidence grade.","name":"Milpa Gardens","publisher":{"@id":"https://milpa.garden/#organization","@type":"Organization","name":"Milpa Gardens","url":"https://milpa.garden/"},"url":"https://milpa.garden/"}</script>
+    <link rel="preload" href="../build/app-bundle.json" as="fetch" crossorigin="anonymous" />
+    <link rel="shortcut icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/web/icons/icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/web/icons/icon-96.png" type="image/png" sizes="96x96" />
+    <link rel="icon" href="/web/icons/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/web/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/web/manifest.webmanifest" />
+    <title>Milpa Gardens - the garden planner that shows its work</title>
+    <link rel="preload" href="./fonts/HankenGrotesk[wght].woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/Fraunces[opsz,SOFT,WONK,wght].woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/Fraunces-Italic[opsz,SOFT,WONK,wght].woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./styles.css?v=56482e34fa" as="style" />
+    <style>:where(html){--gg-ground:#f5ead8;background:var(--gg-ground)}:where(html[data-season=spring]){--gg-ground:#f8faec}:where(html[data-season=summer]){--gg-ground:#fdf6df}:where(html[data-season=winter]){--gg-ground:#edf1f1}@media (prefers-color-scheme:dark){:where(html:not([data-theme=light])){--gg-ground:#1d1a16}}:where(html[data-theme=dark]){--gg-ground:#1d1a16}:where(html[data-theme=dark][data-season=spring]){--gg-ground:#1a1b19}:where(html[data-theme=dark][data-season=summer]){--gg-ground:#1b1a17}:where(html[data-theme=dark][data-season=winter]){--gg-ground:#161c1c}#bootsplash{position:fixed;inset:0;z-index:100;background:var(--gg-ground)}#bootsplash:not([hidden])~#sitefoot{display:none}#bootsplash>*{visibility:hidden}#bootsplash:is(.slow,.failed)>*{visibility:visible}[data-first=land] .landing>:not(.lg-top),[data-first=land] .lg-top>:not(.lg-hero){visibility:hidden}html[data-first] .lg-hero>*{animation:none}:root:not([lang=es]) [data-pl]>[lang=es],[lang=es] [data-pl]>[lang=en],[data-pl]>[data-c]:not([data-on]){display:none}[data-lb=note] [data-lbpre=note][hidden],[data-lb=offer] [data-lbpre=offer][hidden]{display:flex!important}[data-first=land] #bootsplash:is(.slow,.failed){display:flex}</style>
+    <script type="application/json" id="gg-chunks">{"dist/sitepages-es.gen.js":["dist/sitepages-es.gen.js"],"dist/copy-values-es.gen.js":["dist/copy-values-es.gen.js"],"dist/core.js":["dist/core.js"],"dist/silhouettes.js":["dist/silhouettes.js"],"dist/perfhud.js":["dist/perfhud.js"],"dist/shareview.js":["dist/shareview.js","dist/chunk-lutet8cz.js","dist/chunk-l5cseoso.js"],"dist/editor.js":["dist/editor.js","dist/chunk-l5cseoso.js"],"dist/why.js":["dist/why.js","dist/chunk-lutet8cz.js","dist/chunk-h8sxf1mq.js","dist/dossiersheet.js","dist/chunk-hbmfsdgg.js","dist/chunk-h38ll914.js","dist/chunk-d4xihojx.js","dist/chunk-l5cseoso.js","dist/chunk-nlhi0qk9.js"],"dist/panels/plantcard.js":["dist/panels/plantcard.js","dist/chunk-lutet8cz.js","dist/chunk-h8sxf1mq.js","dist/chunk-ngdzafki.js","dist/chunk-jij456u7.js","dist/chunk-nlhi0qk9.js","dist/chunk-cph1bzsd.js","dist/chunk-k60vt8tj.js","dist/chunk-h38ll914.js","dist/chunk-ihqqrs44.js","dist/chunk-e28r444y.js","dist/chunk-l5cseoso.js","dist/chunk-dpsx67rd.js"],"dist/panels/knows.js":["dist/panels/knows.js","dist/chunk-lutet8cz.js","dist/chunk-l5cseoso.js"],"dist/review.js":["dist/review.js","dist/chunk-lutet8cz.js","dist/chunk-cph1bzsd.js","dist/chunk-l5cseoso.js"],"dist/answers.js":["dist/answers.js","dist/chunk-lutet8cz.js","dist/chunk-d70vvzl3.js","dist/chunk-i55djf5h.js","dist/chunk-l9zpnf9a.js","dist/chunk-ezosgnab.js","dist/chunk-k60vt8tj.js","dist/chunk-e28r444y.js","dist/addrrank.js","dist/chunk-l5cseoso.js","dist/chunk-h8sxf1mq.js","dist/chunk-dpsx67rd.js"],"dist/calendar.js":["dist/calendar.js","dist/chunk-lutet8cz.js","dist/chunk-hdo2bedi.js","dist/chunk-kbdsyvxe.js","dist/chunk-or4xtote.js","dist/chunk-nhqolnsd.js","dist/chunk-nmt4lyi1.js","dist/chunk-ezosgnab.js","dist/chunk-l5cseoso.js","dist/chunk-iac2um9b.js"],"dist/logpage.js":["dist/logpage.js","dist/chunk-lutet8cz.js","dist/chunk-h38ll914.js","dist/chunk-d4xihojx.js","dist/chunk-hbmfsdgg.js","dist/chunk-ihqqrs44.js","dist/chunk-ngdzafki.js","dist/chunk-h8sxf1mq.js","dist/chunk-l5cseoso.js"],"dist/home.js":["dist/home.js","dist/chunk-lutet8cz.js","dist/chunk-kbdsyvxe.js","dist/chunk-nmt4lyi1.js","dist/chunk-k60vt8tj.js","dist/chunk-d70vvzl3.js","dist/chunk-huzqyx5l.js","dist/chunk-e0bi5vda.js","dist/chunk-jij456u7.js","dist/chunk-l5cseoso.js","dist/chunk-h8sxf1mq.js","dist/chunk-dpsx67rd.js"],"dist/planroute.js":["dist/planroute.js","dist/chunk-lutet8cz.js","dist/chunk-iac2um9b.js","dist/chunk-k60vt8tj.js","dist/chunk-cph1bzsd.js","dist/chunk-i55djf5h.js","dist/chunk-h8sxf1mq.js","dist/chunk-e28r444y.js","dist/chunk-jkf3oq22.js","dist/chunk-or4xtote.js","dist/chunk-nmt4lyi1.js","dist/chunk-l5cseoso.js","dist/chunk-dpsx67rd.js"],"dist/sync.js":["dist/sync.js"],"dist/dossiersheet.js":["dist/dossiersheet.js","dist/chunk-lutet8cz.js","dist/chunk-h8sxf1mq.js","dist/chunk-nlhi0qk9.js","dist/chunk-l5cseoso.js"],"dist/bell.js":["dist/bell.js","dist/chunk-lutet8cz.js","dist/chunk-kbdsyvxe.js","dist/chunk-l5cseoso.js"],"dist/landbands.js":["dist/landbands.js","dist/chunk-lutet8cz.js","dist/chunk-h38ll914.js","dist/chunk-ihqqrs44.js","dist/chunk-l9zpnf9a.js","dist/chunk-nhqolnsd.js","dist/example.js","dist/chunk-e0bi5vda.js","dist/chunk-l5cseoso.js","dist/chunk-h8sxf1mq.js"],"dist/trailview.js":["dist/trailview.js","dist/chunk-lutet8cz.js","dist/chunk-hbmfsdgg.js","dist/chunk-l5cseoso.js"],"dist/navmenu.js":["dist/navmenu.js"],"dist/citylist.js":["dist/citylist.js"],"dist/yearplanview.js":["dist/yearplanview.js","dist/chunk-lutet8cz.js","dist/chunk-cph1bzsd.js","dist/chunk-jkf3oq22.js","dist/chunk-huzqyx5l.js","dist/chunk-l5cseoso.js","dist/chunk-iac2um9b.js","dist/chunk-dpsx67rd.js"],"dist/corpus-es.gen.js":["dist/corpus-es.gen.js"],"dist/acctmenu.js":["dist/acctmenu.js"],"dist/teams.js":["dist/teams.js","dist/chunk-lutet8cz.js","dist/chunk-l5cseoso.js"],"dist/forecast.js":["dist/forecast.js","dist/chunk-lutet8cz.js","dist/chunk-l5cseoso.js"],"dist/push.js":["dist/push.js","dist/chunk-lutet8cz.js","dist/chunk-hdo2bedi.js","dist/chunk-l5cseoso.js"],"dist/ownfrost.js":["dist/ownfrost.js","dist/chunk-lutet8cz.js","dist/chunk-l5cseoso.js"],"dist/panels/extension.js":["dist/panels/extension.js","dist/chunk-lutet8cz.js","dist/chunk-l5cseoso.js"],"dist/example.js":["dist/example.js","dist/chunk-lutet8cz.js","dist/chunk-l5cseoso.js"],"dist/addrrank.js":["dist/addrrank.js"]}</script>
+    <script src="./boot.js?v=c659f1b3e9"></script>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="triad" viewBox="0 0 16 15"><g style="mix-blend-mode:var(--triad-blend,multiply)"><circle cx="8" cy="5" r="3.8" fill-opacity="0.9" style="fill:var(--color-accent)"/></g><g style="mix-blend-mode:var(--triad-blend,multiply)"><circle cx="5.7" cy="9.6" r="3.8" fill-opacity="0.9" style="fill:var(--color-accent-2)"/></g><g style="mix-blend-mode:var(--triad-blend,multiply)"><circle cx="10.3" cy="9.6" r="3.8" fill-opacity="0.9" style="fill:var(--color-accent-2-700)"/></g></symbol><symbol id="sprig" viewBox="0 0 24 24"><path d="M12 5.5 L12 19" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><g fill="currentColor" stroke="none"><circle cx="12" cy="4.6" r="1.5"/><path d="M12 12.8 C 8.5 12.3 6.5 10.3 6 7.3 C 9 7.8 11.5 9.8 12 12.8 Z"/><path d="M12 12.8 C 15.5 12.3 17.5 10.3 18 7.3 C 15 7.8 12.5 9.8 12 12.8 Z"/><path d="M12 18 C 9.5 17.7 8 16.3 7.5 14.3 C 9.8 14.7 11.5 16 12 18 Z"/><path d="M12 18 C 14.5 17.7 16 16.3 16.5 14.3 C 14.2 14.7 12.5 16 12 18 Z"/></g></symbol><symbol id="frontis" viewBox="0 0 300 440"><g style="fill:none;stroke:var(--color-text)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M44 418 H256" stroke-width="1.1"/><path d="M62 421 l5 9 M96 421 l5 9 M150 422 l5 9 M204 421 l5 9 M238 421 l5 9" stroke-width="0.85" opacity="0.6"/><path d="M150 418 C150 350 148 250 150 160 C150 120 150 96 150 74" stroke-width="2.2"/><path d="M150 74 C150 54 150 36 150 18 M150 74 C140 56 134 40 136 20 M150 74 C160 56 166 40 164 20 M150 74 C130 60 120 46 116 28 M150 74 C170 60 180 46 184 28"/><path d="M150 150 C114 138 86 150 60 184 C94 172 122 164 150 166"/><path d="M150 208 C186 196 216 208 242 242 C208 230 178 224 150 224"/><path d="M150 268 C114 256 86 268 60 302 C94 290 122 282 150 284"/><path d="M150 330 C186 320 214 332 238 364 C206 350 178 344 150 346"/><path d="M176 226 C196 230 206 250 202 278 C199 298 186 310 172 306 C160 302 158 282 160 258 C162 236 166 224 176 226 Z"/><path d="M170 240 l24 8 M167 254 l30 9 M166 270 l31 8 M168 286 l27 8" stroke-width="0.8" opacity="0.7"/><path d="M176 226 C176 214 172 204 162 198 M182 232 C186 220 194 214 204 212" stroke-width="1.1"/></g><g stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="fill:none;stroke:var(--color-accent-2-700)"><path d="M150 404 C178 392 180 368 152 358 C124 348 122 322 150 312 C178 302 180 278 152 268 C124 258 122 232 150 222 C172 214 178 198 168 184"/><path d="M132 350 C120 342 112 330 112 316 C124 322 134 332 136 346 M136 346 C142 336 152 330 164 330 C160 342 150 350 136 350 Z"/><path d="M128 262 C116 254 108 242 108 228 C120 234 130 244 132 258 M132 258 C138 248 148 242 160 242 C156 254 146 262 132 262 Z"/></g><g stroke-linecap="round" stroke-linejoin="round"><path d="M92 400 C66 396 50 378 48 354 C64 364 82 370 100 370 C86 354 82 336 90 318 C104 338 118 354 138 358 C128 380 116 396 92 400 Z" stroke-width="1.5" style="fill:none;stroke:var(--color-accent-2-700)"/><path d="M96 372 L120 348 M98 386 L110 362" stroke-width="0.8" opacity="0.65" style="fill:none;stroke:var(--color-accent-2-700)"/><ellipse cx="118" cy="404" rx="30" ry="20" fill-opacity="0.82" stroke-width="1.4" style="fill:var(--color-accent);stroke:var(--color-text)"/><path d="M104 388 C104 408 106 416 108 422 M118 385 C118 406 118 415 118 424 M132 388 C132 408 130 416 128 422" stroke-width="0.8" opacity="0.5" style="fill:none;stroke:var(--color-text)"/><path d="M118 384 C116 376 118 370 124 366" stroke-width="1.3" style="fill:none;stroke:var(--color-text)"/></g></symbol></svg>
+    <div id="silhouettes" aria-hidden="true"></div>
+    <div id="bootsplash" role="status" aria-live="polite">
+      <svg class="bootmark" aria-hidden="true"><use href="#triad"/></svg>
+      <p class="bootword"><span lang="en">Loading Milpa Gardens…</span><span lang="es">Cargando Milpa Gardens…</span></p>
+      <p class="bootslow"><span lang="en">A slow first connection can take a moment.</span><span lang="es">Una conexión lenta puede tardar un momento.</span>
+        <button id="bootreload" type="button" class="btn btn-secondary"><span lang="en">Reload</span><span lang="es">Volver a cargar</span></button></p>
+    </div>
+    <link rel="stylesheet" href="./styles.css?v=56482e34fa" />
+    <button type="button" id="skiplink" class="skiplink" data-copy="skipToContent" data-pl><span lang="en">Skip to the page</span><span lang="es">Saltar al contenido</span></button>
+    <header class="site">
+      <a class="brand" href="#/start"><svg class="brandmark" aria-hidden="true"><use href="#triad"/></svg><span class="brandname">Milpa <b>Gardens</b></span></a>
+      <nav aria-label="Main"></nav>
+      <a class="navsearch hsearch" href="../search/" aria-label="Search the site" data-copy-attr="aria-label:navSearchAria"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12.6 12.6 17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+      <button id="hbell" class="navsearch hbell" type="button" aria-label="Notifications" data-copy-attr="aria-label:nbAria" aria-haspopup="dialog" aria-expanded="false" aria-controls="bellpanel" hidden><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M10 3.2a4.4 4.4 0 0 0-4.4 4.4v2.6c0 .8-.2 1.5-.7 2.1L4 13.6h12l-.9-1.3c-.5-.6-.7-1.3-.7-2.1V7.6A4.4 4.4 0 0 0 10 3.2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.2 16a2 2 0 0 0 3.6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span id="hbellcount" class="hbellcount" hidden></span></button>
+      <a id="authchip" class="chip hacct authchip" href="#/account" data-copy="navLockTag" data-pl><span lang="en">Sign in</span><span lang="es">Iniciar sesión</span></a>
+      <div id="acctmenu" class="acctmenu" role="menu" aria-label="Account menu" data-copy-attr="aria-label:acMenuAria" hidden>
+        <a role="menuitem" tabindex="-1" href="#/account" data-sec="acct-sec-account" data-copy="acIdxAccount">Account</a>
+        <a role="menuitem" tabindex="-1" href="#/account" data-sec="sec-prefs" data-copy="acIdxDisplay">Display</a>
+        <a role="menuitem" tabindex="-1" href="#/account" data-sec="sec-yourgarden" data-copy="acIdxGarden">Your garden</a>
+        <a role="menuitem" tabindex="-1" href="#/account" data-sec="sec-teams" data-copy="acIdxCircles">Garden circles</a>
+        <a role="menuitem" tabindex="-1" href="#/account" data-sec="sec-gardenknows" data-copy="acIdxData">Your data</a>
+        <button role="menuitem" tabindex="-1" type="button" id="acctmenuout" data-copy="acSignOut">Sign out</button>
+      </div>
+      <div id="bellpanel" class="bellpanel" role="dialog" aria-labelledby="bellpanelh" hidden></div>
+    </header>
+    <main tabindex="-1">
+      <div id="examplebanner" class="card card-callout examplebanner" hidden>
+        <span class="exb-long" data-copy="exampleBannerText"></span>
+        <strong class="exb-short" data-copy="exampleBannerShort">Example garden</strong>
+        <button id="examplestart" class="btn btn-secondary examplestart" type="button" data-copy="exampleStartOwn"></button>
+        <button id="exampleremove" class="btn btn-quiet" type="button" data-copy="exampleRemove"></button>
+      </div>
+      <div id="draftbanner" class="card card-callout examplebanner" hidden></div>
+      <section class="page" id="page-start" hidden aria-labelledby="landing-h">
+        <div class="langbar langnote notice mtnote" data-lbpre="note" hidden aria-hidden="true"><p class="home-pace-q">Traducción automática. Si hay diferencias, la versión en inglés es la que vale.</p><button type="button" class="btn btn-quiet mt-orig" tabindex="-1">Leer en inglés</button><button type="button" class="btn btn-quiet mt-switch" data-lang="en" tabindex="-1">Cambiar la app a inglés</button></div><div id="langbar" class="langbar" hidden></div>
+        <div class="landing">
+          <div id="homereturn" hidden></div>
+          <div class="lg-top">
+          <header class="lg-hero">
+            <svg class="lg-frontis" aria-hidden="true" viewBox="0 0 300 440" preserveAspectRatio="xMidYMax meet"><use href="#frontis"/></svg>
+            <p class="lg-eyebrow"><svg class="triad" aria-hidden="true"><use href="#triad"/></svg> <span data-copy="landingEyebrow" data-pl><span lang="en">Milpa · plants in good company</span><span lang="es">Milpa · plantas en buena compañía</span></span></p>
+            <h1 id="landing-h" data-copy-html="landingHeadlineHtml" data-pl><span lang="en">Know when to plant, <em>and why.</em></span><span lang="es">Sabe cuándo sembrar, <em>y por qué.</em></span></h1>
+            <p class="lg-deck" data-copy-html="landingDeckHtml" data-pl><span lang="en">Every answer shows its evidence. Your planting dates come from the frost odds where you live, and each piece of advice says in plain words how sure the studies are.</span><span lang="es">Cada respuesta muestra su evidencia. Tus fechas de siembra salen de las probabilidades de helada de donde vives, y cada consejo dice con palabras sencillas qué tan seguros están los estudios.</span></p>
+            <form class="lg-first" id="lgfirst" aria-labelledby="lgfirst-q">
+              <p class="lg-first-q" id="lgfirst-q"><span class="lg-door-q" data-copy="door1Q" data-pl><span lang="en">When do I plant?</span><span lang="es">¿Cuándo siembro?</span></span></p>
+              <span class="lg-first-row"><input id="lgplace" autocomplete="off" enterkeyhint="go" placeholder="55401 or Munich" data-copy-attr="aria-label:answersZipLabel;placeholder:anZipPh"><button id="doorwhen" class="btn btn-primary btn-lg" type="submit" data-door="when" data-copy="lgFirstGo" data-pl><span lang="en">Show my planting dates ›</span><span lang="es">Ver mis fechas de siembra ›</span></button></span>
+            </form>
+            <button id="examplebtn" class="btn btn-quiet lg-first-ex" type="button" data-door="example"><span data-copy="landingExample" data-pl><span lang="en">See an example garden</span><span lang="es">Ver un huerto de ejemplo</span></span> &rsaquo;</button>
+            <p class="lg-promise" data-copy="landingNote" data-pl><span lang="en">Free, and you don't need an account: your garden and the diary of what you plant stay right here on this device. A free account carries both to every device you use.</span><span lang="es">Es gratis, y no necesitas una cuenta: tu huerto y el registro de lo que siembras se quedan aquí, en este dispositivo. Una cuenta gratuita los lleva a todos tus dispositivos.</span></p>
+            <div class="lg-groups">
+              <section class="lg-group" aria-labelledby="lgg-before">
+                <h2 class="lg-group-h" id="lgg-before" data-copy="doorsGroupBefore" data-pl><span lang="en">Before you plant</span><span lang="es">Antes de sembrar</span></h2>
+                <button id="doorteams" class="card lg-door" type="button" data-door="together">
+                  <span><span class="lg-door-q" data-copy="door2Q" data-pl><span lang="en">What grows well together?</span><span lang="es">¿Qué plantas crecen bien juntas?</span></span><span class="lg-door-p" data-copy="door2P" data-pl><span lang="en">Plant teams that share a bed well, and how sure the evidence is for each one.</span><span lang="es">Equipos de plantas que comparten bien una cama, y qué tan sólida es la evidencia de cada uno.</span></span></span>
+                  <span class="lg-door-go">&rsaquo;</span>
+                </button>
+                <button id="startbtn" class="card lg-door startgo" type="button" data-door="plan">
+                  <span><span class="lg-door-q" data-copy="door4Q" data-pl><span lang="en">Plan my garden</span><span lang="es">Planificar mi huerto</span></span><span class="lg-door-p" data-copy="door4P" data-pl><span lang="en">Lay out your beds and their plant teams. What grew where stays with the ground when you move a bed.</span><span lang="es">Organiza tus camas y sus equipos de plantas. Lo que creció en cada lugar se queda con la tierra aunque muevas una cama.</span></span></span>
+                  <span class="lg-door-go">&rsaquo;</span>
+                </button>
+              </section>
+              <section class="lg-group" aria-labelledby="lgg-growing">
+                <h2 class="lg-group-h" id="lgg-growing" data-copy="doorsGroupGrowing" data-pl><span lang="en">While it grows</span><span lang="es">Mientras crece</span></h2>
+                <button id="doornow" class="card lg-door" type="button" data-door="now">
+                  <span><span class="lg-door-q" data-copy="doorNowQ" data-pl><span lang="en">What can I plant now?</span><span lang="es">¿Qué puedo sembrar ahora?</span></span><span class="lg-door-p" data-copy="doorNowP" data-pl><span lang="en">What can go in this week where you live, and what has time to finish before the frost.</span><span lang="es">Lo que puedes sembrar esta semana donde vives, y lo que alcanza a madurar antes de la helada.</span></span></span>
+                  <span class="lg-door-go">&rsaquo;</span>
+                </button>
+                <button id="doorwrong" class="card lg-door" type="button" data-door="wrong">
+                  <span><span class="lg-door-q" data-copy="doorWrongQ" data-pl><span lang="en">Something wrong in the garden?</span><span lang="es">¿Algo anda mal en el huerto?</span></span><span class="lg-door-p" data-copy="doorWrongP" data-pl><span lang="en">Match what you see to its likely cause. Each answer comes from a rule a person has checked against its source.</span><span lang="es">Compara lo que ves con su causa probable. Cada respuesta sale de una regla que una persona revisó con su fuente.</span></span></span>
+                  <span class="lg-door-go">&rsaquo;</span>
+                </button>
+              </section>
+              <section class="lg-group" aria-labelledby="lgg-track">
+                <h2 class="lg-group-h" id="lgg-track" data-copy="doorsGroupTrack" data-pl><span lang="en">Keeping track</span><span lang="es">Llevar el registro</span></h2>
+                <button id="doordiary" class="card lg-door" type="button" data-door="diary">
+                  <span><span class="lg-door-q" data-copy="doorDiaryQ" data-pl><span lang="en">Keep a garden diary</span><span lang="es">Llevar un diario del huerto</span></span><span class="lg-door-p" data-copy="doorDiaryP" data-pl><span lang="en">Note what you plant and when the frosts come. It's kept on this device, and you don't need an account.</span><span lang="es">Anota lo que siembras y cuándo llegan las heladas. Se guarda en este dispositivo y no necesitas una cuenta.</span></span></span>
+                  <span class="lg-door-go">&rsaquo;</span>
+                </button>
+              </section>
+              <section class="lg-group" aria-labelledby="lgg-tip">
+                <h2 class="lg-group-h" id="lgg-tip" data-copy="doorsGroupTip" data-pl><span lang="en">Heard a tip?</span><span lang="es">¿Te dieron un consejo?</span></h2>
+                <a class="card lg-door" href="#/why" data-door="tip">
+                  <span><span class="lg-door-q" data-copy="door3Q" data-pl data-n="6"><span lang="en" data-c="0" data-b="B-005">Do eggshells stop slugs?</span><span lang="es" data-c="0">¿Las cáscaras de huevo detienen a las babosas?</span><span lang="en" data-c="1" data-b="B-004">Do Epsom salts stop blossom end rot?</span><span lang="es" data-c="1">¿La sal de Epsom evita la pudrición apical?</span><span lang="en" data-c="2" data-b="B-011">Do marigolds keep pests away?</span><span lang="es" data-c="2">¿Los cempasúchiles (tagetes) alejan las plagas?</span><span lang="en" data-c="3" data-b="B-006">Do coffee grounds make soil acidic?</span><span lang="es" data-c="3">¿El café molido vuelve ácida la tierra?</span><span lang="en" data-c="4" data-b="B-003">Does planting by the moon work?</span><span lang="es" data-c="4">¿Sirve sembrar según la luna?</span><span lang="en" data-c="5" data-b="B-009">Do pot shards help a container drain?</span><span lang="es" data-c="5">¿Los pedazos de maceta ayudan a que un contenedor drene?</span></span><span class="lg-door-p" data-copy="door3P" data-pl><span lang="en">What the studies say about it, with their sources.</span><span lang="es">Lo que dicen los estudios, con sus fuentes.</span></span></span>
+                  <span class="lg-door-go">&rsaquo;</span>
+                </a>
+              </section>
+            </div>
+          </header>
+
+          <section class="lg-product" id="lgproduct" aria-busy="true" aria-label="A look at the planner" data-copy-attr="aria-label:lgProductAria" data-reveal></section>
+          </div>
+
+          <section class="lg-proof">
+            <p class="lg-proof-lead" data-copy="landingProofLead"></p>
+            <div class="lg-receipts">
+              <div class="lg-pair" id="lgpair" aria-busy="true"></div>
+              <article class="lg-rec sure" data-reveal>
+                <span class="lg-kicker"><svg class="triad" aria-hidden="true"><use href="#triad"/></svg> <span data-copy="lgKickKnown">The team you know</span></span>
+                <span class="lg-thumbs" aria-hidden="true"><img data-spot-photo="zea_mays" src="img/thumbs/zea_mays.webp" srcset="img/thumbs/t128_zea_mays.webp 128w, img/thumbs/zea_mays.webp 192w" sizes="4rem" alt="" width="192" height="192" loading="lazy" decoding="async"><img data-spot-photo="phaseolus_vulgaris" src="img/thumbs/phaseolus_vulgaris.webp" srcset="img/thumbs/t128_phaseolus_vulgaris.webp 128w, img/thumbs/phaseolus_vulgaris.webp 192w" sizes="4rem" alt="" width="192" height="192" loading="lazy" decoding="async"><img data-spot-photo="cucurbita_pepo" src="img/thumbs/cucurbita_pepo.webp" srcset="img/thumbs/t128_cucurbita_pepo.webp 128w, img/thumbs/cucurbita_pepo.webp 192w" sizes="4rem" alt="" width="192" height="192" loading="lazy" decoding="async"></span>
+                <span class="lg-plants" data-copy="lgPlantsSisters">Corn · Beans · Squash</span>
+                <h2 data-copy="guildSistersH" class="lg-team">The Three Sisters</h2>
+                <ul class="lg-claims">
+                  <li data-role="support"><span data-copy="guildSistersC1">The corn grows tall and the beans climb it like a trellis.</span> <span class="lg-conf s" data-grade="A"><span class="mk"></span> <span class="lg-conf-w">Well established</span></span></li>
+                  <li data-role="fixer" data-rule="R-014"><span data-copy="guildSistersC2">The beans feed the soil, though most of it reaches next year's crops.</span> <span class="lg-conf h" data-grade="C"><span class="mk"></span> <span class="lg-conf-w">A good hunch</span></span></li>
+                  <li data-role="cover" data-rule="R-053"><span data-copy="guildSistersC3">The squash spreads out underneath and shades the weeds.</span> <span class="lg-conf h" data-grade="C"><span class="mk"></span> <span class="lg-conf-w">A good hunch</span></span></li>
+                </ul>
+                <a class="lg-rec-ev" href="../guilds/three-sisters/" data-copy="lgSeeEvidence">See the evidence ›</a>
+              </article>
+              <article class="lg-rec hunch" data-reveal>
+                <span class="lg-kicker" data-copy="lgKickMaybe">One you might not</span>
+                <span class="lg-thumbs" aria-hidden="true"><img data-spot-photo="thymus_vulgaris" src="img/thumbs/thymus_vulgaris.webp" srcset="img/thumbs/t128_thymus_vulgaris.webp 128w, img/thumbs/thymus_vulgaris.webp 192w" sizes="4rem" alt="" width="192" height="192" loading="lazy" decoding="async"><img data-spot-photo="brassica_oleracea" src="img/thumbs/brassica_oleracea.webp" srcset="img/thumbs/t128_brassica_oleracea.webp 128w, img/thumbs/brassica_oleracea.webp 192w" sizes="4rem" alt="" width="192" height="192" loading="lazy" decoding="async"></span>
+                <span class="lg-plants" data-copy="lgPlantsHerbs">Thyme · Cabbage</span>
+                <h2 data-copy="guildHerbsH" class="lg-team">Brassicas with aromatic herbs</h2>
+                <p data-copy="guildHerbsBody" class="lg-why">Plant strong-smelling herbs among your cabbages and you may see less caterpillar damage. One university trial found that with thyme. Nobody has shown exactly why, and plenty of trials find nothing at all.</p>
+                <span class="lg-conf h" data-grade="C"><span class="mk"></span> <span class="lg-conf-w">A good hunch</span></span>
+                <a class="lg-rec-ev" href="#/why?rule=R-050" data-copy="lgSeeEvidence">See the evidence ›</a>
+              </article>
+              <article class="lg-rec hunch" data-reveal>
+                <span class="lg-kicker" data-copy="lgKickSoil">Under the soil</span>
+                <span class="lg-thumbs" aria-hidden="true"><img data-spot-photo="daucus_carota" src="img/thumbs/daucus_carota.webp" srcset="img/thumbs/t128_daucus_carota.webp 128w, img/thumbs/daucus_carota.webp 192w" sizes="4rem" alt="" width="192" height="192" loading="lazy" decoding="async"><img data-spot-photo="allium_cepa" src="img/thumbs/allium_cepa.webp" srcset="img/thumbs/t128_allium_cepa.webp 128w, img/thumbs/allium_cepa.webp 192w" sizes="4rem" alt="" width="192" height="192" loading="lazy" decoding="async"><img data-spot-photo="anethum_graveolens" src="img/thumbs/anethum_graveolens.webp" srcset="img/thumbs/t128_anethum_graveolens.webp 128w, img/thumbs/anethum_graveolens.webp 192w" sizes="4rem" alt="" width="192" height="192" loading="lazy" decoding="async"></span>
+                <span class="lg-plants" data-copy="lgPlantsCarrot">Carrots · Onions · Dill</span>
+                <h2 class="lg-team" data-copy="guildCarrotH">Carrots, onions and dill</h2>
+                <p data-copy="guildCarrotBody" class="lg-why">Onions planted through the carrots throw the carrot rust fly off the scent, so fewer maggots reach the roots. A dill border gives you something to cut for the table.</p>
+                <span class="lg-conf h" data-grade="C"><span class="mk"></span> <span class="lg-conf-w">A good hunch</span></span>
+                <a class="lg-rec-ev" href="#/why?rule=R-051" data-copy="lgSeeEvidence">See the evidence ›</a>
+              </article>
+              <article class="lg-rec sure" data-reveal>
+                <span class="lg-kicker" data-copy="lgKickEdge">At the edge of the bed</span>
+                <span class="lg-thumbs" aria-hidden="true"><img data-spot-photo="cucurbita_maxima" src="img/thumbs/cucurbita_maxima.webp" srcset="img/thumbs/t128_cucurbita_maxima.webp 128w, img/thumbs/cucurbita_maxima.webp 192w" sizes="4rem" alt="" width="192" height="192" loading="lazy" decoding="async"><img data-spot-photo="cucumis_sativus" src="img/thumbs/cucumis_sativus.webp" srcset="img/thumbs/t128_cucumis_sativus.webp 128w, img/thumbs/cucumis_sativus.webp 192w" sizes="4rem" alt="" width="192" height="192" loading="lazy" decoding="async"></span>
+                <span class="lg-plants" data-copy="lgPlantsHubbard">Hubbard squash · Cucumber</span>
+                <h2 class="lg-team" data-copy="guildHubbardH">The hubbard ring</h2>
+                <p data-copy="guildHubbardBody" class="lg-why">Circle your cucumbers with hubbard squash. The beetles much prefer it, so they crowd onto the ring and mostly leave the cucumbers, and the wilt they carry, alone. You still clear them off. The ring just gathers them.</p>
+                <span class="lg-conf p" data-grade="B"><span class="mk"></span> <span class="lg-conf-w">Promising</span></span>
+                <a class="lg-rec-ev" href="#/why?rule=R-143" data-copy="lgSeeEvidence">See the evidence ›</a>
+              </article>
+            </div>
+          </section>
+
+          <div class="lg-proof-cta" data-reveal>
+            <button class="btn btn-secondary btn-lg startgo" type="button" data-copy="landingProofCta"></button>
+          </div>
+
+          <section class="lg-lib" id="lglib" hidden data-reveal aria-labelledby="lglib-h">
+            <h2 class="lg-h2" id="lglib-h" data-copy="landingLibTitle"></h2>
+          </section>
+
+          <section class="lg-how" data-reveal>
+            <h2 class="lg-h2" data-copy="landingHowTitle"></h2>
+            <div class="lg-principles">
+              <div class="lg-pr">
+                <span class="lg-n">01</span>
+                <h3 data-copy="landingP1Title"></h3>
+                <p data-copy="landingWhyExample" class="lg-ex">why: the beans pull nitrogen from the air and leave it in the soil.</p>
+                <p class="lg-pr-more"><a class="lg-pr-guide" href="../guides/companion-planting-honestly/" data-copy="lgGuideHolds">What actually holds up ›</a></p>
+              </div>
+              <div class="lg-pr">
+                <span class="lg-n">02</span>
+                <h3 data-copy="landingP2Title"></h3>
+                <p data-copy="landingConfidenceRow" class="lg-ex">confidence: well established · promising · a good hunch</p>
+                <p class="lg-pr-more"><a class="lg-pr-guide" href="../rules/" data-copy="lgGuideRules">Every rule and its sources ›</a></p>
+              </div>
+              <div class="lg-pr">
+                <span class="lg-n">03</span>
+                <h3 data-copy="landingP3Title"></h3>
+                <p data-copy="landingFertilizerRow" class="lg-ex">fertilizer: get a soil test first, then feed what it asks for.</p>
+                <p class="lg-pr-more"><a class="lg-pr-guide" href="../guides/the-soil-test/" data-copy="lgGuideSoil">Why a soil test ›</a></p>
+              </div>
+            </div>
+          </section>
+
+          <div class="lg-foot">
+            <svg class="triad" aria-hidden="true"><use href="#triad"/></svg>
+            <h2 data-copy="landingFootTitle"></h2>
+            <button class="btn btn-secondary btn-lg startgo lg-foot-btn" type="button" data-copy="landingStart"></button>
+          </div>
+          <span class="lg-watermark" aria-hidden="true">Milpa</span>
+        </div>
+      </section>
+      <section class="page" id="page-answers" hidden aria-labelledby="answers-h">
+        <div class="answers">
+          <h1 id="answers-h"><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg><span data-copy="answersTitle"></span></h1>
+          <p class="tagline" data-copy="answersTagline"></p>
+
+          <section class="ans-block" aria-labelledby="ans-where-h">
+            <h2 id="ans-where-h" class="ans-h" data-copy="answersWhereH"></h2>
+            <div id="anszip-receipt" class="ans-receipt" hidden></div>
+            <div id="anszip-form">
+            <div class="ans-ziprow">
+              <label class="ans-ziplabel" for="anszip" data-copy="answersZipLabel"></label>
+              <input id="anszip" autocomplete="postal-code" placeholder="55401 or Munich" aria-describedby="anszip-hint"  data-copy-attr="placeholder:anZipPh"/>
+            </div>
+            <p class="hint" id="anszip-hint" aria-live="polite"></p>
+            <div id="anscity" class="ans-chips" hidden></div>
+            <p class="hint" data-copy="anOutsideUs">Outside the US? Type your town's name, or your postcode. Bigger cities answer straight away, and we can look up anywhere else.</p>
+            </div>
+            <div id="ansclimate" class="ans-card" hidden></div>
+          </section>
+
+          <section class="ans-block" id="anscrop" aria-labelledby="ans-crop-h">
+            <h2 id="ans-crop-h" class="ans-h" data-copy="answersCropH"></h2>
+            <div id="anscrop-receipt" class="ans-receipt" hidden></div>
+            <div id="anscrop-form">
+            <div id="anschips" class="ans-chips"></div>
+            <p class="hint" id="anscrop-hint"></p>
+            <input id="anscropq" type="search" placeholder="Or type a crop, like kale"  data-copy-attr="placeholder:anOrTypeAnyCrop"/>
+            <div id="anscroplist" class="ans-chips"></div>
+            </div>
+            <div id="ansdates" class="ans-card" hidden></div>
+            <div id="ansicsrow" class="ans-icsrow" hidden>
+              <button id="ansics" class="btn btn-primary primary" type="button" data-copy="answersIcsBtn"></button>
+              <span class="remindrow"><span data-copy="clRemindMe">Remind me</span>
+                <select id="ansremind" aria-label="reminder time" data-copy-attr="aria-label:anReminderTime">
+                  <option value="morning" data-copy="anMorningOf">Morning of (8 am)</option>
+                  <option value="evening" data-copy="anEveningBefore">Evening before (6 pm)</option>
+                  <option value="none" data-copy="anNoReminder">no reminder</option>
+                </select>
+              </span>
+              <p class="hint" data-copy="answersIcsHint"></p>
+            </div>
+            <div id="ansgrows" class="ans-card ans-grows" hidden></div>
+          </section>
+
+          <section class="ans-block" aria-labelledby="ans-teams-h">
+            <h2 id="ans-teams-h" class="ans-h" data-copy="answersTeamsH"></h2>
+            <div id="ansteams" class="ans-card" hidden></div>
+          </section>
+
+          <div id="anssituations" class="ans-sits" hidden>
+            <p class="ans-sit-lead" data-copy="landingSituationLead"></p>
+            <div id="anssitrow" class="ans-sitrow"></div>
+          </div>
+          <div id="anssituation" hidden></div>
+
+          <div id="ansnext" class="ans-next" hidden>
+            <button id="ansplan" class="btn btn-secondary" type="button" data-copy="answersPlanBtn"></button>
+          </div>
+        </div>
+      </section>
+      <section class="page" id="page-plan" hidden>
+        <div id="planshell">
+          <div id="maparea">
+            <div class="mapbar">
+              <span class="mapbar-group">
+                <button id="moderect" type="button" class="modebtn on" data-copy="plRectangle">Rectangle</button>
+                <button id="modecircle" type="button" class="modebtn" data-copy="plCircle">Circle</button>
+                <details id="advshapes">
+                  <summary data-copy="plShapes">Shapes</summary>
+                  <span class="advrow">
+                    <button id="modelbed" type="button" class="modebtn" data-copy="plLBed">L-bed</button>
+                    <button id="modeubed" type="button" class="modebtn" data-copy="plUBed">U-bed</button>
+                    <button id="modetrough" type="button" class="modebtn" data-copy="plTrough">trough</button>
+                    <button id="modecorner" type="button" class="modebtn" data-copy="plTraceAnOddOutline">trace an odd outline</button>
+                  </span>
+                </details>
+              </span>
+              <span class="mapbar-group">
+                <button data-copy="planNewGardenHereBtn" id="newgardenhere" type="button" hidden>Start a new garden here</button>
+                <button data-copy="planMoveGardenBtn" id="reanchor" type="button" hidden>Move garden here</button>
+                <button data-copy="planUseMapCentreBtn" id="mapuse" type="button" title="pan the imagery to your house, then make this spot your location" data-copy-attr="title:plPanTheImageryTo">Use map center</button>
+              </span>
+            </div>
+            <button id="editground" type="button" data-copy="plEditGround">edit ground</button>
+            <div id="mapviewport">
+              <svg id="mapsvg" viewBox="0 0 440 440" role="group" aria-label="your ground - map with a metre grid; tap to trace growing areas, drag to pan, pinch to zoom" data-copy-attr="aria-label:plYourGroundMapWith"></svg>
+              <div id="gmap" hidden aria-label="location map - drag the pin onto your garden" data-copy-attr="aria-label:plLocationMapDragThe"></div>
+              <div class="maplayers" role="group" aria-label="map layers" data-copy-attr="aria-label:plMapLayers">
+                <span class="lyrow">
+                  <button id="ly-toggle" type="button" aria-expanded="false" data-copy="plLayers">Layers</button>
+                  <span class="ly-set" hidden>
+                    <button id="ly-areas" type="button" class="on" data-copy="plAreas">areas</button>
+                    <button id="ly-plantings" type="button" class="on" data-copy="plPlantings">plantings</button>
+                    <button id="ly-labels" type="button" class="on" data-copy="plLabels">labels</button>
+                    <button id="ly-photo" type="button" data-copy="plPhoto">photo</button>
+                    <span class="ly-tints" role="group" aria-label="bed tint layer" data-copy-attr="aria-label:plBedTintLayer">
+                      <button id="ly-t-season" type="button" class="on" data-copy="plThisSeason">this season</button>
+                      <button id="ly-t-sun" type="button" data-copy="plSun">sun</button>
+                      <button id="ly-t-soil" type="button" data-copy="plSoil">soil</button>
+                      <button id="ly-t-rotation" type="button" data-copy="plRotation">rotation</button>
+                    </span>
+                    <span id="tintwords" class="tintwords"></span>
+                  </span>
+                </span>
+                <span class="lyrow">
+                  <button id="keytoggle" type="button" aria-expanded="false" hidden data-copy="plKey">Key</button>
+                  <div id="maplegend" aria-label="what the plant colours mean" hidden data-copy-attr="aria-label:plWhatThePlantColours"></div>
+                </span>
+              </div>
+              <div id="mapempty" aria-live="polite">
+                <svg class="triad" aria-hidden="true"><use href="#triad"/></svg>
+                <p data-copy="planMapEmptyTitle" class="me-h">Your map opens here</p>
+                <p data-copy="planMapEmptyBody" class="me-b">Set your location in the “Where” step and we'll drop you right on your own yard. From there you can trace your beds straight onto the satellite photo.</p>
+              </div>
+              <p class="hint maphint faded" id="maphint" aria-live="polite"></p>
+              <div id="mapalerts">
+                <div id="mapnotices" hidden>
+                  <span id="mapnoticestext"></span>
+                  <button id="mapnoticesx" type="button" aria-label="dismiss" data-copy-attr="aria-label:plDismiss">&times;</button>
+                </div>
+                <div id="mapcontainer" hidden>
+                  <span id="mapcontainertext"></span>
+                  <button id="mapcontainerx" type="button" aria-label="dismiss" data-copy-attr="aria-label:plDismiss">&times;</button>
+                </div>
+                <div id="mapreach" hidden>
+                  <span id="mapreachtext"></span>
+                  <button id="mapreachx" type="button" aria-label="dismiss" data-copy-attr="aria-label:plDismiss">&times;</button>
+                </div>
+              </div>
+              <div id="bedpop" class="bedpop" role="dialog" aria-label="bed" hidden data-copy-attr="aria-label:plBed"></div>
+              <div class="mapnav">
+                <button id="mapzout" type="button" aria-label="zoom out" data-copy-attr="aria-label:plZoomOut">−</button>
+                <button id="mapzin" type="button" aria-label="zoom in" data-copy-attr="aria-label:plZoomIn">+</button>
+                <button id="mapc" type="button" aria-label="centre on plot" data-copy-attr="aria-label:plCentreOnPlot">⌂</button>
+              </div>
+              <span class="hint" id="mapattrib"></span>
+            </div>
+            <div id="savecard" hidden>
+              <div class="scrow scsize">
+                <span id="dimsrect">
+                  <input id="shapew" type="number" min="0.1" step="0.1" value="1.2" aria-label="bed width"  data-copy-attr="aria-label:plBedWidth"/> ×
+                  <input id="shapel" type="number" min="0.1" step="0.1" value="2.4" aria-label="bed length"  data-copy-attr="aria-label:plBedLength"/> <span class="ulen">m</span>
+                </span>
+                <span id="dimscircle" hidden>
+                  <input id="shaped" type="number" min="0.1" step="0.1" value="2" aria-label="bed diameter"  data-copy-attr="aria-label:plBedDiameter"/> <span class="ulen">m</span>
+                </span>
+                <span id="dimsl" hidden>
+                  <input id="lw" type="number" min="0.3" step="0.1" value="2" aria-label="L-bed outer width"  data-copy-attr="aria-label:plLBedOuterWidth"/> ×
+                  <input id="ll" type="number" min="0.3" step="0.1" value="2" aria-label="L-bed outer length"  data-copy-attr="aria-label:plLBedOuterLength"/> <span class="ulen">m</span>
+                  · <span data-copy="plNotch">notch</span> <input id="lnw" type="number" min="0.1" step="0.1" value="1" aria-label="notch width"  data-copy-attr="aria-label:plNotchWidth"/> ×
+                  <input id="lnl" type="number" min="0.1" step="0.1" value="1" aria-label="notch length"  data-copy-attr="aria-label:plNotchLength"/> <span class="ulen">m</span>
+                </span>
+                <span id="dimsu" hidden>
+                  <input id="uw" type="number" min="0.3" step="0.1" value="2.4" aria-label="U-bed outer width"  data-copy-attr="aria-label:plUBedOuterWidth"/> ×
+                  <input id="ul" type="number" min="0.3" step="0.1" value="2" aria-label="U-bed outer length"  data-copy-attr="aria-label:plUBedOuterLength"/> <span class="ulen">m</span>
+                  · <span data-copy="plNotch">notch</span> <input id="unw" type="number" min="0.1" step="0.1" value="0.8" aria-label="notch width"  data-copy-attr="aria-label:plNotchWidth"/> ×
+                  <input id="unl" type="number" min="0.1" step="0.1" value="1.2" aria-label="notch length"  data-copy-attr="aria-label:plNotchLength"/> <span class="ulen">m</span>
+                </span>
+                <span id="dimstrough" hidden>
+                  <input id="tw" type="number" min="0.1" step="0.1" value="0.6" aria-label="trough width"  data-copy-attr="aria-label:plTroughWidth"/> ×
+                  <input id="tl" type="number" min="0.1" step="0.1" value="1.8" aria-label="trough length"  data-copy-attr="aria-label:plTroughLength"/> <span class="ulen">m</span>
+                </span>
+                <span id="sizereadout"></span>
+                <span class="scspacer"></span>
+                <button id="areaundo" type="button" class="iconbtn" title="undo" data-copy-attr="title:plUndo">↺</button>
+                <button id="arearedo" type="button" class="iconbtn" title="redo" data-copy-attr="title:plRedo">↻</button>
+                <button id="areaclear" type="button" class="iconbtn" title="discard this shape" data-copy-attr="title:plDiscardThisShape">⌫</button>
+              </div>
+              <div class="scrow">
+                <input id="areaname" type="text" placeholder="Name this bed (e.g. south bed)"  data-copy-attr="placeholder:plNameThisBedE"/>
+              </div>
+              <div class="scrow">
+                <select id="bedstructure" aria-label="this bed's structure" title="how this ground is built: a field is walked from lanes, a bed is reached from its edges" data-copy-attr="aria-label:plThisBedSStructure;title:plHowThisGroundIs">
+                  <option value="in_ground" selected data-copy="plInGroundBed">In-ground bed</option>
+                  <option value="raised" data-copy="plRaisedBed">Raised bed</option>
+                  <option value="container" data-copy="plContainerOrPot">Container or pot</option>
+                  <option value="field" data-copy="plOpenField">Open field</option>
+                </select>
+              </div>
+              <div class="scrow">
+                <select id="bedlanes" aria-label="which way this bed's walkways run" title="a bed too deep to reach gets walking paths, a field gets lanes - this flips which way they run; a bed reachable whole never gets any" data-copy-attr="aria-label:plWhichWayThisBed;title:plABedTooDeep">
+                  <option value="" selected data-copy="plWalkwaysRunTheLong">Walkways run the long way</option>
+                  <option value="flip" data-copy="plWalkwaysRunTheShort">Walkways run the short way</option>
+                </select>
+              </div>
+              <p id="bedstructwhy" class="hint bedstructwhy" hidden></p>
+              <div class="scrow">
+                <select id="bedrain" aria-label="does rain reach this bed?" title="does rain reach this bed?" data-copy-attr="aria-label:plDoesRainReach;title:plDoesRainReach">
+                  <option value="" selected data-copy="plRainOpen">Open sky (rain reaches it)</option>
+                  <option value="covered" data-copy="plRainCovered">Under a roof (no rain)</option>
+                  <option value="indoors" data-copy="plRainIndoors">Indoors (no rain)</option>
+                </select>
+              </div>
+              <div class="scrow">
+                <select id="bedsun" aria-label="this bed's sun exposure" title="how much direct sun this bed gets" data-copy-attr="aria-label:plThisBedSSun;title:plHowMuchDirectSun">
+                  <option value="" data-copy="plSunNotStated">Sun not stated</option>
+                  <option value="full" data-copy="plFullSunHoursDirect">Full sun (6+ hours direct)</option>
+                  <option value="part_shade" data-copy="plPartShade">Part shade</option>
+                </select>
+                <button id="areasave" type="button" class="scsave" data-copy="plSaveBed">Save bed</button>
+              </div>
+            </div>
+          </div>
+          <div id="bedpreview" hidden aria-live="polite"></div>
+          <div id="teampanel" hidden aria-live="polite"></div>
+          <div id="plansheet">
+            <div id="sheetgrab" role="button" tabindex="0" aria-label="open or close the plan panel" data-copy-attr="aria-label:plOpenOrCloseThe"><span id="sheetpeek" aria-hidden="true"></span></div>
+            <div id="pathbar" aria-label="Plan steps" data-copy-attr="aria-label:plPlanSteps"></div>
+            <div id="sheetbody">
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg><span data-copy="planTitle"></span></h1>
+        <div id="activegarden" hidden></div>
+        <div id="askmini" hidden></div>
+        <div class="controls">
+          <section id="gardenadd" class="gardenadd-card" hidden aria-labelledby="gardenadd-h" aria-live="polite"></section>
+          <details class="step" id="step-where" open>
+            <summary><span class="badge">1</span><span class="steptitle" data-copy="plWhere">Where</span><span class="stepsum" id="sum-where"></span></summary>
+            <div class="stepbody">
+              <p data-copy="planWhereLead" class="stepneed" id="need-where"></p>
+              <p class="bedselsewhere" id="bedselsewhere-where" hidden></p>
+            <p class="usezip-row"><button type="button" id="usezip" class="btn btn-secondary secondary" hidden></button></p>
+            <form id="addrform" class="logrow" autocomplete="on">
+              <label for="addr" data-copy="plAddress">Address</label>
+              <input id="addr" name="street-address" type="text" autocomplete="street-address" enterkeyhint="search"
+                placeholder="Street address, city" style="width:16rem"  data-copy-attr="placeholder:plStreetAddressCity"/>
+              <button type="button" id="uselocation" class="btn btn-secondary secondary" hidden data-copy="plUseMyLocation">Use my location</button>
+              <input id="addrcity" name="city" type="text" autocomplete="address-level2" tabindex="-1" aria-hidden="true" class="autofillaux" />
+              <input id="addrstate" name="state" type="text" autocomplete="address-level1" tabindex="-1" aria-hidden="true" class="autofillaux" />
+              <input id="addrzip" name="postal-code" type="text" autocomplete="postal-code" tabindex="-1" aria-hidden="true" class="autofillaux" />
+            </form>
+            <div id="addrlist" class="addrlist"></div>
+            <p class="hint" id="wherehint" data-copy="whereHint"></p>
+            <p class="hint" id="ziphint" aria-live="polite" data-copy="ziphintDefault"></p>
+            <div id="farpick" class="farpick" hidden>
+              <p class="hint" id="farpick-line"></p>
+              <p class="farpick-acts"><button type="button" id="farpick-new" class="btn btn-primary" data-copy="planNewGardenHereBtn">Start a new garden here</button>
+                <button type="button" id="farpick-move" class="btn btn-secondary secondary" data-copy="planMoveGardenBtn">Move garden here</button></p>
+            </div>
+            <p data-copy="planWhereBought" class="stepearned" id="earned-where" hidden>You now have frost odds and planting windows for every crop, across the whole app. We won't ask again.</p>
+            <div id="where-ownfrost" class="where-own" hidden><button type="button" id="where-ownbtn" class="btn btn-quiet linky"></button></div>
+            <button type="button" id="changeloc" class="btn btn-secondary secondary" hidden data-copy="plChangeLocation">Change location</button>
+            <p id="gardenaddrow" hidden><button type="button" id="gardenadd-open" class="btn btn-quiet tertiary" data-copy="logAddGardenBtn">+ Add a garden</button></p>
+            <div id="coach-where" class="coachband" hidden></div>
+
+            <input id="lat" type="number" hidden />
+            <input id="lon" type="number" hidden />
+            <p class="hint" id="gardenchip" hidden></p>
+            <div id="firstbed" hidden>
+              <p class="fb-kicker" data-copy="plYourFirstBedReady">Your first bed, ready to keep</p>
+              <p class="fb-sub" id="fb-sub"></p>
+              <p class="fb-sub"><button type="button" id="fb-pots" class="fb-change" data-copy="plFirstBedPots">Growing in pots? Show a pot instead &rsaquo;</button></p>
+              <div class="fb-rows">
+                <div class="fb-row">
+                  <div>
+                    <div class="fb-row-step" data-copy="plBeds">Beds</div>
+                    <div class="fb-row-answer" id="fb-bedline"></div>
+                  </div>
+                  <button type="button" id="fb-resize" class="fb-change" data-copy="plChange">change &rsaquo;</button>
+                </div>
+                <div class="fb-sun" id="fb-sun" role="radiogroup" aria-label="how much sun this bed gets" data-copy-attr="aria-label:plHowMuchSunThis">
+                  <button type="button" class="ba-choice" data-value="full" aria-checked="true" role="radio" data-copy="plFullSun">Full sun</button>
+                  <button type="button" class="ba-choice" data-value="part_shade" aria-checked="false" role="radio" data-copy="plPartShade">Part shade</button>
+                </div>
+                <div class="fb-row">
+                  <div>
+                    <div class="fb-row-step" data-copy="plThisBed">This bed</div>
+                    <div class="fb-row-answer" id="fb-teamline"></div>
+                  </div>
+                  <button type="button" id="fb-other" class="fb-change" data-copy="plChange">change &rsaquo;</button>
+                </div>
+              </div>
+              <p class="fb-team" id="fb-team"></p>
+              <p class="fb-first" id="fb-first" hidden></p>
+              <p class="fb-keepnote" data-copy="firstBedKeepNote"></p>
+              <div class="fb-acts">
+                <button type="button" id="fb-keep" class="btn btn-primary primary" data-copy="plKeepThisBed">Keep this bed</button>
+                <button type="button" id="fb-skip" class="btn btn-quiet tertiary" data-copy="firstBedSkip"></button>
+              </div>
+            </div>
+            <p id="where-next-row"><button type="button" class="btn btn-secondary stepnext" data-next="sec-ground" data-copy="plNextYourGroundWhere">Next: your ground - where do things grow?</button></p>
+            </div>
+          </details>
+          <details class="step" id="sec-ground">
+            <summary><span class="badge">2</span><span class="steptitle" data-copy="plBeds">Beds</span><span class="stepsum" id="sum-ground"></span></summary>
+            <div class="stepbody">
+              <p class="stepneed" id="need-ground"></p>
+              <p class="hint" id="groundgarden" hidden></p>
+              <p class="bedselsewhere" id="bedselsewhere-ground" hidden></p>
+            <div id="arealist"></div>
+            <p id="bedadd-doorrow"><button type="button" class="btn btn-secondary secondary" id="bedadd-open"
+              data-copy="bedAddDoorFirst"></button></p>
+
+            <div class="bedadd" id="bedadd" hidden>
+              <p class="bedadd-back" id="bedadd-back"><button type="button" class="btn btn-quiet tertiary"
+                data-copy="bedAddBack"></button></p>
+              <div class="bedadd-ribbon" id="bedadd-ribbon" role="list"></div>
+              <h2 class="bedadd-h" id="bedadd-h" data-copy="bedAddTitle"></h2>
+
+              <section class="basec" id="ba-how" data-sub="how">
+                <p class="ba-ask" data-copy="bedAddHowAsk"></p>
+                <div class="ba-choices" id="ba-how-choices" role="radiogroup"
+                  aria-label="how to make this bed" data-copy-attr="aria-label:plHowToMakeThis"></div>
+                <p class="hint" data-copy="bedAddHowFoot"></p>
+              </section>
+
+              <section class="basec" id="ba-size" data-sub="size" hidden>
+                <p class="ba-ask" data-copy="bedAddSizeAsk"></p>
+                <div class="logrow dimrow">
+                  <label for="dimw" data-copy="bedAddSizeWide"></label>
+                  <input id="dimw" inputmode="decimal" aria-label="width"  data-copy-attr="aria-label:plWidth"/>
+                  <span aria-hidden="true">&times;</span>
+                  <label for="diml" data-copy="bedAddSizeLong"></label>
+                  <input id="diml" inputmode="decimal" aria-label="length"  data-copy-attr="aria-label:plLength"/>
+                  <span id="dimunit"></span>
+                </div>
+                <div id="bedpresets" class="bedpresets" role="group" aria-label="common bed sizes, one tap each" data-copy-attr="aria-label:plCommonBedSizesOne"></div>
+                <p class="ba-receipt" id="ba-sizereceipt" hidden></p>
+                <p class="hint" data-copy="bedAddSizeFoot"></p>
+              </section>
+
+              <section class="basec" id="ba-kind" data-sub="kind" hidden>
+                <p class="ba-ask" data-copy="bedAddKindAsk"></p>
+                <div class="ba-choices" id="ba-kind-choices" role="radiogroup"
+                  aria-label="how this bed is built" data-copy-attr="aria-label:plHowThisBedIs"></div>
+                <div id="ba-kind-extra"></div>
+                <select id="dimstructure" class="ba-model" aria-label="how this bed is built" tabindex="-1" data-copy-attr="aria-label:plHowThisBedIs">
+                  <option value="in_ground" data-copy="plInGroundBed">In-ground bed</option>
+                  <option value="raised" data-copy="plRaisedBed">Raised bed</option>
+                  <option value="container" data-copy="plContainerOrPot">Container or pot</option>
+                  <option value="field" data-copy="plOpenField">Open field</option>
+                </select>
+              </section>
+
+              <section class="basec" id="ba-sun" data-sub="sun" hidden>
+                <p class="ba-ask" data-copy="bedAddSunAsk"></p>
+                <p class="hint" data-copy="bedAddSunLede"></p>
+                <div class="ba-choices" id="ba-sun-choices" role="radiogroup"
+                  aria-label="this bed's sun exposure" data-copy-attr="aria-label:plThisBedSSun"></div>
+                <select id="dimsun" class="ba-model" aria-label="this bed's sun exposure" tabindex="-1" data-copy-attr="aria-label:plThisBedSSun">
+                  <option value="" data-copy="plSunNotStated">Sun not stated</option>
+                  <option value="full" data-copy="plFullSun">Full sun</option>
+                  <option value="part_shade" data-copy="plPartShade">Part shade</option>
+                </select>
+              </section>
+
+              <section class="basec" id="ba-rain" data-sub="rain" hidden>
+                <p class="ba-ask" data-copy="bedAddRainAsk"></p>
+                <p class="hint" data-copy="bedAddRainLede"></p>
+                <div class="ba-choices" id="ba-rain-choices" role="radiogroup"
+                  aria-label="does rain reach this bed?" data-copy-attr="aria-label:plDoesRainReach"></div>
+                <select id="dimrain" class="ba-model" aria-label="does rain reach this bed?" tabindex="-1" data-copy-attr="aria-label:plDoesRainReach">
+                  <option value="" data-copy="plRainOpen">Open sky (rain reaches it)</option>
+                  <option value="covered" data-copy="plRainCovered">Under a roof (no rain)</option>
+                  <option value="indoors" data-copy="plRainIndoors">Indoors (no rain)</option>
+                </select>
+              </section>
+
+              <p class="ba-actrow"><button id="dimmake" type="button" class="btn btn-primary primary"
+                data-copy="dimbedMake"></button></p>
+              <p class="hint" id="dimbedmsg" data-copy="dimbedHint"></p>
+            </div>
+            <p><button type="button" class="btn btn-secondary stepnext" id="ground-continue" data-next="step-plan" data-copy="plContinuePlanThisBed">Continue to this bed ›</button></p>
+            <div id="nextseason"></div>
+            <div class="upgradecard" id="traceupgrade" hidden>
+              <p class="upgrade-l" data-copy="traceUpL"></p>
+              <p class="hint" data-copy="traceUpBody"></p>
+            </div>
+            <div class="groundsub" id="sec-eligibility">
+              <h2 class="planh2" data-copy="planHistoryH">What grew here recently</h2>
+              <div class="logrow" id="candrow" hidden>
+                <label for="candbed" data-copy="plThisGround">This ground</label>
+                <select id="candbed"></select>
+                <span class="hint" data-copy="plTellUsWhatGrew">tell us what grew here before you started tracking</span>
+              </div>
+              <p class="hint" id="famhint"></p>
+              <div id="families"></div>
+              <p class="hint" data-copy="familyHint"></p>
+              <div id="eligibility"></div>
+            </div>
+            </div>
+          </details>
+          <details class="step" id="step-plan">
+            <summary><span class="badge">3</span><span class="steptitle" data-copy="plThisBed">This bed</span><span class="stepsum" id="sum-plan"></span></summary>
+            <div class="stepbody">
+            <p class="bedadd-back"><button type="button" class="btn btn-quiet tertiary" id="plan-back"></button></p>
+            <div class="bedadd-ribbon" id="plan-ribbon" role="list"></div>
+            <h2 class="teamshead" id="plan-head" data-copy="teamsHead"></h2>
+            <div class="teamsbasis" id="plan-sub" hidden></div>
+            <p class="ba-receipt" id="plan-kept" hidden></p>
+            <div id="guilds"></div>
+            <div id="gd-team" hidden></div>
+            <div id="sharerow">
+              <button data-copy="planShareBtn" id="sharebtn" type="button" class="btn btn-secondary secondary">Share this plan</button>
+              <div id="sharebox" hidden>
+                <button id="shareclose" class="shareclose" type="button" aria-label="close" data-copy-attr="aria-label:plClose">×</button>
+                <p id="shareboxmsg"></p>
+                <p id="shareurl" class="shareurl" hidden></p>
+              </div>
+            </div>
+            <p id="teams-nudge-row"><button type="button" class="btn btn-secondary stepnext" id="teamsnudge" data-copy="plPickATeamIts">Pick a team and its dates go on your calendar ›</button></p>
+            </div>
+          </details>
+          <details class="step" id="step-mybed">
+            <summary><span class="badge">3</span><span class="steptitle" data-copy="plThisBed">This bed</span><span class="stepsum" id="sum-mybed"></span></summary>
+            <div class="stepbody">
+            <p class="bedadd-back"><button type="button" class="btn btn-quiet tertiary" id="mybed-back"
+              data-copy="mybedBackToTeams"></button></p>
+            <div class="bedadd-ribbon" id="mybed-ribbon" role="list"></div>
+            <h2 class="bedadd-h" data-copy="mybedTitle"></h2>
+            <p class="ba-sub" id="mybed-sub"></p>
+            <p class="hint" id="mybed-lede"></p>
+        <div id="mybed" class="mybed">
+          <section class="basec" id="mb-plants" data-sub="plants">
+          <div id="mybedbedrow" class="logrow"></div>
+          <div class="pickrow">
+            <label for="mybedq" data-copy="plAddAPlant">Add a plant</label>
+            <input id="mybedq" type="search" autocomplete="off" placeholder="type to narrow - e.g. to, bean, mint"
+                   aria-label="search plants to add" aria-controls="mybedlist"  data-copy-attr="aria-label:plSearchPlantsToAdd;placeholder:plTypeToNarrowE"/>
+            <p id="mybedcount" class="hint"></p>
+            <div id="mybedlist" class="picklist" role="listbox" aria-label="plants you can add" data-copy-attr="aria-label:plPlantsYouCanAdd"></div>
+          </div>
+          <div id="mybedmembers"></div>
+          <p class="hint" data-copy="mybedHint"></p>
+          </section>
+          <div id="mybedresult">
+            <section class="basec" id="mb-arrange" data-sub="arrange" hidden>
+              <div id="mbr-arrange"></div>
+            </section>
+            <section class="basec" id="mb-found" data-sub="found" hidden>
+              <div id="mbr-found"></div>
+              <div id="mbr-save"></div>
+            </section>
+          </div>
+          <p class="ba-actrow" id="mybed-actrow"><button type="button" class="btn btn-primary primary" id="mybed-next"
+            data-copy="mybedNextBed"></button></p>
+        </div>
+            <p><button type="button" class="btn btn-secondary stepnext" data-next="sec-addplant" data-copy="plMissingAPlantAdd">Missing a plant? Add your own ›</button></p>
+            </div>
+          </details>
+          <p data-copy="planOptionalTag" class="stepmore">Optional, when you're ready</p>
+          <details class="step aside" id="sec-addplant">
+            <summary><span class="badge">+</span><span class="steptitle" data-copy="plAddYourOwnPlant">Add your own plant</span><span class="stepsum" id="sum-addplant"></span></summary>
+            <div class="stepbody">
+          <p class="hint" data-copy="addPlantHint"></p>
+          <datalist id="upfamilies"></datalist>
+          <div id="upaddpanel">
+          <div id="upform-host"></div>
+          <p class="hint upnote" data-copy="addPlantNote"></p>
+          <div class="uprow actions">
+            <button id="upadd" type="button" class="btn btn-primary primary" data-copy="lgAddPlant">Add plant</button>
+            <span class="hint" id="upmsg" aria-live="polite"></span>
+          </div>
+          </div>
+          <p class="hint" id="uplisthint"></p>
+          <div id="uplist"></div>
+            </div>
+          </details>
+          <details class="step aside" id="step-season">
+            <summary><span class="badge">+</span><span class="steptitle" data-copy="plThisSeason2">This season</span><span class="stepsum" id="sum-season"></span></summary>
+            <div class="stepbody">
+              <div id="season"></div>
+            </div>
+          </details>
+        </div>
+        <div id="handoff" class="welcome" hidden>
+          <p data-copy="handoffBody"></p>
+          <button id="handoffgo" type="button" class="btn btn-secondary" data-copy="handoffButton"></button>
+        </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="page" id="page-log" hidden>
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg><span data-copy="logTitle">Your garden diary</span></h1>
+        <p class="tagline" data-copy="logTagline"></p>
+        <p class="logreviewdoor"><a href="#/review" data-copy="lgSeasonReview">Season in review ›</a></p>
+        <div id="askcard" hidden></div>
+        <section id="loglocations"></section>
+        <div id="logjournal">
+        <section id="logmoved" class="acctnotice" role="status" hidden></section>
+        <section id="logfuture" class="acctnotice" role="status" hidden></section>
+        <section id="logfind" hidden></section>
+        <section id="logtimeline" aria-label="season timeline" data-copy-attr="aria-label:lgSeasonTimeline"></section>
+        <details id="fold-supplies" class="logfold disclosure">
+          <summary class="logfold-sum" data-copy="lgSupplies">Supplies</summary>
+        <section id="seedbox" class="seedbox" aria-labelledby="seedbox-h">
+          <h2 id="seedbox-h" data-copy="lgSeedBox">Seed box</h2>
+          <p class="hint" data-copy="lgWhatYouAlreadyHave">What you already have on hand. The planner can subtract these from what a plan needs.</p>
+          <form id="seedadd" class="seedadd">
+            <div class="seedfind">
+              <input id="seedfind" type="search" autocomplete="off" spellcheck="false" placeholder="Find a crop: tomato, basil&hellip;" aria-label="Find a crop" aria-controls="seedpick" aria-expanded="false" data-copy-attr="aria-label:lgFindCrop;placeholder:lgFindCropPh"/>
+              <ul id="seedpick" class="seedpick" aria-label="Matching crops" data-copy-attr="aria-label:lgCropMatches" hidden></ul>
+            </div>
+            <select id="seedspecies" aria-label="crop" data-copy-attr="aria-label:lgCrop" hidden><option value="" data-copy="lgPickACrop">Pick a crop&hellip;</option></select>
+            <input id="seedvariety" type="text" maxlength="120" placeholder="Variety (optional)" aria-label="variety"  data-copy-attr="aria-label:lgVariety;placeholder:lgVarietyOptional"/>
+            <input id="seedqty" type="text" maxlength="60" placeholder="How much (optional)" aria-label="how much"  data-copy-attr="aria-label:lgHowMuch;placeholder:lgHowMuchOptional"/>
+            <input id="seedyear" type="number" min="1900" max="2100" step="1" placeholder="Year" aria-label="packet year"  data-copy-attr="aria-label:lgPacketYear;placeholder:lgYear"/>
+            <input id="seednotes" type="text" maxlength="300" placeholder="Note (optional)" aria-label="note"  data-copy-attr="aria-label:lgNote;placeholder:lgNoteOptional"/>
+            <button id="seedaddbtn" type="submit" class="btn btn-secondary" data-copy="lgAddToSeedBox">Add to seed box</button>
+          </form>
+          <ul id="seedlist" class="seedlist"></ul>
+          <p id="seedempty" class="hint" hidden data-copy="lgYourSeedBoxIs">Your seed box is empty. Add what you have above.</p>
+        </section>
+        <section id="shoppinglist" class="shoppinglist" aria-labelledby="shoppinglist-h">
+          <h2 id="shoppinglist-h" data-copy="lgShoppingList">Shopping list</h2>
+          <p class="hint" data-copy="lgWhatThisPlanNeeds">What this plan needs that your seed box does not already have.</p>
+          <ul id="shoplist" class="shoplist"></ul>
+          <p id="shopnote" class="hint" hidden></p>
+        </section>
+        </details>
+        <section id="gardenfeed" hidden>
+          <h2 data-copy="feedHeading">Garden feed</h2>
+          <p class="hint" data-copy="feedIntro">Notes for the people who tend this garden with you. Only people with access to this garden can see them.</p>
+          <div class="logrow">
+            <input id="feedbody" type="text" maxlength="1000" placeholder="Say something to the team"  data-copy-attr="placeholder:lgSaySomethingToThe"/>
+            <button id="feedpost" type="button" class="btn btn-primary primary" data-copy="feedPostBtn">post</button>
+          </div>
+          <div id="feedlist"></div>
+        </section>
+        <section id="gardenrestore" hidden>
+          <details id="restorefold">
+            <summary data-copy="restoreHeading">Replaced copies of this garden</summary>
+            <p class="hint" data-copy="restoreIntro">When a sync replaces this device's copy of the garden or a season, the outgoing copy is kept here for a while. Restore one to make it the newest version. It syncs back to everyone, undoing the change.</p>
+            <div id="restorelist"></div>
+          </details>
+        </section>
+        <div id="composer">
+          <div class="logrow obsrow">
+            <label for="obsnote" class="vh" data-copy="lgNoteLabel">What happened</label>
+            <input id="obsnote" type="text" enterkeyhint="go" placeholder="What happened in the garden?"  data-copy-attr="placeholder:lgWhatHappenedInThe"/>
+            <select id="obsevent" aria-label="observed event" data-copy-attr="aria-label:lgObservedEvent"></select>
+            <select id="obssev" aria-label="observation severity" data-copy-attr="aria-label:lgObservationSeverity"></select>
+            <select id="obsground" aria-label="which ground" hidden data-copy-attr="aria-label:lgWhichGround"></select>
+            <label for="obsdate" class="vh" data-copy="lgDateLabel">Date</label>
+            <input id="obsdate" type="date" />
+            <button id="obsadd" type="button" class="btn btn-primary primary" data-copy="lgLogIt">Log it</button>
+          </div>
+          <p class="hint" id="lognudge" aria-live="polite" hidden></p>
+          <p class="hint" id="frosthint" aria-live="polite" hidden></p>
+          <p class="wronghint" id="wronghint" aria-live="polite" hidden></p>
+          <div id="logline" class="logline" hidden></div>
+        </div>
+        <section id="wrong" class="wrong" aria-label="something wrong in the garden" data-copy-attr="aria-label:lgSomethingWrongInThe2">
+          <button type="button" id="wrongdoor" class="card wrong-door" aria-expanded="false" aria-controls="wrongbody" data-copy="lgSomethingWrongInThe">Something wrong in the garden?</button>
+          <div id="wrongbody" hidden></div>
+        </section>
+        </div>
+        <div id="lograil">
+        <details id="fold-garden" class="logfold disclosure">
+          <summary class="logfold-sum" data-copy="lgThisGarden">This garden</summary>
+        <fieldset id="sec-gardens">
+          <legend data-copy="lgGardens">Gardens</legend>
+          <div class="logrow gardenswitch">
+            <label for="plotsel" data-copy="lgGarden">Garden</label>
+            <select id="plotsel"></select>
+            <button id="plotdefault" type="button" class="garden-def" data-copy="lgSetDefault" hidden>Make this my default</button>
+          </div>
+          <div class="gardenadd">
+            <button data-copy="logAddGardenBtn" id="plotaddtoggle" type="button" class="btn btn-secondary addgardenbtn">+ Add a garden</button>
+          </div>
+          <div id="closedgardens" class="closedgardens" hidden></div>
+        </fieldset>
+        <fieldset id="sec-earned">
+          <legend data-copy="logLedgerLegend">What your log has earned</legend>
+          <div id="earnedstrip"></div>
+        </fieldset>
+        <fieldset id="sec-weather">
+          <legend data-copy="logWeatherLegend">This ground's weather</legend>
+          <select id="logseason" aria-label="active season" hidden data-copy-attr="aria-label:lgActiveSeason"></select>
+          <div id="gardensclimate"></div>
+          <p data-copy="logWeatherBody" class="hint" id="weatherhint">Frost and heat apply to the whole address. Once you've logged three seasons, this ground's own frost dates take over from the general estimate.</p>
+          <div id="frost"></div>
+          <div class="logrow editonly" id="frostdemorow">
+            <button data-copy="logDemoLoadBtn" id="frostdemo" type="button" class="btn btn-quiet">load demo seasons</button>
+            <button data-copy="logDemoClearBtn" id="frostdemoclear" type="button" hidden class="btn btn-quiet">clear demo seasons</button>
+            <span class="hint" data-copy="frostDemoHint"></span>
+          </div>
+        </fieldset>
+        <div id="soilzone" hidden>
+          <div id="soil"></div>
+          <div id="extension"></div>
+        </div>
+        <fieldset id="sec-soil">
+          <legend data-copy="logSoilLegend">This ground's soil</legend>
+          <p data-copy="logSoilBody" class="hint">How much you know about each piece of ground, and what the next step would tell you. Soil changes slowly, so read this as a picture of the whole season.</p>
+          <div id="soilsummary"></div>
+        </fieldset>
+        <fieldset id="sec-myplants">
+          <legend data-copy="logMyPlantsLegend">My added plants</legend>
+          <p data-copy="logMyPlantsBody" class="hint">Plants you added yourself. Open one to fill in more detail. The more you tell us, the more it works like a built-in plant across Plan, Log, and the Calendar.</p>
+          <div id="myplants"></div>
+        </fieldset>
+        </details>
+        <details id="fold-more" class="logfold disclosure">
+          <summary class="logfold-sum" id="foldmoresum" data-copy="lgMore">More</summary>
+        <fieldset>
+          <legend data-copy="lgKeepIt">Keep it</legend>
+          <div class="logrow">
+            <button data-copy="logExportBtn" id="logexport" type="button" class="btn btn-secondary">export season</button>
+            <button data-copy="logImportBtn" id="logimport" type="button" class="btn btn-secondary">import pasted file</button>
+            <span class="hint" data-copy="exportHint"></span>
+          </div>
+          <details id="logfilebox">
+            <summary data-copy="logSeasonFileSummary">season file (export shows it here; paste one here to import)</summary>
+            <textarea id="logfile" rows="10" spellcheck="false" aria-label="season file (export target, import source)" data-copy-attr="aria-label:lgSeasonFileExportTarget"></textarea>
+            <p class="hint" data-copy="lgImportFromFilesThe">Import from files (the season .yaml, and its photos .zip if you have one)</p>
+            <label class="btn btn-secondary" for="logimportfiles" data-copy="lgChooseFiles">Choose files</label>
+            <input type="file" id="logimportfiles" class="vh" accept=".yaml,.yml,.zip" multiple aria-label="import season file and photo zip"  data-copy-attr="aria-label:lgImportSeasonFileAnd"/>
+          </details>
+        </fieldset>
+        <div id="solar"></div>
+        </details>
+        </div>
+        <p class="hint" id="logmsg" aria-live="polite"></p>
+      </section>
+      <section class="page" id="page-review" hidden>
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg><span data-copy="reviewTitle">Season review</span></h1>
+        <p class="tagline" data-copy="reviewTagline"></p>
+        <div id="reviewbody"></div>
+      </section>
+      <section class="page" id="page-share" hidden>
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg><span data-copy="shareTitle">A shared plan</span></h1>
+        <div id="sharebody"></div>
+      </section>
+      <section class="page" id="page-notfound" hidden>
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg><span data-copy="nfTitle">We can't find that page</span></h1>
+        <div class="notfound">
+          <p data-copy="nfBody">The link may be old, or cut short when it was copied.</p>
+          <p class="notfound-acts"><a class="btn btn-primary" href="#/start" data-copy="nfHome">Go to Home</a>
+            <a class="btn btn-secondary" href="#/plan" data-copy="nfPlan">Plan a garden</a></p>
+        </div>
+      </section>
+      <section class="page" id="page-calendar" hidden>
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg><span data-copy="calendarTitle">Your season, by the date</span></h1>
+        <p class="tagline"><span id="caltagline"></span></p>
+        <div class="empty" id="calempty"><p id="calnoloc" data-copy="calendarTaglineNoLocation"></p>
+          <button type="button" id="calsetloc" class="btn btn-secondary calsetloc" hidden data-copy="clSetYourLocation">Set your location ›</button></div>
+        <div class="calbar">
+          <div class="seg" role="group" aria-label="calendar view" data-copy-attr="aria-label:clCalendarView">
+            <button id="calv-week" type="button" aria-pressed="false" data-copy="clThisWeek">This week</button>
+            <button id="calv-month" type="button" aria-pressed="true" data-copy="clMonth">Month</button>
+            <button id="calv-year" type="button" aria-pressed="false" data-copy="clYear">Year</button>
+          </div>
+        </div>
+        <div id="calgardens" class="calbeds" role="group" aria-label="filter by garden" hidden data-copy-attr="aria-label:clFilterByGarden"></div>
+        <div id="calbeds" class="calbeds" role="group" aria-label="filter by bed" hidden data-copy-attr="aria-label:clFilterByBed"></div>
+        <p class="hint calundated" id="calundated" hidden></p>
+        <p class="hint calundated calunfit" id="calunfit" hidden></p>
+        <div id="calweekview" hidden>
+          <h2 class="calagtitle" id="calwktitle"></h2>
+          <section class="calglance" id="calwkglance" hidden aria-labelledby="calwkglanceh">
+            <h3 class="calglanceh" id="calwkglanceh" data-copy="clWkGlance">This week at a glance</h3>
+            <ul class="calglancelist" id="calwkglancelist"></ul>
+          </section>
+          <div id="calwklog"></div>
+          <div id="calweek" class="caltasks"></div>
+        </div>
+        <div id="calmonthview">
+          <div class="calleft">
+          <div class="calnav">
+            <button id="calprev" type="button" aria-label="previous month" data-copy-attr="aria-label:clPreviousMonth" class="btn btn-icon">‹</button>
+            <span class="callabel" id="calmlabel"></span>
+            <button id="calnext" type="button" aria-label="next month" data-copy-attr="aria-label:clNextMonth" class="btn btn-icon">›</button>
+          </div>
+          <div class="calmonthband" id="calmonthband" role="tablist" aria-label="jump to month" data-copy-attr="aria-label:clJumpToMonth"></div>
+          <div class="calmonth">
+            <div class="caldow" id="caldow"></div>
+            <div class="calgrid" id="calgrid"></div>
+          </div>
+          <p class="calmrain" id="calmrain" hidden></p>
+          <div class="callegend" aria-hidden="true">
+            <span><i class="ct-plant"></i><span data-copy="clLegPlant">Plant or sow</span></span>
+            <span><i class="ct-sow"></i><span data-copy="clLegSow">Sowing reminders</span></span>
+            <span><i class="ct-harvest"></i><span data-copy="clLegHarvest">Harvest</span></span>
+            <span><i class="ct-frost"></i><span data-copy="clLegFrost">Frost and season end</span></span>
+            <span><i class="ct-heat"></i><span data-copy="clLegHeat">Summer heat</span></span>
+            <span><i class="ct-water"></i><span data-copy="clLegWater">Watering</span></span>
+            <span><i class="ct-ended"></i><span data-copy="clLegEnded">Logged or ended</span></span>
+            <span><i class="ct-note"></i><span data-copy="clLegNotes">Notes</span></span>
+            <span class="calleg-key"><i class="cdot is-logged"></i><span data-copy="clLegHappened">Happened</span><i class="cdot is-planned"></i><span data-copy="clLegPlanned">Planned</span></span>
+          </div>
+          </div>
+          <div class="calright">
+          <div id="calagenda">
+            <h2 class="calagtitle" id="calagtitle"></h2>
+            <div id="callog"></div>
+            <div id="caltasks" class="caltasks"></div>
+          </div>
+          </div>
+        </div>
+        <div id="calyearview" hidden>
+          <div class="calnav">
+            <button id="calyprev" type="button" aria-label="previous year" data-copy-attr="aria-label:clPreviousYear" class="btn btn-icon">‹</button>
+            <span class="callabel" id="calylabel"></span>
+            <button id="calynext" type="button" aria-label="next year" data-copy-attr="aria-label:clNextYear" class="btn btn-icon">›</button>
+          </div>
+          <div class="calyeargrid" id="calyeargrid"></div>
+        </div>
+        <details class="calexport disclosure" id="calexport">
+          <summary data-copy="clAddToYourCalendar">Add to your calendar, or set reminders</summary>
+        <div class="calbar calnotifybar">
+          <span class="remindrow"><label for="calnotifyhow" data-copy="clNotifyHow">How often</label>
+            <select id="calnotifyhow">
+              <option value="weekly" data-copy="clNotifyWeekly">Your week, plus heads-ups</option>
+              <option value="daily" data-copy="clNotifyDaily">Every day with a job</option>
+              <option value="headsups" data-copy="clNotifyHeads">Heads-ups only</option>
+            </select></span>
+          <span class="remindrow notifyday"><label for="calnotifyday" data-copy="clNotifyDay">Your week comes on</label>
+            <select id="calnotifyday"></select></span>
+        </div>
+        <p data-copy="clNotifyHint" class="hint" id="calnotifyhowhint">Your week sums up the next seven days by what you do, across all your beds. A heads-up comes only on the days that can't wait: a frost date, a hot or dry stretch starting, a last call to sow. Your calendar's alarms follow the same choice.</p>
+        <div class="calbar calexportbar">
+          <button data-copy="calendarIcsBtn" id="calics" type="button" class="calics">Add to calendar</button>
+          <span class="remindrow"><label for="calremind" data-copy="clRemindMe">remind me</label>
+            <select id="calremind" aria-label="what reminder each exported task carries" data-copy-attr="aria-label:clWhatReminderEachExported">
+              <option value="morning" data-copy="clMorningOf">Morning of (8 am)</option>
+              <option value="evening" data-copy="clEveningBefore">Evening before (6 pm)</option>
+              <option value="none" data-copy="clNoReminder">no reminder</option>
+            </select></span>
+        </div>
+        <p data-copy="calendarIcsHint" class="hint" id="calicshint">Reminders come from your calendar app. Plan changed? Export again and the calendar updates.</p>
+        <button id="calnotify" type="button" class="calics" hidden data-copy="clRemindMeOnThis">Remind me on this device</button>
+        <p class="hint" id="calnotifyhint" hidden></p>
+        <p class="hint calinstall" id="calinstall" hidden></p>
+        </details>
+        <div id="climate"></div>
+        <p><button type="button" class="btn btn-secondary stepnext" id="calplannudge" data-copy="clPlanTheBedThese">Plan a bed for these dates ›</button></p>
+      </section>
+      <section class="page" id="page-plant" hidden aria-labelledby="plant-h">
+        <h1 id="plant-h"><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg><span data-copy="plantTitle">Plant</span></h1>
+        <div id="plantcard"></div>
+      </section>
+      <section class="page" id="page-why" hidden>
+        <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg><span data-copy="whyTitle">Why trust this?</span></h1>
+        <p data-copy="whyTagline" class="tagline"></p>
+        <details id="whyterms" class="whyterms disclosure">
+          <summary data-copy="wyWhatTheseWordsMean">What these words mean</summary>
+          <div id="whytermsbody"></div>
+        </details>
+        <div id="whygarden" class="whygarden" role="group" aria-label="rules about the plants in your garden" hidden data-copy-attr="aria-label:wyRulesAboutThePlants"></div>
+        <nav id="whyjump" class="whyjump" aria-label="sections" data-copy-attr="aria-label:wySections"></nav>
+        <div id="whychips" class="whychips" role="group" aria-label="filter rules by kind" data-copy-attr="aria-label:wyFilterRulesByKind"></div>
+        <div class="controls">
+          <input id="whyq" type="search" placeholder="Search rules and folklore"  data-copy-attr="placeholder:wySearchRulesFolkloreTry"/>
+        </div>
+        <div id="whyapplied" class="whyapplied" role="status" aria-live="polite" hidden></div>
+        <div id="beliefs"></div>
+        <div id="rules"></div>
+        <fieldset id="whyclimate">
+          <legend data-copy="whyClimateLegend">Where the climate numbers come from</legend>
+          <details class="whyfold"><summary data-copy="wyClimateFold"></summary>
+          <p id="whyclimbody" class="hint"></p>
+          </details>
+        </fieldset>
+        <fieldset id="whyspecies">
+          <legend data-copy="whyPlantLegend">Where the plant numbers come from</legend>
+          <p data-copy="whyPlantBody" class="hint">Every number a plant contributes, like how wide it grows, how tall, or how long to harvest, carries a confidence mark. A number marked estimated is one nobody has confirmed against a published source yet. Use it for laying out a bed, but don't quote it. The app tracks which, and here they are.</p>
+          <p class="hint" id="speciesconf" data-copy="wyLoading">loading…</p>
+          <div id="speciesflags"></div>
+          <p data-copy="whyTreeSizesBody" class="hint">The tree sizes were checked against land-grant extension publications in July 2026: UGA Extension Circular 740 (Home Garden Apples) and Circular 1063 (Home Garden Peaches), University of Maine Bulletin #2034 (Plum Production in Maine), University of California ANR's plum rootstock guidance, and University of Missouri Extension G6030 (peach training and pruning). Where a size is derived from a published band instead of quoted from it, the number stays marked estimated. Dwarf apples, for instance, are "about 30 to 40 percent as large as standard trees", with no stated height. There is no dwarf pear in this corpus because extension sources say a home grower cannot buy one.</p>
+        </fieldset>
+        <fieldset id="whysources">
+          <legend data-copy="whyDataLegend">Where the data comes from</legend>
+          <p data-copy="whyPrivacyBody" class="hint">Privacy: visits are counted anonymously, with no cookies and no personal data, and Do Not Track is honored. Your plants and plans are never part of it.</p>
+          <details class="whyfold"><summary data-copy="wySourcesFold"></summary>
+          <p class="hint" id="info" data-copy="wyLoading">loading…</p>
+          <p id="whydatabody" class="hint"></p>
+          <p data-copy="whySourcesReadBody" class="hint"></p>
+          </details>
+          <p class="hint editonly"><a href="./styleguide.html" data-copy="wyStyleGuide">The style guide, every piece the app is drawn with</a></p>
+        </fieldset>
+        <div class="whynext">
+          <p class="whynext-l" data-copy="whyNextL"></p>
+          <p><a class="whynext-go" href="#/answers?teams" data-copy="whyNextGo"></a></p>
+        </div>
+      </section>
+      <section class="page" id="page-account" hidden>
+        <div class="acctpromise">
+          <h1><svg class="hmark" aria-hidden="true"><use href="#triad"/></svg><span data-copy="accountPromiseTitle">Your garden lives on this device</span></h1>
+          <p id="acctpromisebody" class="tagline" data-copy="accountPromiseBody">Everything you plan and log stays right here in your browser, yours by default: the garden, the Log of what you plant, and the season review. A free account carries them to every device you use and keeps a daily backup. Nothing leaves this device until you sign in.</p>
+        </div>
+        <div id="acctnotice" role="alert" hidden></div>
+        <div class="acctlayout">
+          <nav class="acctindex" id="acctindex" aria-label="Account sections" data-copy-attr="aria-label:acIndexAria">
+            <a class="chip" href="#acct-sec-account" data-copy="acIdxAccount">Account</a>
+            <a class="chip" href="#sec-prefs" data-copy="acIdxDisplay">Display</a>
+            <a class="chip" href="#sec-yourgarden" data-copy="acIdxGarden">Your garden</a>
+            <a class="chip" href="#sec-teams" data-acct-in data-plus hidden data-copy="acIdxCircles">Garden circles</a>
+            <a class="chip" href="#sec-gardenknows" data-copy="acIdxData">Your data</a>
+          </nav>
+          <div class="acctmain">
+          <section id="acct-sec-account" class="acctgroup" aria-label="Account" data-copy-attr="aria-label:acIdxAccount">
+          <p class="tagline" id="acctstatus" data-copy="acLoading">loading…</p>
+          <div id="acctsignedout">
+          <fieldset>
+            <legend id="acctlegend" data-copy="acSignIn">Sign in</legend>
+            <form id="signinform" novalidate>
+              <div class="fieldrow"><label for="acctemail" data-copy="acEmail">Email</label>
+                <input id="acctemail" class="field" type="email" autocomplete="username" required /></div>
+              <div class="fieldrow"><label for="acctpass" data-copy="acPassword">Password</label>
+                <input id="acctpass" class="field" type="password" autocomplete="current-password" required /></div>
+              <p id="acctpwhint" class="hint" hidden data-copy="acUseAtLeastCharacters">Use at least 8 characters. A password manager's suggestion is perfect here.</p>
+              <div class="logrow">
+                <button id="acctsignin" type="submit" class="btn btn-primary primary" data-copy="acSignIn">Sign in</button>
+              </div>
+            </form>
+            <div class="logrow" id="acctswitchrow">
+              <span class="hint" data-copy="acNewHere">new here?</span>
+              <button data-copy="accountCreateBtn" id="acctsignup" type="button" class="btn btn-secondary">create account</button>
+              <button data-copy="accountForgotBtn" id="pwforgot" type="button" class="btn btn-quiet">forgot password</button>
+            </div>
+            <div class="logrow" id="acctbackrow" hidden>
+              <span class="hint" data-copy="acHaveAnAccountAlready">have an account already?</span>
+              <button id="acctback" type="button" class="btn btn-quiet" data-copy="acBackToSignIn">back to sign in</button>
+            </div>
+          </fieldset>
+        </div>
+          <div id="syncreport" aria-live="polite"></div>
+          <div id="acctsignedin" hidden>
+          <div class="welcome signedcard">
+            <p id="acctwholine">Signed in as <b id="acctwho"></b>. Your log syncs to this account.</p>
+            <p class="hint" id="lastsync" hidden></p>
+            <button id="acctsignout" type="button" data-copy="acSignOut" class="btn btn-secondary">sign out</button>
+          </div>
+          <fieldset>
+            <legend data-copy="acMyAccount">My account</legend>
+            <div class="logrow">
+              <input id="newpass" type="password" placeholder="New password" aria-label="new password" autocomplete="new-password" minlength="8"  data-copy-attr="aria-label:acNewPassword;placeholder:acNewPassword"/>
+              <button data-copy="accountChangePwBtn" id="passchange" type="button" class="btn btn-secondary">change password</button>
+            </div>
+            <div class="logrow">
+              <input id="newemail" type="email" placeholder="New email" aria-label="new email address" autocomplete="email"  data-copy-attr="aria-label:acNewEmailAddress;placeholder:acNewEmail"/>
+              <button data-copy="accountChangeEmailBtn" id="emailchange" type="button" class="btn btn-secondary">change email</button>
+            </div>
+            <p data-copy="accountEmailNote" class="hint">Email changes are confirmed by a message to the new address.
+              Your gardens and their logs are on the Log, under “This garden”.</p>
+            <div class="logrow">
+              <button data-copy="acSignOutEverywhere" id="acctsignouteverywhere" type="button" class="btn btn-secondary">Sign out of every device</button>
+            </div>
+            <p data-copy="acSignOutEverywhereHint" class="hint">Use this if your password may have leaked. Every device signed in to this account, this one included, will need to sign in again.</p>
+          </fieldset>
+        </div>
+          </section>
+          <fieldset id="sec-prefs">
+            <legend data-copy="accountDisplayLegend">Display preferences</legend>
+          <div class="prefrow preflangrow">
+            <label for="preflang" data-copy="accountLangLabel">Language · Idioma</label>
+            <select id="preflang">
+              <option value="en">English</option>
+              <option value="es" lang="es">Español (traducción automática)</option>
+            </select>
+          </div>
+          <div class="logrow">
+            <label for="prefunits" data-copy="acMeasurement">Measurement</label>
+            <select id="prefunits" aria-label="measurement units" data-copy-attr="aria-label:acMeasurementUnits">
+              <option value="metric" data-copy="acMetresCmM">Meters · cm · m²</option>
+              <option value="imperial" data-copy="acFeetInchesFt">feet · inches · ft²</option>
+            </select>
+          </div>
+          <div class="logrow">
+            <label for="preftemp" data-copy="acTemperature">Temperature</label>
+            <select id="preftemp" aria-label="temperature units" data-copy-attr="aria-label:acTemperatureUnits">
+              <option value="c">°C</option>
+              <option value="f">°F</option>
+            </select>
+          </div>
+          <div class="logrow">
+            <label for="preftheme" data-copy="acTheme">Theme</label>
+            <select id="preftheme" aria-label="colour theme" data-copy-attr="aria-label:acColourTheme">
+              <option value="system" data-copy="acMatchMyDevice">match my device</option>
+              <option value="light" data-copy="acLight">light</option>
+              <option value="dark" data-copy="acDark">dark</option>
+            </select>
+          </div>
+          <div class="prefrow">
+            <label for="prefseason" data-copy="acSeason">Season</label>
+            <select id="prefseason" aria-label="seasonal colours" data-copy-attr="aria-label:acSeasonalColours">
+              <option value="follow" data-copy="acFollowTheSeasons">follow the seasons</option>
+              <option value="spring" data-copy="acSpring">spring</option>
+              <option value="summer" data-copy="acSummer">summer</option>
+              <option value="autumn" data-copy="acAutumn">autumn</option>
+              <option value="winter" data-copy="acWinter">winter</option>
+            </select>
+          </div>
+          <div class="prefrow">
+            <label for="prefsilo" data-copy="acBackgroundGarden">Background garden</label>
+            <select id="prefsilo" aria-label="the seasonal garden behind the page" data-copy-attr="aria-label:acTheSeasonalGardenBehind">
+              <option value="on" data-copy="acShowIt">show it</option>
+              <option value="off" data-copy="acHideIt">hide it</option>
+            </select>
+          </div>
+
+          <p data-copy="accountDisplayBody" class="hint">Kept on this device; once you're signed in it follows your account to every device.</p>
+          </fieldset>
+          <fieldset id="sec-yourgarden">
+            <legend data-copy="acGardenLegend">Your garden</legend>
+          <div class="prefrow">
+            <label for="prefpace" data-copy="acOnHomeShow">On Home, show</label>
+            <select id="prefpace" aria-label="how much Home names each week" data-copy-attr="aria-label:acHowMuchHomeNames">
+              <option value="full" data-copy="acEverythingTheGardenAsks">every garden task</option>
+              <option value="light" data-copy="acJustTheTwoThat">just the two that matter most</option>
+            </select>
+          </div>
+          <div class="prefrow">
+            <label for="prefspace" data-copy="acMyGardenIs">My garden is</label>
+            <select id="prefspace" aria-label="what kind of space the garden is" data-copy-attr="aria-label:acWhatKindOfSpace">
+              <option value="" data-copy="acNotSaid">not said</option>
+              <option value="ground" data-copy="acInTheGround">in the ground</option>
+              <option value="raised" data-copy="acRaisedBeds">raised beds</option>
+              <option value="pots" data-copy="acPots">pots</option>
+              <option value="changing" data-copy="acAPlotThatChanges">a plot that changes (community or rented)</option>
+            </select>
+          </div>
+          <div class="prefrow">
+            <label for="prefafter" data-copy="acItSMostlyFor">It's mostly for</label>
+            <select id="prefafter" aria-label="what the garden is mostly for" data-copy-attr="aria-label:acWhatTheGardenIs">
+              <option value="" data-copy="acNotSaid">not said</option>
+              <option value="food" data-copy="acFoodForTheHousehold">food for the household</option>
+              <option value="pollinators" data-copy="acFlowersAndPollinators">flowers and pollinators</option>
+              <option value="kids" data-copy="acGrowingWithKids">growing with kids</option>
+              <option value="little" data-copy="acAsLittleWorkAs">as little work as possible</option>
+            </select>
+          </div>
+          <div class="prefrow">
+            <label for="prefadults" data-copy="acGrowingFoodFor">Growing food for</label>
+            <span class="prefhouse"><input id="prefadults" type="number" min="0" max="30" step="1" aria-label="adults the garden feeds" data-copy-attr="aria-label:acAdultsTheGardenFeeds"> <span data-copy="acAdultsWord">adults,</span>
+            <input id="prefchildren" type="number" min="0" max="30" step="1" aria-label="children the garden feeds" data-copy-attr="aria-label:acChildrenTheGardenFeeds"> <span data-copy="acChildrenWord">children</span></span>
+          </div>
+          <div class="ledgerring" id="ledgerring">
+          <div class="ledgerring-dial" id="ledgerringdial" style="--frac:0">
+            <span class="ledgerring-num" id="ledgerringnum"></span>
+          </div>
+          <p class="ledgerring-label" id="ledgerringlabel"></p>
+        </div>
+
+          </fieldset>
+          <fieldset id="sec-teams" data-acct-in data-plus hidden>
+            <legend data-copy="teamsLegend">Garden circles</legend>
+            <p data-copy="teamsIntro" class="hint">A garden circle lets more than one person tend the same garden. Create one, invite the people who help, and you'll all see the same beds, seasons, and diary.</p>
+            <div id="teaminvites"></div>
+            <div id="teamlist"></div>
+            <div class="logrow">
+              <input id="teamname" type="text" maxlength="60" placeholder="Name this circle" aria-label="circle name" data-copy-attr="aria-label:acCircleName;placeholder:acNameThisCircle"/>
+              <button data-copy="teamsCreateBtn" id="teamcreate" type="button" class="btn btn-secondary">create circle</button>
+            </div>
+            <p data-copy="teamsConsent" class="hint" id="teamsconsent">Everyone you add to a circle can see that circle's gardens, including their location on the map and their full seasons. Everyone in a circle can also see each other's sign-in email. Your photos and your display settings never travel.</p>
+            <p data-copy="teamsGardensNote" class="hint">Share a garden with a circle and everyone in it sees its beds, seasons, and diary, and can tend it with you. Only the garden's owner can share or remove it.</p>
+            <div id="teamsreport" aria-live="polite"></div>
+          </fieldset>
+          <fieldset id="sec-gardenknows">
+          <legend data-copy="accountKnowsLegend">What is on record for your garden</legend>
+          <p class="notice" id="knowsexample" hidden data-copy="gkExampleNote"></p>
+          <p class="hint" id="knowssummary"></p>
+          <div id="knowsrows"></div>
+          <p data-copy="accountKnowsBody" class="hint">Every one of these is optional, and the app says what it would do with a
+            fact before you give it. Nothing here is sold, shared, or used to advertise to you.</p>
+        </fieldset>
+          <fieldset id="sec-privacy">
+          <legend data-copy="accountPrivacyLegend">Privacy Policy</legend>
+          <details class="acctprivacy disclosure">
+            <summary data-copy="acReadHowYourData">Read how your data is kept</summary>
+          <p data-copy="accountPrivacySignedOut" class="hint">Signed out, your garden data lives only on this device, and nothing leaves your browser unless you choose to email us a note. Nothing backs it up, either: the season export on the Log is your own copy, and the daily backup comes with a free account.</p>
+          <p data-copy="accountPrivacySignedIn" class="hint">Signed in, your addresses, growing areas and seasons are stored in your
+            account so they can follow you across devices. They are readable only by your own
+            account, and deleting your account above removes them in one tap.</p>
+          <p data-copy="accountPrivacyBundle" class="hint">The plant knowledge that powers the app is a public file built into the
+            app itself. Your data never mixes into it.</p>
+          <p data-copy="accountPrivacyNetwork" class="hint">Address lookup and map imagery are fetched only when you use them, and those requests carry only what you typed or the area you are viewing. They never carry your plans. Visits are counted anonymously, with no cookies and no personal data, and Do Not Track is honored. Your plants and your plans are never part of any analytics.</p>
+          </details>
+        </fieldset>
+          <fieldset id="sec-delete" data-acct-in hidden>
+            <legend data-copy="accountDeleteLegend">Delete account</legend>
+            <p data-copy="accountDeleteBody" class="hint">Removes your account and every record synced to it. Its copy on this device goes too, with the photos in its gardens. Gardens you made without signing in stay here. Export any season you want to keep first.</p>
+            <div class="logrow">
+              <input id="delpass" type="password" placeholder="Current password" aria-label="current password" autocomplete="current-password"  data-copy-attr="aria-label:acCurrentPassword;placeholder:acCurrentPassword"/>
+            </div>
+            <div class="logrow">
+              <input id="delconfirm" type="text" class="field" placeholder='Type "delete my account"' aria-label='Deletion confirmation: type "delete my account"' data-copy-attr="placeholder:acDeleteConfirmPh;aria-label:acDeleteConfirmAria" style="width:16rem" />
+              <button data-copy="accountDeleteBtn" id="acctdelete" type="button" class="btn btn-secondary">delete account</button>
+            </div>
+          </fieldset>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site sitefoot" id="sitefoot">
+      <div class="foot-brand"><a class="brand" href="#/start"><svg class="brandmark" aria-hidden="true"><use href="#triad"/></svg><span class="brandname">Milpa <b>Gardens</b></span></a></div>
+      <nav class="sitenav" aria-label="Explore the site" data-lang="en" data-q="Search the site" data-q-hint="tomato, frost, nitrogen…" data-more="Tools, help and every other page ›"><div class="foot-col" data-group="learn" data-part="doors"><p class="foot-h">Learn</p><a href="../guides/" data-desc="How to grow it, step by step">Guides</a><a href="../explainers/" data-desc="The reasoning behind the planner">Explainers</a><a href="../plants/" data-desc="What each crop needs, and when">Plants</a><a href="../guilds/" data-desc="Plants that do something for each other">Plant teams</a><a href="../frost/" data-desc="Your last and first frost, for your ZIP code or town">Frost dates and growing weather</a></div><div class="foot-col" data-group="evidence" data-part="row"><p class="foot-h">Evidence</p><a href="../rules/">Rules</a><a href="../beliefs/">Folklore</a><a href="../unsure/">What we don’t know</a><a href="../grades/">How we grade evidence</a><a href="../explainers/how-this-is-built/">How this is built</a><a href="../corpus/">Download the data</a><a href="../for-educators/">For educators</a></div><div class="foot-col" data-group="tools"><p class="foot-h">Tools</p><a href="../still-time/">Can I still sow this?</a><a href="../search/" data-part="search">Search</a></div><div class="foot-col" data-group="about"><p class="foot-h">About</p><a href="../about/">About Milpa</a><a href="../help/">Help</a><a href="../whats-new/">What’s new</a><a href="../coverage/">Where Milpa works</a><a href="../compare/">How Milpa compares</a><a href="../privacy/">Privacy</a><a href="mailto:contact@milpa.garden" data-part="contact">contact@milpa.garden</a></div></nav>
+      <nav class="sitenav" aria-label="Explora el sitio" data-lang="es" lang="es" data-q="Buscar en el sitio" data-q-hint="tomate, helada, nitrógeno…" data-more="Herramientas, ayuda y todas las demás páginas ›"><div class="foot-col" data-group="learn" data-part="doors"><p class="foot-h">Aprende</p><a href="../es/guides/" data-desc="Cómo cultivarlo, paso a paso">Guías</a><a href="../es/explainers/" data-desc="El razonamiento detrás del planificador">Explicaciones</a><a href="../es/plants/" data-desc="Lo que necesita cada cultivo, y cuándo">Plantas</a><a href="../es/guilds/" data-desc="Plantas que hacen algo unas por otras">Equipos de plantas</a><a href="../es/frost/" data-desc="Tu última y primera helada, para tu código postal o tu ciudad">Fechas de helada y clima de cultivo</a></div><div class="foot-col" data-group="evidence" data-part="row"><p class="foot-h">Evidencia</p><a href="../es/rules/">Reglas</a><a href="../es/beliefs/">Creencias populares</a><a href="../es/unsure/">Lo que no sabemos</a><a href="../es/grades/">Cómo calificamos la evidencia</a><a href="../es/explainers/how-this-is-built/">Cómo está hecho</a><a href="../es/corpus/">Descarga los datos</a><a href="../es/for-educators/">Para docentes</a></div><div class="foot-col" data-group="tools"><p class="foot-h">Herramientas</p><a href="../es/still-time/">¿Todavía puedo sembrar esto?</a><a href="../es/search/" data-part="search">Buscar</a></div><div class="foot-col" data-group="about"><p class="foot-h">Acerca de</p><a href="../es/about/">Acerca de Milpa</a><a href="../es/help/">Ayuda</a><a href="../es/whats-new/">Novedades</a><a href="../es/coverage/">Dónde funciona Milpa</a><a href="../es/compare/">Cómo se compara Milpa</a><a href="../es/privacy/">Privacidad</a><a href="mailto:contact@milpa.garden" data-part="contact">contact@milpa.garden</a></div></nav>
+    </footer>
+    <dialog class="navsheet" id="navsheet" aria-labelledby="navsheet-h"><div class="navsheet-bar"><p class="navsheet-title" id="navsheet-h"></p><button type="button" class="navsheet-x" aria-label="Close" data-copy-attr="aria-label:sheetClose">×</button></div><div class="navsheet-body"></div></dialog>
+    <section id="bedsheet" class="bedsheet" hidden role="dialog" aria-modal="true" aria-label="bed sheet">
+      <div class="bedsheet-bar">
+        <button type="button" id="bedsheetprint" class="btn btn-primary primary" data-copy="bedsheetPrint">Print</button>
+        <button type="button" id="bedsheetclose" class="btn btn-secondary secondary" data-copy="bedsheetClose">Close</button>
+      </div>
+      <div id="bedsheetbody" class="bedsheet-doc"></div>
+    </section>
+    <div id="dossierscrim" class="dossier-scrim" hidden></div>
+    <section id="dossiersheet" class="dossiersheet" hidden role="dialog" aria-modal="true" aria-labelledby="dossiersheet-h">
+      <div class="dossiersheet-bar">
+        <span class="dossiersheet-title" id="dossiersheet-h" data-copy="dossierBarTitle">The evidence</span>
+        <button type="button" id="dossiersheetclose" class="btn btn-icon dossiersheet-x" aria-label="close" data-copy-attr="aria-label:sheetClose">×</button>
+      </div>
+      <div id="dossiersheetbody" class="dossiersheet-doc"></div>
+    </section>
+    <div id="authscrim" class="dossier-scrim" hidden></div>
+    <section id="authsheet" class="dossiersheet authsheet" hidden role="dialog" aria-modal="true" aria-labelledby="authsheet-h">
+      <div class="dossiersheet-bar">
+        <span class="dossiersheet-title" id="authsheet-h" data-copy="acSheetTitle">Sign in</span>
+        <button type="button" id="authsheetclose" class="btn btn-icon dossiersheet-x" aria-label="close" data-copy-attr="aria-label:sheetClose">×</button>
+      </div>
+      <div id="authsheetbody" class="authsheet-doc"></div>
+    </section>
+    <script type="importmap">
+      { "imports": { "preact": "./vendor/preact.mjs",
+                     "preact/hooks": "./vendor/preact-hooks.mjs",
+                     "htm": "./vendor/htm.mjs" } }
+    </script>
+    <link rel="modulepreload" href="./dist/paint.js">
+    <script type="module" src="./dist/app.js?v=90e91a12f2"></script>
+  </body>
+</html>

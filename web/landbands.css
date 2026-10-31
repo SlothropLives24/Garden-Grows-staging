@@ -1,0 +1,66 @@
+/* Many doors M2 (O326, D-337 point 2): the landing's four bands of real output, one per door group, each ending at its
+   doors (web/src/landbands.ts). Linked by that chunk the first time it draws, after styles.css, whose tokens it reads, so
+   the first visit carries none of it (perf budget: app-landing css) and every skin and the dark scheme apply. A desktop
+   sets the bands two by two; a phone stacks them (the maintainer, 2026-10-22: "Stack them"), kept compact so the phone
+   landing stays under its ceiling (e2e 13c-p). Every door is a 44 px tap target, and nothing is wider than the screen. */
+.lg-bands { margin: clamp(var(--space-4), 4vw, 2.4rem) 0; }
+.lg-bands-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+@media (min-width: 780px) { .lg-bands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); } }
+
+/* a band: the receipts' open shape, a 3px stripe at its left in place of a box */
+.lg-band { position: relative; display: flex; flex-direction: column; gap: var(--space-2); min-width: 0;
+  padding: var(--space-0) 0 var(--space-0) var(--space-4); overflow-wrap: anywhere; }
+.lg-band::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--line); }
+.lg-band-h { margin: 0; font: 500 var(--fs-lg)/1.15 var(--serif); letter-spacing: -.01em; }
+.lg-band-out { display: flex; flex-direction: column; gap: var(--space-2); }
+/* a band's kicker, in the doors' own group-heading voice (sentence case), so it holds one line on a phone in either language */
+.lg-band-k { margin: var(--space-1) 0 0; font: 600 var(--fs-xs) var(--font-ui); letter-spacing: .02em; color: var(--muted); }
+
+/* the lines: frost odds, the week's jobs by day, the diary's dated lines */
+.lg-band-lines { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-1); font-size: var(--fs-sm); line-height: 1.45; }
+/* a dated line: its day run in before it, in the kicker's quiet ink, said once per day */
+.lg-band-day { font: 600 var(--fs-xs) var(--font-ui); letter-spacing: .02em; color: var(--muted); }
+.lg-band-src { margin: 0; font-size: var(--fs-xs); line-height: 1.45; color: var(--muted); }
+.lg-band-src cite { font-style: italic; }
+.lg-band-line { margin: 0; font-size: var(--fs-sm); line-height: 1.45; font-weight: 600; }
+
+/* the symptom finder's own card, a little tighter beside the week: its answer and its grade word. What to do waits behind
+   the band's door, in the finder itself, so a phone's stacked bands stay short */
+.lg-band .wrong-answer { margin-top: 0; padding: var(--space-2) var(--space-3); font-size: var(--fs-sm); line-height: 1.45; }
+.lg-band .wrong-k { margin-bottom: var(--space-1); }
+/* its grade word runs on after the claim and its "Why this?", one block, not three */
+.lg-band .wrong-claim, .lg-band .wrong-conf { display: inline; margin: 0; }
+.lg-band .wrong-conf { margin-left: var(--space-1); }
+.lg-band .wrong-conf .conf { vertical-align: .05em; }
+.lg-band .wrong-todo { display: none; }
+
+/* the tip: its question, its grade, its answer, its first source */
+.lg-band-q { margin: 0; font: 700 var(--fs-md)/1.3 var(--font-body); }
+.lg-band-conf { display: inline-block; vertical-align: .1em; font-weight: 400; }
+.lg-band-answer { margin: 0; font-size: var(--fs-sm); line-height: 1.5; }
+
+/* the band's doors: small, plain, each a full tap target */
+.lg-band-doors { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: auto; padding-top: var(--space-1); }
+.lg-band-door { display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--tap); max-width: 100%;
+  padding: var(--space-1) var(--space-3); border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--surface);
+  color: var(--color-text); font: 600 var(--fs-sm)/1.25 var(--font-ui); text-align: left; text-decoration: none; cursor: pointer; }
+.lg-band-door:hover, .lg-band-door:focus-visible { border-color: var(--accent-text); color: var(--accent-text); }
+.lg-band-go { flex: none; font: 700 var(--fs-md)/1 var(--serif); color: var(--accent-text); }
+
+/* A phone stacks the four bands (the maintainer, 2026-10-22), under the landing's 6,000 px ceiling in both languages
+   (e2e 13c-p): the gaps inside a band close up, the growing band's two doors share one row (each wraps its own words),
+   and the tip names its first source by who published it (its title, and every source, are a tap away on the door). */
+@media (max-width: 779px) {
+  .lg-bands > .lg-proof-lead { margin-bottom: var(--space-2); }
+  .lg-bands-grid { gap: var(--space-3); }
+  .lg-band-h { font-size: 1.125rem; }
+  .lg-band, .lg-band-out { gap: var(--space-1); }
+  .lg-band-k-wrong { display: none; } /* the card's own heading names the trouble and the crop */
+  .lg-band .wrong-answer { font-size: var(--fs-xs); }
+  .lg-band-lines, .lg-band .wrong-answer { line-height: 1.4; }
+  .lg-band .wrong-answer { padding: var(--space-1) var(--space-3); }
+  .lg-band-doors { padding-top: var(--space-1); }
+  .lg-band[data-band="growing"] .lg-band-doors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lg-band[data-band="growing"] .lg-band-door { justify-content: space-between; }
+  .lg-band[data-band="tip"] .lg-band-src:has(.lg-band-pub) :is(cite, .lg-band-sep) { display: none; }
+}
