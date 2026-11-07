@@ -1,0 +1,32 @@
+/* Many doors M3 (O326, D-337 point 3): the trail every door's answer ends on (web/src/trailview.ts) - the one next step as
+   the screen's primary button, at most two more doors on one quiet line, then the fold "More ways Milpa can help" of every
+   other door. Linked by that chunk the first time it draws, after styles.css, whose tokens it reads, so the first visit
+   carries none of it (perf budget: app-landing css) and every skin and the dark scheme apply. Every door is a full tap
+   target (var(--tap)), and nothing is wider than the screen. */
+.trail { display: grid; gap: var(--space-1); margin: var(--space-4) 0 0; padding-top: var(--space-3);
+  border-top: 1px solid var(--line); max-width: 44rem; min-width: 0; overflow-wrap: anywhere; }
+.trail[hidden] { display: none; }
+
+/* the one next step: the primary button, or the screen's own control moved here (Answers' calendar row keeps its reminder) */
+.trail-next { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.trail-next > .ans-icsrow { margin-top: 0; }
+.trail-go { max-width: 100%; text-align: center; text-decoration: none; }
+
+/* the two more doors, on one line where they fit */
+.trail-more { display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--space-5); margin: 0; }
+.trail-link { display: inline-flex; align-items: center; min-height: var(--tap); max-width: 100%; padding: 0; border: 0;
+  background: none; color: var(--accent-text); font: 600 var(--fs-sm)/1.3 var(--font-ui); text-align: left;
+  text-decoration: none; cursor: pointer; }
+.trail-link:hover, .trail-link:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+
+/* the fold: every other door, one tap away - the D-228 .disclosure (its words, the one marker), the marker beside the words */
+.trail-fold > summary { justify-content: flex-start; }
+.trail-doors { list-style: none; margin: 0; padding: 0 0 0 var(--space-3); display: grid; }
+.trail-doors li { margin: 0; }
+
+/* a trail inside a card (the Log's symptom answer) sits closer */
+.wrong-answer + .trail, #wrongbody .trail { margin-top: var(--space-3); }
+
+/* on Answers the trail can sit between an answer and more of the page ("What grows here" under a crop's dates): a rule
+   under it too, so it reads as the answer's end, not the next section's start */
+#ansnext.trail:not(:last-child) { padding-bottom: var(--space-2); border-bottom: 1px solid var(--line); margin-bottom: var(--space-3); }

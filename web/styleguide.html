@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Milpa style guide</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./styles.css" />
+    <!-- The living style guide (D-228): every component and state, drawn by the app's OWN stylesheet
+         (./styles.css, the @components block), so this page cannot drift from what the app draws. The
+         skin switcher (styleguide.js) stamps <html data-season / data-theme> from the app's own keys and
+         changes them in place; contrast scenario 79 walks this page in every skin. -->
+    <script src="./styleguide.js"></script>
+    <style>
+      .sg { max-width: 60rem; margin: 0 auto; padding: var(--space-5) var(--gutter) var(--space-7); }
+      .sg section { margin: var(--space-6) 0; }
+      .sg h2 { font-size: var(--fs-xl); margin: 0 0 var(--space-3); }
+      .sg .row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; margin: var(--space-3) 0; }
+      .sg .lab { font: 600 var(--fs-xs)/var(--lh-ui) var(--font-mono); color: var(--ink-muted); width: 100%; margin: 0; }
+      .sg .sw { width: 7rem; }
+      .sg .sw i { display: block; height: 3rem; border-radius: var(--r-xs); border: 1px solid var(--line); }
+      .sg .sw span { font: 400 var(--fs-xs)/var(--lh-ui) var(--font-mono); color: var(--ink-muted); }
+      .sg .type p { margin: var(--space-1) 0; }
+      .sg .space i { display: inline-block; height: var(--space-4); background: var(--soft); border: 1px solid var(--accent); vertical-align: middle; }
+    </style>
+  </head>
+  <body>
+    <main class="sg">
+      <h1>The style guide</h1>
+      <p class="tagline">Every piece the app and the site are drawn with, from the same stylesheet the app uses. Tappable things are round; information is square.</p>
+      <div class="row" aria-label="skin">
+        <div class="seg" role="group" aria-label="season"><button type="button" data-sg-season="spring">Spring</button><button type="button" data-sg-season="summer">Summer</button><button type="button" data-sg-season="autumn">Autumn</button><button type="button" data-sg-season="winter">Winter</button></div>
+        <div class="seg" role="group" aria-label="theme"><button type="button" data-sg-theme="light">Light</button><button type="button" data-sg-theme="dark">Dark</button></div>
+      </div>
+
+      <section>
+        <h2>Buttons</h2>
+        <p class="lab">.btn.btn-primary (one per screen) · .btn.btn-secondary · .btn.btn-quiet · .btn.btn-icon · disabled</p>
+        <div class="row">
+          <button class="btn btn-primary" type="button">Log it</button>
+          <button class="btn btn-secondary" type="button">Continue</button>
+          <button class="btn btn-quiet" type="button">Not now</button>
+          <button class="btn btn-icon" type="button" aria-label="home">&#8962;</button>
+          <button class="btn btn-primary" type="button" disabled>Save</button>
+          <button class="btn btn-secondary" type="button" disabled>Next</button>
+        </div>
+        <div class="row"><button class="btn btn-primary btn-lg" type="button">Start planning &#8594;</button></div>
+        <div class="row" style="max-width: 22rem"><button class="btn btn-primary btn-block" type="button">Save this plan</button></div>
+      </section>
+
+      <section>
+        <h2>Choices</h2>
+        <p class="lab">.seg (one of a few) · .chip (entities and filters) - one selected look</p>
+        <div class="row">
+          <div class="seg" role="group" aria-label="view"><button type="button" aria-pressed="true">This week</button><button type="button" aria-pressed="false">Month</button><button type="button" aria-pressed="false">Year</button></div>
+        </div>
+        <div class="row">
+          <button class="chip" type="button" aria-pressed="true">Jul</button>
+          <button class="chip" type="button" aria-pressed="false">Aug</button>
+          <button class="chip" type="button">Tomato <span class="chip-count">&#215;4</span></button>
+          <a class="chip" href="#">Main bed</a>
+          <button class="chip" type="button" disabled>Sep</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Badges and the evidence grade</h2>
+        <p class="lab">.badge (soft / outline / solid) x tone · .grade (s p h d f, and no letter)</p>
+        <div class="row">
+          <span class="badge tone-neutral">Won&#8217;t fit</span>
+          <span class="badge outline tone-positive">Fits</span>
+          <span class="badge solid tone-positive">Recommended</span>
+          <span class="badge tone-caution">Draft</span>
+          <span class="badge outline tone-danger">Late by 3 days</span>
+        </div>
+        <div class="row">
+          <span class="conf s"><span class="mk"></span>Well established</span>
+          <span class="conf p"><span class="mk"></span>Promising</span>
+          <span class="conf h"><span class="mk"></span>A good hunch</span>
+          <span class="conf d"><span class="mk"></span>Contested</span>
+          <span class="conf f"><span class="mk"></span>Refuted</span>
+          <span class="grade">Estimated</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Cards</h2>
+        <p class="lab">.card · a.card (a row you tap) · .card-flat · .card-rail · .card-callout · .notice</p>
+        <div class="row" style="align-items: stretch">
+          <div class="card" style="flex: 1 1 12rem"><strong>This ground's climate</strong><br />Last spring frost ~Apr 24</div>
+          <a class="card" href="#" style="flex: 1 1 12rem"><strong>Open your garden</strong><br />The plan, the map, the beds</a>
+          <div class="card card-flat" style="flex: 1 1 12rem"><strong>Three Sisters</strong><br />needs 43.1 ft&#178;</div>
+        </div>
+        <div class="card card-rail">A rule's claim, de-boxed: the tone rides the rail.</div>
+        <div class="row"><div class="card card-callout" style="flex: 1">This is an example garden. <button class="btn btn-secondary" type="button">Start my own garden</button> <button class="btn btn-quiet" type="button">Remove example</button></div></div>
+        <div class="notice">A notice stays until it is dealt with.</div>
+        <div class="empty"><p>No beds yet. Draw or size one on the Plan, and it shows up here.</p><a class="btn btn-secondary" href="#">Plan a bed &#8250;</a></div>
+      </section>
+
+      <section>
+        <h2>Disclosure and field</h2>
+        <details class="disclosure"><summary>How we know</summary><p>One marker, drawn by the stylesheet, turning over when open.</p></details>
+        <div class="fieldrow" style="max-width: 22rem"><label for="sg-zip">ZIP code</label><input id="sg-zip" class="field" type="text" inputmode="numeric" placeholder="55401" /></div>
+      </section>
+
+      <section class="type">
+        <h2>Type</h2>
+        <p class="lab">--fs-xs 13 · --fs-sm 14 · --fs-md 16 · --fs-read 17 · --fs-lg 20 · --fs-xl 24 · --fs-2xl 40 (the page h1) · Fraunces for headings, Newsreader for reading, Hanken for the interface</p>
+        <p class="kicker">A kicker - the one small caps label</p>
+        <p style="font-size: var(--fs-xs)">Caption, badge, kicker</p>
+        <p style="font-size: var(--fs-sm)">Controls, chips, meta</p>
+        <p style="font-size: var(--fs-md)">Interface body</p>
+        <p style="font: 400 var(--fs-read)/var(--lh-body) var(--font-text)">Long-form reading, in the text face.</p>
+        <p style="font: 500 var(--fs-xl)/var(--lh-head) var(--font-display)">A section heading</p>
+      </section>
+
+      <section>
+        <h2>Colour</h2>
+        <p class="lab">the semantic layer - every skin and scheme re-points these</p>
+        <div class="row">
+          <div class="sw"><i style="background: var(--bg)"></i><span>--bg</span></div>
+          <div class="sw"><i style="background: var(--surface)"></i><span>--surface</span></div>
+          <div class="sw"><i style="background: var(--card)"></i><span>--card</span></div>
+          <div class="sw"><i style="background: var(--ink)"></i><span>--ink</span></div>
+          <div class="sw"><i style="background: var(--ink-muted)"></i><span>--ink-muted</span></div>
+          <div class="sw"><i style="background: var(--action)"></i><span>--action</span></div>
+          <div class="sw"><i style="background: var(--link)"></i><span>--link</span></div>
+          <div class="sw"><i style="background: var(--soft)"></i><span>--soft</span></div>
+          <div class="sw"><i style="background: var(--positive)"></i><span>--positive</span></div>
+          <div class="sw"><i style="background: var(--caution)"></i><span>--caution</span></div>
+          <div class="sw"><i style="background: var(--danger)"></i><span>--danger</span></div>
+        </div>
+      </section>
+
+      <section class="space">
+        <h2>Space and shape</h2>
+        <p class="lab">--space-0 to --space-7 (2 4 8 12 16 24 32 48px) · radii --r-0 --r-xs --r-md --r-lg --r-pill</p>
+        <div class="row">
+          <i style="width: var(--space-0)"></i><i style="width: var(--space-1)"></i><i style="width: var(--space-2)"></i><i style="width: var(--space-3)"></i>
+          <i style="width: var(--space-4)"></i><i style="width: var(--space-5)"></i><i style="width: var(--space-6)"></i><i style="width: var(--space-7)"></i>
+        </div>
+        <div class="row">
+          <i style="width: 3rem; height: 3rem; border-radius: var(--r-0)"></i><i style="width: 3rem; height: 3rem; border-radius: var(--r-xs)"></i>
+          <i style="width: 3rem; height: 3rem; border-radius: var(--r-md)"></i><i style="width: 3rem; height: 3rem; border-radius: var(--r-lg)"></i>
+          <i style="width: 5rem; height: 3rem; border-radius: var(--r-pill)"></i>
+        </div>
+      </section>
+      <p><a href="./#/why">Back to the app</a></p>
+    </main>
+  </body>
+</html>
